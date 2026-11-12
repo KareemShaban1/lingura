@@ -6,6 +6,7 @@ use App\Domain\AI\AiGateway;
 use App\Domain\AI\Data\TextRequest;
 use App\Domain\AI\ExplanationLanguage;
 use App\Domain\AI\PromptRegistry;
+use App\Domain\Billing\QuotaGuard;
 use App\Domain\Languages\CapabilityMatrix;
 use App\Domain\Practice\TextNormalizer;
 use App\Domain\Shared\DomainError;
@@ -38,6 +39,7 @@ class TutorService
         private readonly PromptRegistry $prompts,
         private readonly CapabilityMatrix $capabilities,
         private readonly LearningEventRecorder $events,
+        private readonly QuotaGuard $quota,
     ) {}
 
     public function start(LearnerProfile $profile, AiTutor $tutor, ?ConversationScenario $scenario, ?CefrLevel $level, string $mode, ?LearningSession $session = null): AiConversation
@@ -73,16 +75,19 @@ class TutorService
     }
 
     /** @return array{learner: AiMessage, reply: AiMessage} */
-    public function reply(AiConversation $conversation, string $text, ?AudioRecording $recording = null, string $source = 'text', ?int $responseMs = null): array
+    public function reply(AiConversation $conversation, string $text, ?AudioRecording $recording = null, string $source = 'text', ?int $responseMs = null, bool $prepaid = false): array
     {
         $this->assertActive($conversation);
         $text = trim(mb_substr($text, 0, config('learning.tutor.max_message_chars')));
         if ($text === '') {
             throw new DomainError('Say or type something first.', 'empty_message', 422);
         }
-        $this->assertQuota($conversation->learnerProfile);
+        if ($prepaid) { // the caller already consumed the turn (voice: before paying for transcription)
+            return $this->exchange($conversation, $text, $recording, $source, $responseMs);
+        }
 
-        return $this->exchange($conversation, $text, $recording, $source, $responseMs);
+        return $this->quota->using($conversation->learnerProfile->user, 'tutor_messages',
+            fn () => $this->exchange($conversation, $text, $recording, $source, $responseMs));
     }
 
     /**
@@ -229,20 +234,6 @@ class TutorService
     {
         if (! $conversation->isActive()) {
             throw new DomainError('This conversation has ended.', 'conversation_closed');
-        }
-    }
-
-    /** Pre-billing safety cap on daily tutor turns (moves to plan entitlements in Phase 4). */
-    private function assertQuota(LearnerProfile $profile): void
-    {
-        $turns = AiMessage::query()->join('ai_conversations', 'ai_conversations.id', '=', 'ai_messages.ai_conversation_id')
-            ->join('learner_profiles', 'learner_profiles.id', '=', 'ai_conversations.learner_profile_id')
-            ->where('learner_profiles.user_id', $profile->user_id)
-            ->where('ai_messages.role', 'learner')
-            ->where('ai_messages.created_at', '>=', now()->startOfDay())
-            ->count();
-        if ($turns >= config('learning.tutor.daily_turn_limit')) {
-            throw new DomainError('You have reached today’s conversation limit. It resets tomorrow.', 'quota_exceeded', 429);
         }
     }
 }

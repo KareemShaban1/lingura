@@ -3,12 +3,14 @@
 namespace Tests\Feature;
 
 use App\Domain\AI\Drivers\FakeDriver;
+use App\Domain\Billing\EntitlementService;
 use App\Models\AiConversation;
 use App\Models\AiFeedback;
 use App\Models\Exercise;
 use App\Models\LearnerProfile;
 use App\Models\LearningPlanItem;
 use App\Models\LearningSession;
+use App\Models\PlanEntitlement;
 use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 
@@ -136,8 +138,11 @@ class TutorTest extends TestCase
 
     public function test_quota_realtime_and_authorisation(): void
     {
-        config(['learning.tutor.daily_turn_limit' => 1]);
         $conversation = $this->start();
+        $user = AiConversation::first()->learnerProfile->user;
+        $this->subscribe($user, 'premium_monthly');
+        PlanEntitlement::where('feature', 'tutor_messages')->update(['limit' => 1]);
+        app(EntitlementService::class)->forget();
         FakeDriver::queueText($this->turn('Bien.'));
         $this->postJson("/api/v1/conversations/{$conversation['id']}/messages", ['text' => 'Un café'])->assertOk();
         $this->postJson("/api/v1/conversations/{$conversation['id']}/messages", ['text' => 'Otro café'])

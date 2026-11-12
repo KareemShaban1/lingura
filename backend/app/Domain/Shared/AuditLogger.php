@@ -12,7 +12,7 @@ class AuditLogger
         $request = app()->runningInConsole() ? null : request();
 
         return AuditLog::create([
-            'actor_user_id' => $actorId ?? $request?->user()?->id,
+            'actor_user_id' => $actorId ?? $request?->user()?->id ?? auth()->id(), // auth() also covers console/test contexts
             'action' => $action,
             'auditable_type' => $subject ? $subject->getMorphClass() : null,
             'auditable_id' => $subject?->getKey(),

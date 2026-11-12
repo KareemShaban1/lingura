@@ -150,7 +150,8 @@ class ContentPackImporter
                 'audio_path' => $textChanged ? null : $existing?->audio_path, // stale audio is regenerated
                 'source' => 'authored',
                 'content_hash' => $hash,
-                'review_status' => 'published',
+                // An editor's retirement survives re-imports; only new or active exercises are (re)published.
+                'review_status' => $existing?->review_status === 'retired' ? 'retired' : 'published',
                 'reviewed_at' => $existing?->reviewed_at ?? now(),
                 'deleted_at' => null,
             ]);

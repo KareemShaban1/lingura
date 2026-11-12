@@ -2,6 +2,7 @@
 
 namespace App\Domain\Writing;
 
+use App\Domain\Billing\QuotaGuard;
 use App\Domain\Shared\DomainError;
 use App\Jobs\EvaluateWriting;
 use App\Models\LearnerProfile;
@@ -22,6 +23,8 @@ class WritingService
         if ($words > $task->max_words * 2) {
             throw new DomainError('This text is much longer than the task asks for.', 'text_too_long', 422);
         }
+
+        app(QuotaGuard::class)->consume($profile->user, 'writing_evaluations'); // refunded if evaluation finally fails
 
         $submission = WritingSubmission::create([
             'learner_profile_id' => $profile->id,

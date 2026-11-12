@@ -40,7 +40,6 @@ return [
 
     'tutor' => [
         'history_messages' => 16, // context window sent to the model
-        'daily_turn_limit' => (int) env('LF_TUTOR_DAILY_TURNS', 150), // pre-billing safety cap; Phase 4 moves this to plan entitlements
         'max_message_chars' => 1000,
     ],
 

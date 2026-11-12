@@ -13,6 +13,9 @@ use App\Domain\AI\Data\TranscriptionResult;
 use App\Domain\AI\Exceptions\AiException;
 use App\Domain\AI\Exceptions\CapabilityUnavailable;
 use App\Domain\Languages\CapabilityMatrix;
+use App\Models\AiModel;
+use App\Models\AiProvider;
+use Illuminate\Support\Facades\Cache;
 use Throwable;
 
 /**
@@ -83,6 +86,9 @@ class AiGateway
      */
     private function metered(string $provider, string $model, string $operation, ?int $userId, ?int $profileId, callable $call, callable $usage): mixed
     {
+        if (! self::enabled($provider, $model)) {
+            throw new AiException("AI provider [{$provider}/{$model}] is disabled by an administrator.", 'provider_disabled');
+        }
         $start = hrtime(true);
         try {
             $result = $call();
@@ -102,5 +108,23 @@ class AiGateway
         ]);
 
         return $result;
+    }
+
+    /** Admin kill switch (ai_providers / ai_models `is_enabled`); unknown rows are enabled. Cached for a minute. */
+    public static function enabled(string $provider, string $model): bool
+    {
+        return Cache::remember(self::switchKey($provider, $model), 60, function () use ($provider, $model) {
+            $row = AiProvider::where('slug', $provider)->first();
+            if ($row && ! $row->is_enabled) {
+                return false;
+            }
+
+            return ! ($row && AiModel::where('ai_provider_id', $row->id)->where('slug', $model)->where('is_enabled', false)->exists());
+        });
+    }
+
+    public static function switchKey(string $provider, string $model): string
+    {
+        return "ai-switch:{$provider}:{$model}";
     }
 }

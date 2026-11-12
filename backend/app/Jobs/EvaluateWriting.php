@@ -3,6 +3,7 @@
 namespace App\Jobs;
 
 use App\Domain\Adaptive\AdaptiveEngine;
+use App\Domain\Billing\QuotaGuard;
 use App\Domain\Practice\ProgressRecorder;
 use App\Domain\Shared\LearningEventRecorder;
 use App\Domain\Writing\WritingEvaluator;
@@ -43,6 +44,12 @@ class EvaluateWriting implements ShouldQueue
 
     public function failed(Throwable $e): void
     {
-        WritingSubmission::whereKey($this->submissionId)->update(['status' => 'failed']);
+        $submission = WritingSubmission::with('learnerProfile.user')->find($this->submissionId);
+        if ($submission && $submission->status !== 'failed') {
+            $submission->update(['status' => 'failed']);
+            if (! $submission->assessment_attempt_id) { // placement writing is charged under placement_productive
+                app(QuotaGuard::class)->release($submission->learnerProfile->user, 'writing_evaluations');
+            }
+        }
     }
 }

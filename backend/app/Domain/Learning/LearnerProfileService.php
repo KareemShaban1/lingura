@@ -2,6 +2,7 @@
 
 namespace App\Domain\Learning;
 
+use App\Domain\Billing\QuotaGuard;
 use App\Domain\Shared\AuditLogger;
 use App\Domain\Shared\DomainError;
 use App\Domain\Shared\LearningEventRecorder;
@@ -31,6 +32,9 @@ class LearnerProfileService
         if ($user->learnerProfiles()->where('target_language_id', $language->id)->exists()) {
             throw new DomainError('You are already learning this language.', 'profile_exists');
         }
+        // Existing languages stay accessible after a downgrade; only adding a new one is limited.
+        app(QuotaGuard::class)->assertBelow($user, 'target_languages',
+            $user->learnerProfiles()->where('status', '!=', LearnerProfile::STATUS_ARCHIVED)->count());
 
         $profile = DB::transaction(function () use ($user, $data, $language) {
             $profile = $user->learnerProfiles()->create([

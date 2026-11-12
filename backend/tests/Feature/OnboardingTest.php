@@ -61,6 +61,7 @@ class OnboardingTest extends TestCase
     public function test_one_profile_per_target_language_and_multiple_languages_allowed(): void
     {
         $user = $this->actingAsUser($this->makeUser());
+        $this->subscribe($user, 'premium_monthly'); // Free includes one language
         $payload = ['target_language' => 'de', 'purpose' => 'travel', 'daily_minutes' => 15];
 
         $this->postJson('/api/v1/learner-profiles', $payload)->assertCreated();

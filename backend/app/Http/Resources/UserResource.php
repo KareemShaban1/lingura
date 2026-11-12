@@ -20,6 +20,8 @@ class UserResource extends JsonResource
             'email_verified' => $this->email_verified_at !== null,
             'roles' => $this->roles->pluck('slug'),
             'is_staff' => $this->hasPermission('admin.access'),
+            // Drives which admin sections the UI shows; every admin route re-checks on the server.
+            'permissions' => $this->hasPermission('admin.access') ? $this->roles->flatMap->permissions->pluck('slug')->unique()->values() : [],
             'profile' => [
                 'native_language' => $profile?->nativeLanguage?->code,
                 'interface_language' => $profile?->interfaceLanguage?->code ?? 'en',

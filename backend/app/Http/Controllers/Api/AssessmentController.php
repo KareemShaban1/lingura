@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Domain\Assessment\PlacementService;
 use App\Domain\Assessment\ReportBuilder;
+use App\Domain\Billing\QuotaGuard;
 use App\Domain\Media\MediaUrlService;
 use App\Domain\Shared\DomainError;
 use App\Http\Controllers\Controller;
@@ -11,6 +12,7 @@ use App\Http\Resources\AssessmentAttemptResource;
 use App\Http\Resources\AssessmentItemResource;
 use App\Http\Resources\ProductionTaskResource;
 use App\Models\AssessmentAttempt;
+use App\Models\AssessmentAttemptSection;
 use App\Models\AssessmentItem;
 use App\Models\AudioRecording;
 use App\Models\LearnerProfile;
@@ -79,7 +81,7 @@ class AssessmentController extends Controller
     {
         $this->authorize('update', $attempt);
         $text = $request->validate(['text' => ['required', 'string', 'max:5000']])['text'];
-        $section = $this->placement->submitWriting($attempt, $text);
+        $section = $this->metered($attempt, fn () => $this->placement->submitWriting($attempt, $text));
 
         return response()->json(['data' => ['status' => $section->status, 'reason' => $section->skip_reason]]);
     }
@@ -89,9 +91,21 @@ class AssessmentController extends Controller
         $this->authorize('update', $attempt);
         $id = $request->validate(['recording_id' => ['required', 'string', 'size:26']])['recording_id'];
         $recording = AudioRecording::where('public_id', $id)->where('learner_profile_id', $attempt->learner_profile_id)->firstOrFail();
-        $section = $this->placement->submitSpeaking($attempt, $recording);
+        $section = $this->metered($attempt, fn () => $this->placement->submitSpeaking($attempt, $recording));
 
         return response()->json(['data' => ['status' => $section->status, 'reason' => $section->skip_reason]]);
+    }
+
+    /** AI-scored placement answers count against `placement_productive`; not charged when the evaluation was unavailable. */
+    private function metered(AssessmentAttempt $attempt, callable $submit): AssessmentAttemptSection
+    {
+        $user = $attempt->learnerProfile->user;
+        $section = app(QuotaGuard::class)->using($user, 'placement_productive', $submit);
+        if ($section->skip_reason === 'evaluation_unavailable') {
+            app(QuotaGuard::class)->release($user, 'placement_productive');
+        }
+
+        return $section;
     }
 
     public function skip(AssessmentAttempt $attempt, string $skill): JsonResponse

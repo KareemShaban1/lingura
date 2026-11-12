@@ -3,6 +3,10 @@
 namespace App\Providers;
 
 use App\Domain\AI\AiManager;
+use App\Domain\Billing\Contracts\BillingGateway;
+use App\Domain\Billing\EntitlementService;
+use App\Domain\Billing\Gateways\FakeGateway;
+use App\Domain\Billing\Gateways\StripeGateway;
 use App\Domain\Languages\CapabilityMatrix;
 use App\Models\User;
 use Illuminate\Auth\Notifications\ResetPassword;
@@ -12,6 +16,7 @@ use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Validation\Rules\Password;
+use RuntimeException;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -19,6 +24,17 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->app->singleton(AiManager::class);
         $this->app->singleton(CapabilityMatrix::class);
+        // Per request / per queued job, so plan changes are never served from a stale memo.
+        $this->app->scoped(EntitlementService::class);
+        $this->app->singleton(BillingGateway::class, function ($app) {
+            return match (config('billing.driver')) {
+                'stripe' => new StripeGateway(config('billing.stripe')),
+                'fake' => $app->isProduction()
+                    ? throw new RuntimeException('The fake billing driver cannot be used in production.')
+                    : new FakeGateway,
+                default => throw new RuntimeException('Unknown billing driver ['.config('billing.driver').'].'),
+            };
+        });
     }
 
     public function boot(): void

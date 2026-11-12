@@ -7,6 +7,8 @@ use App\Domain\AI\Data\RealtimeSessionRequest;
 use App\Domain\AI\Data\SpeechRequest;
 use App\Domain\AI\ExplanationLanguage;
 use App\Domain\AI\PromptRegistry;
+use App\Domain\Billing\EntitlementService;
+use App\Domain\Billing\QuotaGuard;
 use App\Domain\Languages\CapabilityMatrix;
 use App\Domain\Media\MediaUrlService;
 use App\Domain\Shared\DomainError;
@@ -59,6 +61,12 @@ class TutorController extends Controller
                 // Realtime needs a real provider: the browser connects to it directly with an ephemeral token.
                 'realtime' => $this->capabilities->isUsable($code, 'realtime_voice') && config('ai.default_provider') !== 'fake',
             ],
+            // Plan limits so the UI can show what is left (and offer an upgrade) before the learner hits a 429.
+            'quota' => collect(['tutor_messages', 'realtime_minutes'])->mapWithKeys(fn ($f) => [$f => [
+                'limit' => app(EntitlementService::class)->limit($learnerProfile->user, $f),
+                'remaining' => app(QuotaGuard::class)->remaining($learnerProfile->user, $f),
+                'resets_at' => app(QuotaGuard::class)->resetsAt($learnerProfile->user, $f)?->toIso8601String(),
+            ]]),
         ]]);
     }
 
@@ -109,21 +117,26 @@ class TutorController extends Controller
     }
 
     /** Push-to-talk voice turn: the uploaded recording is transcribed, then handled like a text turn. */
-    public function voice(Request $request, AiConversation $conversation, TranscriptionService $transcriber): JsonResponse
+    public function voice(Request $request, AiConversation $conversation, TranscriptionService $transcriber, QuotaGuard $quota): JsonResponse
     {
         $this->authorize('update', $conversation);
         $data = $request->validate(['recording_id' => ['required', 'string', 'size:26'], 'response_ms' => ['nullable', 'integer', 'min:0']]);
         $recording = AudioRecording::where('public_id', $data['recording_id'])->where('learner_profile_id', $conversation->learner_profile_id)->firstOrFail();
-        $text = $transcriber->transcribe($recording, $conversation->learnerProfile->targetLanguage->code, 'stt.conversation')->text;
+        // The turn is charged before transcription so an exhausted quota never incurs speech-to-text cost.
+        $turn = $quota->using($conversation->learnerProfile->user, 'tutor_messages', function () use ($transcriber, $recording, $conversation, $data) {
+            $text = $transcriber->transcribe($recording, $conversation->learnerProfile->targetLanguage->code, 'stt.conversation')->text;
 
-        return $this->turnResponse($conversation, $this->tutor->reply($conversation, $text, $recording, 'voice', $data['response_ms'] ?? null));
+            return $this->tutor->reply($conversation, $text, $recording, 'voice', $data['response_ms'] ?? null, prepaid: true);
+        });
+
+        return $this->turnResponse($conversation, $turn);
     }
 
     /**
      * Issues a short-lived credential for a browser WebRTC session with the provider. The permanent API key never
      * leaves the server; instructions are fixed server-side so the client cannot change the tutor's behaviour.
      */
-    public function realtimeSession(AiConversation $conversation, AiGateway $ai, PromptRegistry $prompts): JsonResponse
+    public function realtimeSession(AiConversation $conversation, AiGateway $ai, PromptRegistry $prompts, QuotaGuard $quota): JsonResponse
     {
         $this->authorize('update', $conversation);
         if (! $conversation->isActive()) {
@@ -140,7 +153,12 @@ class TutorController extends Controller
             'correction_mode' => $conversation->tutor->correction_mode === 'end_only' ? 'do not correct during the conversation' : 'correct gently by recasting',
             'explanation_language' => ExplanationLanguage::for($profile),
         ]);
-        $session = $ai->realtimeSession(new RealtimeSessionRequest($prompt->text, $profile->targetLanguage->code, $conversation->tutor->voice, $profile->user_id));
+        // Realtime audio is pre-charged in blocks (it streams browser↔provider, so it cannot be metered per second here).
+        $user = $profile->user;
+        $remaining = $quota->remaining($user, 'realtime_minutes');
+        $minutes = $remaining === null ? config('billing.realtime_block_minutes') : max(1, min(config('billing.realtime_block_minutes'), $remaining));
+        $session = $quota->using($user, 'realtime_minutes',
+            fn () => $ai->realtimeSession(new RealtimeSessionRequest($prompt->text, $profile->targetLanguage->code, $conversation->tutor->voice, $profile->user_id)), $minutes);
         $conversation->update(['mode' => 'realtime']);
 
         return response()->json(['data' => [
@@ -148,6 +166,7 @@ class TutorController extends Controller
             'expires_at' => $session->expiresAt->format(DATE_ATOM),
             'model' => $session->model,
             'provider' => $session->provider,
+            'max_seconds' => $minutes * 60, // the client hangs up at the end of the block
         ]]);
     }
 

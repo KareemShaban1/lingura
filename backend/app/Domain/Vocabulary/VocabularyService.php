@@ -102,6 +102,7 @@ class VocabularyService
             ]);
 
             $this->progress->increment($card->learnerProfile, Skill::where('slug', Skill::VOCABULARY)->value('id'), ['words_reviewed' => 1]);
+            $this->events->record($card->learnerProfile, 'vocabulary.reviewed', $card, value: $rating);
 
             return $card;
         });

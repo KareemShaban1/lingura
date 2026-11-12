@@ -3,12 +3,14 @@
 use App\Domain\AI\Exceptions\AiException;
 use App\Domain\AI\Exceptions\CapabilityUnavailable;
 use App\Domain\Shared\DomainError;
+use App\Http\Middleware\EnsurePermission;
 use App\Http\Middleware\EnsureUserIsActive;
 use App\Http\Middleware\SetRequestLocale;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Support\Facades\Log;
 
 return Application::configure(basePath: dirname(__DIR__))
@@ -21,7 +23,9 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware): void {
         $middleware->statefulApi();
         $middleware->api(append: [SetRequestLocale::class]);
-        $middleware->alias(['active' => EnsureUserIsActive::class]);
+        $middleware->alias(['active' => EnsureUserIsActive::class, 'permission' => EnsurePermission::class]);
+        // Permission checks run before route-model binding, so unauthorised staff cannot probe which records exist.
+        $middleware->prependToPriorityList(SubstituteBindings::class, EnsurePermission::class);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         $exceptions->shouldRenderJsonWhen(
@@ -31,6 +35,7 @@ return Application::configure(basePath: dirname(__DIR__))
         $exceptions->render(fn (DomainError $e) => response()->json([
             'message' => $e->getMessage(),
             'code' => $e->errorCode,
+            ...($e->context ? ['details' => $e->context] : []),
         ], $e->status));
 
         $exceptions->render(fn (CapabilityUnavailable $e) => response()->json([

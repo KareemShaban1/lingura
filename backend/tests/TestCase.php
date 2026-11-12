@@ -3,9 +3,12 @@
 namespace Tests;
 
 use App\Domain\AI\Drivers\FakeDriver;
+use App\Domain\Billing\EntitlementService;
 use App\Domain\Identity\AccountService;
 use App\Domain\Learning\LearnerProfileService;
 use App\Models\LearnerProfile;
+use App\Models\Subscription;
+use App\Models\SubscriptionPlan;
 use App\Models\User;
 use Database\Seeders\DatabaseSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -51,6 +54,18 @@ abstract class TestCase extends BaseTestCase
             'purpose' => 'general',
             'daily_minutes' => 30,
         ], $profile));
+    }
+
+    /** Puts the user on a paid plan (manual grant) so tests can exercise features beyond Free limits. */
+    protected function subscribe(User $user, string $plan = 'pro_monthly'): Subscription
+    {
+        $subscription = Subscription::create([
+            'user_id' => $user->id, 'subscription_plan_id' => SubscriptionPlan::where('slug', $plan)->value('id'),
+            'provider' => 'manual', 'status' => 'active', 'current_period_start' => now(), 'current_period_end' => now()->addMonth(),
+        ]);
+        app(EntitlementService::class)->forget();
+
+        return $subscription;
     }
 
     /** A small but genuine WAV file (content-sniffed as audio by the upload validator). */

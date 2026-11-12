@@ -83,6 +83,7 @@ class WritingAndPronunciationTest extends TestCase
 
         // Arabic pronunciation is unsupported in the capability matrix → the exercise is not offered.
         $arabic = Exercise::where('key', 'ar-a1-repeat')->first();
+        $this->subscribe($profile->user, 'premium_monthly');
         $arProfile = $this->makeLearner('ar', user: $profile->user);
         $this->postJson("/api/v1/learner-profiles/{$arProfile->public_id}/exercises/{$arabic->public_id}/attempts")
             ->assertStatus(409)->assertJsonPath('code', 'exercise_unavailable');

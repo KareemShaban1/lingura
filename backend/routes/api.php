@@ -1,14 +1,25 @@
 <?php
 
+use App\Http\Controllers\Api\Admin\AiAdminController;
+use App\Http\Controllers\Api\Admin\AnalyticsController;
+use App\Http\Controllers\Api\Admin\BillingAdminController;
+use App\Http\Controllers\Api\Admin\ContentAdminController;
+use App\Http\Controllers\Api\Admin\ReviewController;
+use App\Http\Controllers\Api\Admin\SystemAdminController;
+use App\Http\Controllers\Api\Admin\UserAdminController;
 use App\Http\Controllers\Api\AssessmentController;
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\BillingController;
 use App\Http\Controllers\Api\CatalogController;
 use App\Http\Controllers\Api\CourseController;
+use App\Http\Controllers\Api\GamificationController;
 use App\Http\Controllers\Api\GrammarController;
 use App\Http\Controllers\Api\LearnerProfileController;
 use App\Http\Controllers\Api\MeController;
 use App\Http\Controllers\Api\MediaController;
+use App\Http\Controllers\Api\NotificationController;
 use App\Http\Controllers\Api\OpenApiController;
+use App\Http\Controllers\Api\OrganizationController;
 use App\Http\Controllers\Api\PlanController;
 use App\Http\Controllers\Api\PracticeController;
 use App\Http\Controllers\Api\RecordingController;
@@ -25,7 +36,11 @@ Route::prefix('v1')->group(function () {
         Route::get('languages', [CatalogController::class, 'languages']);
         Route::get('languages/{code}', [CatalogController::class, 'language']);
         Route::get('catalog/onboarding', [CatalogController::class, 'onboarding']);
+        Route::get('billing/plans', [BillingController::class, 'plans']);
     });
+
+    // Payment provider webhooks: authenticated by signature, not by session.
+    Route::post('webhooks/billing', [BillingController::class, 'webhook'])->middleware('throttle:120,1');
 
     // Authentication
     Route::prefix('auth')->middleware('throttle:auth')->group(function () {
@@ -134,5 +149,82 @@ Route::prefix('v1')->group(function () {
         Route::get('learner-profiles/{learnerProfile}/writing-tasks/{task}', [WritingController::class, 'task']);
         Route::post('learner-profiles/{learnerProfile}/writing-tasks/{task}/submissions', [WritingController::class, 'submit'])->middleware('throttle:ai');
         Route::get('writing-submissions/{submission}', [WritingController::class, 'show']);
+
+        // Phase 4 — billing & notifications
+        Route::get('billing/subscription', [BillingController::class, 'subscription']);
+        Route::post('billing/checkout', [BillingController::class, 'checkout'])->middleware('throttle:10,1');
+        Route::post('billing/checkout/confirm', [BillingController::class, 'confirm'])->middleware('throttle:10,1');
+        Route::post('billing/subscription/cancel', [BillingController::class, 'cancel']);
+        Route::post('billing/subscription/resume', [BillingController::class, 'resume']);
+        Route::post('billing/portal', [BillingController::class, 'portal']);
+        Route::get('billing/payments', [BillingController::class, 'payments']);
+        Route::get('me/notifications', [NotificationController::class, 'index']);
+        Route::post('me/notifications/read', [NotificationController::class, 'markRead']);
+
+        // Phase 4 — family / organizations
+        Route::get('organizations', [OrganizationController::class, 'index']);
+        Route::post('organizations', [OrganizationController::class, 'store']);
+        Route::get('organizations/{organization}', [OrganizationController::class, 'show']);
+        Route::patch('organizations/{organization}', [OrganizationController::class, 'update']);
+        Route::post('organizations/{organization}/invitations', [OrganizationController::class, 'invite'])->middleware('throttle:20,1');
+        Route::delete('organization-invitations/{invitation}', [OrganizationController::class, 'revokeInvitation']);
+        Route::get('invitations/{token}', [OrganizationController::class, 'previewInvitation'])->middleware('throttle:20,1');
+        Route::post('invitations/{token}/accept', [OrganizationController::class, 'acceptInvitation'])->middleware('throttle:20,1');
+        Route::delete('organizations/{organization}/members/{member}', [OrganizationController::class, 'removeMember']);
+        Route::post('organizations/{organization}/leave', [OrganizationController::class, 'leave']);
+
+        // Phase 4 — gamification
+        Route::get('me/gamification', [GamificationController::class, 'summary']);
+        Route::get('me/xp', [GamificationController::class, 'xp']);
+        Route::get('me/achievements', [GamificationController::class, 'achievements']);
+        Route::get('me/challenges', [GamificationController::class, 'challenges']);
+        Route::get('leaderboards/weekly', [GamificationController::class, 'leaderboard']);
+        Route::patch('me/leaderboard', [GamificationController::class, 'updateLeaderboard']);
+
+        // Phase 4 — administration (RBAC: admin.access + a per-area permission; every mutation is audited)
+        Route::prefix('admin')->group(function () {
+            Route::get('analytics/overview', [AnalyticsController::class, 'overview'])->middleware('permission:analytics.view');
+
+            Route::middleware('permission:users.manage')->group(function () {
+                Route::get('users', [UserAdminController::class, 'index']);
+                Route::get('users/{user}', [UserAdminController::class, 'show']);
+                Route::patch('users/{user}/status', [UserAdminController::class, 'updateStatus']);
+                Route::put('users/{user}/roles', [UserAdminController::class, 'updateRoles']);
+            });
+            Route::post('users/{user}/grants', [UserAdminController::class, 'grant'])->middleware('permission:users.manage,billing.manage');
+
+            Route::middleware('permission:content.review')->group(function () {
+                Route::get('review/items', [ReviewController::class, 'items']);
+                Route::post('review/items/{item}', [ReviewController::class, 'decideItem']);
+                Route::get('review/evaluations', [ReviewController::class, 'evaluations']);
+                Route::post('review/evaluations/{evaluation}', [ReviewController::class, 'reviewEvaluation']);
+            });
+            Route::middleware('permission:content.manage')->group(function () {
+                Route::get('content/summary', [ContentAdminController::class, 'summary']);
+                Route::get('content/exercises', [ContentAdminController::class, 'exercises']);
+                Route::patch('content/exercises/{exercise}', [ContentAdminController::class, 'setExerciseStatus']);
+                Route::post('content/import', [ContentAdminController::class, 'import'])->middleware('throttle:10,1');
+            });
+            Route::middleware('permission:ai.manage')->group(function () {
+                Route::get('ai/providers', [AiAdminController::class, 'providers']);
+                Route::patch('ai/providers/{provider}', [AiAdminController::class, 'updateProvider']);
+                Route::patch('ai/models/{model}', [AiAdminController::class, 'updateModel']);
+                Route::get('ai/prompts', [AiAdminController::class, 'prompts']);
+                Route::post('ai/prompts/{key}/versions', [AiAdminController::class, 'createVersion']);
+                Route::post('ai/prompt-versions/{version}/activate', [AiAdminController::class, 'activate']);
+            });
+            Route::middleware('permission:billing.manage')->group(function () {
+                Route::get('billing/subscriptions', [BillingAdminController::class, 'subscriptions']);
+                Route::post('billing/subscriptions/{subscription}/revoke', [BillingAdminController::class, 'revoke']);
+                Route::get('billing/plans', [BillingAdminController::class, 'plans']);
+                Route::patch('billing/plans/{plan}', [BillingAdminController::class, 'updatePlan']);
+                Route::get('billing/events', [BillingAdminController::class, 'events']);
+            });
+            Route::middleware('permission:languages.manage')->group(function () {
+                Route::get('languages', [SystemAdminController::class, 'languages']);
+                Route::patch('language-capabilities/{capability}', [SystemAdminController::class, 'updateCapability']);
+            });
+            Route::get('audit-logs', [SystemAdminController::class, 'audit'])->middleware('permission:audit.view');
+        });
     });
 });

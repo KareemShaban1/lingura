@@ -2,6 +2,7 @@
 
 namespace App\Domain\Practice;
 
+use App\Domain\Billing\QuotaGuard;
 use App\Domain\Shared\DomainError;
 use App\Domain\Shared\LearningEventRecorder;
 use App\Domain\Speech\PronunciationService;
@@ -38,6 +39,7 @@ class ExerciseService
         private readonly ProgressRecorder $progress,
         private readonly LearningEventRecorder $events,
         private readonly PronunciationService $pronunciation,
+        private readonly QuotaGuard $quota,
     ) {}
 
     public function start(LearnerProfile $profile, Exercise $exercise, ?Lesson $lesson = null, ?LearningSession $session = null): ExerciseAttempt
@@ -98,7 +100,8 @@ class ExerciseService
             $recording = AudioRecording::where('public_id', (string) ($payload['recording_id'] ?? ''))
                 ->where('learner_profile_id', $attempt->learner_profile_id)->first()
                 ?? throw new DomainError('Record your answer first.', 'recording_required', 422);
-            $pronunciation = $this->pronunciation->assess($recording, $question->reference_text, $attempt->exercise->language->code);
+            $pronunciation = $this->quota->using($attempt->learnerProfile->user, 'pronunciation_checks',
+                fn () => $this->pronunciation->assess($recording, $question->reference_text, $attempt->exercise->language->code));
         }
 
         return DB::transaction(function () use ($attempt, $questionId, $payload, $pronunciation) {
