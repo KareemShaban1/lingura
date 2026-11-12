@@ -2,6 +2,7 @@
 
 namespace App\Domain\Learning;
 
+use App\Domain\Adaptive\AdaptiveEngine;
 use App\Domain\Courses\GrammarService;
 use App\Models\AssessmentAttempt;
 use App\Models\LearnerProfile;
@@ -28,6 +29,8 @@ final class PlanInputs
         public readonly bool $hasCompletedAssessment,
         public readonly string $purpose,
         public readonly string $timezone,
+        /** @var array{offsets: array<string,int>, recurring: list<string>, revision: list<string>} */
+        public readonly array $adaptive = ['offsets' => [], 'recurring' => [], 'revision' => []],
     ) {}
 
     public static function fromProfile(LearnerProfile $profile): self
@@ -65,7 +68,10 @@ final class PlanInputs
             ? $latest->findings->where('code', 'topic_unexpected_errors')
                 ->map(fn ($f) => ['skill' => $f->skill?->slug ?? 'grammar', 'topic' => $f->detail, 'source' => 'assessment'])->values()->all()
             : [];
-        $weakTopics = collect([...$practiceWeak, ...$assessmentWeak])->unique('topic')->values()->all();
+        $adaptive = app(AdaptiveEngine::class)->planSignals($profile);
+        $recurring = array_map(fn ($t) => ['skill' => 'grammar', 'topic' => $t, 'source' => 'recurring'], $adaptive['recurring']);
+        $revision = array_map(fn ($t) => ['skill' => 'grammar', 'topic' => $t, 'source' => 'revision'], $adaptive['revision']);
+        $weakTopics = collect([...$recurring, ...$practiceWeak, ...$revision, ...$assessmentWeak])->unique('topic')->values()->all();
 
         $days = $profile->scheduleSlots->pluck('day_of_week')->map(fn ($d) => (int) $d)->sort()->values()->all();
         $baseline = $overall ?? 1;
@@ -81,6 +87,7 @@ final class PlanInputs
             hasCompletedAssessment: $latest !== null,
             purpose: $profile->purpose->slug,
             timezone: $profile->user->profile?->timezone ?? 'UTC',
+            adaptive: $adaptive,
         );
     }
 

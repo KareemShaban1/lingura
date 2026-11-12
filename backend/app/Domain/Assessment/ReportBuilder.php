@@ -14,7 +14,7 @@ class ReportBuilder
 
     public function build(AssessmentAttempt $attempt): array
     {
-        $attempt->loadMissing(['sections.skill', 'sections.estimatedLevel', 'overallLevel', 'findings.skill']);
+        $attempt->loadMissing(['sections.skill', 'sections.estimatedLevel', 'overallLevel', 'findings.skill', 'sections.productionTask', 'sections.writingSubmission.evaluation.criteria']);
         $irt = IrtModel::fromConfig();
         $completed = $attempt->sections->where('status', AssessmentAttemptSection::COMPLETED);
 
@@ -41,6 +41,14 @@ class ReportBuilder
                 'standard_error' => $s->standard_error,
                 'items_answered' => $s->items_answered,
                 'items_correct' => $s->items_correct,
+                // Productive sections: the rubric evidence behind the estimate (AI-scored, labelled as such).
+                'evaluation' => ($e = $s->writingSubmission?->evaluation) ? [
+                    'method' => 'ai_rubric',
+                    'task' => $s->productionTask?->prompt,
+                    'response' => $s->writingSubmission->text,
+                    'summary' => $e->summary,
+                    'criteria' => $e->criteria->map(fn ($c) => ['criterion' => $c->criterion, 'score' => $c->score, 'comment' => $c->comment])->values(),
+                ] : null,
             ])->values(),
             'findings' => $attempt->findings->map(fn ($f) => [
                 'type' => $f->type,

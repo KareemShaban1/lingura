@@ -157,6 +157,13 @@ class ContentPackImporter
             if (isset($e['title'])) {
                 $exercise->setTranslations('title', $e['title']);
             }
+            foreach ($e['objectives'] ?? [] as $o) {
+                $objective = LearningObjective::updateOrCreate(['code' => $o['code']], [
+                    'language_id' => $this->language->id, 'skill_id' => $this->skill($o['skill']), 'cefr_level_id' => $level->id,
+                ]);
+                $objective->setTranslations('description', $o['text']);
+                $exercise->objectives()->syncWithoutDetaching([$objective->id]);
+            }
 
             if ($contentChanged) {
                 $exercise->questions()->delete();
@@ -196,6 +203,13 @@ class ContentPackImporter
                 foreach ($q['a'] as $answer) {
                     $question->acceptedAnswers()->create(['answer' => $answer]);
                 }
+                break;
+            case 'repeat':
+                if (empty($q['r'])) {
+                    throw new InvalidArgumentException("{$key}#{$position}: repeat needs a reference sentence");
+                }
+                $this->assertScript($q['r'], "{$key}#{$position}");
+                $question->update(['reference_text' => $q['r']]);
                 break;
             case 'ordering':
                 $this->assertOptions($q['o'], "{$key}#{$position}");

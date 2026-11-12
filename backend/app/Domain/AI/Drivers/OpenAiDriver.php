@@ -44,10 +44,13 @@ class OpenAiDriver implements AiDriver
         $payload = [
             'model' => $model,
             'instructions' => $request->instructions,
-            'input' => [['role' => 'user', 'content' => $request->input]],
+            'input' => [...($request->history ?? []), ['role' => 'user', 'content' => $request->input]],
             'max_output_tokens' => $request->maxOutputTokens,
             'store' => false,
         ];
+        if ($request->temperature !== null) {
+            $payload['temperature'] = $request->temperature;
+        }
         if ($request->jsonSchema !== null) {
             $payload['text'] = ['format' => [
                 'type' => 'json_schema',

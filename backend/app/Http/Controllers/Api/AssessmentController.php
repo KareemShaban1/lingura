@@ -9,9 +9,12 @@ use App\Domain\Shared\DomainError;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\AssessmentAttemptResource;
 use App\Http\Resources\AssessmentItemResource;
+use App\Http\Resources\ProductionTaskResource;
 use App\Models\AssessmentAttempt;
 use App\Models\AssessmentItem;
+use App\Models\AudioRecording;
 use App\Models\LearnerProfile;
+use App\Models\ProductionTask;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
@@ -45,12 +48,15 @@ class AssessmentController extends Controller
     public function next(AssessmentAttempt $attempt): JsonResponse
     {
         $this->authorize('update', $attempt);
-        $item = $attempt->isInProgress() ? $this->placement->next($attempt) : null;
+        $next = $attempt->isInProgress() ? $this->placement->next($attempt) : null;
         $attempt->refresh();
 
         return response()->json([
-            'done' => $item === null,
-            'item' => $item ? new AssessmentItemResource($item) : null,
+            'done' => $next === null,
+            'item' => $next instanceof AssessmentItem ? new AssessmentItemResource($next) : null,
+            'task' => $next instanceof ProductionTask ? (new ProductionTaskResource($next))->toArray(request()) + [
+                'skill' => $next->mode === 'spoken' ? 'speaking' : 'writing',
+            ] : null,
             'attempt' => new AssessmentAttemptResource($attempt->unsetRelation('sections')),
         ]);
     }
@@ -67,6 +73,25 @@ class AssessmentController extends Controller
 
         // Correctness is intentionally not revealed during a placement test.
         return response()->json(['accepted' => true]);
+    }
+
+    public function writing(Request $request, AssessmentAttempt $attempt): JsonResponse
+    {
+        $this->authorize('update', $attempt);
+        $text = $request->validate(['text' => ['required', 'string', 'max:5000']])['text'];
+        $section = $this->placement->submitWriting($attempt, $text);
+
+        return response()->json(['data' => ['status' => $section->status, 'reason' => $section->skip_reason]]);
+    }
+
+    public function speaking(Request $request, AssessmentAttempt $attempt): JsonResponse
+    {
+        $this->authorize('update', $attempt);
+        $id = $request->validate(['recording_id' => ['required', 'string', 'size:26']])['recording_id'];
+        $recording = AudioRecording::where('public_id', $id)->where('learner_profile_id', $attempt->learner_profile_id)->firstOrFail();
+        $section = $this->placement->submitSpeaking($attempt, $recording);
+
+        return response()->json(['data' => ['status' => $section->status, 'reason' => $section->skip_reason]]);
     }
 
     public function skip(AssessmentAttempt $attempt, string $skill): JsonResponse

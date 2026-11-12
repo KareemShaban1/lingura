@@ -31,10 +31,39 @@ class FakeDriver implements AiDriver
         self::$queuedText[] = $response;
     }
 
+    /** @var list<string> */
+    private static array $queuedTranscripts = [];
+
+    public static function queueTranscript(string $text): void
+    {
+        self::$queuedTranscripts[] = $text;
+    }
+
     public static function reset(): void
     {
         self::$queuedText = [];
+        self::$queuedTranscripts = [];
         self::$requests = [];
+    }
+
+    /**
+     * Builds a minimal, schema-valid placeholder so flows work without an API key in local development.
+     * Strings are visibly fake ("[fake] …") so nobody mistakes them for real feedback.
+     */
+    public static function fakeFromSchema(array $schema, string $name = 'value'): mixed
+    {
+        $type = is_array($schema['type'] ?? null) ? $schema['type'][0] : ($schema['type'] ?? 'string');
+
+        return match (true) {
+            isset($schema['enum']) => $schema['enum'][0],
+            $type === 'object' => collect($schema['properties'] ?? [])->map(fn ($p, $k) => self::fakeFromSchema($p, $k))->all(),
+            $type === 'array' => [],
+            $type === 'integer' => (int) ($schema['minimum'] ?? 1),
+            $type === 'number' => (float) ($schema['minimum'] ?? 1),
+            $type === 'boolean' => false,
+            $type === 'null' => null,
+            default => "[fake] {$name}",
+        };
     }
 
     public function slug(): string
@@ -50,7 +79,8 @@ class FakeDriver implements AiDriver
     public function generate(TextRequest $request): TextResult
     {
         self::$requests[] = $request;
-        $next = array_shift(self::$queuedText) ?? ($request->jsonSchema ? [] : 'ok');
+        $next = array_shift(self::$queuedText)
+            ?? ($request->jsonSchema ? self::fakeFromSchema($request->jsonSchema) : '[fake] reply');
         $text = is_array($next) ? json_encode($next, JSON_UNESCAPED_UNICODE) : $next;
 
         return new TextResult($text, is_array($next) ? $next : null, 'fake-text', mb_strlen($request->input), mb_strlen($text));
@@ -67,7 +97,7 @@ class FakeDriver implements AiDriver
     {
         self::$requests[] = $request;
 
-        return new TranscriptionResult('fake transcript', 'fake-stt', $request->durationSeconds ?? 0);
+        return new TranscriptionResult(array_shift(self::$queuedTranscripts) ?? '[fake] transcript', 'fake-stt', $request->durationSeconds ?? 0);
     }
 
     public function issue(RealtimeSessionRequest $request): EphemeralSession

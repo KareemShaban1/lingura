@@ -35,7 +35,8 @@ class PracticeTest extends TestCase
     {
         $list = collect($this->getJson("/api/v1/learner-profiles/{$this->profile->public_id}/exercises")->assertOk()->json('data'));
 
-        $this->assertCount(8, $list, 'listening and dictation are hidden until their audio exists');
+        $this->assertCount(9, $list, 'listening and dictation are hidden until their audio exists');
+        $this->assertTrue($list->contains('type', 'repeat'), 'Spanish supports pronunciation practice');
         $this->assertEmpty($list->whereIn('type', ['listening', 'dictation']));
         $this->assertTrue($list->every(fn ($e) => str_starts_with(Exercise::where('public_id', $e['id'])->value('key'), 'es-')));
 

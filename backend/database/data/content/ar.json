@@ -990,6 +990,43 @@
      ]
     }
    ]
+  },
+  {
+   "key": "ar-a1-repeat",
+   "type": "repeat",
+   "skill": "speaking",
+   "level": "A1",
+   "title": {
+    "en": "Say it aloud",
+    "ar": "قلها بصوت عالٍ"
+   },
+   "objectives": [
+    {
+     "code": "ar.a1.pronounce",
+     "skill": "speaking",
+     "text": {
+      "en": "Pronounce everyday sentences clearly enough to be understood",
+      "ar": "نطق جمل يومية بوضوح يكفي لفهمها"
+     }
+    }
+   ],
+   "questions": [
+    {
+     "r": "اسمي سارة وأنا من الأردن."
+    },
+    {
+     "r": "بيتي صغير."
+    },
+    {
+     "r": "نحن ندرس في الليل."
+    },
+    {
+     "r": "أنا من مصر."
+    },
+    {
+     "r": "أدرس العربية."
+    }
+   ]
   }
  ],
  "course": {

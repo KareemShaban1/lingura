@@ -174,7 +174,12 @@ class PlanGenerator
                 $reason = $allocations[$slug]['reason'];
                 if ($slug === 'grammar' && ($t = array_shift($topics))) {
                     $topic = $t['topic'];
-                    $reason = ($t['source'] ?? 'assessment') === 'practice' ? 'practice_topic_weakness' : 'assessment_topic_weakness';
+                    $reason = match ($t['source'] ?? 'assessment') {
+                        'recurring' => 'recurring_mistake',
+                        'practice' => 'practice_topic_weakness',
+                        'revision' => 'topic_due_for_revision',
+                        default => 'assessment_topic_weakness',
+                    };
                 }
                 $push($this->practiceItem($profile, $slug, null, $block, $reason, $inputs, $scale, $locale, $topic));
 
@@ -208,8 +213,9 @@ class PlanGenerator
 
     private function practiceItem(LearnerProfile $profile, string $slug, ?string $activity, int $minutes, string $reason, PlanInputs $inputs, CefrScale $scale, string $locale, ?string $topic = null): array
     {
-        $ordinal = $inputs->skills[$slug]['ordinal'] ?? $inputs->overallOrdinal ?? 1;
-        $level = $scale->byOrdinal($ordinal);
+        // Difficulty adaptation: recent practice accuracy moves content one level up or down (clamped to the scale).
+        $ordinal = ($inputs->skills[$slug]['ordinal'] ?? $inputs->overallOrdinal ?? 1) + ($inputs->adaptive['offsets'][$slug] ?? 0);
+        $level = $scale->byOrdinal(max(0, min(6, $ordinal)));
         $binding = $this->selector->bind($profile, $slug, $activity ?? self::ACTIVITY_BY_SKILL[$slug], $level->ordinal, $topic);
 
         // The item's skill follows its content: a revision that retries a reading exercise is a reading item.
@@ -226,11 +232,13 @@ class PlanGenerator
             'topic' => $topic,
             'lesson_id' => $binding['lesson']?->id,
             'exercise_id' => $binding['exercise']?->id,
+            'production_task_id' => $binding['task']?->id,
+            'conversation_scenario_id' => $binding['scenario']?->id,
             'estimated_minutes' => $minutes,
             'reason_code' => $reason,
             'target_level_id' => $level->id,
             // Snapshot in the generation locale; the API re-renders in the reader's locale.
-            ...$this->text->render($binding['activity_type'], $skillSlug, $level, $topic, $profile->targetLanguage, $binding['lesson'], $binding['exercise'], $locale),
+            ...$this->text->render($binding['activity_type'], $skillSlug, $level, $topic, $profile->targetLanguage, $binding['lesson'], $binding['exercise'], $locale, $binding['task'], $binding['scenario']),
         ];
     }
 }

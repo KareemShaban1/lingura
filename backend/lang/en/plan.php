@@ -14,6 +14,8 @@ return [
         'balanced_maintenance' => 'it keeps your skills balanced',
         'assessment_topic_weakness' => 'your placement showed unexpected errors on this topic',
         'practice_topic_weakness' => 'your recent practice shows this topic needs more work',
+        'recurring_mistake' => 'you keep making the same kind of mistake here',
+        'topic_due_for_revision' => 'you have not practised this topic for a week and it is not mastered yet',
         'scheduled_revision' => 'spaced revision helps you retain what you practised',
         'assessment_required' => 'your plan needs placement results',
     ],
@@ -28,6 +30,14 @@ return [
         'placement_assessment' => [
             'title' => 'Take your placement assessment',
             'objective' => 'Answer adaptive questions so we can estimate each of your skills independently.',
+        ],
+        'conversation' => [
+            'title' => 'Conversation: :name',
+            'objective' => 'Talk with your AI tutor in :language at :level. Aim for full sentences; your report shows corrections and new words.',
+        ],
+        'writing_task' => [
+            'title' => 'Writing: :name',
+            'objective' => 'Write :min–:max words. You will get rubric scores, corrections and an improved version of your text.',
         ],
         'lesson' => ['title' => 'Lesson: :title'],
         'vocabulary_review' => [

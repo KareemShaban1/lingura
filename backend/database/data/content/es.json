@@ -929,6 +929,43 @@
      ]
     }
    ]
+  },
+  {
+   "key": "es-a1-repeat",
+   "type": "repeat",
+   "skill": "speaking",
+   "level": "A1",
+   "title": {
+    "en": "Say it aloud",
+    "ar": "قلها بصوت عالٍ"
+   },
+   "objectives": [
+    {
+     "code": "es.a1.pronounce",
+     "skill": "speaking",
+     "text": {
+      "en": "Pronounce everyday sentences clearly enough to be understood",
+      "ar": "نطق جمل يومية بوضوح يكفي لفهمها"
+     }
+    }
+   ],
+   "questions": [
+    {
+     "r": "Me llamo Ana y soy de Chile."
+    },
+    {
+     "r": "Mi casa es pequeña."
+    },
+    {
+     "r": "Nosotros estudiamos por la noche."
+    },
+    {
+     "r": "Soy de Madrid."
+    },
+    {
+     "r": "Hablo español."
+    }
+   ]
   }
  ],
  "course": {

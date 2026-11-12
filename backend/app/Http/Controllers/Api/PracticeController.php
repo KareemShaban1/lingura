@@ -15,6 +15,7 @@ use App\Models\ExerciseQuestion;
 use App\Models\LearnerProfile;
 use App\Models\LearningSession;
 use App\Models\Lesson;
+use App\Models\PronunciationResult;
 use App\Models\Skill;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -87,6 +88,7 @@ class PracticeController extends Controller
             'order' => ['nullable', 'array', 'max:30'],
             'order.*' => ['integer'],
             'response_time_ms' => ['nullable', 'integer', 'min:0'],
+            'recording_id' => ['nullable', 'string', 'size:26'],
         ]);
         $answer = $this->exercises->answer($exerciseAttempt, $data['question_id'], $data);
         $question = ExerciseQuestion::with(['options', 'acceptedAnswers'])->find($answer->exercise_question_id);
@@ -119,6 +121,7 @@ class PracticeController extends Controller
     public static function feedback(Exercise $exercise, ExerciseQuestion $question, ExerciseAnswer $answer): array
     {
         $correct = match ($exercise->type) {
+            'repeat' => $question->reference_text,
             'cloze', 'dictation' => $question->acceptedAnswers->first()?->answer,
             'ordering' => $question->options->sortBy('correct_position')->pluck('label')->implode(' '),
             default => $question->options->firstWhere('is_correct', true)?->label,
@@ -130,7 +133,7 @@ class PracticeController extends Controller
             'score' => $answer->score,
             'feedback_code' => $answer->feedback_code,
             'given' => match ($exercise->type) {
-                'cloze', 'dictation' => $answer->response_text,
+                'cloze', 'dictation', 'repeat' => $answer->response_text,
                 'ordering' => collect(explode(',', (string) $answer->response_text))
                     ->map(fn ($id) => $question->options->firstWhere('id', (int) $id)?->label)->filter()->implode(' '),
                 default => $question->options->firstWhere('id', $answer->selected_option_id)?->label,
@@ -139,6 +142,21 @@ class PracticeController extends Controller
             'correct_option_id' => in_array($exercise->type, ['mcq', 'reading', 'listening'], true) ? $question->options->firstWhere('is_correct', true)?->id : null,
             'correct_answer' => $correct,
             'explanation' => $question->explanation,
+            'pronunciation' => $exercise->type === 'repeat' && $answer->audio_recording_id ? self::pronunciation($answer->audio_recording_id) : null,
         ];
+    }
+
+    /** Word-level intelligibility result for a repeat-after-me answer. */
+    private static function pronunciation(int $recordingId): ?array
+    {
+        $result = PronunciationResult::where('audio_recording_id', $recordingId)->with('words')->latest('id')->first();
+
+        return $result ? [
+            'method' => $result->method,
+            'accuracy' => $result->accuracy,
+            'completeness' => $result->completeness,
+            'words_per_minute' => $result->words_per_minute,
+            'words' => $result->words->map(fn ($w) => ['expected' => $w->expected, 'heard' => $w->heard, 'status' => $w->status])->values(),
+        ] : null;
     }
 }

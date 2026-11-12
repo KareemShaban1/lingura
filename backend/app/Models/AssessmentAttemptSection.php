@@ -45,6 +45,16 @@ class AssessmentAttemptSection extends Model
         return $this->belongsTo(CefrLevel::class, 'estimated_level_id');
     }
 
+    public function productionTask(): BelongsTo
+    {
+        return $this->belongsTo(ProductionTask::class);
+    }
+
+    public function writingSubmission(): BelongsTo
+    {
+        return $this->belongsTo(WritingSubmission::class);
+    }
+
     public function answers(): HasMany
     {
         return $this->hasMany(AssessmentAnswer::class);

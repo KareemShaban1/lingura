@@ -27,6 +27,12 @@ class AssessmentFlowTest extends TestCase
             if ($next->json('done')) {
                 return $attemptId;
             }
+            if ($task = $next->json('task')) {
+                // Productive sections are covered in ProductivePlacementTest; skip them here.
+                $this->postJson("/api/v1/assessment-attempts/{$attemptId}/sections/{$task['skill']}/skip")->assertOk();
+
+                continue;
+            }
             $item = AssessmentItem::where('public_id', $next->json('item.id'))->firstOrFail();
             $correct = $policy($item);
             $option = AssessmentItemOption::where('assessment_item_id', $item->id)->where('is_correct', $correct)->first();
@@ -96,9 +102,9 @@ class AssessmentFlowTest extends TestCase
         $codes = collect($report['findings'])->pluck('code');
         $this->assertTrue($codes->contains('skill_below_overall') || $codes->contains('skill_above_overall'));
 
-        // Productive skills are honestly reported as not yet assessed, and the overall result is provisional.
-        $this->assertSame('not_available', $skills['speaking']['status']);
-        $this->assertSame('coming_in_future_release', $skills['writing']['reason']);
+        // Skipped productive skills are reported as not assessed, and the overall result stays provisional.
+        $this->assertSame('skipped', $skills['speaking']['status']);
+        $this->assertSame('skipped_by_learner', $skills['writing']['reason']);
         $this->assertTrue($report['overall']['is_provisional']);
         $this->assertContains('productive_skills_not_assessed', $report['overall']['provisional_reasons']);
 

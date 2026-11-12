@@ -922,6 +922,43 @@
      ]
     }
    ]
+  },
+  {
+   "key": "it-a1-repeat",
+   "type": "repeat",
+   "skill": "speaking",
+   "level": "A1",
+   "title": {
+    "en": "Say it aloud",
+    "ar": "قلها بصوت عالٍ"
+   },
+   "objectives": [
+    {
+     "code": "it.a1.pronounce",
+     "skill": "speaking",
+     "text": {
+      "en": "Pronounce everyday sentences clearly enough to be understood",
+      "ar": "نطق جمل يومية بوضوح يكفي لفهمها"
+     }
+    }
+   ],
+   "questions": [
+    {
+     "r": "Mi chiamo Anna e sono di Napoli."
+    },
+    {
+     "r": "La mia casa è piccola."
+    },
+    {
+     "r": "Noi studiamo la sera."
+    },
+    {
+     "r": "Sono di Roma."
+    },
+    {
+     "r": "Parlo italiano."
+    }
+   ]
   }
  ],
  "course": {

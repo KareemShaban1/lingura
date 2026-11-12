@@ -44,6 +44,7 @@ class ExerciseAttemptResource extends JsonResource
                     return [
                         'id' => $q->id,
                         'prompt' => $q->prompt,
+                        'reference_text' => $q->reference_text,
                         'has_audio' => $q->audio_path !== null,
                         'options' => $q->options->map(fn ($o) => ['id' => $o->id, 'label' => $o->label])->values(),
                         'answer' => $answer ? PracticeController::feedback($exercise, $q, $answer) : null,

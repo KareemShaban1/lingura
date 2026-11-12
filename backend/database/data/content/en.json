@@ -875,6 +875,43 @@
      ]
     }
    ]
+  },
+  {
+   "key": "en-a1-repeat",
+   "type": "repeat",
+   "skill": "speaking",
+   "level": "A1",
+   "title": {
+    "en": "Say it aloud",
+    "ar": "قلها بصوت عالٍ"
+   },
+   "objectives": [
+    {
+     "code": "en.a1.pronounce",
+     "skill": "speaking",
+     "text": {
+      "en": "Pronounce everyday sentences clearly enough to be understood",
+      "ar": "نطق جمل يومية بوضوح يكفي لفهمها"
+     }
+    }
+   ],
+   "questions": [
+    {
+     "r": "My name is Sara and I am from Jordan."
+    },
+    {
+     "r": "My house is small."
+    },
+    {
+     "r": "We study English at night."
+    },
+    {
+     "r": "I am from Egypt."
+    },
+    {
+     "r": "She works in a shop."
+    }
+   ]
   }
  ],
  "course": {

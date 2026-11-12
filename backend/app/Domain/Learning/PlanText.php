@@ -4,12 +4,14 @@ namespace App\Domain\Learning;
 
 use App\Domain\Assessment\Engine\CefrScale;
 use App\Models\CefrLevel;
+use App\Models\ConversationScenario;
 use App\Models\Exercise;
 use App\Models\GrammarTopic;
 use App\Models\Language;
 use App\Models\LearningPlanItem;
 use App\Models\LearningPlanVersion;
 use App\Models\Lesson;
+use App\Models\ProductionTask;
 use Illuminate\Support\Str;
 
 /**
@@ -20,8 +22,24 @@ use Illuminate\Support\Str;
 class PlanText
 {
     /** @return array{title: string, objective: string} */
-    public function render(string $activity, ?string $skill, ?CefrLevel $level, ?string $topic, Language $language, ?Lesson $lesson = null, ?Exercise $exercise = null, ?string $locale = null): array
+    public function render(string $activity, ?string $skill, ?CefrLevel $level, ?string $topic, Language $language, ?Lesson $lesson = null, ?Exercise $exercise = null, ?string $locale = null, ?ProductionTask $task = null, ?ConversationScenario $scenario = null): array
     {
+        if ($scenario) {
+            $scenario->loadMissing('translations');
+
+            return [
+                'title' => __('plan.items.conversation.title', ['name' => $scenario->translate('title', $locale)], $locale),
+                'objective' => __('plan.items.conversation.objective', ['language' => $language->name, 'level' => $level?->label ?? ''], $locale),
+            ];
+        }
+        if ($task) {
+            $task->loadMissing('translations');
+
+            return [
+                'title' => __('plan.items.writing_task.title', ['name' => $task->translate('title', $locale)], $locale),
+                'objective' => __('plan.items.writing_task.objective', ['min' => $task->min_words, 'max' => $task->max_words], $locale),
+            ];
+        }
         $params = [
             'level' => $level?->label ?? '',
             'language' => $language->name,
@@ -68,9 +86,9 @@ class PlanText
     /** @return array{title: string, objective: string} */
     public function forItem(LearningPlanItem $item, Language $language, ?string $locale = null): array
     {
-        $item->loadMissing(['skill', 'targetLevel', 'lesson', 'exercise']);
+        $item->loadMissing(['skill', 'targetLevel', 'lesson', 'exercise', 'productionTask', 'scenario']);
 
-        return $this->render($item->activity_type, $item->skill?->slug, $item->targetLevel, $item->topic, $language, $item->lesson, $item->exercise, $locale);
+        return $this->render($item->activity_type, $item->skill?->slug, $item->targetLevel, $item->topic, $language, $item->lesson, $item->exercise, $locale, $item->productionTask, $item->scenario);
     }
 
     public function topicName(Language $language, string $slug, ?string $locale = null): string

@@ -51,6 +51,16 @@ class LearningPlanItem extends Model
         return $this->belongsTo(Exercise::class);
     }
 
+    public function productionTask(): BelongsTo
+    {
+        return $this->belongsTo(ProductionTask::class);
+    }
+
+    public function scenario(): BelongsTo
+    {
+        return $this->belongsTo(ConversationScenario::class, 'conversation_scenario_id');
+    }
+
     public function sessions(): HasMany
     {
         return $this->hasMany(LearningSession::class);

@@ -11,7 +11,10 @@ use App\Http\Controllers\Api\MediaController;
 use App\Http\Controllers\Api\OpenApiController;
 use App\Http\Controllers\Api\PlanController;
 use App\Http\Controllers\Api\PracticeController;
+use App\Http\Controllers\Api\RecordingController;
+use App\Http\Controllers\Api\TutorController;
 use App\Http\Controllers\Api\VocabularyController;
+use App\Http\Controllers\Api\WritingController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('v1')->group(function () {
@@ -105,5 +108,31 @@ Route::prefix('v1')->group(function () {
         Route::post('learner-profiles/{learnerProfile}/vocabulary-collections', [VocabularyController::class, 'createCollection']);
         Route::delete('vocabulary-collections/{collection}', [VocabularyController::class, 'deleteCollection']);
         Route::post('vocabulary-collections/{collection}/items', [VocabularyController::class, 'toggleCollectionItem']);
+
+        // Phase 3 — speech
+        Route::post('learner-profiles/{learnerProfile}/recordings', [RecordingController::class, 'store'])->middleware('throttle:ai');
+        Route::get('recordings/{recording}/url', [RecordingController::class, 'url']);
+        Route::post('assessment-attempts/{attempt}/writing', [AssessmentController::class, 'writing'])->middleware('throttle:ai');
+        Route::post('assessment-attempts/{attempt}/speaking', [AssessmentController::class, 'speaking'])->middleware('throttle:ai');
+
+        // Phase 3 — AI tutor
+        Route::get('learner-profiles/{learnerProfile}/tutor/catalog', [TutorController::class, 'catalog']);
+        Route::get('learner-profiles/{learnerProfile}/conversations', [TutorController::class, 'index']);
+        Route::post('learner-profiles/{learnerProfile}/conversations', [TutorController::class, 'start'])->middleware('throttle:ai');
+        Route::get('conversations/{conversation}', [TutorController::class, 'show']);
+        Route::post('conversations/{conversation}/messages', [TutorController::class, 'message'])->middleware('throttle:ai');
+        Route::post('conversations/{conversation}/voice', [TutorController::class, 'voice'])->middleware('throttle:ai');
+        Route::post('conversations/{conversation}/realtime-session', [TutorController::class, 'realtimeSession'])->middleware('throttle:ai');
+        Route::post('conversations/{conversation}/realtime-transcript', [TutorController::class, 'realtimeTranscript']);
+        Route::post('conversations/{conversation}/finish', [TutorController::class, 'finish']);
+        Route::get('conversations/{conversation}/report', [TutorController::class, 'report']);
+        Route::post('conversations/{conversation}/report/retry', [TutorController::class, 'retryReport'])->middleware('throttle:ai');
+        Route::get('ai-messages/{message}/audio', [TutorController::class, 'messageAudio'])->middleware('throttle:ai');
+
+        // Phase 3 — writing
+        Route::get('learner-profiles/{learnerProfile}/writing-tasks', [WritingController::class, 'tasks']);
+        Route::get('learner-profiles/{learnerProfile}/writing-tasks/{task}', [WritingController::class, 'task']);
+        Route::post('learner-profiles/{learnerProfile}/writing-tasks/{task}/submissions', [WritingController::class, 'submit'])->middleware('throttle:ai');
+        Route::get('writing-submissions/{submission}', [WritingController::class, 'show']);
     });
 });

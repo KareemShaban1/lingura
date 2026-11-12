@@ -18,5 +18,8 @@ final readonly class TextRequest
         public ?int $maxOutputTokens = 2000,
         public ?int $userId = null,
         public ?int $learnerProfileId = null,
+        /** @var list<array{role: 'user'|'assistant', content: string}>|null Prior turns for multi-turn calls; `input` is the newest user turn. */
+        public ?array $history = null,
+        public ?float $temperature = null,
     ) {}
 }

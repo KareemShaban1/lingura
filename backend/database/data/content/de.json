@@ -915,6 +915,43 @@
      ]
     }
    ]
+  },
+  {
+   "key": "de-a1-repeat",
+   "type": "repeat",
+   "skill": "speaking",
+   "level": "A1",
+   "title": {
+    "en": "Say it aloud",
+    "ar": "قلها بصوت عالٍ"
+   },
+   "objectives": [
+    {
+     "code": "de.a1.pronounce",
+     "skill": "speaking",
+     "text": {
+      "en": "Pronounce everyday sentences clearly enough to be understood",
+      "ar": "نطق جمل يومية بوضوح يكفي لفهمها"
+     }
+    }
+   ],
+   "questions": [
+    {
+     "r": "Ich heiße Anna und komme aus Wien."
+    },
+    {
+     "r": "Mein Haus ist klein."
+    },
+    {
+     "r": "Wir lernen am Abend."
+    },
+    {
+     "r": "Ich bin aus Kairo."
+    },
+    {
+     "r": "Ich lerne Deutsch."
+    }
+   ]
   }
  ],
  "course": {

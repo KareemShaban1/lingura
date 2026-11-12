@@ -48,12 +48,13 @@ class SynthesizeExerciseAudio implements ShouldQueue
             $exercise->update(['audio_path' => $path]);
         }
 
-        if ($exercise->type === 'dictation') {
+        if (in_array($exercise->type, ['dictation', 'repeat'], true)) {
             foreach ($exercise->questions as $question) {
-                if ($question->audio_path || ! $question->acceptedAnswers->first()) {
+                $text = $exercise->type === 'repeat' ? $question->reference_text : $question->acceptedAnswers->first()?->answer;
+                if ($question->audio_path || ! $text) {
                     continue;
                 }
-                $audio = $speak($question->acceptedAnswers->first()->answer);
+                $audio = $speak($text);
                 $path = "exercise-audio/{$exercise->language->code}/{$exercise->public_id}-{$question->position}.{$audio->extension}";
                 $disk->put($path, $audio->bytes);
                 $question->update(['audio_path' => $path]);

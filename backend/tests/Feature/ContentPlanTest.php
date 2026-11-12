@@ -27,11 +27,11 @@ class ContentPlanTest extends TestCase
         $lesson = $items->firstWhere('activity_type', 'lesson');
         $this->assertStringStartsWith('Lesson: ', $lesson['title']);
 
-        // Speaking and writing remain self-guided until Phase 3.
-        $speaking = $items->firstWhere('skill', 'speaking');
-        $this->assertNotNull($speaking);
-        $this->assertNull($speaking['lesson_id']);
-        $this->assertNull($speaking['exercise_id']);
+        // Speaking binds to pronunciation practice first, then tutor conversations; writing to an evaluated task.
+        $speaking = $items->where('skill', 'speaking')->values();
+        $this->assertSame('repeat', Exercise::where('public_id', $speaking[0]['exercise_id'])->value('type'));
+        $this->assertTrue($items->contains('activity_type', 'conversation'));
+        $this->assertTrue($items->contains('activity_type', 'writing_task'));
     }
 
     public function test_due_flashcards_and_weak_grammar_shape_the_next_plan(): void

@@ -2,19 +2,28 @@
 
 namespace App\Domain\Assessment;
 
+use App\Domain\AI\Exceptions\AiException;
 use App\Domain\Assessment\Engine\CefrScale;
 use App\Domain\Assessment\Engine\IrtModel;
 use App\Domain\Languages\CapabilityMatrix;
 use App\Domain\Shared\DomainError;
 use App\Domain\Shared\LearningEventRecorder;
+use App\Domain\Speech\TranscriptionService;
+use App\Domain\Writing\SpeakingEvaluator;
+use App\Domain\Writing\TextStats;
+use App\Domain\Writing\WritingEvaluator;
 use App\Models\Assessment;
 use App\Models\AssessmentAnswer;
 use App\Models\AssessmentAttempt;
 use App\Models\AssessmentAttemptSection;
 use App\Models\AssessmentItem;
 use App\Models\AssessmentSection;
+use App\Models\AudioRecording;
+use App\Models\CefrLevel;
 use App\Models\LearnerProfile;
+use App\Models\ProductionTask;
 use App\Models\Skill;
+use App\Models\WritingSubmission;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 
@@ -24,6 +33,9 @@ use Illuminate\Support\Facades\DB;
 class PlacementService
 {
     public function __construct(
+        private readonly WritingEvaluator $writing,
+        private readonly SpeakingEvaluator $speaking,
+        private readonly TranscriptionService $transcriber,
         private readonly CapabilityMatrix $capabilities,
         private readonly AttemptFinalizer $finalizer,
         private readonly LearningEventRecorder $events,
@@ -69,17 +81,31 @@ class PlacementService
     /**
      * Returns the item to present now, or null when the attempt is finished.
      */
-    public function next(AssessmentAttempt $attempt): ?AssessmentItem
+    /**
+     * Returns what to present now: an adaptive item, a productive task (writing/speaking), or null when finished.
+     */
+    public function next(AssessmentAttempt $attempt): AssessmentItem|ProductionTask|null
     {
         $this->assertInProgress($attempt);
 
         $item = DB::transaction(function () use ($attempt) {
             AssessmentAttempt::whereKey($attempt->id)->lockForUpdate()->first();
-            $sections = $attempt->sections()->with('section')->get();
+            $sections = $attempt->sections()->with(['section', 'skill'])->get();
 
             foreach ($sections as $section) {
                 if (! $section->isOpen()) {
                     continue;
+                }
+                if ($section->skill->is_productive) {
+                    $task = $section->production_task_id ? ProductionTask::find($section->production_task_id) : $this->selectTask($attempt, $section);
+                    if (! $task) {
+                        $this->closeSection($section, AssessmentAttemptSection::NOT_AVAILABLE, 'no_content_available');
+
+                        continue;
+                    }
+                    $section->update(['status' => AssessmentAttemptSection::IN_PROGRESS, 'production_task_id' => $task->id]);
+
+                    return $task;
                 }
                 if ($section->current_item_id) {
                     return AssessmentItem::find($section->current_item_id);
@@ -111,7 +137,129 @@ class PlacementService
             $this->finalizer->finalize($attempt->fresh());
         }
 
-        return $item?->load(['options', 'skill', 'level']);
+        return $item instanceof AssessmentItem ? $item->load(['options', 'skill', 'level']) : $item?->load(['level', 'translations']);
+    }
+
+    /** Placement writing: the response is rubric-scored synchronously (AI with server-side validation). */
+    public function submitWriting(AssessmentAttempt $attempt, string $text): AssessmentAttemptSection
+    {
+        $section = $this->openProductiveSection($attempt, Skill::WRITING);
+        $task = $section->productionTask;
+        $words = TextStats::of($text)['words'];
+        if ($words < 3) {
+            throw new DomainError('Write a little more before submitting.', 'text_too_short', 422);
+        }
+        $submission = WritingSubmission::create([
+            'learner_profile_id' => $attempt->learner_profile_id, 'production_task_id' => $task->id,
+            'assessment_attempt_id' => $attempt->id, 'text' => mb_substr($text, 0, 5000), 'word_count' => $words,
+        ]);
+        try {
+            $evaluation = $this->writing->evaluate($submission);
+        } catch (AiException $e) {
+            $submission->update(['status' => 'failed']);
+            $this->closeProductive($section, null, null, 'evaluation_unavailable', $submission->id);
+
+            return $section->fresh();
+        }
+        $this->closeProductive($section, $evaluation->level, $words < $task->min_words, null, $submission->id);
+
+        return $section->fresh();
+    }
+
+    /**
+     * Placement speaking: transcribe, then rubric-score the transcript with measured fluency facts.
+     * The transcript and rubric are stored like a written submission (criteria fluency/grammar/vocabulary/coherence).
+     */
+    public function submitSpeaking(AssessmentAttempt $attempt, AudioRecording $recording): AssessmentAttemptSection
+    {
+        $section = $this->openProductiveSection($attempt, Skill::SPEAKING);
+        $task = $section->productionTask->load('language');
+        try {
+            $transcript = $this->transcriber->transcribe($recording, $task->language->code, 'stt.speaking_assessment')->text;
+            if (TextStats::of($transcript)['words'] < 3) {
+                $this->closeProductive($section, null, null, 'no_speech_detected', null, $recording->id);
+
+                return $section->fresh();
+            }
+            $result = $this->speaking->evaluate($attempt->learnerProfile, $task, $transcript, $recording->duration_ms);
+        } catch (AiException $e) {
+            $this->closeProductive($section, null, null, 'evaluation_unavailable', null, $recording->id);
+
+            return $section->fresh();
+        }
+
+        $submission = DB::transaction(function () use ($attempt, $task, $transcript, $result) {
+            $submission = WritingSubmission::create([
+                'learner_profile_id' => $attempt->learner_profile_id, 'production_task_id' => $task->id,
+                'assessment_attempt_id' => $attempt->id, 'text' => $transcript, 'word_count' => $result['words'], 'status' => 'evaluated',
+            ]);
+            $stats = TextStats::of($transcript);
+            $evaluation = $submission->evaluation()->create([
+                'cefr_level_id' => $result['level']->id,
+                'overall_score' => round(collect($result['criteria'])->avg('score'), 2),
+                'summary' => $result['summary'], 'corrected_text' => $transcript,
+                'sentence_count' => $stats['sentences'], 'avg_sentence_length' => $stats['avg_sentence_length'], 'lexical_variety' => $stats['lexical_variety'],
+                'prompt_version' => $result['prompt_version'], 'model_slug' => config('ai.default_provider'),
+            ]);
+            foreach ($result['criteria'] as $criterion => $c) {
+                $evaluation->criteria()->create(['criterion' => $criterion, 'score' => $c['score'], 'comment' => $c['comment']]);
+            }
+
+            return $submission;
+        });
+        $this->closeProductive($section, $result['level'], $result['words'] < $task->min_words, null, $submission->id, $recording->id);
+
+        return $section->fresh();
+    }
+
+    private function openProductiveSection(AssessmentAttempt $attempt, string $skill): AssessmentAttemptSection
+    {
+        $this->assertInProgress($attempt);
+        $section = $attempt->sections()->whereHas('skill', fn ($q) => $q->where('slug', $skill))->with('productionTask')->first();
+        if (! $section || ! $section->isOpen() || ! $section->productionTask) {
+            throw new DomainError('This section is not waiting for a response.', 'section_not_current');
+        }
+
+        return $section;
+    }
+
+    /**
+     * A rubric estimate is placed on the ability scale at its level anchor with a wider standard error
+     * than adaptive closed items (wider still for responses shorter than the task asks for).
+     */
+    private function closeProductive(AssessmentAttemptSection $section, ?CefrLevel $level, ?bool $short, ?string $failure, ?int $submissionId = null, ?int $recordingId = null): void
+    {
+        $c = config('learning.productive_assessment');
+        $section->update($level ? [
+            'status' => AssessmentAttemptSection::COMPLETED,
+            'theta' => $level->anchor_theta,
+            'standard_error' => $short ? $c['short_response_standard_error'] : $c['standard_error'],
+            'estimated_level_id' => $level->id,
+            'items_answered' => 1,
+            'writing_submission_id' => $submissionId,
+            'audio_recording_id' => $recordingId,
+            'completed_at' => now(),
+        ] : [
+            'status' => AssessmentAttemptSection::SKIPPED,
+            'skip_reason' => $failure,
+            'writing_submission_id' => $submissionId,
+            'audio_recording_id' => $recordingId,
+            'completed_at' => now(),
+        ]);
+    }
+
+    /** Task closest to the provisional level (lower median of sections finished so far). */
+    private function selectTask(AssessmentAttempt $attempt, AssessmentAttemptSection $section): ?ProductionTask
+    {
+        $profile = $attempt->learnerProfile;
+        $ordinals = $attempt->sections()->where('status', AssessmentAttemptSection::COMPLETED)->with('estimatedLevel')->get()
+            ->pluck('estimatedLevel.ordinal')->filter(fn ($o) => $o !== null)->values()->all();
+        $provisional = CefrScale::load()->lowerMedian($ordinals) ?? $profile->selfReportedLevel?->ordinal ?? 2;
+        $mode = $section->skill->slug === Skill::SPEAKING ? 'spoken' : 'written';
+
+        return ProductionTask::where('language_id', $profile->target_language_id)->where('mode', $mode)
+            ->where('is_placement', true)->where('review_status', 'published')->with('level')->get()
+            ->sortBy(fn ($t) => [abs($t->level->ordinal - $provisional), $t->level->ordinal])->first();
     }
 
     /**
@@ -291,6 +439,18 @@ class PlacementService
     {
         if ($section->availability !== 'enabled') {
             return 'coming_in_future_release';
+        }
+        if ($section->skill->is_productive) {
+            $needs = $section->skill->slug === Skill::SPEAKING ? ['stt', 'content_generation'] : ['writing_evaluation'];
+            foreach ($needs as $feature) {
+                if (! $this->capabilities->isUsable($languageCode, $feature)) {
+                    return 'not_supported_for_language';
+                }
+            }
+            $mode = $section->skill->slug === Skill::SPEAKING ? 'spoken' : 'written';
+
+            return ProductionTask::where('language_id', $languageId)->where('mode', $mode)->where('is_placement', true)->exists()
+                ? null : 'no_content_available';
         }
 
         $query = AssessmentItem::published()->where('language_id', $languageId)->where('skill_id', $section->skill_id);

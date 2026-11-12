@@ -927,6 +927,43 @@
      ]
     }
    ]
+  },
+  {
+   "key": "fr-a1-repeat",
+   "type": "repeat",
+   "skill": "speaking",
+   "level": "A1",
+   "title": {
+    "en": "Say it aloud",
+    "ar": "قلها بصوت عالٍ"
+   },
+   "objectives": [
+    {
+     "code": "fr.a1.pronounce",
+     "skill": "speaking",
+     "text": {
+      "en": "Pronounce everyday sentences clearly enough to be understood",
+      "ar": "نطق جمل يومية بوضوح يكفي لفهمها"
+     }
+    }
+   ],
+   "questions": [
+    {
+     "r": "Je m'appelle Anne et je suis de Lyon."
+    },
+    {
+     "r": "Ma maison est petite."
+    },
+    {
+     "r": "Nous étudions le soir."
+    },
+    {
+     "r": "Je suis de Tunis."
+    },
+    {
+     "r": "Je parle français."
+    }
+   ]
   }
  ],
  "course": {

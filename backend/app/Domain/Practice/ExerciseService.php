@@ -4,6 +4,9 @@ namespace App\Domain\Practice;
 
 use App\Domain\Shared\DomainError;
 use App\Domain\Shared\LearningEventRecorder;
+use App\Domain\Speech\PronunciationService;
+use App\Jobs\RefreshAdaptiveState;
+use App\Models\AudioRecording;
 use App\Models\Exercise;
 use App\Models\ExerciseAnswer;
 use App\Models\ExerciseAttempt;
@@ -27,10 +30,14 @@ class ExerciseService
     /** Reading speeds outside this range are treated as unreliable (skimming or idle tab). */
     private const WPM_RANGE = [20, 600];
 
+    /** A repeat-after-me sentence counts as correct when at least this share of words was understood. */
+    public const PRONUNCIATION_PASS = 0.8;
+
     public function __construct(
         private readonly AnswerChecker $checker,
         private readonly ProgressRecorder $progress,
         private readonly LearningEventRecorder $events,
+        private readonly PronunciationService $pronunciation,
     ) {}
 
     public function start(LearnerProfile $profile, Exercise $exercise, ?Lesson $lesson = null, ?LearningSession $session = null): ExerciseAttempt
@@ -83,7 +90,18 @@ class ExerciseService
             throw new DomainError('This attempt is already finished.', 'attempt_closed');
         }
 
-        return DB::transaction(function () use ($attempt, $questionId, $payload) {
+        // Pronunciation needs a (slow) transcription call: do it before taking any row locks.
+        $pronunciation = null;
+        if ($attempt->exercise->type === 'repeat' && ! $attempt->answers()->where('exercise_question_id', $questionId)->exists()) {
+            $question = ExerciseQuestion::where('exercise_id', $attempt->exercise_id)->find($questionId)
+                ?? throw new DomainError('This question is not part of the exercise.', 'invalid_question', 422);
+            $recording = AudioRecording::where('public_id', (string) ($payload['recording_id'] ?? ''))
+                ->where('learner_profile_id', $attempt->learner_profile_id)->first()
+                ?? throw new DomainError('Record your answer first.', 'recording_required', 422);
+            $pronunciation = $this->pronunciation->assess($recording, $question->reference_text, $attempt->exercise->language->code);
+        }
+
+        return DB::transaction(function () use ($attempt, $questionId, $payload, $pronunciation) {
             $attempt = ExerciseAttempt::whereKey($attempt->id)->lockForUpdate()->first();
             $question = ExerciseQuestion::with(['options', 'acceptedAnswers'])
                 ->where('exercise_id', $attempt->exercise_id)->find($questionId)
@@ -95,7 +113,10 @@ class ExerciseService
             }
 
             $exercise = $attempt->exercise;
-            [$result, $response, $optionId] = $this->score($exercise->type, $question, $payload);
+            [$result, $response, $optionId] = $pronunciation
+                ? [['is_correct' => $pronunciation->accuracy >= self::PRONUNCIATION_PASS, 'score' => $pronunciation->accuracy, 'feedback_code' => 'pronunciation'],
+                    $pronunciation->audioRecording?->transcription?->text, null]
+                : $this->score($exercise->type, $question, $payload);
 
             $answer = $attempt->answers()->create([
                 'exercise_question_id' => $question->id,
@@ -105,6 +126,7 @@ class ExerciseService
                 'score' => $result['score'],
                 'feedback_code' => $result['feedback_code'],
                 'response_time_ms' => isset($payload['response_time_ms']) ? min((int) $payload['response_time_ms'], 3_600_000) : null,
+                'audio_recording_id' => $pronunciation?->audio_recording_id,
                 'answered_at' => now(),
             ]);
             $attempt->update([
@@ -165,6 +187,7 @@ class ExerciseService
             $this->events->record($profile, 'exercise.completed', $attempt, $exercise->skill_id, round($score, 4), [
                 'exercise' => $exercise->key, 'type' => $exercise->type, 'wpm' => $wpm,
             ]);
+            RefreshAdaptiveState::dispatch($profile->id)->afterCommit();
 
             return $attempt;
         });
@@ -179,6 +202,7 @@ class ExerciseService
                 : throw new DomainError('Choose an option.', 'option_required', 422),
             'cloze' => [$this->checker->typed((string) ($payload['text'] ?? ''), $question->acceptedAnswers->pluck('answer')->all()), mb_substr((string) ($payload['text'] ?? ''), 0, 500), null],
             'dictation' => [$this->checker->dictation((string) ($payload['text'] ?? ''), $question->acceptedAnswers->first()->answer), mb_substr((string) ($payload['text'] ?? ''), 0, 1000), null],
+            'repeat' => throw new DomainError('Record your answer first.', 'recording_required', 422),
             'ordering' => [$this->checker->ordering($question, array_map('intval', $payload['order'] ?? [])), implode(',', array_map('intval', $payload['order'] ?? [])), null],
         };
     }

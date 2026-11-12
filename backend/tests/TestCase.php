@@ -10,6 +10,7 @@ use App\Models\User;
 use Database\Seeders\DatabaseSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
+use Illuminate\Http\UploadedFile;
 use Laravel\Sanctum\Sanctum;
 
 abstract class TestCase extends BaseTestCase
@@ -50,6 +51,22 @@ abstract class TestCase extends BaseTestCase
             'purpose' => 'general',
             'daily_minutes' => 30,
         ], $profile));
+    }
+
+    /** A small but genuine WAV file (content-sniffed as audio by the upload validator). */
+    protected function wavUpload(string $name = 'speech.wav'): UploadedFile
+    {
+        $samples = str_repeat(pack('v', 0), 8000);
+        $header = 'RIFF'.pack('V', 36 + strlen($samples)).'WAVEfmt '.pack('VvvVVvv', 16, 1, 1, 16000, 32000, 2, 16).'data'.pack('V', strlen($samples));
+
+        return UploadedFile::fake()->createWithContent($name, $header.$samples);
+    }
+
+    protected function uploadRecording(LearnerProfile $profile, string $purpose, int $durationMs = 4000): string
+    {
+        return $this->post("/api/v1/learner-profiles/{$profile->public_id}/recordings", [
+            'audio' => $this->wavUpload(), 'purpose' => $purpose, 'duration_ms' => $durationMs,
+        ], ['Accept' => 'application/json'])->assertCreated()->json('data.id');
     }
 
     protected function actingAsUser(User $user): User

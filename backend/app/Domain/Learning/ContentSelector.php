@@ -3,18 +3,22 @@
 namespace App\Domain\Learning;
 
 use App\Domain\Courses\CourseService;
+use App\Domain\Languages\CapabilityMatrix;
+use App\Models\ConversationScenario;
 use App\Models\Exercise;
 use App\Models\ExerciseAttempt;
 use App\Models\GrammarTopic;
 use App\Models\LearnerProfile;
 use App\Models\Lesson;
+use App\Models\ProductionTask;
 use App\Models\Skill;
 use App\Models\UserVocabulary;
+use App\Models\WritingSubmission;
 
 /**
  * Binds a plan block (skill + level + optional topic) to concrete content: a course lesson, a practice
  * exercise, or a flashcard review. Each piece of content is used at most once per plan version.
- * Skills without Phase 2 content (speaking, writing) stay self-guided.
+ * Speaking binds to repeat-after-me or a tutor conversation; writing binds to an AI-evaluated task.
  */
 class ContentSelector
 {
@@ -35,9 +39,14 @@ class ContentSelector
     }
 
     /**
-     * @return array{activity_type: string, lesson: ?Lesson, exercise: ?Exercise}
+     * @return array{activity_type: string, lesson: ?Lesson, exercise: ?Exercise, task: ?ProductionTask, scenario: ?ConversationScenario}
      */
     public function bind(LearnerProfile $profile, string $skill, string $activity, int $ordinal, ?string $topic): array
+    {
+        return $this->bindContent($profile, $skill, $activity, $ordinal, $topic) + ['lesson' => null, 'exercise' => null, 'task' => null, 'scenario' => null];
+    }
+
+    private function bindContent(LearnerProfile $profile, string $skill, string $activity, int $ordinal, ?string $topic): array
     {
         $none = ['activity_type' => $activity, 'lesson' => null, 'exercise' => null];
 
@@ -60,8 +69,44 @@ class ContentSelector
             Skill::GRAMMAR => $this->grammar($profile, $ordinal, $topic) ?? $none,
             Skill::READING => $this->exercise($profile, ['reading'], $ordinal, $activity) ?? $none,
             Skill::LISTENING => $this->exercise($profile, ['listening', 'dictation'], $ordinal, $activity) ?? $none,
-            default => $none, // speaking & writing: AI-evaluated practice arrives in Phase 3
+            Skill::SPEAKING => $this->speaking($profile, $ordinal) ?? $none,
+            Skill::WRITING => $this->writing($profile, $ordinal) ?? $none,
+            default => $none,
         };
+    }
+
+    /** Alternate pronunciation practice and tutor conversations; conversations need AI content generation. */
+    private function speaking(LearnerProfile $profile, int $ordinal): ?array
+    {
+        $repeat = isset($this->used['speaking:repeat']) ? null : $this->exercise($profile, ['repeat'], $ordinal, 'speaking_practice');
+        if ($repeat) {
+            $this->used['speaking:repeat'] = true;
+
+            return $repeat;
+        }
+        if (! app(CapabilityMatrix::class)->isUsable($profile->targetLanguage->code, 'content_generation')) {
+            return null;
+        }
+        $scenario = ConversationScenario::where('is_active', true)->with(['minLevel', 'maxLevel'])->orderBy('position')->get()
+            ->filter(fn ($s) => $s->minLevel->ordinal <= $ordinal && $s->maxLevel->ordinal >= $ordinal)
+            ->first(fn ($s) => $this->claim('scenario:'.$s->id));
+
+        return $scenario ? ['activity_type' => 'conversation', 'scenario' => $scenario] : null;
+    }
+
+    private function writing(LearnerProfile $profile, int $ordinal): ?array
+    {
+        if (! app(CapabilityMatrix::class)->isUsable($profile->targetLanguage->code, 'writing_evaluation')) {
+            return null;
+        }
+        $recent = WritingSubmission::where('learner_profile_id', $profile->id)->where('created_at', '>=', now()->subDays(self::RECENT_DAYS))->pluck('production_task_id');
+        $task = ProductionTask::where('language_id', $profile->target_language_id)->where('mode', 'written')->where('review_status', 'published')
+            ->whereNotIn('id', $recent)->with('level')->get()
+            ->filter(fn ($t) => $t->level->ordinal <= $ordinal + 1)
+            ->sortBy(fn ($t) => [abs($t->level->ordinal - $ordinal), $t->id])
+            ->first(fn ($t) => $this->claim('task:'.$t->id));
+
+        return $task ? ['activity_type' => 'writing_task', 'task' => $task] : null;
     }
 
     private function vocabulary(LearnerProfile $profile, int $ordinal): ?array

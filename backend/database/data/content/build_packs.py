@@ -30,6 +30,12 @@ def reading(key, title, text, qs, level="A1", kind="reading"):
 def dictation(key, sentences):
     return {"key": key, "type": "dictation", "skill": "listening", "level": "A1", "title": {"en": "Short everyday sentences", "ar": "جمل يومية قصيرة"}, "questions": [{"a": [s]} for s in sentences]}
 
+def repeat(key, sentences):
+    code = key.split("-")[0]
+    return {"key": key, "type": "repeat", "skill": "speaking", "level": "A1", "title": {"en": "Say it aloud", "ar": "قلها بصوت عالٍ"},
+            "objectives": [{"code": f"{code}.a1.pronounce", "skill": "speaking", "text": {"en": "Pronounce everyday sentences clearly enough to be understood", "ar": "نطق جمل يومية بوضوح يكفي لفهمها"}}],
+            "questions": [{"r": s} for s in sentences]}
+
 def course(code, name_en, name_ar, topics, words, ex, l4=None):
     lname = {"en": name_en, "ar": name_ar}
     L = lambda en, ar: {"en": en, "ar": ar}
@@ -454,6 +460,9 @@ packs["ar"] = {"language":"ar","topics":ar_topics,"words":ar_words,"exercises":a
      l4=({"en":"At the café and the market","ar":"في المقهى والسوق"},{"en":"Say who things belong to and understand a simple order in a café.","ar":"عبّر عن الملكية وافهم طلبًا بسيطًا في مقهى."}))}
 
 for code, pack in packs.items():
+    dictation_ex = next(e for e in pack["exercises"] if e["type"] == "dictation")
+    sentences = [q["a"][0] for q in dictation_ex["questions"]] + [pack["topics"][0]["examples"][0][0], pack["topics"][2]["examples"][0][0]]
+    pack["exercises"].append(repeat(f"{code}-a1-repeat", sentences))
     with open(f"{OUT}/{code}.json", "w", encoding="utf-8") as f:
         json.dump(pack, f, ensure_ascii=False, indent=1)
     print(code, len(pack["topics"]), "topics", len(pack["words"]), "words", len(pack["exercises"]), "exercises")

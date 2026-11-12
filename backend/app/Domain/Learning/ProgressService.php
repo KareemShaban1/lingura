@@ -2,15 +2,20 @@
 
 namespace App\Domain\Learning;
 
+use App\Domain\Adaptive\AdaptiveEngine;
 use App\Domain\Vocabulary\VocabularyService;
+use App\Models\AiConversation;
 use App\Models\AssessmentAttempt;
 use App\Models\ExerciseAttempt;
 use App\Models\GrammarMastery;
+use App\Models\LearnerMistakePattern;
 use App\Models\LearnerProfile;
 use App\Models\LearningPlanItem;
 use App\Models\LearningSession;
+use App\Models\PronunciationResult;
 use App\Models\UserProgress;
 use App\Models\UserVocabulary;
+use App\Models\WritingSubmission;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 
@@ -181,6 +186,25 @@ class ProgressService
                     ->latest('completed_at')->limit(5)->pluck('words_per_minute')->reverse()->values(),
             ],
             'exercises_completed' => ExerciseAttempt::where('learner_profile_id', $profile->id)->where('status', 'completed')->count(),
+            'level_progress' => app(AdaptiveEngine::class)->levelProgress($profile),
+            'writing' => WritingSubmission::where('writing_submissions.learner_profile_id', $profile->id)
+                ->whereNull('assessment_attempt_id')->where('status', 'evaluated')
+                ->join('writing_evaluations', 'writing_evaluations.writing_submission_id', '=', 'writing_submissions.id')
+                ->orderByDesc('writing_submissions.created_at')->limit(10)
+                ->get(['writing_submissions.created_at', 'writing_evaluations.overall_score', 'writing_submissions.word_count'])
+                ->reverse()->values()->map(fn ($r) => ['date' => $r->created_at->toDateString(), 'score' => (float) $r->overall_score, 'words' => $r->word_count]),
+            'speaking' => [
+                'conversations' => AiConversation::where('learner_profile_id', $profile->id)->where('learner_turns', '>', 0)->count(),
+                'learner_turns' => (int) AiConversation::where('learner_profile_id', $profile->id)->sum('learner_turns'),
+                'conversation_minutes' => round(LearningSession::where('learner_profile_id', $profile->id)->where('activity_type', 'conversation')->sum('active_seconds') / 60, 1),
+                'speaking_minutes' => round(AiConversation::where('learner_profile_id', $profile->id)->sum('speaking_seconds') / 60, 1),
+                'pronunciation_accuracy' => ($p = PronunciationResult::query()
+                    ->join('audio_recordings', 'audio_recordings.id', '=', 'pronunciation_results.audio_recording_id')
+                    ->where('audio_recordings.learner_profile_id', $profile->id)
+                    ->where('pronunciation_results.created_at', '>=', now()->subDays(30))->avg('accuracy')) !== null ? round((float) $p, 3) : null,
+            ],
+            'mistake_patterns' => LearnerMistakePattern::where('learner_profile_id', $profile->id)->orderByDesc('occurrences')->limit(6)->get()
+                ->map(fn ($m) => ['category' => $m->category, 'topic' => $m->topic_slug ?: null, 'occurrences' => $m->occurrences, 'sources' => $m->sources, 'example' => $m->example]),
             'attempts' => $profile->assessmentAttempts()->where('status', AssessmentAttempt::STATUS_COMPLETED)
                 ->with(['overallLevel', 'sections.skill', 'sections.estimatedLevel'])->latest('completed_at')->get(),
         ];

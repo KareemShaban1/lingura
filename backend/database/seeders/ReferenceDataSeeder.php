@@ -189,8 +189,8 @@ class ReferenceDataSeeder extends Seeder
             ['vocabulary', 2, 5, 8, 0.55, 'enabled'],
             ['reading', 3, 4, 6, 0.65, 'enabled'],
             ['listening', 4, 4, 6, 0.65, 'enabled'],
-            ['writing', 5, 1, 1, 0.80, 'coming_soon'],
-            ['speaking', 6, 1, 1, 0.80, 'coming_soon'],
+            ['writing', 5, 1, 1, 0.70, 'enabled'],
+            ['speaking', 6, 1, 1, 0.70, 'enabled'],
         ];
         foreach ($sections as [$skill, $position, $min, $max, $se, $availability]) {
             AssessmentSection::updateOrCreate(

@@ -99,7 +99,7 @@ class PlanController extends Controller
     public function startSession(Request $request, LearnerProfile $learnerProfile): JsonResponse
     {
         $this->authorize('update', $learnerProfile);
-        $data = $request->validate(['activity_type' => ['required', 'in:lesson,exercise,vocabulary_review']]);
+        $data = $request->validate(['activity_type' => ['required', 'in:lesson,exercise,vocabulary_review,writing_task,conversation']]);
 
         return (new LearningSessionResource($this->plans->startStandalone($learnerProfile, $data['activity_type'])))->response()->setStatusCode(201);
     }

@@ -92,6 +92,10 @@ class LearnerProfileController extends Controller
             'grammar' => $data['grammar'],
             'reading' => $data['reading'],
             'exercises_completed' => $data['exercises_completed'],
+            'level_progress' => $data['level_progress'],
+            'writing' => $data['writing'],
+            'speaking' => $data['speaking'],
+            'mistake_patterns' => $data['mistake_patterns'],
             'attempts' => $data['attempts']->map(fn ($a) => [
                 'id' => $a->public_id,
                 'completed_at' => $a->completed_at->toIso8601String(),

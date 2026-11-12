@@ -34,6 +34,8 @@ class AppServiceProvider extends ServiceProvider
             Limit::perMinute(30)->by($request->ip()),
         ]);
         RateLimiter::for('api', fn (Request $request) => Limit::perMinute(300)->by($request->user()?->id ?: $request->ip()));
+        // AI-backed calls cost money: a tighter per-user limit on top of daily quotas.
+        RateLimiter::for('ai', fn (Request $request) => Limit::perMinute(30)->by($request->user()?->id ?: $request->ip()));
         RateLimiter::for('assessment', fn (Request $request) => Limit::perMinute(60)->by($request->user()?->id ?: $request->ip()));
 
         Gate::define('access-admin', fn (User $user) => $user->hasPermission('admin.access'));
