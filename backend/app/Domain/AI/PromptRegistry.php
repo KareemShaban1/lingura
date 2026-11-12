@@ -15,12 +15,16 @@ class PromptRegistry
 {
     public function active(string $key): AiPromptVersion
     {
-        return Cache::remember("ai-prompt:{$key}", now()->addMinutes(5), function () use ($key) {
+        // Cache raw attributes only: cache stores must never unserialize model objects.
+        $attributes = Cache::remember("ai-prompt:{$key}", now()->addMinutes(5), function () use ($key) {
             $prompt = AiPrompt::where('key', $key)->first() ?? throw new RuntimeException("Unknown prompt [{$key}].");
-
-            return $prompt->versions()->where('status', 'active')->first()
+            $version = $prompt->versions()->where('status', 'active')->first()
                 ?? throw new RuntimeException("Prompt [{$key}] has no active version.");
+
+            return $version->getAttributes();
         });
+
+        return (new AiPromptVersion)->setRawAttributes($attributes, true);
     }
 
     /** @param array<string, string|int> $variables */

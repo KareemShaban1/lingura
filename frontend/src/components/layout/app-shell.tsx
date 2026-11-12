@@ -5,7 +5,7 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useQueryClient } from "@tanstack/react-query";
 import { useTheme } from "next-themes";
-import { BarChart3, Dumbbell, Home, Layers, LogOut, Map, Moon, Plus, Sun, UserRound, type LucideIcon } from "lucide-react";
+import { BarChart3, Bot, Dumbbell, Home, Layers, LogOut, Map, Moon, Plus, Sun, UserRound, type LucideIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Select } from "@/components/ui/input";
 import { useActiveProfile, useMe } from "@/features/queries";
@@ -14,14 +14,16 @@ import { useI18n } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 import { useUiStore } from "@/stores/ui-store";
 
-type NavItem = { href: string; key: "home" | "learning" | "practice" | "vocabulary" | "progress" | "profile"; icon: LucideIcon; feature?: string; mobile?: boolean };
+type NavItem = { href: string; key: "home" | "learning" | "practice" | "tutor" | "vocabulary" | "progress" | "profile"; icon: LucideIcon; feature?: string; mobile?: boolean };
 
 /** Only modules that are enabled for this account are rendered — no dead navigation. */
 const NAV: NavItem[] = [
   { href: "/home", key: "home", icon: Home },
   { href: "/learning", key: "learning", icon: Map, feature: "plan" },
   { href: "/practice", key: "practice", icon: Dumbbell, feature: "practice" },
-  { href: "/vocabulary", key: "vocabulary", icon: Layers, feature: "vocabulary" },
+  { href: "/tutor", key: "tutor", icon: Bot, feature: "tutor" },
+  // On phones vocabulary is reached from Practice to keep the tab bar at five items.
+  { href: "/vocabulary", key: "vocabulary", icon: Layers, feature: "vocabulary", mobile: false },
   { href: "/progress", key: "progress", icon: BarChart3, feature: "progress" },
   // On phones the profile lives in the header to keep the tab bar at five items.
   { href: "/profile", key: "profile", icon: UserRound, mobile: false },

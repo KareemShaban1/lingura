@@ -67,6 +67,23 @@ export async function api<T>(path: string, { method = "GET", body, signal }: Opt
   return data as T;
 }
 
+/** Multipart upload (e.g. voice recordings) with the same CSRF/session handling as api(). */
+export async function apiUpload<T>(path: string, form: FormData): Promise<T> {
+  await ensureCsrf();
+  const xsrf = readCookie("XSRF-TOKEN");
+  const response = await fetch(`${API_URL}/api/v1${path}`, {
+    method: "POST",
+    credentials: "include",
+    headers: { Accept: "application/json", ...(xsrf ? { "X-XSRF-TOKEN": xsrf } : {}) },
+    body: form,
+  }).catch(() => {
+    throw new ApiError(0, "We couldn't reach the server. Check your connection and try again.", "network_error");
+  });
+  const data = await response.json().catch(() => ({}));
+  if (!response.ok) throw new ApiError(response.status, data.message ?? "Something went wrong.", data.code, data.errors);
+  return data as T;
+}
+
 /** Applies Laravel validation errors to a react-hook-form instance. */
 export function applyServerErrors(
   error: unknown,

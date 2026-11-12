@@ -18,6 +18,8 @@ export function planItemHref(item: PlanItem, sessionId: string) {
   if (item.lesson_id) return `/lessons/${item.lesson_id}?session=${sessionId}`;
   if (item.exercise_id) return `/practice/${item.exercise_id}?session=${sessionId}`;
   if (item.activity_type === "vocabulary_review") return `/vocabulary/review?session=${sessionId}`;
+  if (item.writing_task_id) return `/practice/writing/${item.writing_task_id}?session=${sessionId}`;
+  if (item.activity_type === "conversation") return `/tutor?session=${sessionId}${item.scenario ? `&scenario=${item.scenario}` : ""}`;
   return `/learning/session/${sessionId}`;
 }
 

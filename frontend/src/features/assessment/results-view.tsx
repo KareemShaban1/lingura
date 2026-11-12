@@ -75,8 +75,18 @@ export function ResultsView() {
                     <>
                       <LevelLadder ordinal={s.level?.ordinal ?? null} skill={s.skill} className="mt-2" />
                       <p className="mt-2 text-xs text-muted-foreground">
-                        {s.confidence && t.results.confidence[s.confidence]} · {f(t.results.answered, { correct: s.items_correct, answered: s.items_answered })}
+                        {s.confidence && t.results.confidence[s.confidence]}
+                        {s.evaluation ? ` · ${t.report.aiNote}` : ` · ${f(t.results.answered, { correct: s.items_correct, answered: s.items_answered })}`}
                       </p>
+                      {s.evaluation && (
+                        <details className="mt-2 text-xs">
+                          <summary className="cursor-pointer font-medium">{t.placement.evaluation}</summary>
+                          <p dir="auto" className="mt-1 text-muted-foreground">{s.evaluation.summary}</p>
+                          <ul className="mt-1 space-y-0.5">
+                            {s.evaluation.criteria.map((c) => <li key={c.criterion}>{t.writing.criteria[c.criterion as keyof typeof t.writing.criteria] ?? c.criterion}: {c.score}/5</li>)}
+                          </ul>
+                        </details>
+                      )}
                     </>
                   ) : (
                     <p className="mt-1 text-xs text-muted-foreground">

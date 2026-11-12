@@ -2,7 +2,7 @@
 
 return [
     // Features exposed to the client navigation. Modules not listed are not rendered (no dead buttons).
-    'features' => array_filter(explode(',', env('LF_FEATURES', 'onboarding,assessment,plan,progress,courses,practice,grammar,vocabulary'))),
+    'features' => array_filter(explode(',', env('LF_FEATURES', 'onboarding,assessment,plan,progress,courses,practice,grammar,vocabulary,tutor,writing'))),
 
     'assessment' => [
         'engine_version' => 'irt_v1',

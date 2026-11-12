@@ -8,7 +8,7 @@ Errors follow a single envelope:
 ```
 
 Pagination: cursor-based for feeds (`?cursor=`), page-based for admin tables (`?page=&per_page=` max 100).
-Machine-readable spec: `backend/openapi.yaml` (served at `GET /api/v1/openapi.yaml`). ✅ = implemented in Phase 1.
+Machine-readable spec: `backend/openapi.yaml` (served at `GET /api/v1/openapi.yaml`). ✅ = implemented.
 
 ## Identity
 | Method | Path | Description | |
@@ -89,10 +89,33 @@ Machine-readable spec: `backend/openapi.yaml` (served at `GET /api/v1/openapi.ya
 
 Plan items now carry `lesson_id`, `exercise_id` and `topic`; dashboard adds `vocabulary_due`; progress adds `skill_accuracy`, `daily_skill_activity`, `vocabulary`, `grammar`, `reading`, `exercises_completed`.
 
+## Phase 3 — tutor, speech, writing ✅
+All routes below use the `ai` limiter (30/min per user). Details: [12-tutor-and-adaptive.md](12-tutor-and-adaptive.md).
+
+| Method | Path | Description |
+|---|---|---|
+| GET | `/learner-profiles/{id}/tutor/catalog` | Tutors, scenarios (filtered by level), available modes per capability matrix, remaining daily turns |
+| GET | `/learner-profiles/{id}/conversations` | Recent conversations |
+| POST | `/learner-profiles/{id}/conversations` | `{tutor, scenario?, level?, mode: text\|voice\|realtime, session_id?}` (reuses an open one) |
+| GET | `/conversations/{c}` | Conversation, messages, corrections |
+| POST | `/conversations/{c}/messages` | `{text ≤ 2000, response_ms?}` → tutor reply + corrections (JSON per turn) |
+| POST | `/conversations/{c}/voice` | `{recording_id}` → transcribe, then same as a text turn |
+| POST | `/conversations/{c}/realtime-session` | Ephemeral client secret for WebRTC (never the API key) |
+| POST | `/conversations/{c}/realtime-transcript` | `{role, text}` — persists realtime turns |
+| POST | `/conversations/{c}/finish` | `{active_seconds}` → closes, queues report |
+| GET | `/conversations/{c}/report` · POST `/report/retry` | Report (`pending\|ready\|failed`) / retry a failed one |
+| GET | `/ai-messages/{m}/audio` | Signed URL for tutor-reply TTS (cached) |
+| POST | `/learner-profiles/{id}/recordings` | Multipart `{audio ≤ 4 MB, purpose, duration_ms?}`, MIME-sniffed, private |
+| GET | `/recordings/{r}/url` | 5-minute signed playback URL (owner only) |
+| GET | `/learner-profiles/{id}/writing-tasks` · `/{task}` | Writing tasks with past submissions |
+| POST | `/learner-profiles/{id}/writing-tasks/{task}/submissions` | `{text ≤ 5000}` → 202, queued evaluation |
+| GET | `/writing-submissions/{s}` | Submission + evaluation (criteria, anchored corrections, corrected text) |
+| POST | `/assessment-attempts/{a}/writing` · `/speaking` | Productive placement answers `{text}` / `{recording_id}` |
+| POST | `/exercise-attempts/{a}/answers` | Now also `{question_id, recording_id}` for repeat-after-me (pronunciation result in feedback) |
+
+`GET /assessment-attempts/{a}/next` returns `{item}` or `{task}`. Progress adds `level_progress`, `writing`, `speaking`, `mistake_patterns`; plan items add `writing_task_id` and `scenario`.
+
 ## Later phases (contract sketch)
-- **Speech (P3):** `POST /audio-recordings` (multipart, ≤ 2 MB / 60 s, mime-sniffed), `GET /audio-recordings/{id}/transcription`, `POST /pronunciation-assessments`.
-- **Tutor (P3):** `GET /tutors`, `GET /scenarios`, `POST /conversations`, `POST /conversations/{id}/messages` (SSE stream), `POST /conversations/{id}/realtime-session` (ephemeral token, quota-checked), `POST /conversations/{id}/finish` → report job, `GET /conversations/{id}/report`.
-- **Writing (P3):** `POST /writing-submissions`, `GET /writing-submissions/{id}/evaluation`.
 - **Billing (P4):** `GET /billing/plans`, `POST /billing/checkout`, `POST /billing/portal`, `GET /billing/subscription`, `GET /billing/usage`, `POST /webhooks/stripe` (signature-verified).
 - **Gamification (P4):** `GET /me/xp`, `/me/achievements`, `/leaderboards/{scope}`, `/challenges`.
 - **Admin (P4):** `/admin/users`, `/admin/languages`, `/admin/language-capabilities`, `/admin/assessment-items` (+ `/review`), `/admin/courses|lessons|exercises`, `/admin/ai/providers|models|prompts`, `/admin/subscriptions`, `/admin/analytics/*`, `/admin/audit-logs` — all behind `role:admin|content_editor|support` + per-ability policies.
@@ -104,4 +127,4 @@ Plan items now carry `lesson_id`, `exercise_id` and `topic`; dashboard adds `voc
 | `auth` | 10/min per IP+email |
 | `api` | 300/min per user (interactive practice makes several calls per minute) |
 | `assessment` | 60/min per user |
-| `ai` (P3) | per-plan, plus hard monthly quota from entitlements |
+| `ai` | 30/min per user ✅; tutor daily turn cap (150); per-plan monthly quotas from entitlements in P4 |

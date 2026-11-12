@@ -1,9 +1,9 @@
 openapi: 3.1.0
 info:
   title: LinguaForge API
-  version: 2.0.0-phase2
+  version: 3.0.0-phase3
   description: |
-    REST API for the LinguaForge language-learning platform (Phase 1: identity, onboarding, placement assessment, learning plans).
+    REST API for the LinguaForge language-learning platform (identity, onboarding, placement, plans, content & practice, AI tutor, speech and writing).
     Authentication: Sanctum SPA cookies (call `GET /sanctum/csrf-cookie` first and send `X-XSRF-TOKEN`) or a bearer token
     (pass `device_name` to register/login). Errors use `{message, code?, errors?}`.
     Assessment results are estimates aligned to CEFR descriptors, never official certifications.
@@ -23,6 +23,9 @@ tags:
   - name: Grammar
   - name: Practice
   - name: Vocabulary
+  - name: Tutor
+  - name: Speech
+  - name: Writing
 paths:
   /auth/register:
     post:
@@ -378,6 +381,76 @@ paths:
   /vocabulary-collections/{collection}/items:
     parameters: [{ name: collection, in: path, required: true, schema: { type: integer } }]
     post: { tags: [Vocabulary], requestBody: { content: { application/json: { schema: { type: object, required: [user_vocabulary_id], properties: { user_vocabulary_id: { type: integer } } } } } }, responses: { '200': { description: '{ attached }' } } }
+  /learner-profiles/{profile}/tutor/catalog:
+    parameters: [{ $ref: '#/components/parameters/Profile' }]
+    get: { tags: [Tutor], responses: { '200': { description: 'tutors, scenarios, modes available for the language, remaining daily turns' } } }
+  /learner-profiles/{profile}/conversations:
+    parameters: [{ $ref: '#/components/parameters/Profile' }]
+    get: { tags: [Tutor], responses: { '200': { description: Recent conversations } } }
+    post:
+      tags: [Tutor]
+      description: Starts (or reuses an open) conversation. Realtime mode requires realtime capability for the language.
+      requestBody: { content: { application/json: { schema: { type: object, required: [tutor, mode], properties: { tutor: { type: string }, scenario: { type: string }, level: { type: string }, mode: { type: string, enum: [text, voice, realtime] }, session_id: { type: string } } } } } }
+      responses: { '201': { description: Conversation }, '422': { $ref: '#/components/responses/ValidationError' } }
+  /conversations/{conversation}:
+    parameters: [{ $ref: '#/components/parameters/Conversation' }]
+    get: { tags: [Tutor], responses: { '200': { description: Conversation with messages and corrections } } }
+  /conversations/{conversation}/messages:
+    parameters: [{ $ref: '#/components/parameters/Conversation' }]
+    post:
+      tags: [Tutor]
+      description: One tutor turn. Corrections are kept only when they quote the learner's own text. Daily turn cap applies (429 `quota_exceeded`).
+      requestBody: { content: { application/json: { schema: { type: object, required: [text], properties: { text: { type: string, maxLength: 2000 }, response_ms: { type: integer } } } } } }
+      responses: { '200': { description: '{ learner_message, tutor_message, corrections[] }' }, '429': { description: Rate or daily limit reached } }
+  /conversations/{conversation}/voice:
+    parameters: [{ $ref: '#/components/parameters/Conversation' }]
+    post: { tags: [Tutor], requestBody: { content: { application/json: { schema: { type: object, required: [recording_id], properties: { recording_id: { type: string }, response_ms: { type: integer } } } } } }, responses: { '200': { description: Transcribed turn (same shape as messages) } } }
+  /conversations/{conversation}/realtime-session:
+    parameters: [{ $ref: '#/components/parameters/Conversation' }]
+    post: { tags: [Tutor], description: Short-lived client secret for a browser WebRTC session. Never returns a permanent API key., responses: { '200': { description: '{ client_secret, expires_at, model, provider }' } } }
+  /conversations/{conversation}/realtime-transcript:
+    parameters: [{ $ref: '#/components/parameters/Conversation' }]
+    post: { tags: [Tutor], requestBody: { content: { application/json: { schema: { type: object, required: [role, text], properties: { role: { type: string, enum: [learner, assistant] }, text: { type: string, maxLength: 2000 } } } } } }, responses: { '201': { description: Stored } } }
+  /conversations/{conversation}/finish:
+    parameters: [{ $ref: '#/components/parameters/Conversation' }]
+    post: { tags: [Tutor], requestBody: { content: { application/json: { schema: { type: object, required: [active_seconds], properties: { active_seconds: { type: integer, maximum: 86400 } } } } } }, responses: { '200': { description: Finished; report queued } } }
+  /conversations/{conversation}/report:
+    parameters: [{ $ref: '#/components/parameters/Conversation' }]
+    get: { tags: [Tutor], responses: { '200': { description: 'Report with status pending | ready | failed; labelled as AI feedback, not an official assessment' } } }
+  /conversations/{conversation}/report/retry:
+    parameters: [{ $ref: '#/components/parameters/Conversation' }]
+    post: { tags: [Tutor], responses: { '202': { description: Requeued } } }
+  /ai-messages/{message}/audio:
+    parameters: [{ name: message, in: path, required: true, schema: { type: string } }]
+    get: { tags: [Tutor], responses: { '200': { description: '{ url } signed TTS audio for a tutor message' } } }
+  /learner-profiles/{profile}/recordings:
+    parameters: [{ $ref: '#/components/parameters/Profile' }]
+    post:
+      tags: [Speech]
+      description: Learner audio. Max 4 MB / 120 s; MIME type is sniffed from the bytes (webm, ogg, mp4, mpeg, wav). Stored privately.
+      requestBody: { content: { multipart/form-data: { schema: { type: object, required: [audio, purpose], properties: { audio: { type: string, format: binary }, purpose: { type: string, enum: [conversation, pronunciation, speaking_assessment] }, duration_ms: { type: integer } } } } } }
+      responses: { '201': { description: '{ id, duration_ms, mime }' }, '422': { $ref: '#/components/responses/ValidationError' } }
+  /recordings/{recording}/url:
+    parameters: [{ name: recording, in: path, required: true, schema: { type: string } }]
+    get: { tags: [Speech], responses: { '200': { description: '{ url } signed for 5 minutes (owner only)' } } }
+  /learner-profiles/{profile}/writing-tasks:
+    parameters: [{ $ref: '#/components/parameters/Profile' }]
+    get: { tags: [Writing], responses: { '200': { description: Writing tasks for the profile language and level } } }
+  /learner-profiles/{profile}/writing-tasks/{task}:
+    parameters: [{ $ref: '#/components/parameters/Profile' }, { name: task, in: path, required: true, schema: { type: integer } }]
+    get: { tags: [Writing], responses: { '200': { description: Task with previous submissions } } }
+  /learner-profiles/{profile}/writing-tasks/{task}/submissions:
+    parameters: [{ $ref: '#/components/parameters/Profile' }, { name: task, in: path, required: true, schema: { type: integer } }]
+    post: { tags: [Writing], requestBody: { content: { application/json: { schema: { type: object, required: [text], properties: { text: { type: string, maxLength: 5000 } } } } } }, responses: { '202': { description: Submission (evaluation queued) } } }
+  /writing-submissions/{submission}:
+    parameters: [{ name: submission, in: path, required: true, schema: { type: string } }]
+    get: { tags: [Writing], responses: { '200': { description: 'Submission with evaluation: criteria (1–5), estimated level, span-anchored corrections, corrected text' } } }
+  /assessment-attempts/{attempt}/writing:
+    parameters: [{ $ref: '#/components/parameters/Attempt' }]
+    post: { tags: [Assessment], requestBody: { content: { application/json: { schema: { type: object, required: [text], properties: { text: { type: string, maxLength: 5000 } } } } } }, responses: { '200': { description: Section scored by rubric; returns attempt state } } }
+  /assessment-attempts/{attempt}/speaking:
+    parameters: [{ $ref: '#/components/parameters/Attempt' }]
+    post: { tags: [Assessment], requestBody: { content: { application/json: { schema: { type: object, required: [recording_id], properties: { recording_id: { type: string } } } } } }, responses: { '200': { description: Section scored by rubric from the transcript } } }
 components:
   securitySchemes:
     bearerAuth: { type: http, scheme: bearer }
@@ -385,6 +458,7 @@ components:
   parameters:
     Profile: { name: profile, in: path, required: true, schema: { type: string, description: ULID } }
     Attempt: { name: attempt, in: path, required: true, schema: { type: string, description: ULID } }
+    Conversation: { name: conversation, in: path, required: true, schema: { type: string, description: ULID } }
   responses:
     ValidationError:
       description: Validation failed

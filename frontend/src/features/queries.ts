@@ -3,6 +3,7 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { api } from "@/lib/api";
 import type {
+  Conversation, ConversationReport, ProductionTask, TutorCatalog, WritingSubmission,
   Course, ExerciseAttempt, ExerciseSummary, GrammarTopic, GrammarTopicDetail, LessonDetail, UserWord, VocabularySummary, Word,
   AssessmentAttempt, AssessmentItem, AssessmentReport, Dashboard, LearningPlan, LearningSession,
   OnboardingCatalog, PlanItem, PlanVersion, Progress, User,
@@ -87,7 +88,10 @@ export function useAttempt(attemptId: string) {
 export function useNextItem(attemptId: string, enabled = true) {
   return useQuery({
     queryKey: keys.attemptNext(attemptId),
-    queryFn: () => api<{ done: boolean; item: AssessmentItem | null; attempt: AssessmentAttempt }>(`/assessment-attempts/${attemptId}/next`),
+    queryFn: () =>
+      api<{ done: boolean; item: AssessmentItem | null; task: (ProductionTask & { skill: "writing" | "speaking" }) | null; attempt: AssessmentAttempt }>(
+        `/assessment-attempts/${attemptId}/next`,
+      ),
     enabled,
     staleTime: Infinity,
   });
@@ -213,4 +217,63 @@ export async function startExerciseAttempt(profileId: string, exerciseId: string
     method: "POST",
     body: { lesson_id: opts.lessonId ?? null, session_id: opts.sessionId ?? null },
   }).then((r) => r.data);
+}
+
+// ---------------------------------------------------------------- Phase 3
+
+export function useTutorCatalog(profileId?: string) {
+  return useQuery({
+    queryKey: ["profile", profileId ?? "", "tutor-catalog"],
+    queryFn: () => api<{ data: TutorCatalog }>(`/learner-profiles/${profileId}/tutor/catalog`).then((r) => r.data),
+    enabled: !!profileId,
+  });
+}
+
+export function useConversations(profileId?: string) {
+  return useQuery({
+    queryKey: ["profile", profileId ?? "", "conversations"],
+    queryFn: () => api<{ data: Conversation[] }>(`/learner-profiles/${profileId}/conversations`).then((r) => r.data),
+    enabled: !!profileId,
+  });
+}
+
+export function useConversation(id: string) {
+  return useQuery({ queryKey: ["conversation", id], queryFn: () => api<{ data: Conversation }>(`/conversations/${id}`).then((r) => r.data), staleTime: Infinity });
+}
+
+export function useConversationReport(id: string) {
+  return useQuery({
+    queryKey: ["conversation", id, "report"],
+    queryFn: () => api<{ data: ConversationReport }>(`/conversations/${id}/report`).then((r) => r.data),
+    // Reports are generated in the background: poll until ready.
+    refetchInterval: (q) => (q.state.data?.status === "pending" ? 2500 : false),
+  });
+}
+
+export function useWritingTasks(profileId?: string) {
+  return useQuery({
+    queryKey: ["profile", profileId ?? "", "writing-tasks"],
+    queryFn: () => api<{ data: ProductionTask[] }>(`/learner-profiles/${profileId}/writing-tasks`).then((r) => r.data),
+    enabled: !!profileId,
+  });
+}
+
+export function useWritingTask(profileId: string | undefined, taskId: string) {
+  return useQuery({
+    queryKey: ["profile", profileId ?? "", "writing-task", taskId],
+    queryFn: () =>
+      api<{ data: ProductionTask & { language: { code: string; direction: "ltr" | "rtl" }; submissions: { id: string; status: string; word_count: number; score: number | null; created_at: string }[] } }>(
+        `/learner-profiles/${profileId}/writing-tasks/${taskId}`,
+      ).then((r) => r.data),
+    enabled: !!profileId,
+  });
+}
+
+export function useWritingSubmission(id: string | null) {
+  return useQuery({
+    queryKey: ["writing-submission", id],
+    queryFn: () => api<{ data: WritingSubmission }>(`/writing-submissions/${id}`).then((r) => r.data),
+    enabled: !!id,
+    refetchInterval: (q) => (q.state.data?.status === "pending" ? 2000 : false),
+  });
 }

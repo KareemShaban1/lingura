@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { useQueryClient } from "@tanstack/react-query";
-import { CheckCircle2, CircleDashed, Headphones, Info, MinusCircle, Play } from "lucide-react";
+import { CheckCircle2, CircleDashed, Headphones, Info, Loader2, MinusCircle, Play } from "lucide-react";
 import { toast } from "sonner";
 import { Choice } from "@/components/choice";
 import { SkillIcon } from "@/components/skill";
@@ -15,7 +15,9 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { keys, useAttempt, useNextItem } from "@/features/queries";
 import { api } from "@/lib/api";
 import { useI18n } from "@/lib/i18n";
-import type { AssessmentAttempt, AssessmentItem, Direction } from "@/lib/types";
+import { Recorder } from "@/features/speech/recorder";
+import { useActiveProfile } from "@/features/queries";
+import type { AssessmentAttempt, AssessmentItem, Direction, ProductionTask } from "@/lib/types";
 import { cn } from "@/lib/utils";
 
 /** Renders a cloze prompt with a visible gap instead of raw underscores. */
@@ -96,6 +98,50 @@ function SectionRail({ attempt }: { attempt: AssessmentAttempt }) {
         );
       })}
     </ol>
+  );
+}
+
+/** Writing or speaking section: one open task, rubric-scored on submission. */
+function ProductiveTask({ attemptId, task, lang, onDone }: { attemptId: string; task: ProductionTask & { skill: "writing" | "speaking" }; lang: { code: string; direction: Direction }; onDone: () => Promise<void> }) {
+  const { t, f } = useI18n();
+  const profile = useActiveProfile();
+  const [text, setText] = useState("");
+  const [busy, setBusy] = useState(false);
+  const words = (text.trim().match(/[\p{L}\p{M}\p{N}']+/gu) ?? []).length;
+
+  async function submit(body: Record<string, unknown>) {
+    setBusy(true);
+    try {
+      await api(`/assessment-attempts/${attemptId}/${task.skill}`, { method: "POST", body });
+      await onDone();
+    } catch (e) {
+      toast.error(e instanceof Error ? e.message : t.common.errorTitle);
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  return (
+    <div className="space-y-4">
+      <p lang={lang.code} dir={lang.direction} className="rounded-xl border bg-secondary/30 p-4 text-lg leading-relaxed">{task.prompt}</p>
+      <p className="text-sm text-muted-foreground">
+        {f(task.skill === "writing" ? t.placement.writingIntro : t.placement.speakingIntro, { min: task.min_words, max: task.max_words })}
+      </p>
+      {busy ? (
+        <p role="status" className="flex items-center gap-2 text-muted-foreground"><Loader2 className="size-4 animate-spin" /> {t.placement.evaluating}</p>
+      ) : task.skill === "writing" ? (
+        <>
+          <textarea value={text} onChange={(e) => setText(e.target.value)} rows={8} lang={lang.code} dir={lang.direction} aria-label={t.placement.writingTitle}
+            className="w-full rounded-xl border border-input bg-card p-4 text-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40" />
+          <div className="flex items-center justify-between">
+            <span className="text-sm text-muted-foreground">{f(t.writing.words, { n: words })}</span>
+            <Button size="lg" onClick={() => submit({ text })} disabled={words < 3}>{t.placement.submit}</Button>
+          </div>
+        </>
+      ) : profile && (
+        <Recorder profileId={profile.id} purpose="speaking_assessment" onRecorded={(id) => submit({ recording_id: id })} />
+      )}
+    </div>
   );
 }
 
@@ -191,6 +237,22 @@ export function AssessmentPlayer() {
   }
 
   if (next.error) return <ErrorState error={next.error} onRetry={() => next.refetch()} />;
+  const task = next.data?.task;
+  if (task && live) {
+    return (
+      <div className="space-y-6">
+        <SectionRail attempt={live} />
+        <div className="flex items-center gap-3">
+          <SkillIcon skill={task.skill} />
+          <p className="font-medium">{t.skills[task.skill]}</p>
+        </div>
+        <ProductiveTask attemptId={attemptId} task={task} lang={lang} onDone={refresh} />
+        <div className="flex gap-2">
+          <Button variant="ghost" size="sm" onClick={async () => { await api(`/assessment-attempts/${attemptId}/sections/${task.skill}/skip`, { method: "POST" }); await refresh(); }}>{t.assessment.skipSection}</Button>
+        </div>
+      </div>
+    );
+  }
   if (!item || !live) {
     return (
       <div className="space-y-4" role="status" aria-live="polite">

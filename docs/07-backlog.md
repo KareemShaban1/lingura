@@ -31,8 +31,19 @@ Definition of done for every item: migrations + seed data, API with FormRequest 
 | 2.8 | Daily per-skill rollups; progress analytics (accuracy, retention, reading speed, daily activity) | ✅ |
 | — | Deferred: OpenAPI-generated TS types; B1+ content; admin authoring UI (Phase 4); per-skill time for standalone sessions | → later |
 
-## Phase 3 — AI tutor & productive skills
-Prompt registry · text tutor with streaming + corrections · realtime voice with ephemeral tokens + PTT fallback · scenarios & personalities · conversation reports · audio upload pipeline (private S3, signed URLs, virus/mime checks) · STT · pronunciation assessment · speaking & writing placement sections (rubric-based AI scoring with human-review sampling) · writing module · adaptive engine v1 (mistake pattern detection, difficulty adaptation, revision scheduling).
+## Phase 3 — AI tutor & productive skills ✅
+| # | Item | Status |
+|---|---|---|
+| 3.1 | Versioned prompt registry with JSON schemas, version tags on every AI output | ✅ |
+| 3.2 | Text tutor with verified corrections, tutor personas, 10 scenarios, daily turn cap | ✅ |
+| 3.3 | Push-to-talk voice turns (STT) and realtime voice via ephemeral secrets (WebRTC) | ✅ |
+| 3.4 | Conversation reports (queued, retryable) | ✅ |
+| 3.5 | Audio pipeline: private storage, MIME sniffing, signed URLs, retention purge | ✅ |
+| 3.6 | Pronunciation estimate (transcript alignment) + repeat-after-me exercises, capability-gated | ✅ |
+| 3.7 | Writing module: tasks, rubric evaluation, span-anchored corrections, human-review sampling | ✅ |
+| 3.8 | Writing & speaking placement sections (rubric → ability with wider SE, lower-median overall) | ✅ |
+| 3.9 | Adaptive engine v1: mistake patterns, difficulty offsets, revision, readiness, adaptive plan versions | ✅ |
+| — | Deferred: SSE token streaming for tutor replies; phoneme-level pronunciation; antivirus scan of uploads; human-review UI (Phase 4 admin); live-provider integration tests | → later |
 
 ## Phase 4 — Business
 Admin dashboard (RBAC) for all content and AI configuration · content review queue · Stripe subscriptions (monthly/annual), entitlements, quotas, usage metering, billing notifications · organizations/family seats · gamification (XP tied to verified learning outcomes, streaks with freeze, achievements, weekly challenges, leaderboards opt-in) · platform analytics (retention cohorts, AI cost, engagement).

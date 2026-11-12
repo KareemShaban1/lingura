@@ -133,7 +133,11 @@ class OpenAiDriver implements AiDriver
                 'type' => 'realtime',
                 'model' => $model,
                 'instructions' => $request->instructions,
-                'audio' => ['output' => ['voice' => $request->voice ?? $this->config['tts_voice']]],
+                'audio' => [
+                    'output' => ['voice' => $request->voice ?? $this->config['tts_voice']],
+                    // Transcribe the learner's speech so the conversation can be stored and reported on.
+                    'input' => ['transcription' => ['model' => $this->modelFor('stt'), 'language' => $request->languageCode]],
+                ],
             ],
         ]))->json();
 

@@ -111,6 +111,7 @@ export interface AssessmentReport {
     standard_error: number | null;
     items_answered: number;
     items_correct: number;
+    evaluation?: { method: string; task: string | null; response: string; summary: string; criteria: { criterion: string; score: number; comment: string }[] } | null;
   }[];
   findings: { type: "strength" | "weakness" | "recommendation"; code: string; skill: SkillSlug | null; detail: string | null; detail_label: string | null }[];
 }
@@ -130,6 +131,8 @@ export interface PlanItem {
   topic: string | null;
   lesson_id: string | null;
   exercise_id: string | null;
+  writing_task_id?: string | null;
+  scenario?: string | null;
   status: "pending" | "in_progress" | "completed" | "skipped";
   completed_at: string | null;
 }
@@ -181,7 +184,7 @@ export interface Dashboard {
   vocabulary_due: number;
 }
 
-export interface Progress extends Partial<ProgressPhase2> {
+export interface Progress extends Partial<ProgressPhase2>, Partial<ProgressPhase3> {
   skills: SkillProfile[];
   weekly_activity: { week_start: string; minutes: number; active_days: number }[];
   practice_by_skill: Record<string, { minutes: number; sessions: number }>;
@@ -203,7 +206,7 @@ export interface LearningSession {
 }
 
 // ---------------------------------------------------------------- Phase 2
-export type ExerciseType = "mcq" | "cloze" | "ordering" | "reading" | "listening" | "dictation";
+export type ExerciseType = "mcq" | "cloze" | "ordering" | "reading" | "listening" | "dictation" | "repeat";
 
 export interface ExerciseSummary {
   id: string;
@@ -224,12 +227,13 @@ export interface AnswerFeedback {
   question_id: number;
   is_correct: boolean;
   score: number;
-  feedback_code: "check_accents" | "word_accuracy" | "empty" | "invalid_order" | null;
+  feedback_code: "check_accents" | "word_accuracy" | "empty" | "invalid_order" | "pronunciation" | null;
   given: string | null;
   selected_option_id: number | null;
   correct_option_id: number | null;
   correct_answer: string | null;
   explanation: string | null;
+  pronunciation?: PronunciationFeedback | null;
 }
 
 export interface ExerciseAttempt {
@@ -247,7 +251,7 @@ export interface ExerciseAttempt {
     objectives: string[];
     stimulus: string | null;
     has_audio: boolean;
-    questions: { id: number; prompt: string; has_audio: boolean; options: { id: number; label: string }[]; answer: AnswerFeedback | null }[];
+    questions: { id: number; prompt: string; reference_text: string | null; has_audio: boolean; options: { id: number; label: string }[]; answer: AnswerFeedback | null }[];
   };
 }
 
@@ -343,4 +347,104 @@ export interface ProgressPhase2 {
   grammar: { topics_practised: number; topics_mastered: number };
   reading: { recent_wpm: number[] };
   exercises_completed: number;
+}
+
+// ---------------------------------------------------------------- Phase 3
+export interface Correction { type: string; original: string; correction: string; explanation: string; topic?: string | null }
+
+export interface TutorMessage {
+  id: number;
+  role: "assistant" | "learner";
+  content: string;
+  source: "text" | "voice" | "realtime";
+  natural_alternative: string | null;
+  corrections: Correction[];
+  created_at: string;
+}
+
+export interface Conversation {
+  id: string;
+  status: "active" | "completed" | "report_failed";
+  mode: "text" | "voice" | "realtime";
+  tutor: { slug: string; name: string; voice: string; correction_mode: string };
+  scenario: { slug: string; title: string } | null;
+  level: Level;
+  language: { code: string; direction: Direction; name: string };
+  learner_turns: number;
+  started_at: string;
+  ended_at: string | null;
+  has_report: boolean;
+  messages?: TutorMessage[];
+}
+
+export interface TutorCatalog {
+  tutors: { slug: string; name: string; style: string; correction_mode: string; description: string }[];
+  scenarios: { slug: string; icon: string; title: string; description: string; min_level: string; max_level: string; recommended: boolean }[];
+  levels: Level[];
+  default_level: string;
+  capabilities: { text: boolean; voice: boolean; realtime: boolean };
+}
+
+export interface ConversationReport {
+  status: "pending" | "ready" | "failed" | "empty";
+  conversation: Conversation;
+  stats: { learner_turns: number; learner_words: number; avg_words_per_turn: number; speaking_seconds: number; avg_response_seconds: number; corrections: number; grammar_corrections: number; vocabulary_corrections: number };
+  report: null | {
+    summary: string;
+    fluency_feedback: string;
+    pronunciation_feedback: string | null;
+    scores: { task_completion: number; grammar: number; vocabulary: number; interaction: number };
+    vocabulary: { term: string; meaning: string | null; word_id: number | null }[];
+    expressions: { term: string; meaning: string | null }[];
+    exercises: { id: string; type: ExerciseType; title: string | null }[];
+  };
+  mistakes: Correction[];
+}
+
+export interface ProductionTask {
+  id: string;
+  mode: "written" | "spoken";
+  type: string;
+  title: string;
+  prompt: string;
+  source_text: string | null;
+  level: Level;
+  min_words: number;
+  max_words: number;
+  last_score?: number | null;
+  last_status?: string | null;
+}
+
+export interface WritingSubmission {
+  id: string;
+  status: "pending" | "evaluated" | "failed";
+  text: string;
+  word_count: number;
+  task: ProductionTask;
+  language: { code: string; direction: Direction };
+  created_at: string;
+  evaluation: null | {
+    estimated_level: Level;
+    overall_score: number;
+    summary: string;
+    corrected_text: string;
+    criteria: { criterion: string; score: number; comment: string }[];
+    corrections: { start: number; length: number; original: string; correction: string; type: string; explanation: string }[];
+    stats: { sentences: number; avg_sentence_length: number; lexical_variety: number };
+  };
+}
+
+export interface PronunciationFeedback {
+  method: string;
+  accuracy: number;
+  completeness: number;
+  words_per_minute: number | null;
+  words: { expected: string | null; heard: string | null; status: "correct" | "substituted" | "omitted" | "inserted" }[];
+}
+
+export interface ProgressPhase3 {
+  level_progress: Record<string, { level: string; next: string | null; progress: number | null; ready_for_check: boolean; next_level_accuracy: number | null; next_level_answers: number }>;
+  writing: { date: string; score: number; words: number }[];
+  speaking: { conversations: number; learner_turns: number; conversation_minutes: number; speaking_minutes: number; pronunciation_accuracy: number | null };
+  mistake_patterns: { category: string; topic: string | null; occurrences: number; sources: number; example: string | null }[];
 }

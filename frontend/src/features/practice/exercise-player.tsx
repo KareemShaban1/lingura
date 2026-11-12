@@ -20,13 +20,15 @@ import { api } from "@/lib/api";
 import { useI18n } from "@/lib/i18n";
 import type { AnswerFeedback, ExerciseAttempt } from "@/lib/types";
 import { cn } from "@/lib/utils";
+import { PronunciationView } from "@/features/speech/pronunciation-view";
+import { Recorder } from "@/features/speech/recorder";
 import { AudioPlayer } from "./audio-player";
 import { TappableText } from "./tappable-text";
 import { useActivitySession } from "./use-activity-session";
 
 type Question = ExerciseAttempt["exercise"]["questions"][number];
 
-function FeedbackPanel({ feedback }: { feedback: AnswerFeedback }) {
+function FeedbackPanel({ feedback, lang }: { feedback: AnswerFeedback; lang: { code: string; direction: "ltr" | "rtl" } }) {
   const { t, f } = useI18n();
   const tone = feedback.is_correct ? "correct" : feedback.score > 0 ? "partial" : "incorrect";
   const Icon = tone === "correct" ? CheckCircle2 : tone === "partial" ? CircleAlert : XCircle;
@@ -40,7 +42,10 @@ function FeedbackPanel({ feedback }: { feedback: AnswerFeedback }) {
       {feedback.feedback_code && (
         <p className="mt-1">{f(t.exercise.feedback[feedback.feedback_code], { score: Math.round(feedback.score * 100) })}</p>
       )}
-      {!feedback.is_correct && feedback.correct_answer && (
+      {feedback.pronunciation && (
+        <div className="mt-3 border-t pt-3"><PronunciationView result={feedback.pronunciation} lang={lang.code} dir={lang.direction} /></div>
+      )}
+      {!feedback.is_correct && feedback.correct_answer && !feedback.pronunciation && (
         <p className="mt-2"><span className="text-muted-foreground">{t.exercise.correctAnswer}: </span><strong dir="auto">{feedback.correct_answer}</strong></p>
       )}
       {feedback.explanation && <p className="mt-2 text-muted-foreground">{feedback.explanation}</p>}
@@ -49,8 +54,8 @@ function FeedbackPanel({ feedback }: { feedback: AnswerFeedback }) {
 }
 
 /** Builds the payload for the current question type; returns null while the learner hasn't answered. */
-function QuestionInput({ attempt, question, onChange, disabled }: {
-  attempt: ExerciseAttempt; question: Question; disabled: boolean;
+function QuestionInput({ attempt, question, onChange, disabled, profileId }: {
+  attempt: ExerciseAttempt; question: Question; disabled: boolean; profileId: string;
   onChange: (payload: Record<string, unknown> | null) => void;
 }) {
   const { t } = useI18n();
@@ -61,6 +66,18 @@ function QuestionInput({ attempt, question, onChange, disabled }: {
   const ref = useRef<HTMLInputElement>(null);
 
   useEffect(() => ref.current?.focus(), []);
+
+  if (type === "repeat") {
+    return (
+      <div className="space-y-5 text-center">
+        <p lang={language.code} dir={language.direction} className="font-display text-3xl leading-snug">{question.reference_text}</p>
+        {question.has_audio && <div className="flex justify-center"><AudioPlayer compact src={`/exercise-attempts/${attempt.id}/audio?question_id=${question.id}`} /></div>}
+        {!disabled && (
+          <Recorder profileId={profileId} purpose="pronunciation" onRecorded={(id) => onChange({ recording_id: id })} />
+        )}
+      </div>
+    );
+  }
 
   if (type === "cloze" || type === "dictation") {
     const parts = question.prompt.split("___");
@@ -298,8 +315,8 @@ export function ExercisePlayer() {
       )}
 
       <div key={question.id} className="space-y-5 motion-safe:animate-[fadeIn_200ms_ease-out]">
-        <QuestionInput attempt={attempt} question={question} disabled={!!feedback} onChange={setPayload} />
-        {feedback && <FeedbackPanel feedback={feedback} />}
+        {profile && <QuestionInput attempt={attempt} question={question} disabled={!!feedback} onChange={setPayload} profileId={profile.id} />}
+        {feedback && <FeedbackPanel feedback={feedback} lang={exercise.language} />}
       </div>
 
       <div className="flex justify-end">

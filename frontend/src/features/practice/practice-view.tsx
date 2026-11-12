@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { ArrowRight, Clock, Puzzle } from "lucide-react";
+import { ArrowRight, Clock, Layers, PenLine, Puzzle } from "lucide-react";
 import { SkillIcon } from "@/components/skill";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
@@ -36,7 +36,7 @@ export function ExerciseCard({ exercise, href }: { exercise: ExerciseSummary; hr
   );
 }
 
-const FILTERS: (SkillSlug | "all")[] = ["all", "grammar", "vocabulary", "reading", "listening"];
+const FILTERS: (SkillSlug | "all")[] = ["all", "grammar", "vocabulary", "reading", "listening", "speaking"];
 
 export function PracticeView() {
   const { t } = useI18n();
@@ -51,9 +51,17 @@ export function PracticeView() {
           <h1 className="font-display text-3xl md:text-4xl">{t.practice.title}</h1>
           <p className="mt-1 text-muted-foreground">{t.practice.subtitle}</p>
         </div>
-        <Link href="/practice/grammar" className="flex items-center gap-2 rounded-lg border bg-card px-4 py-2 text-sm font-medium hover:border-primary/50">
-          <Puzzle className="size-4 text-skill-grammar" /> {t.practice.grammarTopics}
-        </Link>
+        <div className="flex flex-wrap gap-2">
+          <Link href="/practice/grammar" className="flex items-center gap-2 rounded-lg border bg-card px-4 py-2 text-sm font-medium hover:border-primary/50">
+            <Puzzle className="size-4 text-skill-grammar" /> {t.practice.grammarTopics}
+          </Link>
+          <Link href="/practice/writing" className="flex items-center gap-2 rounded-lg border bg-card px-4 py-2 text-sm font-medium hover:border-primary/50">
+            <PenLine className="size-4 text-skill-writing" /> {t.writing.title}
+          </Link>
+          <Link href="/vocabulary" className="flex items-center gap-2 rounded-lg border bg-card px-4 py-2 text-sm font-medium hover:border-primary/50 md:hidden">
+            <Layers className="size-4 text-skill-vocabulary" /> {t.vocab.title}
+          </Link>
+        </div>
       </div>
 
       <div role="tablist" className="flex gap-2 overflow-x-auto pb-1">

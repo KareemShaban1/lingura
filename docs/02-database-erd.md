@@ -119,7 +119,7 @@ erDiagram
 |---|---|
 | `ai_providers` | slug, name, driver, is_enabled, config jsonb (non-secret only; secrets in env/secret manager) |
 | `ai_models` | provider_id, slug, operation(`text/tts/stt/realtime/embedding`), input_cost_per_mtok, output_cost_per_mtok, audio_cost_per_minute, is_default, is_enabled |
-| `ai_prompts` / `ai_prompt_versions` | key, version, template, json_schema, status — *Phase 3* |
+| `ai_prompts` / `ai_prompt_versions` | key, version, template, json_schema, status ✅ |
 | `ai_usage_records` | user_id, learner_profile_id, model_id, operation, input_tokens, output_tokens, audio_seconds, cost_micros, latency_ms, status, error_code, created_at — index(user_id, created_at), index(model_id, created_at) |
 
 ### Audit ✅
@@ -134,7 +134,7 @@ erDiagram
 `vocabulary_words`(language_id, lemma, pos, cefr_level_id, frequency_rank, ipa, audio_path) · `vocabulary_senses` · `vocabulary_examples` · `user_vocabulary`(profile, word, collection_id, srs state: stability, difficulty, due_at, reps, lapses) · `flashcard_reviews`(append-only) · `vocabulary_collections`.
 `user_progress`(profile, skill, date, minutes, items, accuracy) — daily rollup.
 
-**Phase 3 – Speech/Tutor/Writing**
+**Phase 3 – Speech/Tutor/Writing** ✅ implemented (see [12-tutor-and-adaptive.md](12-tutor-and-adaptive.md)); as built: `ai_tutors`, `conversation_scenarios`, `ai_conversations`, `ai_messages`, `ai_feedback`(source), `ai_conversation_reports`(+items), `audio_recordings`, `speech_transcriptions`, `pronunciation_results`, `pronunciation_word_results` (word-level, not phoneme), `production_tasks`, `writing_submissions`, `writing_evaluations`(+criteria, span-anchored corrections), `learner_mistake_patterns`. Original design notes:
 `audio_recordings`(owner, disk, path, duration, mime, checksum, purpose) · `speech_transcriptions` · `pronunciation_results`(+ `pronunciation_phoneme_results`) · `ai_tutors`(persona, language_id nullable, voice, style) · `ai_conversations`(profile, tutor, scenario_id, difficulty, status) · `ai_messages` · `ai_feedback`(message/conversation, type, original, correction, explanation) · `conversation_scenarios` · `writing_submissions` · `writing_evaluations`(rubric rows in `writing_evaluation_criteria`).
 
 **Phase 4 – Billing/Gamification/Admin**

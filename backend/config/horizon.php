@@ -210,6 +210,21 @@ return [
             'timeout' => 60,
             'nice' => 0,
         ],
+        // AI evaluations/reports and TTS: slower provider calls (HTTP timeout 60 s) need headroom
+        // while staying below the Redis retry_after (90 s) so a job is never run twice concurrently.
+        'supervisor-ai' => [
+            'connection' => 'redis',
+            'queue' => ['ai', 'audio'],
+            'balance' => 'auto',
+            'autoScalingStrategy' => 'time',
+            'maxProcesses' => 1,
+            'maxTime' => 0,
+            'maxJobs' => 0,
+            'memory' => 256,
+            'tries' => 1,
+            'timeout' => 85,
+            'nice' => 0,
+        ],
     ],
 
     'environments' => [
@@ -219,11 +234,17 @@ return [
                 'balanceMaxShift' => 1,
                 'balanceCooldown' => 3,
             ],
+            'supervisor-ai' => [
+                'maxProcesses' => 6,
+            ],
         ],
 
         'local' => [
             'supervisor-1' => [
                 'maxProcesses' => 3,
+            ],
+            'supervisor-ai' => [
+                'maxProcesses' => 2,
             ],
         ],
     ],

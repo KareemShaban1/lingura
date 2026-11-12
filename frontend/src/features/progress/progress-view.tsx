@@ -14,7 +14,7 @@ import type { SkillSlug } from "@/lib/types";
 import { formatMinutes } from "@/lib/utils";
 
 export function ProgressView() {
-  const { t, locale } = useI18n();
+  const { t, f, locale } = useI18n();
   const profile = useActiveProfile();
   const progress = useProgress(profile?.id);
   const dateFmt = (iso: string) => new Date(iso).toLocaleDateString(locale === "ar" ? "ar" : "en", { day: "numeric", month: "short" });
@@ -35,6 +35,7 @@ export function ProgressView() {
   }
   const history = [...historyRows.values()].sort((a, b) => String(a.date).localeCompare(String(b.date)));
   const assessedSkills = p.skills.filter((s) => (s.history?.length ?? 0) > 0).map((s) => s.skill);
+  const levelProgress = Object.entries(p.level_progress ?? {});
   const accuracy = Object.entries(p.skill_accuracy ?? {}).filter(([, a]) => a.answered > 0);
   const dailyHasData = (p.daily_skill_activity ?? []).some((d) => Object.keys(d).length > 1);
   const practice = SKILLS.map((s) => ({ skill: s, label: t.skills[s], minutes: p.practice_by_skill[s]?.minutes ?? 0 })).filter((x) => x.minutes > 0);
@@ -74,6 +75,77 @@ export function ProgressView() {
               </div>
             );
           })}
+        </CardContent>
+      </Card>
+
+      {levelProgress.length > 0 && (
+        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          {levelProgress.map(([skill, lp]) => (
+            <Card key={skill}>
+              <CardContent className="space-y-2 p-4">
+                <div className="flex items-center gap-2">
+                  <SkillIcon skill={skill as SkillSlug} className="size-8" />
+                  <span className="flex-1 text-sm font-medium">{t.skills[skill as SkillSlug]}</span>
+                  <span className="font-mono text-sm">{lp.level}</span>
+                </div>
+                {lp.next && lp.progress !== null && (
+                  <>
+                    <div className="flex justify-between text-xs text-muted-foreground"><span>{f(t.progress3.nextLevel, { next: lp.next })}</span><span>{Math.round(lp.progress * 100)}%</span></div>
+                    <div className="h-1.5 rounded-full bg-muted"><div className="h-full rounded-full" style={{ width: `${Math.round(lp.progress * 100)}%`, background: skillVar[skill as SkillSlug] }} /></div>
+                  </>
+                )}
+                {lp.ready_for_check && lp.next && (
+                  <Badge variant="success">{t.progress3.ready} · {f(t.progress3.readyHint, { pct: Math.round((lp.next_level_accuracy ?? 0) * 100), next: lp.next })}</Badge>
+                )}
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      )}
+
+      <div className="grid gap-4 md:grid-cols-3">
+        <Card>
+          <CardHeader><CardTitle>{t.progress3.speaking}</CardTitle></CardHeader>
+          <CardContent className="grid grid-cols-2 gap-3 text-sm">
+            <div><p className="font-display text-3xl">{p.speaking?.conversations ?? 0}</p><p className="text-xs text-muted-foreground">{t.progress3.conversations}</p></div>
+            <div><p className="font-display text-3xl">{p.speaking?.speaking_minutes ?? 0}</p><p className="text-xs text-muted-foreground">{t.progress3.speakingMinutes}</p></div>
+            <div className="col-span-2"><p className="font-display text-2xl">{p.speaking?.pronunciation_accuracy != null ? `${Math.round(p.speaking.pronunciation_accuracy * 100)}%` : "—"}</p><p className="text-xs text-muted-foreground">{t.progress3.pronunciation}</p></div>
+          </CardContent>
+        </Card>
+        <Card className="md:col-span-2">
+          <CardHeader><CardTitle>{t.progress3.writing}</CardTitle></CardHeader>
+          <CardContent>
+            {(p.writing?.length ?? 0) === 0 ? <p className="text-sm text-muted-foreground">{t.progress3.noWriting}</p> : (
+              <div className="h-32">
+                <ResponsiveContainer width="100%" height="100%">
+                  <LineChart data={p.writing} margin={{ top: 8, right: 8, left: -24, bottom: 0 }}>
+                    <XAxis dataKey="date" tickFormatter={dateFmt} fontSize={10} tickLine={false} reversed={locale === "ar"} />
+                    <YAxis domain={[1, 5]} fontSize={10} tickLine={false} axisLine={false} orientation={locale === "ar" ? "right" : "left"} />
+                    <Tooltip labelFormatter={(l) => dateFmt(String(l))} contentStyle={{ borderRadius: 8, fontSize: 12 }} />
+                    <Line type="monotone" dataKey="score" stroke={skillVar.writing} strokeWidth={2} dot={{ r: 3 }} />
+                  </LineChart>
+                </ResponsiveContainer>
+              </div>
+            )}
+          </CardContent>
+        </Card>
+      </div>
+
+      <Card>
+        <CardHeader><CardTitle>{t.progress3.patterns}</CardTitle></CardHeader>
+        <CardContent>
+          {(p.mistake_patterns?.length ?? 0) === 0 ? <p className="text-sm text-muted-foreground">{t.progress3.noPatterns}</p> : (
+            <ul className="space-y-2 text-sm">
+              {p.mistake_patterns!.map((m, i) => (
+                <li key={i} className="flex flex-wrap items-center gap-2">
+                  <Badge variant="muted">{m.category}</Badge>
+                  {m.topic && <span className="font-medium">{m.topic.replace(/_/g, " ")}</span>}
+                  <span className="font-mono text-xs">{f(t.progress3.times, { n: m.occurrences })}</span>
+                  {m.example && <span dir="auto" className="text-muted-foreground">{m.example}</span>}
+                </li>
+              ))}
+            </ul>
+          )}
         </CardContent>
       </Card>
 

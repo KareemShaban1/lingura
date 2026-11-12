@@ -28,7 +28,10 @@ app/
 │  ├─ practice/grammar/…               ✅ P2 grammar topics, mastery, explanations, recent mistakes
 │  ├─ vocabulary/page.tsx              ✅ P2 deck, dictionary search, collections, retention
 │  ├─ vocabulary/review/page.tsx       ✅ P2 FSRS flashcard session
-│  ├─ tutor/…                          P3 (nav hidden until the module flag is enabled)
+│  ├─ tutor/page.tsx                   ✅ P3 tutor & scenario picker, mode (text / push-to-talk / realtime voice)
+│  ├─ tutor/[id]/page.tsx              ✅ P3 conversation (corrections, TTS playback, recorder, realtime WebRTC)
+│  ├─ tutor/[id]/report/page.tsx       ✅ P3 conversation report
+│  ├─ practice/writing/…               ✅ P3 writing tasks, editor with word count, evaluation with annotated text
 └─ admin/…                             P4
 ```
 
@@ -46,7 +49,10 @@ src/
 │  ├─ assessment/            AssessmentPlayer, ItemRenderer, SectionProgress, ResultsReport, SkillLevelBar
 │  ├─ plan/                  RoadmapWeek, PlanItemCard, PlanVersionHistory, PlanControls
 │  ├─ dashboard/             TodayCard, SkillSnapshot, WeeklyMinutesChart
-│  └─ profile/               PreferencesForm, DangerZone
+│  ├─ profile/               PreferencesForm, DangerZone
+│  ├─ speech/                Recorder (MediaRecorder, level meter, limits), PronunciationView
+│  ├─ tutor/                 TutorHome, ConversationView, RealtimeVoice, ConversationReportView
+│  └─ writing/               WritingListView, WritingTaskView, SubmissionResult, AnnotatedText
 ├─ lib/                      api client (fetch + CSRF), query keys, i18n, cn()
 ├─ stores/                   useActiveProfileStore (Zustand, persisted)
 └─ types/                    API types (hand-written to match Laravel Resources; OpenAPI-generated in P2)
