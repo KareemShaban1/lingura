@@ -1,0 +1,18 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+/** Append-only audit trail. */
+class AuditLog extends Model
+{
+    public const UPDATED_AT = null;
+
+    protected $guarded = ['id'];
+
+    protected function casts(): array
+    {
+        return ['old_values' => 'array', 'new_values' => 'array'];
+    }
+}

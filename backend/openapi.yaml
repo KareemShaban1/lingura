@@ -1,0 +1,344 @@
+openapi: 3.1.0
+info:
+  title: LinguaForge API
+  version: 1.0.0-phase1
+  description: |
+    REST API for the LinguaForge language-learning platform (Phase 1: identity, onboarding, placement assessment, learning plans).
+    Authentication: Sanctum SPA cookies (call `GET /sanctum/csrf-cookie` first and send `X-XSRF-TOKEN`) or a bearer token
+    (pass `device_name` to register/login). Errors use `{message, code?, errors?}`.
+    Assessment results are estimates aligned to CEFR descriptors, never official certifications.
+servers:
+  - url: /api/v1
+security:
+  - bearerAuth: []
+  - cookieAuth: []
+tags:
+  - name: Auth
+  - name: Account
+  - name: Catalog
+  - name: Learner profiles
+  - name: Assessment
+  - name: Plans
+paths:
+  /auth/register:
+    post:
+      tags: [Auth]
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [name, email, password, password_confirmation, accept_terms]
+              properties:
+                name: { type: string, maxLength: 120 }
+                email: { type: string, format: email }
+                password: { type: string, minLength: 10 }
+                password_confirmation: { type: string }
+                native_language: { type: string, example: ar }
+                interface_language: { type: string, enum: [en, ar] }
+                timezone: { type: string, example: Africa/Cairo }
+                accept_terms: { type: boolean }
+                device_name: { type: string, description: When set, a bearer token is returned instead of a session. }
+      responses:
+        '201': { description: Registered, content: { application/json: { schema: { $ref: '#/components/schemas/AuthResponse' } } } }
+        '422': { $ref: '#/components/responses/ValidationError' }
+  /auth/login:
+    post:
+      tags: [Auth]
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [email, password]
+              properties:
+                email: { type: string, format: email }
+                password: { type: string }
+                device_name: { type: string }
+      responses:
+        '200': { description: Signed in, content: { application/json: { schema: { $ref: '#/components/schemas/AuthResponse' } } } }
+        '422': { $ref: '#/components/responses/ValidationError' }
+        '429': { description: Too many attempts }
+  /auth/logout:
+    post: { tags: [Auth], responses: { '200': { description: Signed out } } }
+  /auth/me:
+    get:
+      tags: [Auth]
+      responses:
+        '200': { description: Current user, content: { application/json: { schema: { type: object, properties: { data: { $ref: '#/components/schemas/User' } } } } } }
+        '401': { description: Unauthenticated }
+  /auth/forgot-password:
+    post:
+      tags: [Auth]
+      security: []
+      description: Always returns the same response whether or not the account exists.
+      requestBody: { content: { application/json: { schema: { type: object, required: [email], properties: { email: { type: string, format: email } } } } } }
+      responses: { '200': { description: Accepted } }
+  /auth/reset-password:
+    post:
+      tags: [Auth]
+      security: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [token, email, password, password_confirmation]
+              properties: { token: { type: string }, email: { type: string }, password: { type: string }, password_confirmation: { type: string } }
+      responses: { '200': { description: Password reset }, '422': { $ref: '#/components/responses/ValidationError' } }
+  /me/profile:
+    patch:
+      tags: [Account]
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name: { type: string }
+                native_language: { type: string, nullable: true }
+                interface_language: { type: string, enum: [en, ar] }
+                timezone: { type: string }
+                country_code: { type: string, minLength: 2, maxLength: 2 }
+      responses: { '200': { description: Updated user } }
+  /me/preferences:
+    patch:
+      tags: [Account]
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                theme: { type: string, enum: [light, dark, system] }
+                daily_reminder_enabled: { type: boolean }
+                reminder_time: { type: string, example: '19:30', nullable: true }
+                marketing_opt_in: { type: boolean }
+      responses: { '200': { description: Updated user } }
+  /me/data-exports:
+    get: { tags: [Account], responses: { '200': { description: Recent export requests } } }
+    post: { tags: [Account], description: Queues a full personal-data export., responses: { '202': { description: Export requested } } }
+  /me/data-exports/{export}/download:
+    get:
+      tags: [Account]
+      parameters: [{ name: export, in: path, required: true, schema: { type: string } }]
+      responses: { '200': { description: '{ url } — signed URL valid for 5 minutes' }, '410': { description: Expired } }
+  /me:
+    delete:
+      tags: [Account]
+      description: Anonymises the account immediately; learning data is purged after the grace period.
+      requestBody: { content: { application/json: { schema: { type: object, required: [password], properties: { password: { type: string } } } } } }
+      responses: { '200': { description: Deleted }, '422': { $ref: '#/components/responses/ValidationError' } }
+  /languages:
+    get:
+      tags: [Catalog]
+      security: []
+      responses: { '200': { description: Active languages with variants and capability matrix, content: { application/json: { schema: { type: object, properties: { data: { type: array, items: { $ref: '#/components/schemas/Language' } } } } } } } }
+  /languages/{code}:
+    get:
+      tags: [Catalog]
+      security: []
+      parameters: [{ name: code, in: path, required: true, schema: { type: string } }]
+      responses: { '200': { description: Language }, '404': { description: Not found } }
+  /catalog/onboarding:
+    get: { tags: [Catalog], security: [], responses: { '200': { description: 'languages, purposes, skills, levels, daily_minutes bounds' } } }
+  /learner-profiles:
+    get: { tags: [Learner profiles], responses: { '200': { description: My target languages } } }
+    post:
+      tags: [Learner profiles]
+      requestBody:
+        required: true
+        content: { application/json: { schema: { $ref: '#/components/schemas/LearnerProfileInput' } } }
+      responses:
+        '201': { description: Created (an initial plan version is generated) }
+        '409': { description: 'Already learning this language (code: profile_exists)' }
+        '422': { $ref: '#/components/responses/ValidationError' }
+  /learner-profiles/{profile}:
+    parameters: [{ $ref: '#/components/parameters/Profile' }]
+    get: { tags: [Learner profiles], responses: { '200': { description: Profile }, '403': { description: Not yours } } }
+    patch:
+      tags: [Learner profiles]
+      description: Changing purpose, daily minutes, target level, schedule or focus skills creates a new plan version.
+      requestBody: { content: { application/json: { schema: { $ref: '#/components/schemas/LearnerProfileInput' } } } }
+      responses: { '200': { description: Updated } }
+    delete: { tags: [Learner profiles], responses: { '200': { description: Archived } } }
+  /learner-profiles/{profile}/dashboard:
+    parameters: [{ $ref: '#/components/parameters/Profile' }]
+    get: { tags: [Learner profiles], responses: { '200': { description: 'Today items, streak, week minutes, skill levels, latest attempt' } } }
+  /learner-profiles/{profile}/progress:
+    parameters: [{ $ref: '#/components/parameters/Profile' }]
+    get: { tags: [Learner profiles], responses: { '200': { description: 'Skill history, 12-week activity, practice by skill, assessment history' } } }
+  /learner-profiles/{profile}/assessments:
+    parameters: [{ $ref: '#/components/parameters/Profile' }]
+    post: { tags: [Assessment], description: Start (or resume) the placement attempt., responses: { '201': { description: Started }, '200': { description: Resumed existing attempt } } }
+  /learner-profiles/{profile}/assessment-attempts:
+    parameters: [{ $ref: '#/components/parameters/Profile' }]
+    get: { tags: [Assessment], responses: { '200': { description: Attempt history } } }
+  /assessment-attempts/{attempt}:
+    parameters: [{ $ref: '#/components/parameters/Attempt' }]
+    get: { tags: [Assessment], responses: { '200': { description: Attempt with per-section status } } }
+  /assessment-attempts/{attempt}/next:
+    parameters: [{ $ref: '#/components/parameters/Attempt' }]
+    get:
+      tags: [Assessment]
+      description: Returns the adaptively selected item (stable across refreshes), or done=true when all sections are closed (the attempt is then finalised).
+      responses:
+        '200':
+          description: Next item
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  done: { type: boolean }
+                  item: { oneOf: [{ $ref: '#/components/schemas/AssessmentItem' }, { type: 'null' }] }
+  /assessment-attempts/{attempt}/answers:
+    parameters: [{ $ref: '#/components/parameters/Attempt' }]
+    post:
+      tags: [Assessment]
+      description: Idempotent per (attempt, item). Only the currently served item is accepted. Correctness is not revealed.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [item_id, option_id]
+              properties: { item_id: { type: string }, option_id: { type: integer }, response_time_ms: { type: integer } }
+      responses:
+        '200': { description: '{ accepted: true }' }
+        '409': { description: 'item_not_current | attempt_closed' }
+        '422': { description: invalid_option }
+  /assessment-attempts/{attempt}/sections/{skill}/skip:
+    parameters: [{ $ref: '#/components/parameters/Attempt' }, { name: skill, in: path, required: true, schema: { type: string } }]
+    post: { tags: [Assessment], responses: { '200': { description: Section skipped (not assessed) } } }
+  /assessment-attempts/{attempt}/complete:
+    parameters: [{ $ref: '#/components/parameters/Attempt' }]
+    post: { tags: [Assessment], description: End now; sections with at least min_items answers are scored., responses: { '200': { description: Report } } }
+  /assessment-attempts/{attempt}/report:
+    parameters: [{ $ref: '#/components/parameters/Attempt' }]
+    get:
+      tags: [Assessment]
+      responses:
+        '200': { description: Report, content: { application/json: { schema: { type: object, properties: { data: { $ref: '#/components/schemas/AssessmentReport' } } } } } }
+        '409': { description: Attempt still in progress }
+  /assessment-attempts/{attempt}/items/{item}/audio:
+    parameters: [{ $ref: '#/components/parameters/Attempt' }, { name: item, in: path, required: true, schema: { type: string } }]
+    get: { tags: [Assessment], description: Signed 5-minute URL for the current listening item., responses: { '200': { description: '{ url }' }, '404': { description: Not the current item } } }
+  /learner-profiles/{profile}/plan:
+    parameters: [{ $ref: '#/components/parameters/Profile' }]
+    get: { tags: [Plans], responses: { '200': { description: Live plan with current version, rationale and allocations } } }
+  /learner-profiles/{profile}/plan/items:
+    parameters:
+      - { $ref: '#/components/parameters/Profile' }
+      - { name: from, in: query, schema: { type: string, format: date } }
+      - { name: to, in: query, schema: { type: string, format: date } }
+    get: { tags: [Plans], responses: { '200': { description: Items of the current version } } }
+  /learner-profiles/{profile}/plan/versions:
+    parameters: [{ $ref: '#/components/parameters/Profile' }]
+    get: { tags: [Plans], responses: { '200': { description: Immutable version history } } }
+  /learner-profiles/{profile}/plan/regenerate:
+    parameters: [{ $ref: '#/components/parameters/Profile' }]
+    post: { tags: [Plans], responses: { '200': { description: New version } } }
+  /learner-profiles/{profile}/plan/pause:
+    parameters: [{ $ref: '#/components/parameters/Profile' }]
+    post: { tags: [Plans], responses: { '200': { description: Paused } } }
+  /learner-profiles/{profile}/plan/resume:
+    parameters: [{ $ref: '#/components/parameters/Profile' }]
+    post: { tags: [Plans], responses: { '200': { description: Resumed with a fresh week } } }
+  /plan-items/{item}/start:
+    parameters: [{ name: item, in: path, required: true, schema: { type: string } }]
+    post: { tags: [Plans], responses: { '201': { description: Learning session }, '409': { description: 'plan_paused | item_superseded | item_finished' } } }
+  /plan-items/{item}/skip:
+    parameters: [{ name: item, in: path, required: true, schema: { type: string } }]
+    post: { tags: [Plans], requestBody: { content: { application/json: { schema: { type: object, properties: { reason: { type: string } } } } } }, responses: { '200': { description: Skipped } } }
+  /learning-sessions/{session}:
+    parameters: [{ name: session, in: path, required: true, schema: { type: string } }]
+    get: { tags: [Plans], responses: { '200': { description: Session with its plan item } } }
+  /learning-sessions/{session}/complete:
+    parameters: [{ name: session, in: path, required: true, schema: { type: string } }]
+    post:
+      tags: [Plans]
+      description: Credited time is capped at real elapsed time (+60 s) and 4 h.
+      requestBody:
+        content:
+          application/json:
+            schema: { type: object, required: [active_seconds], properties: { active_seconds: { type: integer }, self_rating: { type: integer, minimum: 1, maximum: 5 } } }
+      responses: { '200': { description: Completed } }
+components:
+  securitySchemes:
+    bearerAuth: { type: http, scheme: bearer }
+    cookieAuth: { type: apiKey, in: cookie, name: linguaforge_session }
+  parameters:
+    Profile: { name: profile, in: path, required: true, schema: { type: string, description: ULID } }
+    Attempt: { name: attempt, in: path, required: true, schema: { type: string, description: ULID } }
+  responses:
+    ValidationError:
+      description: Validation failed
+      content: { application/json: { schema: { type: object, properties: { message: { type: string }, errors: { type: object, additionalProperties: { type: array, items: { type: string } } } } } } }
+  schemas:
+    AuthResponse:
+      type: object
+      properties: { user: { $ref: '#/components/schemas/User' }, token: { type: string, description: Only for token clients } }
+    User:
+      type: object
+      properties:
+        id: { type: integer }
+        name: { type: string }
+        email: { type: string }
+        roles: { type: array, items: { type: string } }
+        is_staff: { type: boolean }
+        profile: { type: object, properties: { native_language: { type: string }, interface_language: { type: string }, interface_direction: { type: string, enum: [ltr, rtl] }, timezone: { type: string } } }
+        preferences: { type: object }
+        learner_profiles: { type: array, items: { $ref: '#/components/schemas/LearnerProfile' } }
+        features: { type: array, items: { type: string } }
+    Language:
+      type: object
+      properties:
+        code: { type: string }
+        name: { type: string }
+        native_name: { type: string }
+        direction: { type: string, enum: [ltr, rtl] }
+        variants: { type: array, items: { type: object, properties: { code: { type: string }, name: { type: string }, is_default: { type: boolean } } } }
+        capabilities: { type: object, additionalProperties: { type: object, properties: { status: { type: string, enum: [supported, beta, unsupported] }, quality_tier: { type: integer } } } }
+    LearnerProfileInput:
+      type: object
+      properties:
+        target_language: { type: string }
+        variant: { type: string }
+        purpose: { type: string, enum: [general, career, travel, academic, immigration, exams, personal] }
+        self_reported_level: { type: string, enum: [PRE_A1, A1, A2, B1, B2, C1, C2] }
+        target_level: { type: string }
+        daily_minutes: { type: integer, minimum: 10, maximum: 240 }
+        focus_skills: { type: array, items: { type: string, enum: [listening, speaking, reading, writing, grammar, vocabulary] } }
+        schedule: { type: array, items: { type: object, properties: { day: { type: integer, minimum: 0, maximum: 6 }, time: { type: string } } } }
+        preferences: { type: object, additionalProperties: { type: string } }
+    LearnerProfile:
+      type: object
+      properties:
+        id: { type: string }
+        status: { type: string, enum: [assessment_pending, active, archived] }
+        target_language: { type: object }
+        daily_minutes: { type: integer }
+    AssessmentItem:
+      type: object
+      description: Never contains the answer key, difficulty or explanation.
+      properties:
+        id: { type: string }
+        skill: { type: string }
+        format: { type: string }
+        stimulus: { type: [string, 'null'] }
+        has_audio: { type: boolean }
+        prompt: { type: string }
+        options: { type: array, items: { type: object, properties: { id: { type: integer }, label: { type: string } } } }
+    AssessmentReport:
+      type: object
+      properties:
+        is_official: { type: boolean, const: false }
+        disclaimer: { type: string }
+        overall: { type: object, properties: { level: { type: object }, is_provisional: { type: boolean }, provisional_reasons: { type: array, items: { type: string } }, method: { type: string, const: lower_median_of_assessed_skills } } }
+        skills: { type: array, items: { type: object, properties: { skill: { type: string }, status: { type: string }, level: { type: object }, confidence: { type: string }, scaled_score: { type: integer }, items_answered: { type: integer } } } }
+        findings: { type: array, items: { type: object, properties: { type: { type: string, enum: [strength, weakness, recommendation] }, code: { type: string }, skill: { type: string }, detail: { type: string } } } }
