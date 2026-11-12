@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: LinguaForge API
-  version: 1.0.0-phase1
+  version: 2.0.0-phase2
   description: |
     REST API for the LinguaForge language-learning platform (Phase 1: identity, onboarding, placement assessment, learning plans).
     Authentication: Sanctum SPA cookies (call `GET /sanctum/csrf-cookie` first and send `X-XSRF-TOKEN`) or a bearer token
@@ -19,6 +19,10 @@ tags:
   - name: Learner profiles
   - name: Assessment
   - name: Plans
+  - name: Courses
+  - name: Grammar
+  - name: Practice
+  - name: Vocabulary
 paths:
   /auth/register:
     post:
@@ -268,6 +272,112 @@ paths:
           application/json:
             schema: { type: object, required: [active_seconds], properties: { active_seconds: { type: integer }, self_rating: { type: integer, minimum: 1, maximum: 5 } } }
       responses: { '200': { description: Completed } }
+  /learner-profiles/{profile}/learning-sessions:
+    parameters: [{ $ref: '#/components/parameters/Profile' }]
+    post:
+      tags: [Plans]
+      requestBody: { content: { application/json: { schema: { type: object, required: [activity_type], properties: { activity_type: { type: string, enum: [lesson, exercise, vocabulary_review] } } } } } }
+      responses: { '201': { description: Standalone learning session } }
+  /learner-profiles/{profile}/courses:
+    parameters: [{ $ref: '#/components/parameters/Profile' }]
+    get: { tags: [Courses], responses: { '200': { description: 'Courses → units → lessons with progress; next_lesson_id' } } }
+  /learner-profiles/{profile}/lessons/{lesson}:
+    parameters: [{ $ref: '#/components/parameters/Profile' }, { name: lesson, in: path, required: true, schema: { type: string } }]
+    get: { tags: [Courses], responses: { '200': { description: 'Lesson detail: intro, objectives, grammar topic, words, exercises' } } }
+  /learner-profiles/{profile}/lessons/{lesson}/complete:
+    parameters: [{ $ref: '#/components/parameters/Profile' }, { name: lesson, in: path, required: true, schema: { type: string } }]
+    post: { tags: [Courses], responses: { '200': { description: Completed; lesson words added to flashcards }, '409': { description: lesson_incomplete } } }
+  /learner-profiles/{profile}/grammar-topics:
+    parameters: [{ $ref: '#/components/parameters/Profile' }]
+    get: { tags: [Grammar], responses: { '200': { description: Topics with mastery } } }
+  /learner-profiles/{profile}/grammar-topics/{slug}:
+    parameters: [{ $ref: '#/components/parameters/Profile' }, { name: slug, in: path, required: true, schema: { type: string } }]
+    get: { tags: [Grammar], responses: { '200': { description: 'Explanation, examples, exercises, recent mistakes' } } }
+  /learner-profiles/{profile}/exercises:
+    parameters:
+      - { $ref: '#/components/parameters/Profile' }
+      - { name: skill, in: query, schema: { type: string } }
+      - { name: level, in: query, schema: { type: string } }
+      - { name: type, in: query, schema: { type: string, enum: [mcq, cloze, ordering, reading, listening, dictation] } }
+    get: { tags: [Practice], responses: { '200': { description: Usable exercises in the profile language } } }
+  /learner-profiles/{profile}/exercises/{exercise}/attempts:
+    parameters: [{ $ref: '#/components/parameters/Profile' }, { name: exercise, in: path, required: true, schema: { type: string } }]
+    post:
+      tags: [Practice]
+      requestBody: { content: { application/json: { schema: { type: object, properties: { lesson_id: { type: string }, session_id: { type: string } } } } } }
+      responses: { '201': { description: Attempt started }, '200': { description: Open attempt resumed }, '409': { description: exercise_unavailable }, '422': { description: wrong_language } }
+  /exercise-attempts/{attempt}:
+    parameters: [{ $ref: '#/components/parameters/Attempt' }]
+    get: { tags: [Practice], responses: { '200': { description: Attempt; answer keys only for answered questions } } }
+  /exercise-attempts/{attempt}/answers:
+    parameters: [{ $ref: '#/components/parameters/Attempt' }]
+    post:
+      tags: [Practice]
+      description: Idempotent per question. Deterministic scoring with partial credit.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [question_id]
+              properties: { question_id: { type: integer }, option_id: { type: integer }, text: { type: string }, order: { type: array, items: { type: integer } }, response_time_ms: { type: integer } }
+      responses:
+        '200':
+          description: Feedback
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      is_correct: { type: boolean }
+                      score: { type: number }
+                      feedback_code: { type: [string, 'null'], enum: [check_accents, word_accuracy, empty, invalid_order, null] }
+                      correct_answer: { type: [string, 'null'] }
+                      explanation: { type: [string, 'null'] }
+  /exercise-attempts/{attempt}/finish:
+    parameters: [{ $ref: '#/components/parameters/Attempt' }]
+    post:
+      tags: [Practice]
+      requestBody: { content: { application/json: { schema: { type: object, properties: { reading_seconds: { type: integer } } } } } }
+      responses: { '200': { description: 'Completed attempt: score, words_per_minute, transcript for listening' } }
+  /exercise-attempts/{attempt}/audio:
+    parameters: [{ $ref: '#/components/parameters/Attempt' }, { name: question_id, in: query, schema: { type: integer } }]
+    get: { tags: [Practice], responses: { '200': { description: '{ url } signed for 5 minutes' } } }
+  /learner-profiles/{profile}/vocabulary:
+    parameters: [{ $ref: '#/components/parameters/Profile' }]
+    get: { tags: [Vocabulary], parameters: [{ name: filter, in: query, schema: { type: string, enum: [all, due, learning, mastered] } }, { name: collection, in: query, schema: { type: integer } }], responses: { '200': { description: Deck (paginated) } } }
+    post: { tags: [Vocabulary], requestBody: { content: { application/json: { schema: { type: object, required: [word_id], properties: { word_id: { type: integer }, source: { type: string }, collection_id: { type: integer } } } } } }, responses: { '201': { description: Added }, '200': { description: Already in deck } } }
+  /learner-profiles/{profile}/vocabulary/summary:
+    parameters: [{ $ref: '#/components/parameters/Profile' }]
+    get: { tags: [Vocabulary], responses: { '200': { description: 'total, due_now, mastered, retention_30d …' } } }
+  /learner-profiles/{profile}/vocabulary/review-queue:
+    parameters: [{ $ref: '#/components/parameters/Profile' }, { name: limit, in: query, schema: { type: integer, maximum: 100 } }]
+    get: { tags: [Vocabulary], responses: { '200': { description: Due cards } } }
+  /learner-profiles/{profile}/vocabulary/lookup:
+    parameters: [{ $ref: '#/components/parameters/Profile' }, { name: q, in: query, required: true, schema: { type: string } }]
+    get: { tags: [Vocabulary], responses: { '200': { description: Matching words (lemma or inflected form) } } }
+  /learner-profiles/{profile}/vocabulary/extract:
+    parameters: [{ $ref: '#/components/parameters/Profile' }]
+    post: { tags: [Vocabulary], requestBody: { content: { application/json: { schema: { type: object, required: [text], properties: { text: { type: string } } } } } }, responses: { '200': { description: 'token → word (with in_deck)' } } }
+  /user-vocabulary/{card}/reviews:
+    parameters: [{ name: card, in: path, required: true, schema: { type: integer } }]
+    post: { tags: [Vocabulary], description: FSRS-4.5 review., requestBody: { content: { application/json: { schema: { type: object, required: [rating], properties: { rating: { type: integer, minimum: 1, maximum: 4 }, duration_ms: { type: integer } } } } } }, responses: { '200': { description: Updated card schedule } } }
+  /user-vocabulary/{card}:
+    parameters: [{ name: card, in: path, required: true, schema: { type: integer } }]
+    delete: { tags: [Vocabulary], responses: { '200': { description: Removed } } }
+  /learner-profiles/{profile}/vocabulary-collections:
+    parameters: [{ $ref: '#/components/parameters/Profile' }]
+    get: { tags: [Vocabulary], responses: { '200': { description: Collections } } }
+    post: { tags: [Vocabulary], requestBody: { content: { application/json: { schema: { type: object, required: [name], properties: { name: { type: string } } } } } }, responses: { '201': { description: Created } } }
+  /vocabulary-collections/{collection}:
+    parameters: [{ name: collection, in: path, required: true, schema: { type: integer } }]
+    delete: { tags: [Vocabulary], responses: { '200': { description: Deleted } } }
+  /vocabulary-collections/{collection}/items:
+    parameters: [{ name: collection, in: path, required: true, schema: { type: integer } }]
+    post: { tags: [Vocabulary], requestBody: { content: { application/json: { schema: { type: object, required: [user_vocabulary_id], properties: { user_vocabulary_id: { type: integer } } } } } }, responses: { '200': { description: '{ attached }' } } }
 components:
   securitySchemes:
     bearerAuth: { type: http, scheme: bearer }

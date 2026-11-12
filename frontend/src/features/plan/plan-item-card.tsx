@@ -13,6 +13,14 @@ import { useI18n } from "@/lib/i18n";
 import type { LearningSession, PlanItem } from "@/lib/types";
 import { cn } from "@/lib/utils";
 
+/** Content-bound items open their player; self-guided items open the session runner. */
+export function planItemHref(item: PlanItem, sessionId: string) {
+  if (item.lesson_id) return `/lessons/${item.lesson_id}?session=${sessionId}`;
+  if (item.exercise_id) return `/practice/${item.exercise_id}?session=${sessionId}`;
+  if (item.activity_type === "vocabulary_review") return `/vocabulary/review?session=${sessionId}`;
+  return `/learning/session/${sessionId}`;
+}
+
 export function PlanItemCard({ item, profileId, paused, compact = false }: { item: PlanItem; profileId: string; paused: boolean; compact?: boolean }) {
   const { t } = useI18n();
   const router = useRouter();
@@ -32,7 +40,7 @@ export function PlanItemCard({ item, profileId, paused, compact = false }: { ite
       }
       const { data } = await api<{ data: LearningSession }>(`/plan-items/${item.id}/start`, { method: "POST" });
       invalidate(profileId);
-      router.push(`/learning/session/${data.id}`);
+      router.push(planItemHref(item, data.id));
     } catch (e) {
       toast.error(e instanceof Error ? e.message : t.common.errorTitle);
       setBusy(false);
@@ -55,7 +63,7 @@ export function PlanItemCard({ item, profileId, paused, compact = false }: { ite
           <SkillIcon skill={item.skill} />
         ) : (
           <span className="grid size-9 place-items-center rounded-lg bg-accent/20 text-accent-foreground dark:text-accent">
-            {item.activity_type === "revision" ? <RotateCcw className="size-[18px]" /> : <ClipboardCheck className="size-[18px]" />}
+            {item.activity_type === "revision" || item.activity_type === "vocabulary_review" ? <RotateCcw className="size-[18px]" /> : <ClipboardCheck className="size-[18px]" />}
           </span>
         )}
         <div className="min-w-0 flex-1">

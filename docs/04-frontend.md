@@ -21,7 +21,14 @@ app/
 │  ├─ learning/session/[sessionId]/page.tsx ✅ Session runner (objective + timer + complete)
 │  ├─ progress/page.tsx                ✅ Skill levels & assessment history (real data only)
 │  ├─ profile/page.tsx                 ✅ Account, languages, preferences, data export, delete account
-│  ├─ practice/…  vocabulary/…  tutor/…    P2/P3 (nav items hidden until module flag enabled)
+│  ├─ learning/courses/page.tsx        ✅ P2 course tree with progress
+│  ├─ lessons/[lessonId]/page.tsx      ✅ P2 lesson player (objectives, grammar, words, exercises, completion)
+│  ├─ practice/page.tsx                ✅ P2 exercise library by skill
+│  ├─ practice/[exerciseId]/page.tsx   ✅ P2 exercise player (mcq, cloze, ordering, reading w/ tap-to-translate, listening w/ speed, dictation)
+│  ├─ practice/grammar/…               ✅ P2 grammar topics, mastery, explanations, recent mistakes
+│  ├─ vocabulary/page.tsx              ✅ P2 deck, dictionary search, collections, retention
+│  ├─ vocabulary/review/page.tsx       ✅ P2 FSRS flashcard session
+│  ├─ tutor/…                          P3 (nav hidden until the module flag is enabled)
 └─ admin/…                             P4
 ```
 

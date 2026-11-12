@@ -35,6 +35,8 @@ export function ProgressView() {
   }
   const history = [...historyRows.values()].sort((a, b) => String(a.date).localeCompare(String(b.date)));
   const assessedSkills = p.skills.filter((s) => (s.history?.length ?? 0) > 0).map((s) => s.skill);
+  const accuracy = Object.entries(p.skill_accuracy ?? {}).filter(([, a]) => a.answered > 0);
+  const dailyHasData = (p.daily_skill_activity ?? []).some((d) => Object.keys(d).length > 1);
   const practice = SKILLS.map((s) => ({ skill: s, label: t.skills[s], minutes: p.practice_by_skill[s]?.minutes ?? 0 })).filter((x) => x.minutes > 0);
 
   return (
@@ -74,6 +76,67 @@ export function ProgressView() {
           })}
         </CardContent>
       </Card>
+
+      <div className="grid gap-4 md:grid-cols-3">
+        <Card>
+          <CardHeader><CardTitle>{t.progress2.vocabulary}</CardTitle></CardHeader>
+          <CardContent className="grid grid-cols-2 gap-3 text-sm">
+            <div><p className="font-display text-3xl">{p.vocabulary?.total ?? 0}</p><p className="text-xs text-muted-foreground">{t.vocab.total}</p></div>
+            <div><p className="font-display text-3xl">{p.vocabulary?.mastered ?? 0}</p><p className="text-xs text-muted-foreground">{t.vocab.mastered}</p></div>
+            <div className="col-span-2">
+              <p className="text-xs text-muted-foreground">{t.vocab.retention}</p>
+              <p className="font-medium">{p.vocabulary?.retention_30d != null ? `${Math.round(p.vocabulary.retention_30d * 100)}% · ${p.vocabulary.reviews_30d}` : t.vocab.retentionNone}</p>
+            </div>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardHeader><CardTitle>{t.progress2.accuracy}</CardTitle></CardHeader>
+          <CardContent>
+            {accuracy.length === 0 ? <p className="text-sm text-muted-foreground">{t.progress2.noAccuracy}</p> : (
+              <ul className="space-y-3">
+                {accuracy.map(([skill, a]) => (
+                  <li key={skill}>
+                    <div className="flex justify-between text-xs"><span>{t.skills[skill as SkillSlug]}</span><span className="font-mono">{Math.round((a.accuracy ?? 0) * 100)}% · {a.answered}</span></div>
+                    <div className="mt-1 h-1.5 rounded-full bg-muted"><div className="h-full rounded-full" style={{ width: `${Math.round((a.accuracy ?? 0) * 100)}%`, background: skillVar[skill as SkillSlug] }} /></div>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </CardContent>
+        </Card>
+        <Card>
+          <CardHeader><CardTitle>{t.progress2.readingSpeed}</CardTitle></CardHeader>
+          <CardContent className="space-y-3 text-sm">
+            {p.reading?.recent_wpm.length ? (
+              <>
+                <p className="font-display text-3xl">{p.reading.recent_wpm[p.reading.recent_wpm.length - 1]} <span className="font-sans text-sm text-muted-foreground">wpm</span></p>
+                <p className="font-mono text-xs text-muted-foreground">{p.reading.recent_wpm.join(" → ")}</p>
+              </>
+            ) : <p className="text-muted-foreground">—</p>}
+            <div className="flex justify-between border-t pt-3 text-xs"><span>{t.progress2.exercisesCompleted}</span><span className="font-mono">{p.exercises_completed ?? 0}</span></div>
+            <div className="flex justify-between text-xs"><span>{t.progress2.topicsMastered}</span><span className="font-mono">{p.grammar?.topics_mastered ?? 0}/{p.grammar?.topics_practised ?? 0}</span></div>
+          </CardContent>
+        </Card>
+      </div>
+
+      {dailyHasData && (
+        <Card>
+          <CardHeader><CardTitle>{t.progress2.dailyActivity}</CardTitle></CardHeader>
+          <CardContent>
+            <div className="h-48">
+              <ResponsiveContainer width="100%" height="100%">
+                <BarChart data={p.daily_skill_activity} margin={{ top: 8, right: 8, left: -16, bottom: 0 }}>
+                  <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" vertical={false} />
+                  <XAxis dataKey="date" tickFormatter={dateFmt} fontSize={10} tickLine={false} reversed={locale === "ar"} minTickGap={16} />
+                  <YAxis fontSize={11} tickLine={false} axisLine={false} allowDecimals={false} orientation={locale === "ar" ? "right" : "left"} />
+                  <Tooltip labelFormatter={(l) => dateFmt(String(l))} contentStyle={{ borderRadius: 8, fontSize: 12 }} formatter={(v, n) => [v, t.skills[n as SkillSlug]]} />
+                  {SKILLS.map((s) => <Bar key={s} dataKey={s} stackId="a" fill={skillVar[s]} />)}
+                </BarChart>
+              </ResponsiveContainer>
+            </div>
+          </CardContent>
+        </Card>
+      )}
 
       {history.length > 0 && (
         <Card>

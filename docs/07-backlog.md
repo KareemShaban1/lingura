@@ -18,8 +18,18 @@ Definition of done for every item: migrations + seed data, API with FormRequest 
 | 1.11 | AI gateway skeleton (contracts, OpenAI + Fake drivers, usage metering) | ✅ |
 | 1.12 | Audit logging, learning events | ✅ |
 
-## Phase 2 — Content & practice
-Courses/levels/modules/lessons + lesson player · exercise engine (all closed formats, deterministic scoring) · grammar topics & mastery · vocabulary + FSRS spaced repetition + flashcards · listening module (TTS-cached audio, speed control, transcript reveal, dictation) · reading module (interactive glossary, reading speed) · plan items bound to concrete lessons/exercises · daily progress rollups + charts · OpenAPI-generated TS types.
+## Phase 2 — Content & practice ✅
+| # | Item | Status |
+|---|---|---|
+| 2.1 | Content model with translations; courses/units/lessons/objectives | ✅ |
+| 2.2 | Starter A1–A2 packs (6 languages) + validated idempotent importer; immutable published content | ✅ |
+| 2.3 | Exercise engine: mcq, cloze, ordering, reading, listening, dictation; deterministic scoring; feedback | ✅ |
+| 2.4 | Grammar topics, mastery tracking, common-mistake log | ✅ |
+| 2.5 | Vocabulary: FSRS-4.5 flashcards, review log, collections, dictionary, extraction from text | ✅ |
+| 2.6 | Listening (TTS-cached audio, speed control, transcript reveal, dictation) and reading (tap-to-translate, reading speed) | ✅ |
+| 2.7 | Plan items bound to lessons/exercises/flashcards; practice weaknesses feed new plan versions | ✅ |
+| 2.8 | Daily per-skill rollups; progress analytics (accuracy, retention, reading speed, daily activity) | ✅ |
+| — | Deferred: OpenAPI-generated TS types; B1+ content; admin authoring UI (Phase 4); per-skill time for standalone sessions | → later |
 
 ## Phase 3 — AI tutor & productive skills
 Prompt registry · text tutor with streaming + corrections · realtime voice with ephemeral tokens + PTT fallback · scenarios & personalities · conversation reports · audio upload pipeline (private S3, signed URLs, virus/mime checks) · STT · pronunciation assessment · speaking & writing placement sections (rubric-based AI scoring with human-review sampling) · writing module · adaptive engine v1 (mistake pattern detection, difficulty adaptation, revision scheduling).

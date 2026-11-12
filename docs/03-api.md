@@ -60,11 +60,36 @@ Machine-readable spec: `backend/openapi.yaml` (served at `GET /api/v1/openapi.ya
 | POST | `/learning-sessions/{session}/complete` | `{active_seconds, self_rating}` → item completed, events emitted; credit capped at real elapsed time | ✅ |
 | POST | `/plan-items/{item}/skip` | Skip with reason | ✅ |
 
+## Phase 2 — content & practice ✅
+| Method | Path | Description |
+|---|---|---|
+| POST | `/learner-profiles/{id}/learning-sessions` | Standalone session (`lesson`, `exercise`, `vocabulary_review`) for time tracking |
+| GET | `/learner-profiles/{id}/courses` | Course → units → lessons with progress, `next_lesson_id` |
+| GET | `/learner-profiles/{id}/lessons/{lesson}` | Lesson: intro, objectives, grammar topic, words, exercises with completion |
+| POST | `/learner-profiles/{id}/lessons/{lesson}/complete` | Requires all available exercises completed; adds lesson words to flashcards |
+| GET | `/learner-profiles/{id}/grammar-topics` | Topics with mastery |
+| GET | `/learner-profiles/{id}/grammar-topics/{slug}` | Explanation, examples, exercises, recent mistakes |
+| GET | `/learner-profiles/{id}/exercises?skill=&level=&type=` | Practice library (only usable exercises; audio types need audio) |
+| POST | `/learner-profiles/{id}/exercises/{exercise}/attempts` | Start/resume an attempt `{lesson_id?, session_id?}` |
+| GET | `/exercise-attempts/{attempt}` | Attempt; keys only for answered questions; listening transcript after finishing |
+| POST | `/exercise-attempts/{attempt}/answers` | `{question_id, option_id \| text \| order[]}` → feedback (correctness, partial credit, correct answer, explanation). Idempotent |
+| POST | `/exercise-attempts/{attempt}/finish` | `{reading_seconds?}` → score, words per minute |
+| GET | `/exercise-attempts/{attempt}/audio?question_id=` | Signed URL for listening passage / dictation sentence |
+| GET | `/learner-profiles/{id}/vocabulary?filter=&collection=&q=` | Deck (paginated) |
+| POST | `/learner-profiles/{id}/vocabulary` | Add word `{word_id, source?, collection_id?}` (idempotent) |
+| GET | `/learner-profiles/{id}/vocabulary/summary` | Totals, due, mastered, 30-day retention |
+| GET | `/learner-profiles/{id}/vocabulary/review-queue?limit=` | Due cards, relearning first |
+| GET | `/learner-profiles/{id}/vocabulary/lookup?q=` | Dictionary search (lemma or inflected form) |
+| POST | `/learner-profiles/{id}/vocabulary/extract` | Catalogue words found in a text (tap-to-translate) |
+| POST | `/user-vocabulary/{card}/reviews` | `{rating 1–4, duration_ms?}` → FSRS schedule |
+| DELETE | `/user-vocabulary/{card}` | Remove from deck |
+| GET/POST | `/learner-profiles/{id}/vocabulary-collections` | List / create collections |
+| DELETE | `/vocabulary-collections/{collection}` | Delete |
+| POST | `/vocabulary-collections/{collection}/items` | Toggle a card in a collection |
+
+Plan items now carry `lesson_id`, `exercise_id` and `topic`; dashboard adds `vocabulary_due`; progress adds `skill_accuracy`, `daily_skill_activity`, `vocabulary`, `grammar`, `reading`, `exercises_completed`.
+
 ## Later phases (contract sketch)
-- **Curriculum (P2):** `GET /courses?language=`, `GET /courses/{id}`, `GET /lessons/{id}`, `POST /lessons/{id}/complete`.
-- **Exercises (P2):** `GET /exercises/{id}`, `POST /exercises/{id}/attempts`, `POST /exercise-attempts/{id}/answers`, `POST /exercise-attempts/{id}/finish`.
-- **Vocabulary (P2):** `GET /learner-profiles/{id}/vocabulary?due=1`, `POST /flashcard-reviews`, `POST /vocabulary-collections`, `POST /vocabulary/extract` (from lesson text).
-- **Grammar (P2):** `GET /grammar-topics?language=&level=`, `GET /grammar-topics/{slug}`, `POST /grammar-topics/{slug}/practice`.
 - **Speech (P3):** `POST /audio-recordings` (multipart, ≤ 2 MB / 60 s, mime-sniffed), `GET /audio-recordings/{id}/transcription`, `POST /pronunciation-assessments`.
 - **Tutor (P3):** `GET /tutors`, `GET /scenarios`, `POST /conversations`, `POST /conversations/{id}/messages` (SSE stream), `POST /conversations/{id}/realtime-session` (ephemeral token, quota-checked), `POST /conversations/{id}/finish` → report job, `GET /conversations/{id}/report`.
 - **Writing (P3):** `POST /writing-submissions`, `GET /writing-submissions/{id}/evaluation`.
@@ -77,6 +102,6 @@ Machine-readable spec: `backend/openapi.yaml` (served at `GET /api/v1/openapi.ya
 | Limiter | Limit |
 |---|---|
 | `auth` | 10/min per IP+email |
-| `api` | 120/min per user |
+| `api` | 300/min per user (interactive practice makes several calls per minute) |
 | `assessment` | 60/min per user |
 | `ai` (P3) | per-plan, plus hard monthly quota from entitlements |

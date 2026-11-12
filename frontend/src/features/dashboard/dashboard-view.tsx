@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowRight, ClipboardCheck, Flame, PauseCircle } from "lucide-react";
+import { ArrowRight, ClipboardCheck, Flame, Layers, PauseCircle } from "lucide-react";
 import { Bar, BarChart, ResponsiveContainer, Tooltip, XAxis } from "recharts";
 import { toast } from "sonner";
 import { LevelLadder, SKILLS, SkillIcon } from "@/components/skill";
@@ -106,6 +106,14 @@ export function DashboardView() {
           </CardContent>
         </Card>
       </div>
+
+      {d.vocabulary_due > 0 && (
+        <Link href="/vocabulary/review" className="flex items-center gap-4 rounded-xl border bg-card p-4 hover:border-primary/50">
+          <span className="grid size-10 place-items-center rounded-lg bg-skill-vocabulary/15 text-skill-vocabulary"><Layers className="size-5" aria-hidden /></span>
+          <span className="flex-1 font-medium">{f(t.vocab.review, { n: d.vocabulary_due })}</span>
+          <ArrowRight className="size-4 text-muted-foreground rtl:rotate-180" aria-hidden />
+        </Link>
+      )}
 
       <section aria-labelledby="today">
         <div className="mb-3 flex items-center justify-between">

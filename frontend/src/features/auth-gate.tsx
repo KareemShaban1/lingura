@@ -20,8 +20,9 @@ export function FullPageLoader() {
 }
 
 export function AppGate({ children }: { children: React.ReactNode }) {
-  const { ready, error, refetch } = useRequireAuth();
-  if (error && !(error instanceof ApiError && error.isUnauthenticated)) {
+  const { ready, data, error, refetch } = useRequireAuth();
+  // A failed background refresh (e.g. rate limiting) must not hide an app that already has the user loaded.
+  if (!data && error && !(error instanceof ApiError && error.isUnauthenticated)) {
     return (
       <div className="grid min-h-dvh place-items-center p-4">
         <ErrorState error={error} onRetry={() => refetch()} />
@@ -35,7 +36,7 @@ export function AppGate({ children }: { children: React.ReactNode }) {
 /** Focused, chrome-free layout for onboarding and assessments. */
 export function FocusGate({ children }: { children: React.ReactNode }) {
   const { data, error, refetch } = useRequireAuth({ requireProfile: false });
-  if (error && !(error instanceof ApiError && error.isUnauthenticated)) {
+  if (!data && error && !(error instanceof ApiError && error.isUnauthenticated)) {
     return (
       <div className="grid min-h-dvh place-items-center p-4">
         <ErrorState error={error} onRetry={() => refetch()} />

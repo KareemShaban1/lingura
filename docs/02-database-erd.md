@@ -127,7 +127,7 @@ erDiagram
 
 ## Later-phase tables (designed, not yet migrated)
 
-**Phase 2 – Curriculum/Exercises/Vocabulary/Grammar**
+**Phase 2 – Curriculum/Exercises/Vocabulary/Grammar** ✅ implemented (see [11-practice-and-srs.md](11-practice-and-srs.md)); as built: `translations`, `grammar_topics`, `grammar_topic_examples`, `grammar_mastery`, `vocabulary_words`, `vocabulary_forms`, `vocabulary_examples`, `vocabulary_relations`, `user_vocabulary`, `flashcard_reviews`, `vocabulary_collections`, `vocabulary_collection_items`, `learning_objectives`, `exercises`, `exercise_objectives`, `exercise_questions`, `exercise_options`, `exercise_accepted_answers`, `exercise_attempts`, `exercise_answers`, `courses`, `course_units`, `lessons`, `lesson_objectives`, `lesson_words`, `lesson_exercises`, `lesson_progress`, `user_progress`; plus `learning_plan_items.lesson_id/exercise_id/topic` and `learning_sessions.activity_type`. Original design notes:
 `courses`(language_id, target_level range, status) → `course_levels` → `modules` → `lessons`(type, content blocks in `lesson_blocks` rows) → `learning_objectives`(+ `lesson_objectives` pivot).
 `exercises`(language_id, cefr_level_id, skill_id, type, instructions, difficulty, estimated_seconds, review_status) → `exercise_questions` → `exercise_options`; `exercise_objectives` pivot; `exercise_attempts` → `exercise_answers`(is_correct, score, feedback).
 `grammar_topics`(language_id, slug, cefr_level_id, parent_id) · `grammar_attempts` · `grammar_mastery`(profile, topic, mastery, last_practiced_at).

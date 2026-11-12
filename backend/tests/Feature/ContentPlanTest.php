@@ -53,6 +53,10 @@ class ContentPlanTest extends TestCase
         $this->assertSame('gustar', $weak->topic);
         $this->assertSame($topic->id, Exercise::find($weak->exercise_id)->grammar_topic_id, 'bound to an exercise on that topic');
         $this->assertSame(1, $items->where('activity_type', 'vocabulary_review')->count());
+        $this->assertSame('vocabulary', $items->firstWhere('activity_type', 'vocabulary_review')->skill->slug, 'item skill follows its content');
+        foreach ($items->whereNotNull('exercise_id') as $item) {
+            $this->assertSame(Exercise::find($item->exercise_id)->skill_id, $item->skill_id);
+        }
     }
 
     public function test_starting_a_bound_item_and_a_standalone_session(): void

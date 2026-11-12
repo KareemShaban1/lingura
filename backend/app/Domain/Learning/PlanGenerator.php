@@ -212,8 +212,16 @@ class PlanGenerator
         $level = $scale->byOrdinal($ordinal);
         $binding = $this->selector->bind($profile, $slug, $activity ?? self::ACTIVITY_BY_SKILL[$slug], $level->ordinal, $topic);
 
+        // The item's skill follows its content: a revision that retries a reading exercise is a reading item.
+        $skillId = match (true) {
+            $binding['activity_type'] === 'vocabulary_review' => $inputs->skills['vocabulary']['skill_id'],
+            $binding['exercise'] !== null => $binding['exercise']->skill_id,
+            default => $inputs->skills[$slug]['skill_id'],
+        };
+        $skillSlug = array_search($skillId, array_map(fn ($s) => $s['skill_id'], $inputs->skills), true) ?: $slug;
+
         return [
-            'skill_id' => $inputs->skills[$slug]['skill_id'],
+            'skill_id' => $skillId,
             'activity_type' => $binding['activity_type'],
             'topic' => $topic,
             'lesson_id' => $binding['lesson']?->id,
@@ -222,7 +230,7 @@ class PlanGenerator
             'reason_code' => $reason,
             'target_level_id' => $level->id,
             // Snapshot in the generation locale; the API re-renders in the reader's locale.
-            ...$this->text->render($binding['activity_type'], $slug, $level, $topic, $profile->targetLanguage, $binding['lesson'], $binding['exercise'], $locale),
+            ...$this->text->render($binding['activity_type'], $skillSlug, $level, $topic, $profile->targetLanguage, $binding['lesson'], $binding['exercise'], $locale),
         ];
     }
 }

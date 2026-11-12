@@ -34,7 +34,10 @@ export function Providers({ children }: { children: React.ReactNode }) {
           queries: {
             staleTime: 30_000,
             refetchOnWindowFocus: false,
-            retry: (count, error) => !(error instanceof ApiError && error.status >= 400 && error.status < 500) && count < 2,
+            // Client errors are final, except rate limiting (429), which is retried with backoff.
+            retry: (count, error) =>
+              error instanceof ApiError && error.status >= 400 && error.status < 500 ? error.status === 429 && count < 3 : count < 2,
+            retryDelay: (attempt) => Math.min(1000 * 2 ** attempt, 8000),
           },
         },
       }),

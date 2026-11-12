@@ -1,7 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { History, Pause, Play, RefreshCw, Sparkles } from "lucide-react";
+import Link from "next/link";
+import { BookOpen, History, Pause, Play, RefreshCw, Sparkles } from "lucide-react";
 import { Bar, BarChart, Cell, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import { toast } from "sonner";
 import { skillVar } from "@/components/skill";
@@ -97,7 +98,8 @@ export function LearningView() {
           <p className="text-sm text-muted-foreground">{f(t.learning.version, { n: version.version_number })} · {t.learning.trigger[version.trigger as keyof typeof t.learning.trigger] ?? version.trigger}</p>
           <h1 className="font-display text-3xl md:text-4xl">{t.learning.title}</h1>
         </div>
-        <div className="flex gap-2">
+        <div className="flex flex-wrap gap-2">
+          <Button asChild variant="outline"><Link href="/learning/courses"><BookOpen /> {t.courses.title}</Link></Button>
           {paused ? (
             <Button variant="outline" onClick={() => run("resume")} loading={action.isPending}><Play /> {t.learning.resume}</Button>
           ) : (

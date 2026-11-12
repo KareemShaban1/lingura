@@ -804,13 +804,21 @@
       "ليل"
      ]
     }
-   ]
+   ],
+   "title": {
+    "en": "Everyday words",
+    "ar": "كلمات يومية"
+   }
   },
   {
    "key": "ar-a1-order",
    "type": "ordering",
    "skill": "grammar",
    "level": "A1",
+   "title": {
+    "en": "Build simple sentences",
+    "ar": "كوّن جملًا بسيطة"
+   },
    "questions": [
     {
      "o": [
@@ -961,6 +969,10 @@
    "type": "dictation",
    "skill": "listening",
    "level": "A1",
+   "title": {
+    "en": "Short everyday sentences",
+    "ar": "جمل يومية قصيرة"
+   },
    "questions": [
     {
      "a": [
