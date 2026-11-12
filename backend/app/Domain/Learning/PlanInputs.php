@@ -2,6 +2,7 @@
 
 namespace App\Domain\Learning;
 
+use App\Domain\Courses\GrammarService;
 use App\Models\AssessmentAttempt;
 use App\Models\LearnerProfile;
 use App\Models\Skill;
@@ -57,10 +58,14 @@ final class PlanInputs
             ];
         }
 
-        $weakTopics = $latest
+        // Weak topics: practice evidence (low grammar mastery) first, then unexpected placement errors.
+        $practiceWeak = app(GrammarService::class)->weakTopics($profile)
+            ->map(fn ($m) => ['skill' => 'grammar', 'topic' => $m->topic->slug, 'source' => 'practice'])->all();
+        $assessmentWeak = $latest
             ? $latest->findings->where('code', 'topic_unexpected_errors')
-                ->map(fn ($f) => ['skill' => $f->skill?->slug ?? 'grammar', 'topic' => $f->detail])->values()->all()
+                ->map(fn ($f) => ['skill' => $f->skill?->slug ?? 'grammar', 'topic' => $f->detail, 'source' => 'assessment'])->values()->all()
             : [];
+        $weakTopics = collect([...$practiceWeak, ...$assessmentWeak])->unique('topic')->values()->all();
 
         $days = $profile->scheduleSlots->pluck('day_of_week')->map(fn ($d) => (int) $d)->sort()->values()->all();
         $baseline = $overall ?? 1;

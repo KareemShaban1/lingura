@@ -26,7 +26,11 @@ class PlanGenerator
         'writing' => 'writing_practice',
     ];
 
-    public function __construct(private readonly LearningEventRecorder $events, private readonly PlanText $text) {}
+    public function __construct(
+        private readonly LearningEventRecorder $events,
+        private readonly PlanText $text,
+        private readonly ContentSelector $selector,
+    ) {}
 
     public function generate(LearnerProfile $profile, string $trigger): LearningPlanVersion
     {
@@ -41,6 +45,7 @@ class PlanGenerator
                 ?? LearningPlan::create(['learner_profile_id' => $profile->id, 'status' => LearningPlan::STATUS_ACTIVE]);
 
             $inputs = PlanInputs::fromProfile($profile);
+            $this->selector->reset();
             $locale = $profile->user->profile?->interfaceLanguage?->code ?? 'en';
             $allocations = $this->allocate($inputs);
             $today = Carbon::now($inputs->timezone)->startOfDay();
@@ -121,7 +126,7 @@ class PlanGenerator
         $topics = $inputs->weakTopics;
         $items = [];
         $studyIndex = 0;
-        $languageName = $profile->targetLanguage->name;
+        $language = $profile->targetLanguage;
 
         for ($d = 0; $d < $horizon; $d++) {
             $date = $today->copy()->addDays($d);
@@ -141,8 +146,7 @@ class PlanGenerator
                 $push([
                     'skill_id' => null, 'activity_type' => 'placement_assessment', 'estimated_minutes' => $minutes,
                     'reason_code' => 'assessment_required', 'target_level_id' => null,
-                    'title' => $this->text->itemTitle('placement_assessment', null, null, null, $languageName, $locale),
-                    'objective' => $this->text->itemObjective('placement_assessment', null, null, null, null, $languageName, $locale),
+                    ...$this->text->render('placement_assessment', null, null, null, $language, locale: $locale),
                 ]);
                 $budget -= $minutes;
             }
@@ -150,7 +154,7 @@ class PlanGenerator
             if ($studyIndex % 2 === 1 && $practised !== [] && $budget >= 10) {
                 arsort($practised);
                 $slug = array_key_first($practised);
-                $push($this->practiceItem($slug, 'revision', 10, 'scheduled_revision', $inputs, $scale, $locale, $languageName));
+                $push($this->practiceItem($profile, $slug, 'revision', 10, 'scheduled_revision', $inputs, $scale, $locale));
                 $remaining[$slug] -= 10;
                 $budget -= 10;
             }
@@ -167,10 +171,12 @@ class PlanGenerator
                 }
 
                 $topic = null;
+                $reason = $allocations[$slug]['reason'];
                 if ($slug === 'grammar' && ($t = array_shift($topics))) {
                     $topic = $t['topic'];
+                    $reason = ($t['source'] ?? 'assessment') === 'practice' ? 'practice_topic_weakness' : 'assessment_topic_weakness';
                 }
-                $push($this->practiceItem($slug, null, $block, $topic ? 'assessment_topic_weakness' : $allocations[$slug]['reason'], $inputs, $scale, $locale, $languageName, $topic));
+                $push($this->practiceItem($profile, $slug, null, $block, $reason, $inputs, $scale, $locale, $topic));
 
                 $remaining[$slug] -= $block;
                 $practised[$slug] = ($practised[$slug] ?? 0) + $block;
@@ -200,22 +206,23 @@ class PlanGenerator
         return $best;
     }
 
-    private function practiceItem(string $slug, ?string $activity, int $minutes, string $reason, PlanInputs $inputs, CefrScale $scale, string $locale, string $languageName, ?string $topic = null): array
+    private function practiceItem(LearnerProfile $profile, string $slug, ?string $activity, int $minutes, string $reason, PlanInputs $inputs, CefrScale $scale, string $locale, ?string $topic = null): array
     {
         $ordinal = $inputs->skills[$slug]['ordinal'] ?? $inputs->overallOrdinal ?? 1;
         $level = $scale->byOrdinal($ordinal);
-        $activity ??= self::ACTIVITY_BY_SKILL[$slug];
+        $binding = $this->selector->bind($profile, $slug, $activity ?? self::ACTIVITY_BY_SKILL[$slug], $level->ordinal, $topic);
 
         return [
             'skill_id' => $inputs->skills[$slug]['skill_id'],
-            'activity_type' => $activity,
+            'activity_type' => $binding['activity_type'],
             'topic' => $topic,
+            'lesson_id' => $binding['lesson']?->id,
+            'exercise_id' => $binding['exercise']?->id,
             'estimated_minutes' => $minutes,
             'reason_code' => $reason,
             'target_level_id' => $level->id,
             // Snapshot in the generation locale; the API re-renders in the reader's locale.
-            'title' => $this->text->itemTitle($activity, $slug, $level->label, $topic, $languageName, $locale),
-            'objective' => $this->text->itemObjective($activity, $slug, $level->label, $level->ordinal, $topic, $languageName, $locale),
+            ...$this->text->render($binding['activity_type'], $slug, $level, $topic, $profile->targetLanguage, $binding['lesson'], $binding['exercise'], $locale),
         ];
     }
 }

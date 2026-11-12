@@ -1,0 +1,1194 @@
+{
+ "language": "ar",
+ "topics": [
+  {
+   "slug": "nominal_sentence",
+   "level": "A1",
+   "title": {
+    "en": "The nominal sentence",
+    "ar": "الجملة الاسمية"
+   },
+   "explanation": {
+    "en": "Arabic has no verb 'to be' in the present: a sentence can be just a subject and a description. أنا طالب = I am a student. The subject is usually definite or a pronoun.",
+    "ar": "لا يوجد في العربية فعل كينونة في الزمن الحاضر، فالجملة قد تتكون من مبتدأ وخبر فقط: أنا طالب. ويكون المبتدأ عادةً معرفة أو ضميرًا."
+   },
+   "examples": [
+    [
+     "أنا من مصر.",
+     "I am from Egypt."
+    ],
+    [
+     "البيت كبير.",
+     "The house is big."
+    ],
+    [
+     "نحن أصدقاء.",
+     "We are friends."
+    ]
+   ]
+  },
+  {
+   "slug": "gender_agreement",
+   "level": "A1",
+   "title": {
+    "en": "Gender agreement",
+    "ar": "المطابقة في التذكير والتأنيث"
+   },
+   "explanation": {
+    "en": "Most feminine nouns end in ة (taa marbuta). Adjectives and demonstratives agree with the noun: هذا بيت كبير but هذه مدينة كبيرة.",
+    "ar": "تنتهي معظم الأسماء المؤنثة بالتاء المربوطة (ة). وتتطابق الصفات وأسماء الإشارة مع الاسم: هذا بيت كبير، وهذه مدينة كبيرة."
+   },
+   "examples": [
+    [
+     "هذا كتاب جديد.",
+     "This is a new book."
+    ],
+    [
+     "هذه طاولة صغيرة.",
+     "This is a small table."
+    ],
+    [
+     "المدينة جميلة.",
+     "The city is beautiful."
+    ]
+   ]
+  },
+  {
+   "slug": "present_tense",
+   "level": "A1",
+   "title": {
+    "en": "The present tense (al-mudari')",
+    "ar": "الفعل المضارع"
+   },
+   "explanation": {
+    "en": "The present tense adds a prefix to the verb stem: أ for I, ت for you and she, ي for he, ن for we. درس → أدرس، تدرس، يدرس، ندرس.",
+    "ar": "يُصاغ الفعل المضارع بإضافة حرف في أوله: الهمزة للمتكلم، والتاء للمخاطب والغائبة، والياء للغائب، والنون للمتكلمين. مثال: درس ← أدرس، تدرس، يدرس، ندرس."
+   },
+   "examples": [
+    [
+     "أدرس العربية.",
+     "I study Arabic."
+    ],
+    [
+     "هي تعمل في متجر.",
+     "She works in a shop."
+    ],
+    [
+     "نحن نشتري الخبز.",
+     "We buy bread."
+    ]
+   ]
+  },
+  {
+   "slug": "idafa",
+   "level": "A1",
+   "title": {
+    "en": "The possessive construction (idafa)",
+    "ar": "الإضافة"
+   },
+   "explanation": {
+    "en": "To say 'the X of Y', put the two nouns side by side: the first has no ال and no tanween, the second is in the genitive. كتاب الطالب = the student's book.",
+    "ar": "للتعبير عن الملكية نضع اسمين متتاليين: الأول (المضاف) بلا «ال» وبلا تنوين، والثاني (المضاف إليه) مجرور. مثال: كتابُ الطالبِ."
+   },
+   "examples": [
+    [
+     "كتاب الطالب",
+     "the student's book"
+    ],
+    [
+     "بيت العائلة",
+     "the family home"
+    ],
+    [
+     "سوق المدينة",
+     "the city market"
+    ]
+   ]
+  }
+ ],
+ "words": [
+  {
+   "lemma": "مرحبا",
+   "pos": "interj",
+   "level": "A1",
+   "meaning": {
+    "en": "hello",
+    "ar": "مرحبًا"
+   },
+   "example": [
+    "مرحبا، كيف حالك؟",
+    "Hello, how are you?"
+   ],
+   "forms": [
+    "مرحبًا"
+   ]
+  },
+  {
+   "lemma": "مع السلامة",
+   "pos": "interj",
+   "level": "A1",
+   "meaning": {
+    "en": "goodbye",
+    "ar": "مع السلامة"
+   },
+   "example": [
+    "مع السلامة، أراك غدًا.",
+    "Goodbye, see you tomorrow."
+   ]
+  },
+  {
+   "lemma": "شكرا",
+   "pos": "interj",
+   "level": "A1",
+   "meaning": {
+    "en": "thank you",
+    "ar": "شكرًا"
+   },
+   "example": [
+    "شكرا جزيلا!",
+    "Thank you very much!"
+   ],
+   "forms": [
+    "شكرًا"
+   ]
+  },
+  {
+   "lemma": "صديق",
+   "pos": "noun",
+   "level": "A1",
+   "meaning": {
+    "en": "friend",
+    "ar": "صديق"
+   },
+   "example": [
+    "صديقي يسكن في دبي.",
+    "My friend lives in Dubai."
+   ],
+   "forms": [
+    "صديق",
+    "الصديق",
+    "أصدقاء",
+    "الأصدقاء",
+    "صديقة",
+    "الصديقة",
+    "صديقي",
+    "صديقتي"
+   ],
+   "gender": "m"
+  },
+  {
+   "lemma": "بيت",
+   "pos": "noun",
+   "level": "A1",
+   "meaning": {
+    "en": "house, home",
+    "ar": "بيت"
+   },
+   "example": [
+    "بيتي صغير.",
+    "My house is small."
+   ],
+   "forms": [
+    "بيت",
+    "البيت",
+    "بيوت",
+    "البيوت",
+    "بيتي"
+   ],
+   "gender": "m"
+  },
+  {
+   "lemma": "عائلة",
+   "pos": "noun",
+   "level": "A1",
+   "meaning": {
+    "en": "family",
+    "ar": "عائلة"
+   },
+   "example": [
+    "عائلتي كبيرة.",
+    "My family is big."
+   ],
+   "forms": [
+    "عائلة",
+    "العائلة",
+    "عائلات",
+    "العائلات",
+    "عائلتي"
+   ],
+   "gender": "f"
+  },
+  {
+   "lemma": "كتاب",
+   "pos": "noun",
+   "level": "A1",
+   "meaning": {
+    "en": "book",
+    "ar": "كتاب"
+   },
+   "example": [
+    "أقرأ كتابًا.",
+    "I'm reading a book."
+   ],
+   "forms": [
+    "كتاب",
+    "الكتاب",
+    "كتب",
+    "الكتب",
+    "كتابا",
+    "كتابًا"
+   ],
+   "gender": "m"
+  },
+  {
+   "lemma": "طاولة",
+   "pos": "noun",
+   "level": "A1",
+   "meaning": {
+    "en": "table",
+    "ar": "طاولة"
+   },
+   "example": [
+    "القهوة على الطاولة.",
+    "The coffee is on the table."
+   ],
+   "forms": [
+    "طاولة",
+    "الطاولة"
+   ],
+   "gender": "f"
+  },
+  {
+   "lemma": "قهوة",
+   "pos": "noun",
+   "level": "A1",
+   "meaning": {
+    "en": "coffee",
+    "ar": "قهوة"
+   },
+   "example": [
+    "أشرب القهوة في الصباح.",
+    "I drink coffee in the morning."
+   ],
+   "forms": [
+    "قهوة",
+    "القهوة"
+   ],
+   "gender": "f"
+  },
+  {
+   "lemma": "ماء",
+   "pos": "noun",
+   "level": "A1",
+   "meaning": {
+    "en": "water",
+    "ar": "ماء"
+   },
+   "example": [
+    "أريد كأس ماء.",
+    "I'd like a glass of water."
+   ],
+   "forms": [
+    "ماء",
+    "الماء",
+    "ماءً"
+   ],
+   "gender": "m"
+  },
+  {
+   "lemma": "خبز",
+   "pos": "noun",
+   "level": "A1",
+   "meaning": {
+    "en": "bread",
+    "ar": "خبز"
+   },
+   "example": [
+    "أشتري الخبز كل يوم.",
+    "I buy bread every day."
+   ],
+   "forms": [
+    "خبز",
+    "الخبز"
+   ],
+   "gender": "m"
+  },
+  {
+   "lemma": "عمل",
+   "pos": "noun",
+   "level": "A1",
+   "meaning": {
+    "en": "work, job",
+    "ar": "عمل"
+   },
+   "example": [
+    "عملي ممتع.",
+    "My job is interesting."
+   ],
+   "forms": [
+    "عمل",
+    "العمل",
+    "عملي"
+   ],
+   "gender": "m"
+  },
+  {
+   "lemma": "مدينة",
+   "pos": "noun",
+   "level": "A1",
+   "meaning": {
+    "en": "city",
+    "ar": "مدينة"
+   },
+   "example": [
+    "القاهرة مدينة كبيرة.",
+    "Cairo is a big city."
+   ],
+   "forms": [
+    "مدينة",
+    "المدينة",
+    "مدن",
+    "المدن"
+   ],
+   "gender": "f"
+  },
+  {
+   "lemma": "يوم",
+   "pos": "noun",
+   "level": "A1",
+   "meaning": {
+    "en": "day",
+    "ar": "يوم"
+   },
+   "example": [
+    "اليوم يوم جميل.",
+    "Today is a lovely day."
+   ],
+   "forms": [
+    "يوم",
+    "اليوم",
+    "أيام",
+    "الأيام"
+   ],
+   "gender": "m"
+  },
+  {
+   "lemma": "ليل",
+   "pos": "noun",
+   "level": "A1",
+   "meaning": {
+    "en": "night",
+    "ar": "ليل"
+   },
+   "example": [
+    "أدرس في الليل.",
+    "I study at night."
+   ],
+   "forms": [
+    "ليل",
+    "الليل",
+    "ليلة",
+    "الليلة"
+   ],
+   "gender": "m"
+  },
+  {
+   "lemma": "كبير",
+   "pos": "adj",
+   "level": "A1",
+   "meaning": {
+    "en": "big",
+    "ar": "كبير"
+   },
+   "example": [
+    "هذا بيت كبير.",
+    "This is a big house."
+   ],
+   "forms": [
+    "كبير",
+    "الكبير",
+    "كبيرة",
+    "الكبيرة",
+    "كبار",
+    "الكبار"
+   ],
+   "ant": [
+    "صغير"
+   ]
+  },
+  {
+   "lemma": "صغير",
+   "pos": "adj",
+   "level": "A1",
+   "meaning": {
+    "en": "small",
+    "ar": "صغير"
+   },
+   "example": [
+    "عندي قطة صغيرة.",
+    "I have a small cat."
+   ],
+   "forms": [
+    "صغير",
+    "الصغير",
+    "صغيرة",
+    "الصغيرة",
+    "صغار",
+    "الصغار"
+   ],
+   "ant": [
+    "كبير"
+   ]
+  },
+  {
+   "lemma": "جيد",
+   "pos": "adj",
+   "level": "A1",
+   "meaning": {
+    "en": "good",
+    "ar": "جيد"
+   },
+   "example": [
+    "هذا كتاب جيد جدًا.",
+    "This is a very good book."
+   ],
+   "forms": [
+    "جيد",
+    "الجيد",
+    "جيدة",
+    "الجيدة"
+   ],
+   "ant": [
+    "سيئ"
+   ]
+  },
+  {
+   "lemma": "تكلّم",
+   "pos": "verb",
+   "level": "A1",
+   "meaning": {
+    "en": "to speak",
+    "ar": "يتكلّم"
+   },
+   "example": [
+    "أتكلّم العربية والإنجليزية.",
+    "I speak Arabic and English."
+   ],
+   "forms": [
+    "أتكلم",
+    "تتكلم",
+    "يتكلم",
+    "نتكلم",
+    "يتكلمون",
+    "تكلم"
+   ]
+  },
+  {
+   "lemma": "عمل",
+   "pos": "verb",
+   "level": "A1",
+   "meaning": {
+    "en": "to work",
+    "ar": "يعمل"
+   },
+   "example": [
+    "تعمل في مستشفى.",
+    "She works in a hospital."
+   ],
+   "forms": [
+    "أعمل",
+    "تعمل",
+    "يعمل",
+    "نعمل",
+    "يعملون"
+   ]
+  },
+  {
+   "lemma": "درس",
+   "pos": "verb",
+   "level": "A1",
+   "meaning": {
+    "en": "to study",
+    "ar": "يدرس"
+   },
+   "example": [
+    "ندرس معًا.",
+    "We study together."
+   ],
+   "forms": [
+    "أدرس",
+    "تدرس",
+    "يدرس",
+    "ندرس",
+    "يدرسون"
+   ]
+  },
+  {
+   "lemma": "اشترى",
+   "pos": "verb",
+   "level": "A1",
+   "meaning": {
+    "en": "to buy",
+    "ar": "يشتري"
+   },
+   "example": [
+    "أشتري الفاكهة من السوق.",
+    "I buy fruit at the market."
+   ],
+   "forms": [
+    "أشتري",
+    "تشتري",
+    "يشتري",
+    "نشتري",
+    "يشترون"
+   ]
+  },
+  {
+   "lemma": "سوق",
+   "pos": "noun",
+   "level": "A1",
+   "meaning": {
+    "en": "market",
+    "ar": "سوق"
+   },
+   "example": [
+    "يفتح السوق في الثامنة.",
+    "The market opens at eight."
+   ],
+   "forms": [
+    "سوق",
+    "السوق",
+    "أسواق",
+    "الأسواق"
+   ],
+   "gender": "m"
+  },
+  {
+   "lemma": "متجر",
+   "pos": "noun",
+   "level": "A1",
+   "meaning": {
+    "en": "shop",
+    "ar": "متجر"
+   },
+   "example": [
+    "المتجر مغلق.",
+    "The shop is closed."
+   ],
+   "forms": [
+    "متجر",
+    "المتجر",
+    "متاجر",
+    "المتاجر"
+   ],
+   "gender": "m"
+  }
+ ],
+ "exercises": [
+  {
+   "key": "ar-a1-nominal-mcq",
+   "type": "mcq",
+   "skill": "grammar",
+   "level": "A1",
+   "questions": [
+    {
+     "p": "أنا ___ القاهرة.",
+     "o": [
+      "من",
+      "عن",
+      "على",
+      "إلى"
+     ]
+    },
+    {
+     "p": "___ طالبٌ.",
+     "o": [
+      "أنا",
+      "أنتِ",
+      "هي",
+      "نحن"
+     ]
+    },
+    {
+     "p": "نحن ___.",
+     "o": [
+      "أصدقاء",
+      "صديقٌ",
+      "صديقةٌ",
+      "مدينةٌ"
+     ]
+    },
+    {
+     "p": "هذه ___ كبيرة.",
+     "o": [
+      "مدينة",
+      "كتاب",
+      "بيت",
+      "يوم"
+     ]
+    }
+   ],
+   "topic": "nominal_sentence"
+  },
+  {
+   "key": "ar-a1-gender-mcq",
+   "type": "mcq",
+   "skill": "grammar",
+   "level": "A1",
+   "questions": [
+    {
+     "p": "البيتُ ___.",
+     "o": [
+      "كبيرٌ",
+      "كبيرةٌ",
+      "كبيرون",
+      "كبيرات"
+     ]
+    },
+    {
+     "p": "المدينةُ ___.",
+     "o": [
+      "جميلةٌ",
+      "جميلٌ",
+      "جميلون",
+      "جمال"
+     ]
+    },
+    {
+     "p": "هذا ___ جديد.",
+     "o": [
+      "كتاب",
+      "طاولة",
+      "مدينة",
+      "عائلة"
+     ]
+    },
+    {
+     "p": "هذه ___ صغيرة.",
+     "o": [
+      "طاولة",
+      "كتاب",
+      "بيت",
+      "خبز"
+     ]
+    }
+   ],
+   "topic": "gender_agreement"
+  },
+  {
+   "key": "ar-a1-present-cloze",
+   "type": "cloze",
+   "skill": "grammar",
+   "level": "A1",
+   "topic": "present_tense",
+   "questions": [
+    {
+     "p": "أنا ___ (درس) العربية.",
+     "a": [
+      "أدرس"
+     ]
+    },
+    {
+     "p": "هي ___ (عمل) في متجر.",
+     "a": [
+      "تعمل"
+     ]
+    },
+    {
+     "p": "نحن ___ (اشترى) الخبز كل يوم.",
+     "a": [
+      "نشتري"
+     ]
+    },
+    {
+     "p": "هو ___ (تكلّم) الإنجليزية.",
+     "a": [
+      "يتكلم"
+     ]
+    }
+   ]
+  },
+  {
+   "key": "ar-a1-idafa-mcq",
+   "type": "mcq",
+   "skill": "grammar",
+   "level": "A1",
+   "questions": [
+    {
+     "p": "بيتُ ___ كبير.",
+     "o": [
+      "العائلةِ",
+      "العائلةُ",
+      "العائلةَ",
+      "عائلةٌ"
+     ]
+    },
+    {
+     "p": "هذا ___ الطالب.",
+     "o": [
+      "كتابُ",
+      "الكتابُ",
+      "كتابٌ",
+      "الكتابِ"
+     ]
+    },
+    {
+     "p": "سوقُ ___ قريب.",
+     "o": [
+      "المدينةِ",
+      "المدينةُ",
+      "المدينةَ",
+      "مدينةٌ"
+     ]
+    },
+    {
+     "p": "أشربُ فنجانَ ___.",
+     "o": [
+      "قهوةٍ",
+      "قهوةٌ",
+      "القهوةُ",
+      "قهوةً"
+     ]
+    }
+   ],
+   "topic": "idafa"
+  },
+  {
+   "key": "ar-a1-vocab-mcq",
+   "type": "mcq",
+   "skill": "vocabulary",
+   "level": "A1",
+   "questions": [
+    {
+     "p": "أشرب كأسًا من ___.",
+     "o": [
+      "الماء",
+      "الخبز",
+      "الطاولة",
+      "الكتاب"
+     ]
+    },
+    {
+     "p": "عكس «كبير» هو ___.",
+     "o": [
+      "صغير",
+      "جيد",
+      "طويل",
+      "جديد"
+     ]
+    },
+    {
+     "p": "أشتري الفاكهة من ___.",
+     "o": [
+      "السوق",
+      "الكتاب",
+      "الليل",
+      "العمل"
+     ]
+    },
+    {
+     "p": "أقرأ ___ قبل النوم.",
+     "o": [
+      "كتابًا",
+      "خبزًا",
+      "ماءً",
+      "يومًا"
+     ]
+    },
+    {
+     "p": "في الصباح أشرب فنجان ___.",
+     "o": [
+      "قهوة",
+      "طاولة",
+      "مدينة",
+      "ليل"
+     ]
+    }
+   ]
+  },
+  {
+   "key": "ar-a1-order",
+   "type": "ordering",
+   "skill": "grammar",
+   "level": "A1",
+   "questions": [
+    {
+     "o": [
+      "أنا",
+      "من",
+      "مصر"
+     ]
+    },
+    {
+     "o": [
+      "البيت",
+      "كبير",
+      "جدا"
+     ]
+    },
+    {
+     "o": [
+      "هي",
+      "تعمل",
+      "في",
+      "متجر"
+     ]
+    }
+   ]
+  },
+  {
+   "key": "ar-a1-read-1",
+   "type": "reading",
+   "skill": "reading",
+   "level": "A1",
+   "title": {
+    "en": "Layla's family",
+    "ar": "عائلة ليلى"
+   },
+   "text": "اسمي ليلى وأسكن في عمّان مع عائلتي. يعمل أبي في مستشفى وأمي معلمة. عندي أخ صغير اسمه سامي. يوم السبت نشتري الخبز والفاكهة من السوق.",
+   "questions": [
+    {
+     "p": "أين تسكن ليلى؟",
+     "o": [
+      "في عمّان",
+      "في القاهرة",
+      "في مستشفى",
+      "في السوق"
+     ]
+    },
+    {
+     "p": "ماذا تعمل أم ليلى؟",
+     "o": [
+      "هي معلمة",
+      "تعمل في مستشفى",
+      "تعمل في السوق",
+      "هي طالبة"
+     ]
+    },
+    {
+     "p": "ماذا يشترون يوم السبت؟",
+     "o": [
+      "الخبز والفاكهة",
+      "كتبًا",
+      "القهوة والماء",
+      "ملابس"
+     ]
+    }
+   ]
+  },
+  {
+   "key": "ar-a2-read-2",
+   "type": "reading",
+   "skill": "reading",
+   "level": "A2",
+   "title": {
+    "en": "A new job",
+    "ar": "عمل جديد"
+   },
+   "text": "بدأ خالد عملًا جديدًا يوم الاثنين. كان يعمل من قبل في متجر صغير، لكنه الآن يعمل في مكتب في وسط المدينة. في اليوم الأول كان متوترًا، لكن زملاءه كانوا لطفاء جدًا. الآن يذهب إلى العمل بالمترو ويستغرق الطريق عشرين دقيقة.",
+   "questions": [
+    {
+     "p": "أين كان خالد يعمل من قبل؟",
+     "o": [
+      "في متجر صغير",
+      "في مكتب",
+      "في المترو",
+      "في وسط المدينة"
+     ]
+    },
+    {
+     "p": "كيف كان يشعر في اليوم الأول؟",
+     "o": [
+      "متوترًا",
+      "متعبًا",
+      "ضجرًا",
+      "غاضبًا"
+     ]
+    },
+    {
+     "p": "كم يستغرق الطريق إلى العمل؟",
+     "o": [
+      "عشرين دقيقة",
+      "ساعة",
+      "عشر دقائق",
+      "ساعتين"
+     ]
+    }
+   ]
+  },
+  {
+   "key": "ar-a1-listen-1",
+   "type": "listening",
+   "skill": "listening",
+   "level": "A1",
+   "title": {
+    "en": "At the café",
+    "ar": "في المقهى"
+   },
+   "text": "صباح الخير. أريد فنجان قهوة بالحليب وشطيرة جبن من فضلك. كم الحساب؟ الحساب أربعة دنانير ونصف.",
+   "questions": [
+    {
+     "p": "ماذا يشرب الشخص؟",
+     "o": [
+      "قهوة بالحليب",
+      "شايًا",
+      "ماءً",
+      "عصير برتقال"
+     ]
+    },
+    {
+     "p": "ماذا يأكل؟",
+     "o": [
+      "شطيرة جبن",
+      "فاكهة",
+      "سلطة",
+      "لا شيء"
+     ]
+    },
+    {
+     "p": "كم الحساب؟",
+     "o": [
+      "أربعة دنانير ونصف",
+      "خمسة دنانير",
+      "أربعة دنانير",
+      "ثلاثة دنانير ونصف"
+     ]
+    }
+   ]
+  },
+  {
+   "key": "ar-a1-dictation",
+   "type": "dictation",
+   "skill": "listening",
+   "level": "A1",
+   "questions": [
+    {
+     "a": [
+      "اسمي سارة وأنا من الأردن."
+     ]
+    },
+    {
+     "a": [
+      "بيتي صغير."
+     ]
+    },
+    {
+     "a": [
+      "نحن ندرس في الليل."
+     ]
+    }
+   ]
+  }
+ ],
+ "course": {
+  "slug": "ar-foundations",
+  "level_from": "PRE_A1",
+  "level_to": "A2",
+  "title": {
+   "en": "Arabic foundations",
+   "ar": "أساسيات العربية"
+  },
+  "description": {
+   "en": "Your first steps in Arabic: introductions, everyday objects, routines and likes.",
+   "ar": "خطواتك الأولى في العربية: التعارف والأشياء اليومية والروتين وما تحبه."
+  },
+  "units": [
+   {
+    "title": {
+     "en": "First steps",
+     "ar": "الخطوات الأولى"
+    },
+    "lessons": [
+     {
+      "key": "ar-u1-l1",
+      "skill": "grammar",
+      "level": "A1",
+      "topic": "nominal_sentence",
+      "minutes": 12,
+      "title": {
+       "en": "Who are you?",
+       "ar": "من أنت؟"
+      },
+      "intro": {
+       "en": "Introduce yourself and others, and learn your first greetings.",
+       "ar": "عرّف بنفسك وبالآخرين وتعلّم أولى عبارات التحية."
+      },
+      "objectives": [
+       {
+        "code": "ar.a1.introduce",
+        "skill": "speaking",
+        "text": {
+         "en": "Introduce yourself and say where you are from",
+         "ar": "التعريف بنفسك وذكر بلدك"
+        }
+       },
+       {
+        "code": "ar.a1.nominal_sentence",
+        "skill": "grammar",
+        "text": {
+         "en": "Use the key verb or structure for describing people",
+         "ar": "استخدام التركيب الأساسي لوصف الأشخاص"
+        }
+       }
+      ],
+      "words": [
+       "مرحبا",
+       "مع السلامة",
+       "شكرا",
+       "صديق",
+       "عائلة",
+       "مدينة"
+      ],
+      "exercises": [
+       "ar-a1-nominal-mcq",
+       "ar-a1-order"
+      ]
+     },
+     {
+      "key": "ar-u1-l2",
+      "skill": "grammar",
+      "level": "A1",
+      "topic": "gender_agreement",
+      "minutes": 12,
+      "title": {
+       "en": "Things around you",
+       "ar": "الأشياء من حولك"
+      },
+      "intro": {
+       "en": "Name everyday objects and describe them correctly.",
+       "ar": "سمِّ الأشياء اليومية وصِفها بشكل صحيح."
+      },
+      "objectives": [
+       {
+        "code": "ar.a1.gender_agreement",
+        "skill": "grammar",
+        "text": {
+         "en": "Match nouns with the right articles and adjectives",
+         "ar": "مطابقة الأسماء مع أدوات التعريف والصفات الصحيحة"
+        }
+       },
+       {
+        "code": "ar.a1.objects",
+        "skill": "vocabulary",
+        "text": {
+         "en": "Name common objects, food and drinks",
+         "ar": "تسمية الأشياء والأطعمة والمشروبات الشائعة"
+        }
+       }
+      ],
+      "words": [
+       "بيت",
+       "كتاب",
+       "طاولة",
+       "قهوة",
+       "ماء",
+       "خبز",
+       "كبير",
+       "صغير"
+      ],
+      "exercises": [
+       "ar-a1-gender-mcq",
+       "ar-a1-vocab-mcq"
+      ]
+     }
+    ]
+   },
+   {
+    "title": {
+     "en": "Everyday life",
+     "ar": "الحياة اليومية"
+    },
+    "lessons": [
+     {
+      "key": "ar-u2-l1",
+      "skill": "grammar",
+      "level": "A1",
+      "topic": "present_tense",
+      "minutes": 15,
+      "title": {
+       "en": "What do you do?",
+       "ar": "ماذا تفعل؟"
+      },
+      "intro": {
+       "en": "Talk about work, study and daily routines in the present tense.",
+       "ar": "تحدّث عن العمل والدراسة والروتين اليومي بصيغة المضارع."
+      },
+      "objectives": [
+       {
+        "code": "ar.a1.routine",
+        "skill": "speaking",
+        "text": {
+         "en": "Describe your daily routine",
+         "ar": "وصف روتينك اليومي"
+        }
+       },
+       {
+        "code": "ar.a1.read_family",
+        "skill": "reading",
+        "text": {
+         "en": "Understand a short text about a family",
+         "ar": "فهم نص قصير عن عائلة"
+        }
+       }
+      ],
+      "words": [
+       "تكلّم",
+       "درس",
+       "اشترى",
+       "يوم",
+       "ليل"
+      ],
+      "exercises": [
+       "ar-a1-present-cloze",
+       "ar-a1-read-1",
+       "ar-a1-dictation"
+      ]
+     },
+     {
+      "key": "ar-u2-l2",
+      "skill": "grammar",
+      "level": "A1",
+      "topic": "idafa",
+      "minutes": 15,
+      "title": {
+       "en": "At the café and the market",
+       "ar": "في المقهى والسوق"
+      },
+      "intro": {
+       "en": "Say who things belong to and understand a simple order in a café.",
+       "ar": "عبّر عن الملكية وافهم طلبًا بسيطًا في مقهى."
+      },
+      "objectives": [
+       {
+        "code": "ar.a1.idafa",
+        "skill": "grammar",
+        "text": {
+         "en": "Use the lesson's grammar to talk about everyday things",
+         "ar": "استخدام قاعدة الدرس للحديث عن الأمور اليومية"
+        }
+       },
+       {
+        "code": "ar.a1.cafe",
+        "skill": "listening",
+        "text": {
+         "en": "Understand a simple order in a café",
+         "ar": "فهم طلب بسيط في مقهى"
+        }
+       }
+      ],
+      "words": [
+       "جيد",
+       "سوق",
+       "متجر"
+      ],
+      "exercises": [
+       "ar-a1-idafa-mcq",
+       "ar-a1-listen-1",
+       "ar-a2-read-2"
+      ]
+     }
+    ]
+   }
+  ]
+ }
+}

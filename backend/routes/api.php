@@ -3,11 +3,15 @@
 use App\Http\Controllers\Api\AssessmentController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\CatalogController;
+use App\Http\Controllers\Api\CourseController;
+use App\Http\Controllers\Api\GrammarController;
 use App\Http\Controllers\Api\LearnerProfileController;
 use App\Http\Controllers\Api\MeController;
 use App\Http\Controllers\Api\MediaController;
 use App\Http\Controllers\Api\OpenApiController;
 use App\Http\Controllers\Api\PlanController;
+use App\Http\Controllers\Api\PracticeController;
+use App\Http\Controllers\Api\VocabularyController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('v1')->group(function () {
@@ -71,5 +75,35 @@ Route::prefix('v1')->group(function () {
         Route::post('plan-items/{planItem}/skip', [PlanController::class, 'skipItem']);
         Route::get('learning-sessions/{session}', [PlanController::class, 'showSession']);
         Route::post('learning-sessions/{session}/complete', [PlanController::class, 'completeSession']);
+        Route::post('learner-profiles/{learnerProfile}/learning-sessions', [PlanController::class, 'startSession']);
+
+        // Phase 2 — courses, lessons, grammar
+        Route::get('learner-profiles/{learnerProfile}/courses', [CourseController::class, 'index']);
+        Route::get('learner-profiles/{learnerProfile}/lessons/{lesson}', [CourseController::class, 'show']);
+        Route::post('learner-profiles/{learnerProfile}/lessons/{lesson}/complete', [CourseController::class, 'complete']);
+        Route::get('learner-profiles/{learnerProfile}/grammar-topics', [GrammarController::class, 'index']);
+        Route::get('learner-profiles/{learnerProfile}/grammar-topics/{slug}', [GrammarController::class, 'show']);
+
+        // Phase 2 — practice exercises
+        Route::get('learner-profiles/{learnerProfile}/exercises', [PracticeController::class, 'index']);
+        Route::post('learner-profiles/{learnerProfile}/exercises/{exercise}/attempts', [PracticeController::class, 'start']);
+        Route::get('exercise-attempts/{exerciseAttempt}', [PracticeController::class, 'show']);
+        Route::post('exercise-attempts/{exerciseAttempt}/answers', [PracticeController::class, 'answer']);
+        Route::post('exercise-attempts/{exerciseAttempt}/finish', [PracticeController::class, 'finish']);
+        Route::get('exercise-attempts/{exerciseAttempt}/audio', [PracticeController::class, 'audio']);
+
+        // Phase 2 — vocabulary & spaced repetition
+        Route::get('learner-profiles/{learnerProfile}/vocabulary', [VocabularyController::class, 'index']);
+        Route::post('learner-profiles/{learnerProfile}/vocabulary', [VocabularyController::class, 'store']);
+        Route::get('learner-profiles/{learnerProfile}/vocabulary/summary', [VocabularyController::class, 'summary']);
+        Route::get('learner-profiles/{learnerProfile}/vocabulary/review-queue', [VocabularyController::class, 'queue']);
+        Route::get('learner-profiles/{learnerProfile}/vocabulary/lookup', [VocabularyController::class, 'lookup']);
+        Route::post('learner-profiles/{learnerProfile}/vocabulary/extract', [VocabularyController::class, 'extract']);
+        Route::post('user-vocabulary/{userVocabulary}/reviews', [VocabularyController::class, 'review']);
+        Route::delete('user-vocabulary/{userVocabulary}', [VocabularyController::class, 'destroy']);
+        Route::get('learner-profiles/{learnerProfile}/vocabulary-collections', [VocabularyController::class, 'collections']);
+        Route::post('learner-profiles/{learnerProfile}/vocabulary-collections', [VocabularyController::class, 'createCollection']);
+        Route::delete('vocabulary-collections/{collection}', [VocabularyController::class, 'deleteCollection']);
+        Route::post('vocabulary-collections/{collection}/items', [VocabularyController::class, 'toggleCollectionItem']);
     });
 });

@@ -10,7 +10,7 @@ class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
-        $this->call([ReferenceDataSeeder::class, ItemBankSeeder::class]);
+        $this->call([ReferenceDataSeeder::class, ItemBankSeeder::class, ContentSeeder::class]);
 
         if (app()->environment('local')) {
             $admin = User::firstOrCreate(

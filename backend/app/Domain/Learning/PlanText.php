@@ -3,54 +3,86 @@
 namespace App\Domain\Learning;
 
 use App\Domain\Assessment\Engine\CefrScale;
+use App\Models\CefrLevel;
+use App\Models\Exercise;
+use App\Models\GrammarTopic;
+use App\Models\Language;
 use App\Models\LearningPlanItem;
 use App\Models\LearningPlanVersion;
+use App\Models\Lesson;
 use Illuminate\Support\Str;
 
 /**
- * Single source for learner-facing plan text. Text is rendered in the *reader's* locale at read time,
- * from the stored structured fields (activity type, skill, level, topic), so switching interface language
- * re-localises existing plans. The text stored at generation time is kept as a historical snapshot.
+ * Single source for learner-facing plan text. Text is rendered in the *reader's* locale at read time from
+ * structured fields (activity, skill, level, topic, bound content), so switching interface language
+ * re-localises existing plans. Text stored at generation time is kept only as a historical snapshot.
  */
 class PlanText
 {
-    public function itemTitle(string $activity, ?string $skill, ?string $levelLabel, ?string $topic, string $languageName, ?string $locale = null): string
+    /** @return array{title: string, objective: string} */
+    public function render(string $activity, ?string $skill, ?CefrLevel $level, ?string $topic, Language $language, ?Lesson $lesson = null, ?Exercise $exercise = null, ?string $locale = null): array
     {
-        $params = $this->params($skill, $levelLabel, $topic, $languageName, $locale);
+        $params = [
+            'level' => $level?->label ?? '',
+            'language' => $language->name,
+            'skill' => $skill ? __("plan.skills.{$skill}", [], $locale) : '',
+            'topic' => $topic ? $this->topicName($language, $topic, $locale) : '',
+        ];
+        $band = ($level?->ordinal ?? 1) <= 2 ? 'a' : (($level?->ordinal ?? 1) <= 4 ? 'b' : 'c');
 
-        return match (true) {
-            $activity === 'placement_assessment' => __('plan.items.placement_assessment.title', [], $locale),
-            $topic !== null => __('plan.items.grammar_topic.title', $params, $locale),
-            default => __("plan.items.{$activity}.title", $params, $locale),
-        };
-    }
+        if ($lesson) {
+            $lesson->loadMissing('translations');
 
-    public function itemObjective(string $activity, ?string $skill, ?string $levelLabel, ?int $levelOrdinal, ?string $topic, string $languageName, ?string $locale = null): string
-    {
-        $params = $this->params($skill, $levelLabel, $topic, $languageName, $locale);
-        $band = ($levelOrdinal ?? 1) <= 2 ? 'a' : (($levelOrdinal ?? 1) <= 4 ? 'b' : 'c');
+            return [
+                'title' => __('plan.items.lesson.title', ['title' => $lesson->translate('title', $locale)], $locale),
+                'objective' => (string) $lesson->translate('intro', $locale),
+            ];
+        }
+        if ($exercise) {
+            $exercise->loadMissing(['translations', 'grammarTopic.translations']);
+            $name = $exercise->translate('title', $locale)
+                ?? ($exercise->grammarTopic ? $exercise->grammarTopic->translate('title', $locale) : null)
+                ?? __("plan.skills.{$skill}", [], $locale);
 
-        return match (true) {
-            $activity === 'placement_assessment' => __('plan.items.placement_assessment.objective', [], $locale),
-            $activity === 'revision' => __('plan.items.revision.objective', $params, $locale),
-            $topic !== null => __('plan.items.grammar_topic.objective', $params, $locale),
-            default => __("plan.objectives.{$skill}.{$band}", $params, $locale),
-        };
-    }
-
-    public function forItem(LearningPlanItem $item, string $languageName, ?string $locale = null): array
-    {
-        $item->loadMissing(['skill', 'targetLevel']);
+            return [
+                'title' => __("plan.exercise_types.{$exercise->type}", ['name' => $name], $locale),
+                'objective' => __("plan.content.{$exercise->type}", $params, $locale),
+            ];
+        }
 
         return [
-            'title' => $this->itemTitle($item->activity_type, $item->skill?->slug, $item->targetLevel?->label, $item->topic, $languageName, $locale),
-            'objective' => $this->itemObjective($item->activity_type, $item->skill?->slug, $item->targetLevel?->label, $item->targetLevel?->ordinal, $item->topic, $languageName, $locale),
+            'title' => match (true) {
+                $activity === 'placement_assessment', $activity === 'vocabulary_review' => __("plan.items.{$activity}.title", [], $locale),
+                $topic !== null => __('plan.items.grammar_topic.title', $params, $locale),
+                default => __("plan.items.{$activity}.title", $params, $locale),
+            },
+            'objective' => match (true) {
+                $activity === 'placement_assessment', $activity === 'vocabulary_review' => __("plan.items.{$activity}.objective", [], $locale),
+                $activity === 'revision' => __('plan.items.revision.objective', $params, $locale),
+                $topic !== null => __('plan.items.grammar_topic.objective', $params, $locale),
+                default => __("plan.objectives.{$skill}.{$band}", $params, $locale),
+            },
         ];
     }
 
-    /**
-     * @param  array<string, array{minutes:int, reason:string}>  $allocations  ordered by priority
-     */
+    /** @return array{title: string, objective: string} */
+    public function forItem(LearningPlanItem $item, Language $language, ?string $locale = null): array
+    {
+        $item->loadMissing(['skill', 'targetLevel', 'lesson', 'exercise']);
+
+        return $this->render($item->activity_type, $item->skill?->slug, $item->targetLevel, $item->topic, $language, $item->lesson, $item->exercise, $locale);
+    }
+
+    public function topicName(Language $language, string $slug, ?string $locale = null): string
+    {
+        static $cache = [];
+        $key = $language->id.':'.$slug;
+        $cache[$key] ??= GrammarTopic::where('language_id', $language->id)->where('slug', $slug)->with('translations')->first() ?? false;
+
+        return $cache[$key] ? (string) $cache[$key]->translate('title', $locale) : Str::of($slug)->replace('_', ' ')->toString();
+    }
+
+    /** @param array<string, array{minutes:int, reason:string}> $allocations ordered by priority */
     public function rationale(bool $hasAssessment, ?int $overallOrdinal, bool $provisional, int $dailyMinutes, int $studyDays, array $allocations, ?string $locale = null): string
     {
         $lines = [];
@@ -90,15 +122,5 @@ class PlanText
             $allocations,
             $locale,
         );
-    }
-
-    private function params(?string $skill, ?string $levelLabel, ?string $topic, string $languageName, ?string $locale): array
-    {
-        return [
-            'level' => $levelLabel ?? '',
-            'language' => $languageName,
-            'skill' => $skill ? __("plan.skills.{$skill}", [], $locale) : '',
-            'topic' => $topic ? Str::of($topic)->replace('_', ' ')->toString() : '',
-        ];
     }
 }

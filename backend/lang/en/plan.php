@@ -13,6 +13,7 @@ return [
         'goal_priority' => 'it matters most for your goal',
         'balanced_maintenance' => 'it keeps your skills balanced',
         'assessment_topic_weakness' => 'your placement showed unexpected errors on this topic',
+        'practice_topic_weakness' => 'your recent practice shows this topic needs more work',
         'scheduled_revision' => 'spaced revision helps you retain what you practised',
         'assessment_required' => 'your plan needs placement results',
     ],
@@ -27,6 +28,11 @@ return [
         'placement_assessment' => [
             'title' => 'Take your placement assessment',
             'objective' => 'Answer adaptive questions so we can estimate each of your skills independently.',
+        ],
+        'lesson' => ['title' => 'Lesson: :title'],
+        'vocabulary_review' => [
+            'title' => 'Flashcard review',
+            'objective' => 'Review the words that are due today. Rate each card honestly — the schedule adapts to how well you remember.',
         ],
         'grammar_practice' => ['title' => 'Grammar practice (:level)'],
         'vocabulary_building' => ['title' => 'Vocabulary building (:level)'],
@@ -74,5 +80,21 @@ return [
             'b' => 'Write a :level email in :language (about 120 words) inviting a friend or colleague to an event.',
             'c' => 'Write a 250-word opinion paragraph in :language with a clear thesis, supporting points and a conclusion.',
         ],
+    ],
+    'exercise_types' => [
+        'mcq' => 'Practice: :name',
+        'cloze' => 'Fill in the blanks: :name',
+        'ordering' => 'Word order: :name',
+        'reading' => 'Reading: :name',
+        'listening' => 'Listening: :name',
+        'dictation' => 'Dictation: :name',
+    ],
+    'content' => [
+        'mcq' => 'Choose the right answers, then read the explanation for anything you missed.',
+        'cloze' => 'Type the missing words. Check the explanation for every mistake.',
+        'ordering' => 'Put the words in the right order to build correct :language sentences.',
+        'reading' => 'Read the text at your own pace, then answer the questions. We track your reading speed.',
+        'listening' => 'Listen as often as you need (slow it down if it helps), answer, then check the transcript.',
+        'dictation' => 'Listen and type exactly what you hear. You are scored on word accuracy.',
     ],
 ];

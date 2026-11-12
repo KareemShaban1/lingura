@@ -1,0 +1,1121 @@
+{
+ "language": "de",
+ "topics": [
+  {
+   "slug": "sein_present",
+   "level": "A1",
+   "title": {
+    "en": "The verb sein (present)",
+    "ar": "الفعل sein في المضارع"
+   },
+   "explanation": {
+    "en": "Use sein to say who someone is, where they are from and to describe them. Forms: ich bin, du bist, er/sie/es ist, wir sind, ihr seid, sie/Sie sind.",
+    "ar": "يُستخدم الفعل sein للتعريف بالشخص وبلده ووصفه. تصريفه: ich bin، du bist، er/sie/es ist، wir sind، ihr seid، sie/Sie sind."
+   },
+   "examples": [
+    [
+     "Ich bin aus Kairo.",
+     "I am from Cairo."
+    ],
+    [
+     "Sie ist Ärztin.",
+     "She is a doctor."
+    ],
+    [
+     "Wir sind Freunde.",
+     "We are friends."
+    ]
+   ]
+  },
+  {
+   "slug": "article_gender",
+   "level": "A1",
+   "title": {
+    "en": "Articles: der, die, das",
+    "ar": "أدوات التعريف der وdie وdas"
+   },
+   "explanation": {
+    "en": "German nouns have three genders: der (masculine), die (feminine), das (neuter). Learn every noun together with its article. Indefinite: ein (masculine/neuter), eine (feminine). Plural: die.",
+    "ar": "للأسماء الألمانية ثلاثة أجناس: der للمذكر وdie للمؤنث وdas للمحايد. احفظ كل اسم مع أداته. أداة التنكير: ein للمذكر والمحايد وeine للمؤنث. وفي الجمع: die."
+   },
+   "examples": [
+    [
+     "der Tisch",
+     "the table"
+    ],
+    [
+     "die Stadt",
+     "the city"
+    ],
+    [
+     "das Buch",
+     "the book"
+    ]
+   ]
+  },
+  {
+   "slug": "present_regular",
+   "level": "A1",
+   "title": {
+    "en": "Present tense of regular verbs",
+    "ar": "المضارع للأفعال المنتظمة"
+   },
+   "explanation": {
+    "en": "Take the stem and add -e, -st, -t, -en, -t, -en: lernen → ich lerne, du lernst, er lernt, wir lernen, ihr lernt, sie lernen. Some verbs change their vowel with du and er/sie/es: sprechen → du sprichst, er spricht.",
+    "ar": "خذ جذر الفعل وأضف -e، -st، -t، -en، -t، -en. مثال: lernen ← ich lerne، du lernst، er lernt، wir lernen. وبعض الأفعال يتغير حرفها المتحرك مع du وer/sie/es: sprechen ← du sprichst، er spricht."
+   },
+   "examples": [
+    [
+     "Ich lerne Deutsch.",
+     "I'm learning German."
+    ],
+    [
+     "Arbeitest du hier?",
+     "Do you work here?"
+    ],
+    [
+     "Er spricht Englisch.",
+     "He speaks English."
+    ]
+   ]
+  },
+  {
+   "slug": "gern_moegen",
+   "level": "A1",
+   "title": {
+    "en": "Likes with gern and mögen",
+    "ar": "التعبير عمّا تحبه بـ gern وmögen"
+   },
+   "explanation": {
+    "en": "Use a verb + gern to say you like doing something: Ich trinke gern Kaffee. Use mögen + noun to say you like something: Ich mag Pizza (ich mag, du magst, er mag, wir mögen).",
+    "ar": "استخدم الفعل مع gern لتقول إنك تحب فعل شيء: Ich trinke gern Kaffee. واستخدم mögen مع الاسم لتقول إنك تحب شيئًا: Ich mag Pizza (ich mag، du magst، er mag، wir mögen)."
+   },
+   "examples": [
+    [
+     "Ich trinke gern Kaffee.",
+     "I like drinking coffee."
+    ],
+    [
+     "Wir mögen Bücher.",
+     "We like books."
+    ],
+    [
+     "Spielst du gern Fußball?",
+     "Do you like playing football?"
+    ]
+   ]
+  }
+ ],
+ "words": [
+  {
+   "lemma": "hallo",
+   "pos": "interj",
+   "level": "A1",
+   "meaning": {
+    "en": "hello",
+    "ar": "مرحبًا"
+   },
+   "example": [
+    "Hallo, wie geht's?",
+    "Hello, how are you?"
+   ]
+  },
+  {
+   "lemma": "tschüss",
+   "pos": "interj",
+   "level": "A1",
+   "meaning": {
+    "en": "bye",
+    "ar": "مع السلامة"
+   },
+   "example": [
+    "Tschüss, bis morgen!",
+    "Bye, see you tomorrow!"
+   ]
+  },
+  {
+   "lemma": "danke",
+   "pos": "interj",
+   "level": "A1",
+   "meaning": {
+    "en": "thank you",
+    "ar": "شكرًا"
+   },
+   "example": [
+    "Danke schön!",
+    "Thank you very much!"
+   ]
+  },
+  {
+   "lemma": "Freund",
+   "pos": "noun",
+   "level": "A1",
+   "meaning": {
+    "en": "friend",
+    "ar": "صديق"
+   },
+   "example": [
+    "Mein Freund wohnt in Wien.",
+    "My friend lives in Vienna."
+   ],
+   "forms": [
+    "Freunde",
+    "Freundin",
+    "Freundinnen"
+   ],
+   "gender": "m"
+  },
+  {
+   "lemma": "Haus",
+   "pos": "noun",
+   "level": "A1",
+   "meaning": {
+    "en": "house",
+    "ar": "بيت"
+   },
+   "example": [
+    "Mein Haus ist klein.",
+    "My house is small."
+   ],
+   "forms": [
+    "Häuser",
+    "Hause"
+   ],
+   "gender": "n"
+  },
+  {
+   "lemma": "Familie",
+   "pos": "noun",
+   "level": "A1",
+   "meaning": {
+    "en": "family",
+    "ar": "عائلة"
+   },
+   "example": [
+    "Meine Familie ist groß.",
+    "My family is big."
+   ],
+   "forms": [
+    "Familien"
+   ],
+   "gender": "f"
+  },
+  {
+   "lemma": "Buch",
+   "pos": "noun",
+   "level": "A1",
+   "meaning": {
+    "en": "book",
+    "ar": "كتاب"
+   },
+   "example": [
+    "Ich lese ein Buch.",
+    "I'm reading a book."
+   ],
+   "forms": [
+    "Bücher"
+   ],
+   "gender": "n"
+  },
+  {
+   "lemma": "Tisch",
+   "pos": "noun",
+   "level": "A1",
+   "meaning": {
+    "en": "table",
+    "ar": "طاولة"
+   },
+   "example": [
+    "Der Kaffee steht auf dem Tisch.",
+    "The coffee is on the table."
+   ],
+   "forms": [
+    "Tische"
+   ],
+   "gender": "m"
+  },
+  {
+   "lemma": "Kaffee",
+   "pos": "noun",
+   "level": "A1",
+   "meaning": {
+    "en": "coffee",
+    "ar": "قهوة"
+   },
+   "example": [
+    "Ich trinke morgens Kaffee.",
+    "I drink coffee in the morning."
+   ],
+   "gender": "m"
+  },
+  {
+   "lemma": "Wasser",
+   "pos": "noun",
+   "level": "A1",
+   "meaning": {
+    "en": "water",
+    "ar": "ماء"
+   },
+   "example": [
+    "Ein Glas Wasser, bitte.",
+    "A glass of water, please."
+   ],
+   "gender": "n"
+  },
+  {
+   "lemma": "Brot",
+   "pos": "noun",
+   "level": "A1",
+   "meaning": {
+    "en": "bread",
+    "ar": "خبز"
+   },
+   "example": [
+    "Ich kaufe jeden Tag Brot.",
+    "I buy bread every day."
+   ],
+   "forms": [
+    "Brote"
+   ],
+   "gender": "n"
+  },
+  {
+   "lemma": "Arbeit",
+   "pos": "noun",
+   "level": "A1",
+   "meaning": {
+    "en": "work",
+    "ar": "عمل"
+   },
+   "example": [
+    "Meine Arbeit ist interessant.",
+    "My work is interesting."
+   ],
+   "gender": "f"
+  },
+  {
+   "lemma": "Stadt",
+   "pos": "noun",
+   "level": "A1",
+   "meaning": {
+    "en": "city, town",
+    "ar": "مدينة"
+   },
+   "example": [
+    "Berlin ist eine große Stadt.",
+    "Berlin is a big city."
+   ],
+   "forms": [
+    "Städte"
+   ],
+   "gender": "f"
+  },
+  {
+   "lemma": "Tag",
+   "pos": "noun",
+   "level": "A1",
+   "meaning": {
+    "en": "day",
+    "ar": "يوم"
+   },
+   "example": [
+    "Heute ist ein schöner Tag.",
+    "Today is a lovely day."
+   ],
+   "forms": [
+    "Tage"
+   ],
+   "gender": "m"
+  },
+  {
+   "lemma": "Nacht",
+   "pos": "noun",
+   "level": "A1",
+   "meaning": {
+    "en": "night",
+    "ar": "ليل"
+   },
+   "example": [
+    "Ich lerne in der Nacht.",
+    "I study at night."
+   ],
+   "forms": [
+    "Nächte"
+   ],
+   "gender": "f"
+  },
+  {
+   "lemma": "groß",
+   "pos": "adj",
+   "level": "A1",
+   "meaning": {
+    "en": "big, tall",
+    "ar": "كبير"
+   },
+   "example": [
+    "Das ist ein großes Haus.",
+    "That's a big house."
+   ],
+   "forms": [
+    "große",
+    "großen",
+    "großer",
+    "großes"
+   ],
+   "ant": [
+    "klein"
+   ]
+  },
+  {
+   "lemma": "klein",
+   "pos": "adj",
+   "level": "A1",
+   "meaning": {
+    "en": "small",
+    "ar": "صغير"
+   },
+   "example": [
+    "Ich habe einen kleinen Hund.",
+    "I have a small dog."
+   ],
+   "forms": [
+    "kleine",
+    "kleinen",
+    "kleiner",
+    "kleines"
+   ],
+   "ant": [
+    "groß"
+   ]
+  },
+  {
+   "lemma": "gut",
+   "pos": "adj",
+   "level": "A1",
+   "meaning": {
+    "en": "good",
+    "ar": "جيد"
+   },
+   "example": [
+    "Das ist ein sehr gutes Buch.",
+    "That's a very good book."
+   ],
+   "forms": [
+    "gute",
+    "guten",
+    "guter",
+    "gutes"
+   ],
+   "ant": [
+    "schlecht"
+   ]
+  },
+  {
+   "lemma": "sprechen",
+   "pos": "verb",
+   "level": "A1",
+   "meaning": {
+    "en": "to speak",
+    "ar": "يتكلّم"
+   },
+   "example": [
+    "Ich spreche Deutsch und Arabisch.",
+    "I speak German and Arabic."
+   ],
+   "forms": [
+    "spreche",
+    "sprichst",
+    "spricht",
+    "sprecht"
+   ]
+  },
+  {
+   "lemma": "arbeiten",
+   "pos": "verb",
+   "level": "A1",
+   "meaning": {
+    "en": "to work",
+    "ar": "يعمل"
+   },
+   "example": [
+    "Sie arbeitet in einem Krankenhaus.",
+    "She works in a hospital."
+   ],
+   "forms": [
+    "arbeite",
+    "arbeitest",
+    "arbeitet"
+   ]
+  },
+  {
+   "lemma": "lernen",
+   "pos": "verb",
+   "level": "A1",
+   "meaning": {
+    "en": "to learn, to study",
+    "ar": "يتعلّم / يدرس"
+   },
+   "example": [
+    "Wir lernen zusammen.",
+    "We study together."
+   ],
+   "forms": [
+    "lerne",
+    "lernst",
+    "lernt"
+   ]
+  },
+  {
+   "lemma": "kaufen",
+   "pos": "verb",
+   "level": "A1",
+   "meaning": {
+    "en": "to buy",
+    "ar": "يشتري"
+   },
+   "example": [
+    "Ich kaufe Obst auf dem Markt.",
+    "I buy fruit at the market."
+   ],
+   "forms": [
+    "kaufe",
+    "kaufst",
+    "kauft"
+   ]
+  },
+  {
+   "lemma": "Markt",
+   "pos": "noun",
+   "level": "A1",
+   "meaning": {
+    "en": "market",
+    "ar": "سوق"
+   },
+   "example": [
+    "Der Markt öffnet um acht.",
+    "The market opens at eight."
+   ],
+   "forms": [
+    "Märkte"
+   ],
+   "gender": "m"
+  },
+  {
+   "lemma": "Laden",
+   "pos": "noun",
+   "level": "A1",
+   "meaning": {
+    "en": "shop",
+    "ar": "متجر"
+   },
+   "example": [
+    "Der Laden ist geschlossen.",
+    "The shop is closed."
+   ],
+   "forms": [
+    "Läden"
+   ],
+   "gender": "m"
+  }
+ ],
+ "exercises": [
+  {
+   "key": "de-a1-sein-cloze",
+   "type": "cloze",
+   "skill": "grammar",
+   "level": "A1",
+   "topic": "sein_present",
+   "questions": [
+    {
+     "p": "Ich ___ aus Ägypten.",
+     "a": [
+      "bin"
+     ]
+    },
+    {
+     "p": "Du ___ Student, oder?",
+     "a": [
+      "bist"
+     ]
+    },
+    {
+     "p": "Wir ___ Freunde.",
+     "a": [
+      "sind"
+     ]
+    },
+    {
+     "p": "Anna und Paul ___ Ärzte.",
+     "a": [
+      "sind"
+     ]
+    }
+   ]
+  },
+  {
+   "key": "de-a1-articles-mcq",
+   "type": "mcq",
+   "skill": "grammar",
+   "level": "A1",
+   "questions": [
+    {
+     "p": "___ Haus ist groß.",
+     "o": [
+      "Das",
+      "Der",
+      "Die",
+      "Den"
+     ]
+    },
+    {
+     "p": "___ Tisch ist klein.",
+     "o": [
+      "Der",
+      "Die",
+      "Das",
+      "Dem"
+     ]
+    },
+    {
+     "p": "___ Stadt ist sehr schön.",
+     "o": [
+      "Die",
+      "Der",
+      "Das",
+      "Den"
+     ]
+    },
+    {
+     "p": "Ich habe ___ Buch.",
+     "o": [
+      "ein",
+      "eine",
+      "einen",
+      "einer"
+     ]
+    }
+   ],
+   "topic": "article_gender"
+  },
+  {
+   "key": "de-a1-present-cloze",
+   "type": "cloze",
+   "skill": "grammar",
+   "level": "A1",
+   "topic": "present_regular",
+   "questions": [
+    {
+     "p": "Ich ___ (lernen) Deutsch.",
+     "a": [
+      "lerne"
+     ]
+    },
+    {
+     "p": "Anna ___ (arbeiten) in einem Laden.",
+     "a": [
+      "arbeitet"
+     ]
+    },
+    {
+     "p": "Wir ___ (kaufen) jeden Tag Brot.",
+     "a": [
+      "kaufen"
+     ]
+    },
+    {
+     "p": "Du ___ (sprechen) sehr gut Englisch.",
+     "a": [
+      "sprichst"
+     ]
+    }
+   ]
+  },
+  {
+   "key": "de-a1-gern-mcq",
+   "type": "mcq",
+   "skill": "grammar",
+   "level": "A1",
+   "questions": [
+    {
+     "p": "Ich ___ Pizza.",
+     "o": [
+      "mag",
+      "mögen",
+      "magst",
+      "mögt"
+     ]
+    },
+    {
+     "p": "Wir ___ Bücher.",
+     "o": [
+      "mögen",
+      "mag",
+      "magst",
+      "mögt"
+     ]
+    },
+    {
+     "p": "Spielst du ___ Fußball?",
+     "o": [
+      "gern",
+      "sehr",
+      "groß",
+      "kleine"
+     ]
+    },
+    {
+     "p": "Er ___ Kaffee.",
+     "o": [
+      "mag",
+      "mögen",
+      "magst",
+      "mögt"
+     ]
+    }
+   ],
+   "topic": "gern_moegen"
+  },
+  {
+   "key": "de-a1-vocab-mcq",
+   "type": "mcq",
+   "skill": "vocabulary",
+   "level": "A1",
+   "questions": [
+    {
+     "p": "Ich trinke ein Glas ___.",
+     "o": [
+      "Wasser",
+      "Brot",
+      "Tisch",
+      "Buch"
+     ]
+    },
+    {
+     "p": "Das Gegenteil von „groß“ ist ___.",
+     "o": [
+      "klein",
+      "gut",
+      "hoch",
+      "neu"
+     ]
+    },
+    {
+     "p": "Ich kaufe Obst auf dem ___.",
+     "o": [
+      "Markt",
+      "Buch",
+      "Tisch",
+      "Laden"
+     ]
+    },
+    {
+     "p": "Ich lese ein ___ vor dem Schlafen.",
+     "o": [
+      "Buch",
+      "Brot",
+      "Wasser",
+      "Haus"
+     ]
+    },
+    {
+     "p": "Morgens trinke ich einen ___.",
+     "o": [
+      "Kaffee",
+      "Tisch",
+      "Markt",
+      "Laden"
+     ]
+    }
+   ]
+  },
+  {
+   "key": "de-a1-order",
+   "type": "ordering",
+   "skill": "grammar",
+   "level": "A1",
+   "questions": [
+    {
+     "o": [
+      "Ich",
+      "bin",
+      "aus",
+      "Deutschland"
+     ]
+    },
+    {
+     "o": [
+      "Wir",
+      "trinken",
+      "gern",
+      "Kaffee"
+     ]
+    },
+    {
+     "o": [
+      "Sie",
+      "arbeitet",
+      "in",
+      "einem",
+      "Laden"
+     ]
+    }
+   ]
+  },
+  {
+   "key": "de-a1-read-1",
+   "type": "reading",
+   "skill": "reading",
+   "level": "A1",
+   "title": {
+    "en": "Lena's family",
+    "ar": "عائلة لينا"
+   },
+   "text": "Ich heiße Lena und wohne mit meiner Familie in Köln. Mein Vater arbeitet in einem Krankenhaus und meine Mutter ist Lehrerin. Ich habe einen kleinen Bruder, Paul. Samstags kaufen wir Brot und Obst auf dem Markt.",
+   "questions": [
+    {
+     "p": "Wo wohnt Lena?",
+     "o": [
+      "In Köln",
+      "In Berlin",
+      "In einem Krankenhaus",
+      "Auf dem Markt"
+     ]
+    },
+    {
+     "p": "Was macht Lenas Mutter?",
+     "o": [
+      "Sie ist Lehrerin",
+      "Sie arbeitet in einem Krankenhaus",
+      "Sie arbeitet auf dem Markt",
+      "Sie ist Studentin"
+     ]
+    },
+    {
+     "p": "Was kaufen sie samstags?",
+     "o": [
+      "Brot und Obst",
+      "Bücher",
+      "Kaffee und Wasser",
+      "Kleidung"
+     ]
+    }
+   ]
+  },
+  {
+   "key": "de-a2-read-2",
+   "type": "reading",
+   "skill": "reading",
+   "level": "A2",
+   "title": {
+    "en": "A new job",
+    "ar": "عمل جديد"
+   },
+   "text": "Daniel hat am Montag eine neue Stelle angefangen. Früher hat er in einem kleinen Laden gearbeitet, aber jetzt arbeitet er in einem Büro im Stadtzentrum. Am ersten Tag war er nervös, aber seine Kollegen waren sehr freundlich. Jetzt fährt er mit der U-Bahn zur Arbeit und braucht zwanzig Minuten.",
+   "questions": [
+    {
+     "p": "Wo hat Daniel früher gearbeitet?",
+     "o": [
+      "In einem kleinen Laden",
+      "In einem Büro",
+      "In der U-Bahn",
+      "Im Stadtzentrum"
+     ]
+    },
+    {
+     "p": "Wie hat er sich am ersten Tag gefühlt?",
+     "o": [
+      "Nervös",
+      "Müde",
+      "Gelangweilt",
+      "Wütend"
+     ]
+    },
+    {
+     "p": "Wie lange braucht er zur Arbeit?",
+     "o": [
+      "Zwanzig Minuten",
+      "Eine Stunde",
+      "Zehn Minuten",
+      "Zwei Stunden"
+     ]
+    }
+   ]
+  },
+  {
+   "key": "de-a1-listen-1",
+   "type": "listening",
+   "skill": "listening",
+   "level": "A1",
+   "title": {
+    "en": "At the café",
+    "ar": "في المقهى"
+   },
+   "text": "Guten Morgen. Ich hätte gern einen Milchkaffee und ein Käsebrötchen, bitte. Was macht das? Das macht vier Euro fünfzig.",
+   "questions": [
+    {
+     "p": "Was trinkt die Person?",
+     "o": [
+      "Einen Milchkaffee",
+      "Einen Tee",
+      "Wasser",
+      "Orangensaft"
+     ]
+    },
+    {
+     "p": "Was isst die Person?",
+     "o": [
+      "Ein Käsebrötchen",
+      "Obst",
+      "Einen Salat",
+      "Nichts"
+     ]
+    },
+    {
+     "p": "Wie viel kostet es?",
+     "o": [
+      "Vier Euro fünfzig",
+      "Fünf Euro",
+      "Vier Euro",
+      "Drei Euro fünfzig"
+     ]
+    }
+   ]
+  },
+  {
+   "key": "de-a1-dictation",
+   "type": "dictation",
+   "skill": "listening",
+   "level": "A1",
+   "questions": [
+    {
+     "a": [
+      "Ich heiße Anna und komme aus Wien."
+     ]
+    },
+    {
+     "a": [
+      "Mein Haus ist klein."
+     ]
+    },
+    {
+     "a": [
+      "Wir lernen am Abend."
+     ]
+    }
+   ]
+  }
+ ],
+ "course": {
+  "slug": "de-foundations",
+  "level_from": "PRE_A1",
+  "level_to": "A2",
+  "title": {
+   "en": "German foundations",
+   "ar": "أساسيات الألمانية"
+  },
+  "description": {
+   "en": "Your first steps in German: introductions, everyday objects, routines and likes.",
+   "ar": "خطواتك الأولى في الألمانية: التعارف والأشياء اليومية والروتين وما تحبه."
+  },
+  "units": [
+   {
+    "title": {
+     "en": "First steps",
+     "ar": "الخطوات الأولى"
+    },
+    "lessons": [
+     {
+      "key": "de-u1-l1",
+      "skill": "grammar",
+      "level": "A1",
+      "topic": "sein_present",
+      "minutes": 12,
+      "title": {
+       "en": "Who are you?",
+       "ar": "من أنت؟"
+      },
+      "intro": {
+       "en": "Introduce yourself and others, and learn your first greetings.",
+       "ar": "عرّف بنفسك وبالآخرين وتعلّم أولى عبارات التحية."
+      },
+      "objectives": [
+       {
+        "code": "de.a1.introduce",
+        "skill": "speaking",
+        "text": {
+         "en": "Introduce yourself and say where you are from",
+         "ar": "التعريف بنفسك وذكر بلدك"
+        }
+       },
+       {
+        "code": "de.a1.sein_present",
+        "skill": "grammar",
+        "text": {
+         "en": "Use the key verb or structure for describing people",
+         "ar": "استخدام التركيب الأساسي لوصف الأشخاص"
+        }
+       }
+      ],
+      "words": [
+       "hallo",
+       "tschüss",
+       "danke",
+       "Freund",
+       "Familie",
+       "Stadt"
+      ],
+      "exercises": [
+       "de-a1-sein-cloze",
+       "de-a1-order"
+      ]
+     },
+     {
+      "key": "de-u1-l2",
+      "skill": "grammar",
+      "level": "A1",
+      "topic": "article_gender",
+      "minutes": 12,
+      "title": {
+       "en": "Things around you",
+       "ar": "الأشياء من حولك"
+      },
+      "intro": {
+       "en": "Name everyday objects and describe them correctly.",
+       "ar": "سمِّ الأشياء اليومية وصِفها بشكل صحيح."
+      },
+      "objectives": [
+       {
+        "code": "de.a1.article_gender",
+        "skill": "grammar",
+        "text": {
+         "en": "Match nouns with the right articles and adjectives",
+         "ar": "مطابقة الأسماء مع أدوات التعريف والصفات الصحيحة"
+        }
+       },
+       {
+        "code": "de.a1.objects",
+        "skill": "vocabulary",
+        "text": {
+         "en": "Name common objects, food and drinks",
+         "ar": "تسمية الأشياء والأطعمة والمشروبات الشائعة"
+        }
+       }
+      ],
+      "words": [
+       "Haus",
+       "Buch",
+       "Tisch",
+       "Kaffee",
+       "Wasser",
+       "Brot",
+       "groß",
+       "klein"
+      ],
+      "exercises": [
+       "de-a1-articles-mcq",
+       "de-a1-vocab-mcq"
+      ]
+     }
+    ]
+   },
+   {
+    "title": {
+     "en": "Everyday life",
+     "ar": "الحياة اليومية"
+    },
+    "lessons": [
+     {
+      "key": "de-u2-l1",
+      "skill": "grammar",
+      "level": "A1",
+      "topic": "present_regular",
+      "minutes": 15,
+      "title": {
+       "en": "What do you do?",
+       "ar": "ماذا تفعل؟"
+      },
+      "intro": {
+       "en": "Talk about work, study and daily routines in the present tense.",
+       "ar": "تحدّث عن العمل والدراسة والروتين اليومي بصيغة المضارع."
+      },
+      "objectives": [
+       {
+        "code": "de.a1.routine",
+        "skill": "speaking",
+        "text": {
+         "en": "Describe your daily routine",
+         "ar": "وصف روتينك اليومي"
+        }
+       },
+       {
+        "code": "de.a1.read_family",
+        "skill": "reading",
+        "text": {
+         "en": "Understand a short text about a family",
+         "ar": "فهم نص قصير عن عائلة"
+        }
+       }
+      ],
+      "words": [
+       "sprechen",
+       "arbeiten",
+       "lernen",
+       "kaufen",
+       "Arbeit",
+       "Tag",
+       "Nacht"
+      ],
+      "exercises": [
+       "de-a1-present-cloze",
+       "de-a1-read-1",
+       "de-a1-dictation"
+      ]
+     },
+     {
+      "key": "de-u2-l2",
+      "skill": "grammar",
+      "level": "A1",
+      "topic": "gern_moegen",
+      "minutes": 15,
+      "title": {
+       "en": "Likes and plans",
+       "ar": "ما تحبه وخططك"
+      },
+      "intro": {
+       "en": "Say what you like and understand short everyday conversations.",
+       "ar": "عبّر عمّا تحبه وافهم محادثات يومية قصيرة."
+      },
+      "objectives": [
+       {
+        "code": "de.a1.gern_moegen",
+        "skill": "grammar",
+        "text": {
+         "en": "Use the lesson's grammar to talk about everyday things",
+         "ar": "استخدام قاعدة الدرس للحديث عن الأمور اليومية"
+        }
+       },
+       {
+        "code": "de.a1.cafe",
+        "skill": "listening",
+        "text": {
+         "en": "Understand a simple order in a café",
+         "ar": "فهم طلب بسيط في مقهى"
+        }
+       }
+      ],
+      "words": [
+       "gut",
+       "Markt",
+       "Laden"
+      ],
+      "exercises": [
+       "de-a1-gern-mcq",
+       "de-a1-listen-1",
+       "de-a2-read-2"
+      ]
+     }
+    ]
+   }
+  ]
+ }
+}

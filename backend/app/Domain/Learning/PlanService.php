@@ -89,12 +89,26 @@ class PlanService
             $session = LearningSession::create([
                 'learner_profile_id' => $plan->learner_profile_id,
                 'learning_plan_item_id' => $item->id,
+                'activity_type' => $item->activity_type,
                 'started_at' => now(),
             ]);
             $this->events->record($plan->learnerProfile, 'session.started', $session, $item->skill_id);
 
             return $session;
         });
+    }
+
+    /** A session not tied to a plan item (free practice, lessons, flashcards) so study time is still tracked. */
+    public function startStandalone(LearnerProfile $profile, string $activityType): LearningSession
+    {
+        $session = LearningSession::create([
+            'learner_profile_id' => $profile->id,
+            'activity_type' => $activityType,
+            'started_at' => now(),
+        ]);
+        $this->events->record($profile, 'session.started', $session, metadata: ['activity_type' => $activityType]);
+
+        return $session;
     }
 
     public function completeSession(LearningSession $session, int $activeSeconds, ?int $selfRating): LearningSession

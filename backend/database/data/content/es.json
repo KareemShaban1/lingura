@@ -1,0 +1,1135 @@
+{
+ "language": "es",
+ "topics": [
+  {
+   "slug": "ser_present",
+   "level": "A1",
+   "title": {
+    "en": "The verb ser (present)",
+    "ar": "الفعل ser في المضارع"
+   },
+   "explanation": {
+    "en": "Use ser to say who someone is, where they are from and to describe lasting characteristics. Forms: yo soy, tú eres, él/ella/usted es, nosotros somos, vosotros sois, ellos/ustedes son.",
+    "ar": "يُستخدم الفعل ser للتعريف بالشخص وبلده وبالصفات الدائمة. تصريفه: yo soy، tú eres، él/ella/usted es، nosotros somos، vosotros sois، ellos/ustedes son."
+   },
+   "examples": [
+    [
+     "Soy de Madrid.",
+     "I am from Madrid."
+    ],
+    [
+     "Ella es médica.",
+     "She is a doctor."
+    ],
+    [
+     "Somos amigos.",
+     "We are friends."
+    ]
+   ]
+  },
+  {
+   "slug": "article_gender",
+   "level": "A1",
+   "title": {
+    "en": "Articles and gender",
+    "ar": "أدوات التعريف والتذكير والتأنيث"
+   },
+   "explanation": {
+    "en": "Every Spanish noun is masculine or feminine. Use el/un with masculine nouns (often ending in -o) and la/una with feminine nouns (often ending in -a). Plural: los/las, unos/unas.",
+    "ar": "كل اسم في الإسبانية مذكر أو مؤنث. استخدم el/un مع المذكر (وغالبًا ينتهي بـ -o) وla/una مع المؤنث (وغالبًا ينتهي بـ -a). وفي الجمع: los/las وunos/unas."
+   },
+   "examples": [
+    [
+     "el libro",
+     "the book"
+    ],
+    [
+     "la mesa",
+     "the table"
+    ],
+    [
+     "unas casas",
+     "some houses"
+    ]
+   ]
+  },
+  {
+   "slug": "present_regular_ar",
+   "level": "A1",
+   "title": {
+    "en": "Present tense of -ar verbs",
+    "ar": "المضارع للأفعال المنتهية بـ -ar"
+   },
+   "explanation": {
+    "en": "Remove -ar and add -o, -as, -a, -amos, -áis, -an. Hablar → hablo, hablas, habla, hablamos, habláis, hablan.",
+    "ar": "احذف -ar وأضف -o، -as، -a، -amos، -áis، -an. مثال: hablar ← hablo، hablas، habla، hablamos، habláis، hablan."
+   },
+   "examples": [
+    [
+     "Hablo español.",
+     "I speak Spanish."
+    ],
+    [
+     "¿Trabajas aquí?",
+     "Do you work here?"
+    ],
+    [
+     "Ellos estudian mucho.",
+     "They study a lot."
+    ]
+   ]
+  },
+  {
+   "slug": "gustar",
+   "level": "A1",
+   "title": {
+    "en": "Saying what you like with gustar",
+    "ar": "التعبير عمّا تحبه بالفعل gustar"
+   },
+   "explanation": {
+    "en": "Gustar agrees with the thing that is liked: me gusta + singular noun or a verb, me gustan + plural noun. The person who likes it is shown with me, te, le, nos, os, les.",
+    "ar": "يتطابق الفعل gustar مع الشيء المحبوب: me gusta مع المفرد أو الفعل، وme gustan مع الجمع. ويُعبَّر عن الشخص بالضمائر me، te، le، nos، os، les."
+   },
+   "examples": [
+    [
+     "Me gusta el café.",
+     "I like coffee."
+    ],
+    [
+     "Nos gustan los libros.",
+     "We like books."
+    ],
+    [
+     "¿Te gusta bailar?",
+     "Do you like dancing?"
+    ]
+   ]
+  }
+ ],
+ "words": [
+  {
+   "lemma": "hola",
+   "pos": "interj",
+   "level": "A1",
+   "meaning": {
+    "en": "hello",
+    "ar": "مرحبًا"
+   },
+   "example": [
+    "¡Hola! ¿Qué tal?",
+    "Hello! How are you?"
+   ]
+  },
+  {
+   "lemma": "adiós",
+   "pos": "interj",
+   "level": "A1",
+   "meaning": {
+    "en": "goodbye",
+    "ar": "مع السلامة"
+   },
+   "example": [
+    "Adiós, hasta mañana.",
+    "Goodbye, see you tomorrow."
+   ]
+  },
+  {
+   "lemma": "gracias",
+   "pos": "interj",
+   "level": "A1",
+   "meaning": {
+    "en": "thank you",
+    "ar": "شكرًا"
+   },
+   "example": [
+    "Muchas gracias por todo.",
+    "Thank you very much for everything."
+   ]
+  },
+  {
+   "lemma": "amigo",
+   "pos": "noun",
+   "level": "A1",
+   "meaning": {
+    "en": "friend",
+    "ar": "صديق"
+   },
+   "example": [
+    "Mi amigo vive en Lima.",
+    "My friend lives in Lima."
+   ],
+   "forms": [
+    "amigos",
+    "amiga",
+    "amigas"
+   ],
+   "gender": "m"
+  },
+  {
+   "lemma": "casa",
+   "pos": "noun",
+   "level": "A1",
+   "meaning": {
+    "en": "house, home",
+    "ar": "بيت"
+   },
+   "example": [
+    "Mi casa es pequeña.",
+    "My house is small."
+   ],
+   "forms": [
+    "casas"
+   ],
+   "gender": "f"
+  },
+  {
+   "lemma": "familia",
+   "pos": "noun",
+   "level": "A1",
+   "meaning": {
+    "en": "family",
+    "ar": "عائلة"
+   },
+   "example": [
+    "Mi familia es grande.",
+    "My family is big."
+   ],
+   "forms": [
+    "familias"
+   ],
+   "gender": "f"
+  },
+  {
+   "lemma": "libro",
+   "pos": "noun",
+   "level": "A1",
+   "meaning": {
+    "en": "book",
+    "ar": "كتاب"
+   },
+   "example": [
+    "Leo un libro.",
+    "I'm reading a book."
+   ],
+   "forms": [
+    "libros"
+   ],
+   "gender": "m"
+  },
+  {
+   "lemma": "mesa",
+   "pos": "noun",
+   "level": "A1",
+   "meaning": {
+    "en": "table",
+    "ar": "طاولة"
+   },
+   "example": [
+    "El café está en la mesa.",
+    "The coffee is on the table."
+   ],
+   "forms": [
+    "mesas"
+   ],
+   "gender": "f"
+  },
+  {
+   "lemma": "café",
+   "pos": "noun",
+   "level": "A1",
+   "meaning": {
+    "en": "coffee",
+    "ar": "قهوة"
+   },
+   "example": [
+    "Tomo café por la mañana.",
+    "I drink coffee in the morning."
+   ],
+   "forms": [
+    "cafés"
+   ],
+   "gender": "m"
+  },
+  {
+   "lemma": "agua",
+   "pos": "noun",
+   "level": "A1",
+   "meaning": {
+    "en": "water",
+    "ar": "ماء"
+   },
+   "example": [
+    "Quiero un vaso de agua.",
+    "I'd like a glass of water."
+   ],
+   "forms": [
+    "aguas"
+   ],
+   "gender": "f"
+  },
+  {
+   "lemma": "pan",
+   "pos": "noun",
+   "level": "A1",
+   "meaning": {
+    "en": "bread",
+    "ar": "خبز"
+   },
+   "example": [
+    "Compro pan cada día.",
+    "I buy bread every day."
+   ],
+   "forms": [
+    "panes"
+   ],
+   "gender": "m"
+  },
+  {
+   "lemma": "trabajo",
+   "pos": "noun",
+   "level": "A1",
+   "meaning": {
+    "en": "work, job",
+    "ar": "عمل"
+   },
+   "example": [
+    "Mi trabajo es interesante.",
+    "My job is interesting."
+   ],
+   "forms": [
+    "trabajos"
+   ],
+   "gender": "m"
+  },
+  {
+   "lemma": "ciudad",
+   "pos": "noun",
+   "level": "A1",
+   "meaning": {
+    "en": "city",
+    "ar": "مدينة"
+   },
+   "example": [
+    "Madrid es una ciudad grande.",
+    "Madrid is a big city."
+   ],
+   "forms": [
+    "ciudades"
+   ],
+   "gender": "f"
+  },
+  {
+   "lemma": "día",
+   "pos": "noun",
+   "level": "A1",
+   "meaning": {
+    "en": "day",
+    "ar": "يوم"
+   },
+   "example": [
+    "Hoy es un buen día.",
+    "Today is a good day."
+   ],
+   "forms": [
+    "días"
+   ],
+   "gender": "m"
+  },
+  {
+   "lemma": "noche",
+   "pos": "noun",
+   "level": "A1",
+   "meaning": {
+    "en": "night",
+    "ar": "ليل"
+   },
+   "example": [
+    "Estudio por la noche.",
+    "I study at night."
+   ],
+   "forms": [
+    "noches"
+   ],
+   "gender": "f"
+  },
+  {
+   "lemma": "grande",
+   "pos": "adj",
+   "level": "A1",
+   "meaning": {
+    "en": "big",
+    "ar": "كبير"
+   },
+   "example": [
+    "Es una casa grande.",
+    "It's a big house."
+   ],
+   "forms": [
+    "grandes"
+   ],
+   "ant": [
+    "pequeño"
+   ]
+  },
+  {
+   "lemma": "pequeño",
+   "pos": "adj",
+   "level": "A1",
+   "meaning": {
+    "en": "small",
+    "ar": "صغير"
+   },
+   "example": [
+    "Tengo un perro pequeño.",
+    "I have a small dog."
+   ],
+   "forms": [
+    "pequeña",
+    "pequeños",
+    "pequeñas"
+   ],
+   "ant": [
+    "grande"
+   ]
+  },
+  {
+   "lemma": "bueno",
+   "pos": "adj",
+   "level": "A1",
+   "meaning": {
+    "en": "good",
+    "ar": "جيد"
+   },
+   "example": [
+    "Es un libro muy bueno.",
+    "It's a very good book."
+   ],
+   "forms": [
+    "buena",
+    "buenos",
+    "buenas",
+    "buen"
+   ],
+   "ant": [
+    "malo"
+   ]
+  },
+  {
+   "lemma": "hablar",
+   "pos": "verb",
+   "level": "A1",
+   "meaning": {
+    "en": "to speak",
+    "ar": "يتكلّم"
+   },
+   "example": [
+    "Hablo español e inglés.",
+    "I speak Spanish and English."
+   ],
+   "forms": [
+    "hablo",
+    "hablas",
+    "habla",
+    "hablamos",
+    "habláis",
+    "hablan"
+   ]
+  },
+  {
+   "lemma": "trabajar",
+   "pos": "verb",
+   "level": "A1",
+   "meaning": {
+    "en": "to work",
+    "ar": "يعمل"
+   },
+   "example": [
+    "Trabaja en un hospital.",
+    "She works in a hospital."
+   ],
+   "forms": [
+    "trabajas",
+    "trabaja",
+    "trabajamos",
+    "trabajáis",
+    "trabajan"
+   ]
+  },
+  {
+   "lemma": "estudiar",
+   "pos": "verb",
+   "level": "A1",
+   "meaning": {
+    "en": "to study",
+    "ar": "يدرس"
+   },
+   "example": [
+    "Estudiamos juntos.",
+    "We study together."
+   ],
+   "forms": [
+    "estudio",
+    "estudias",
+    "estudia",
+    "estudiamos",
+    "estudiáis",
+    "estudian"
+   ]
+  },
+  {
+   "lemma": "comprar",
+   "pos": "verb",
+   "level": "A1",
+   "meaning": {
+    "en": "to buy",
+    "ar": "يشتري"
+   },
+   "example": [
+    "Compro fruta en el mercado.",
+    "I buy fruit at the market."
+   ],
+   "forms": [
+    "compro",
+    "compras",
+    "compra",
+    "compramos",
+    "compráis",
+    "compran"
+   ]
+  },
+  {
+   "lemma": "mercado",
+   "pos": "noun",
+   "level": "A1",
+   "meaning": {
+    "en": "market",
+    "ar": "سوق"
+   },
+   "example": [
+    "El mercado abre a las ocho.",
+    "The market opens at eight."
+   ],
+   "forms": [
+    "mercados"
+   ],
+   "gender": "m"
+  },
+  {
+   "lemma": "tienda",
+   "pos": "noun",
+   "level": "A1",
+   "meaning": {
+    "en": "shop",
+    "ar": "متجر"
+   },
+   "example": [
+    "La tienda está cerrada.",
+    "The shop is closed."
+   ],
+   "forms": [
+    "tiendas"
+   ],
+   "gender": "f"
+  }
+ ],
+ "exercises": [
+  {
+   "key": "es-a1-ser-cloze",
+   "type": "cloze",
+   "skill": "grammar",
+   "level": "A1",
+   "topic": "ser_present",
+   "questions": [
+    {
+     "p": "Yo ___ de México.",
+     "a": [
+      "soy"
+     ]
+    },
+    {
+     "p": "¿Tú ___ estudiante?",
+     "a": [
+      "eres"
+     ]
+    },
+    {
+     "p": "Nosotros ___ amigos.",
+     "a": [
+      "somos"
+     ]
+    },
+    {
+     "p": "Ellas ___ médicas.",
+     "a": [
+      "son"
+     ]
+    }
+   ]
+  },
+  {
+   "key": "es-a1-articles-mcq",
+   "type": "mcq",
+   "skill": "grammar",
+   "level": "A1",
+   "questions": [
+    {
+     "p": "___ casa es grande.",
+     "o": [
+      "La",
+      "El",
+      "Los",
+      "Un"
+     ]
+    },
+    {
+     "p": "Tengo ___ libro.",
+     "o": [
+      "un",
+      "una",
+      "unas",
+      "la"
+     ]
+    },
+    {
+     "p": "___ mesas son pequeñas.",
+     "o": [
+      "Las",
+      "Los",
+      "La",
+      "El"
+     ]
+    },
+    {
+     "p": "Es ___ ciudad bonita.",
+     "o": [
+      "una",
+      "un",
+      "unos",
+      "el"
+     ]
+    }
+   ],
+   "topic": "article_gender"
+  },
+  {
+   "key": "es-a1-ar-cloze",
+   "type": "cloze",
+   "skill": "grammar",
+   "level": "A1",
+   "topic": "present_regular_ar",
+   "questions": [
+    {
+     "p": "Yo ___ (hablar) español.",
+     "a": [
+      "hablo"
+     ]
+    },
+    {
+     "p": "Ella ___ (trabajar) en una tienda.",
+     "a": [
+      "trabaja"
+     ]
+    },
+    {
+     "p": "Nosotros ___ (estudiar) por la noche.",
+     "a": [
+      "estudiamos"
+     ]
+    },
+    {
+     "p": "¿Vosotros ___ (comprar) pan?",
+     "a": [
+      "compráis"
+     ]
+    }
+   ]
+  },
+  {
+   "key": "es-a1-gustar-mcq",
+   "type": "mcq",
+   "skill": "grammar",
+   "level": "A1",
+   "questions": [
+    {
+     "p": "Me ___ el café.",
+     "o": [
+      "gusta",
+      "gustan",
+      "gusto",
+      "gustas"
+     ]
+    },
+    {
+     "p": "Nos ___ los libros.",
+     "o": [
+      "gustan",
+      "gusta",
+      "gustamos",
+      "gustar"
+     ]
+    },
+    {
+     "p": "¿Te ___ bailar?",
+     "o": [
+      "gusta",
+      "gustan",
+      "gustas",
+      "gusto"
+     ]
+    },
+    {
+     "p": "A ella ___ gustan las ciudades grandes.",
+     "o": [
+      "le",
+      "la",
+      "se",
+      "lo"
+     ]
+    }
+   ],
+   "topic": "gustar"
+  },
+  {
+   "key": "es-a1-vocab-mcq",
+   "type": "mcq",
+   "skill": "vocabulary",
+   "level": "A1",
+   "questions": [
+    {
+     "p": "Bebo un vaso de ___.",
+     "o": [
+      "agua",
+      "pan",
+      "mesa",
+      "libro"
+     ]
+    },
+    {
+     "p": "Lo contrario de «grande» es ___.",
+     "o": [
+      "pequeño",
+      "bueno",
+      "alto",
+      "nuevo"
+     ]
+    },
+    {
+     "p": "Compro fruta en el ___.",
+     "o": [
+      "mercado",
+      "libro",
+      "día",
+      "trabajo"
+     ]
+    },
+    {
+     "p": "Leo un ___ por la noche.",
+     "o": [
+      "libro",
+      "pan",
+      "agua",
+      "día"
+     ]
+    },
+    {
+     "p": "Por la mañana tomo un ___.",
+     "o": [
+      "café",
+      "mesa",
+      "ciudad",
+      "noche"
+     ]
+    }
+   ]
+  },
+  {
+   "key": "es-a1-order",
+   "type": "ordering",
+   "skill": "grammar",
+   "level": "A1",
+   "questions": [
+    {
+     "o": [
+      "Yo",
+      "soy",
+      "de",
+      "España"
+     ]
+    },
+    {
+     "o": [
+      "Nos",
+      "gusta",
+      "el",
+      "café"
+     ]
+    },
+    {
+     "o": [
+      "Ella",
+      "trabaja",
+      "en",
+      "una",
+      "tienda"
+     ]
+    }
+   ]
+  },
+  {
+   "key": "es-a1-read-1",
+   "type": "reading",
+   "skill": "reading",
+   "level": "A1",
+   "title": {
+    "en": "Lucía's family",
+    "ar": "عائلة لوسيا"
+   },
+   "text": "Me llamo Lucía y vivo en Sevilla con mi familia. Mi padre trabaja en un hospital y mi madre es profesora. Tengo un hermano pequeño, Pablo. Los sábados compramos pan y fruta en el mercado.",
+   "questions": [
+    {
+     "p": "¿Dónde vive Lucía?",
+     "o": [
+      "En Sevilla",
+      "En Madrid",
+      "En un hospital",
+      "En el mercado"
+     ]
+    },
+    {
+     "p": "¿Qué hace la madre de Lucía?",
+     "o": [
+      "Es profesora",
+      "Trabaja en un hospital",
+      "Trabaja en el mercado",
+      "Es estudiante"
+     ]
+    },
+    {
+     "p": "¿Qué compran los sábados?",
+     "o": [
+      "Pan y fruta",
+      "Libros",
+      "Café y agua",
+      "Ropa"
+     ]
+    }
+   ]
+  },
+  {
+   "key": "es-a2-read-2",
+   "type": "reading",
+   "skill": "reading",
+   "level": "A2",
+   "title": {
+    "en": "A new job",
+    "ar": "عمل جديد"
+   },
+   "text": "Daniel empezó un trabajo nuevo el lunes. Antes trabajaba en una tienda pequeña, pero ahora trabaja en una oficina en el centro de la ciudad. El primer día estaba nervioso, pero sus compañeros fueron muy amables. Ahora va al trabajo en metro y tarda veinte minutos.",
+   "questions": [
+    {
+     "p": "¿Dónde trabajaba Daniel antes?",
+     "o": [
+      "En una tienda pequeña",
+      "En una oficina",
+      "En el metro",
+      "En el centro"
+     ]
+    },
+    {
+     "p": "¿Cómo se sentía el primer día?",
+     "o": [
+      "Nervioso",
+      "Cansado",
+      "Aburrido",
+      "Enfadado"
+     ]
+    },
+    {
+     "p": "¿Cuánto tarda en llegar al trabajo?",
+     "o": [
+      "Veinte minutos",
+      "Una hora",
+      "Diez minutos",
+      "Dos horas"
+     ]
+    }
+   ]
+  },
+  {
+   "key": "es-a1-listen-1",
+   "type": "listening",
+   "skill": "listening",
+   "level": "A1",
+   "title": {
+    "en": "At the café",
+    "ar": "في المقهى"
+   },
+   "text": "Buenos días. Quiero un café con leche y un pan con tomate, por favor. ¿Cuánto es? Son cuatro euros con cincuenta.",
+   "questions": [
+    {
+     "p": "¿Qué bebe la persona?",
+     "o": [
+      "Un café con leche",
+      "Un té",
+      "Agua",
+      "Un zumo"
+     ]
+    },
+    {
+     "p": "¿Qué come?",
+     "o": [
+      "Pan con tomate",
+      "Fruta",
+      "Una ensalada",
+      "Nada"
+     ]
+    },
+    {
+     "p": "¿Cuánto cuesta?",
+     "o": [
+      "Cuatro euros con cincuenta",
+      "Cinco euros",
+      "Cuatro euros",
+      "Tres euros con cincuenta"
+     ]
+    }
+   ]
+  },
+  {
+   "key": "es-a1-dictation",
+   "type": "dictation",
+   "skill": "listening",
+   "level": "A1",
+   "questions": [
+    {
+     "a": [
+      "Me llamo Ana y soy de Chile."
+     ]
+    },
+    {
+     "a": [
+      "Mi casa es pequeña."
+     ]
+    },
+    {
+     "a": [
+      "Nosotros estudiamos por la noche."
+     ]
+    }
+   ]
+  }
+ ],
+ "course": {
+  "slug": "es-foundations",
+  "level_from": "PRE_A1",
+  "level_to": "A2",
+  "title": {
+   "en": "Spanish foundations",
+   "ar": "أساسيات الإسبانية"
+  },
+  "description": {
+   "en": "Your first steps in Spanish: introductions, everyday objects, routines and likes.",
+   "ar": "خطواتك الأولى في الإسبانية: التعارف والأشياء اليومية والروتين وما تحبه."
+  },
+  "units": [
+   {
+    "title": {
+     "en": "First steps",
+     "ar": "الخطوات الأولى"
+    },
+    "lessons": [
+     {
+      "key": "es-u1-l1",
+      "skill": "grammar",
+      "level": "A1",
+      "topic": "ser_present",
+      "minutes": 12,
+      "title": {
+       "en": "Who are you?",
+       "ar": "من أنت؟"
+      },
+      "intro": {
+       "en": "Introduce yourself and others, and learn your first greetings.",
+       "ar": "عرّف بنفسك وبالآخرين وتعلّم أولى عبارات التحية."
+      },
+      "objectives": [
+       {
+        "code": "es.a1.introduce",
+        "skill": "speaking",
+        "text": {
+         "en": "Introduce yourself and say where you are from",
+         "ar": "التعريف بنفسك وذكر بلدك"
+        }
+       },
+       {
+        "code": "es.a1.ser_present",
+        "skill": "grammar",
+        "text": {
+         "en": "Use the key verb or structure for describing people",
+         "ar": "استخدام التركيب الأساسي لوصف الأشخاص"
+        }
+       }
+      ],
+      "words": [
+       "hola",
+       "adiós",
+       "gracias",
+       "amigo",
+       "familia",
+       "ciudad"
+      ],
+      "exercises": [
+       "es-a1-ser-cloze",
+       "es-a1-order"
+      ]
+     },
+     {
+      "key": "es-u1-l2",
+      "skill": "grammar",
+      "level": "A1",
+      "topic": "article_gender",
+      "minutes": 12,
+      "title": {
+       "en": "Things around you",
+       "ar": "الأشياء من حولك"
+      },
+      "intro": {
+       "en": "Name everyday objects and describe them correctly.",
+       "ar": "سمِّ الأشياء اليومية وصِفها بشكل صحيح."
+      },
+      "objectives": [
+       {
+        "code": "es.a1.article_gender",
+        "skill": "grammar",
+        "text": {
+         "en": "Match nouns with the right articles and adjectives",
+         "ar": "مطابقة الأسماء مع أدوات التعريف والصفات الصحيحة"
+        }
+       },
+       {
+        "code": "es.a1.objects",
+        "skill": "vocabulary",
+        "text": {
+         "en": "Name common objects, food and drinks",
+         "ar": "تسمية الأشياء والأطعمة والمشروبات الشائعة"
+        }
+       }
+      ],
+      "words": [
+       "casa",
+       "libro",
+       "mesa",
+       "café",
+       "agua",
+       "pan",
+       "grande",
+       "pequeño"
+      ],
+      "exercises": [
+       "es-a1-articles-mcq",
+       "es-a1-vocab-mcq"
+      ]
+     }
+    ]
+   },
+   {
+    "title": {
+     "en": "Everyday life",
+     "ar": "الحياة اليومية"
+    },
+    "lessons": [
+     {
+      "key": "es-u2-l1",
+      "skill": "grammar",
+      "level": "A1",
+      "topic": "present_regular_ar",
+      "minutes": 15,
+      "title": {
+       "en": "What do you do?",
+       "ar": "ماذا تفعل؟"
+      },
+      "intro": {
+       "en": "Talk about work, study and daily routines in the present tense.",
+       "ar": "تحدّث عن العمل والدراسة والروتين اليومي بصيغة المضارع."
+      },
+      "objectives": [
+       {
+        "code": "es.a1.routine",
+        "skill": "speaking",
+        "text": {
+         "en": "Describe your daily routine",
+         "ar": "وصف روتينك اليومي"
+        }
+       },
+       {
+        "code": "es.a1.read_family",
+        "skill": "reading",
+        "text": {
+         "en": "Understand a short text about a family",
+         "ar": "فهم نص قصير عن عائلة"
+        }
+       }
+      ],
+      "words": [
+       "hablar",
+       "trabajar",
+       "estudiar",
+       "comprar",
+       "trabajo",
+       "día",
+       "noche"
+      ],
+      "exercises": [
+       "es-a1-ar-cloze",
+       "es-a1-read-1",
+       "es-a1-dictation"
+      ]
+     },
+     {
+      "key": "es-u2-l2",
+      "skill": "grammar",
+      "level": "A1",
+      "topic": "gustar",
+      "minutes": 15,
+      "title": {
+       "en": "Likes and plans",
+       "ar": "ما تحبه وخططك"
+      },
+      "intro": {
+       "en": "Say what you like and understand short everyday conversations.",
+       "ar": "عبّر عمّا تحبه وافهم محادثات يومية قصيرة."
+      },
+      "objectives": [
+       {
+        "code": "es.a1.gustar",
+        "skill": "grammar",
+        "text": {
+         "en": "Use the lesson's grammar to talk about everyday things",
+         "ar": "استخدام قاعدة الدرس للحديث عن الأمور اليومية"
+        }
+       },
+       {
+        "code": "es.a1.cafe",
+        "skill": "listening",
+        "text": {
+         "en": "Understand a simple order in a café",
+         "ar": "فهم طلب بسيط في مقهى"
+        }
+       }
+      ],
+      "words": [
+       "bueno",
+       "mercado",
+       "tienda"
+      ],
+      "exercises": [
+       "es-a1-gustar-mcq",
+       "es-a1-listen-1",
+       "es-a2-read-2"
+      ]
+     }
+    ]
+   }
+  ]
+ }
+}

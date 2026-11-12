@@ -96,6 +96,14 @@ class PlanController extends Controller
         return new PlanItemResource($this->plans->skipItem($planItem, $data['reason'] ?? null)->load(['skill', 'targetLevel']));
     }
 
+    public function startSession(Request $request, LearnerProfile $learnerProfile): JsonResponse
+    {
+        $this->authorize('update', $learnerProfile);
+        $data = $request->validate(['activity_type' => ['required', 'in:lesson,exercise,vocabulary_review']]);
+
+        return (new LearningSessionResource($this->plans->startStandalone($learnerProfile, $data['activity_type'])))->response()->setStatusCode(201);
+    }
+
     public function showSession(LearningSession $session): LearningSessionResource
     {
         $this->authorize('view', $session);

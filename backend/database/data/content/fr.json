@@ -1,0 +1,1133 @@
+{
+ "language": "fr",
+ "topics": [
+  {
+   "slug": "etre_present",
+   "level": "A1",
+   "title": {
+    "en": "The verb être (present)",
+    "ar": "الفعل être في المضارع"
+   },
+   "explanation": {
+    "en": "Use être to say who someone is, where they are from and to describe them. Forms: je suis, tu es, il/elle est, nous sommes, vous êtes, ils/elles sont.",
+    "ar": "يُستخدم الفعل être للتعريف بالشخص وبلده ووصفه. تصريفه: je suis، tu es، il/elle est، nous sommes، vous êtes، ils/elles sont."
+   },
+   "examples": [
+    [
+     "Je suis de Tunis.",
+     "I am from Tunis."
+    ],
+    [
+     "Elle est médecin.",
+     "She is a doctor."
+    ],
+    [
+     "Nous sommes amis.",
+     "We are friends."
+    ]
+   ]
+  },
+  {
+   "slug": "article_gender",
+   "level": "A1",
+   "title": {
+    "en": "Articles and gender",
+    "ar": "أدوات التعريف والتذكير والتأنيث"
+   },
+   "explanation": {
+    "en": "French nouns are masculine or feminine. Use le/un with masculine nouns and la/une with feminine nouns; before a vowel, le and la become l'. Plural: les, des.",
+    "ar": "الأسماء الفرنسية مذكرة أو مؤنثة. استخدم le/un مع المذكر وla/une مع المؤنث، وقبل حرف متحرك تصبح le وla ‏l'. وفي الجمع: les وdes."
+   },
+   "examples": [
+    [
+     "le livre",
+     "the book"
+    ],
+    [
+     "la maison",
+     "the house"
+    ],
+    [
+     "l'eau",
+     "the water"
+    ]
+   ]
+  },
+  {
+   "slug": "present_er",
+   "level": "A1",
+   "title": {
+    "en": "Present tense of -er verbs",
+    "ar": "المضارع للأفعال المنتهية بـ -er"
+   },
+   "explanation": {
+    "en": "Remove -er and add -e, -es, -e, -ons, -ez, -ent. Parler → je parle, tu parles, il parle, nous parlons, vous parlez, ils parlent. The -e, -es and -ent endings are silent.",
+    "ar": "احذف -er وأضف -e، -es، -e، -ons، -ez، -ent. مثال: parler ← je parle، tu parles، il parle، nous parlons، vous parlez، ils parlent. والنهايات -e و-es و-ent لا تُنطق."
+   },
+   "examples": [
+    [
+     "Je parle français.",
+     "I speak French."
+    ],
+    [
+     "Tu travailles ici ?",
+     "Do you work here?"
+    ],
+    [
+     "Ils étudient beaucoup.",
+     "They study a lot."
+    ]
+   ]
+  },
+  {
+   "slug": "aimer",
+   "level": "A1",
+   "title": {
+    "en": "Saying what you like with aimer",
+    "ar": "التعبير عمّا تحبه بالفعل aimer"
+   },
+   "explanation": {
+    "en": "Use aimer + definite article + noun (j'aime le café) or aimer + infinitive (j'aime lire). In the negative, keep the definite article: je n'aime pas le thé.",
+    "ar": "استخدم aimer مع أداة التعريف والاسم (j'aime le café) أو مع المصدر (j'aime lire). وفي النفي تبقى أداة التعريف: je n'aime pas le thé."
+   },
+   "examples": [
+    [
+     "J'aime le café.",
+     "I like coffee."
+    ],
+    [
+     "Nous aimons les livres.",
+     "We like books."
+    ],
+    [
+     "Elle n'aime pas le thé.",
+     "She doesn't like tea."
+    ]
+   ]
+  }
+ ],
+ "words": [
+  {
+   "lemma": "bonjour",
+   "pos": "interj",
+   "level": "A1",
+   "meaning": {
+    "en": "hello, good morning",
+    "ar": "مرحبًا / صباح الخير"
+   },
+   "example": [
+    "Bonjour, ça va ?",
+    "Hello, how are you?"
+   ]
+  },
+  {
+   "lemma": "au revoir",
+   "pos": "interj",
+   "level": "A1",
+   "meaning": {
+    "en": "goodbye",
+    "ar": "مع السلامة"
+   },
+   "example": [
+    "Au revoir, à demain !",
+    "Goodbye, see you tomorrow!"
+   ]
+  },
+  {
+   "lemma": "merci",
+   "pos": "interj",
+   "level": "A1",
+   "meaning": {
+    "en": "thank you",
+    "ar": "شكرًا"
+   },
+   "example": [
+    "Merci beaucoup !",
+    "Thank you very much!"
+   ]
+  },
+  {
+   "lemma": "ami",
+   "pos": "noun",
+   "level": "A1",
+   "meaning": {
+    "en": "friend",
+    "ar": "صديق"
+   },
+   "example": [
+    "Mon ami habite à Lyon.",
+    "My friend lives in Lyon."
+   ],
+   "forms": [
+    "amis",
+    "amie",
+    "amies"
+   ],
+   "gender": "m"
+  },
+  {
+   "lemma": "maison",
+   "pos": "noun",
+   "level": "A1",
+   "meaning": {
+    "en": "house",
+    "ar": "بيت"
+   },
+   "example": [
+    "Ma maison est petite.",
+    "My house is small."
+   ],
+   "forms": [
+    "maisons"
+   ],
+   "gender": "f"
+  },
+  {
+   "lemma": "famille",
+   "pos": "noun",
+   "level": "A1",
+   "meaning": {
+    "en": "family",
+    "ar": "عائلة"
+   },
+   "example": [
+    "Ma famille est grande.",
+    "My family is big."
+   ],
+   "forms": [
+    "familles"
+   ],
+   "gender": "f"
+  },
+  {
+   "lemma": "livre",
+   "pos": "noun",
+   "level": "A1",
+   "meaning": {
+    "en": "book",
+    "ar": "كتاب"
+   },
+   "example": [
+    "Je lis un livre.",
+    "I'm reading a book."
+   ],
+   "forms": [
+    "livres"
+   ],
+   "gender": "m"
+  },
+  {
+   "lemma": "table",
+   "pos": "noun",
+   "level": "A1",
+   "meaning": {
+    "en": "table",
+    "ar": "طاولة"
+   },
+   "example": [
+    "Le café est sur la table.",
+    "The coffee is on the table."
+   ],
+   "forms": [
+    "tables"
+   ],
+   "gender": "f"
+  },
+  {
+   "lemma": "café",
+   "pos": "noun",
+   "level": "A1",
+   "meaning": {
+    "en": "coffee",
+    "ar": "قهوة"
+   },
+   "example": [
+    "Je bois un café le matin.",
+    "I drink a coffee in the morning."
+   ],
+   "forms": [
+    "cafés"
+   ],
+   "gender": "m"
+  },
+  {
+   "lemma": "eau",
+   "pos": "noun",
+   "level": "A1",
+   "meaning": {
+    "en": "water",
+    "ar": "ماء"
+   },
+   "example": [
+    "Je voudrais de l'eau.",
+    "I'd like some water."
+   ],
+   "forms": [
+    "eaux"
+   ],
+   "gender": "f"
+  },
+  {
+   "lemma": "pain",
+   "pos": "noun",
+   "level": "A1",
+   "meaning": {
+    "en": "bread",
+    "ar": "خبز"
+   },
+   "example": [
+    "J'achète du pain tous les jours.",
+    "I buy bread every day."
+   ],
+   "forms": [
+    "pains"
+   ],
+   "gender": "m"
+  },
+  {
+   "lemma": "travail",
+   "pos": "noun",
+   "level": "A1",
+   "meaning": {
+    "en": "work, job",
+    "ar": "عمل"
+   },
+   "example": [
+    "Mon travail est intéressant.",
+    "My job is interesting."
+   ],
+   "forms": [
+    "travaux"
+   ],
+   "gender": "m"
+  },
+  {
+   "lemma": "ville",
+   "pos": "noun",
+   "level": "A1",
+   "meaning": {
+    "en": "city, town",
+    "ar": "مدينة"
+   },
+   "example": [
+    "Paris est une grande ville.",
+    "Paris is a big city."
+   ],
+   "forms": [
+    "villes"
+   ],
+   "gender": "f"
+  },
+  {
+   "lemma": "jour",
+   "pos": "noun",
+   "level": "A1",
+   "meaning": {
+    "en": "day",
+    "ar": "يوم"
+   },
+   "example": [
+    "C'est un beau jour.",
+    "It's a lovely day."
+   ],
+   "forms": [
+    "jours"
+   ],
+   "gender": "m"
+  },
+  {
+   "lemma": "nuit",
+   "pos": "noun",
+   "level": "A1",
+   "meaning": {
+    "en": "night",
+    "ar": "ليل"
+   },
+   "example": [
+    "J'étudie la nuit.",
+    "I study at night."
+   ],
+   "forms": [
+    "nuits"
+   ],
+   "gender": "f"
+  },
+  {
+   "lemma": "grand",
+   "pos": "adj",
+   "level": "A1",
+   "meaning": {
+    "en": "big, tall",
+    "ar": "كبير"
+   },
+   "example": [
+    "C'est une grande maison.",
+    "It's a big house."
+   ],
+   "forms": [
+    "grande",
+    "grands",
+    "grandes"
+   ],
+   "ant": [
+    "petit"
+   ]
+  },
+  {
+   "lemma": "petit",
+   "pos": "adj",
+   "level": "A1",
+   "meaning": {
+    "en": "small",
+    "ar": "صغير"
+   },
+   "example": [
+    "J'ai un petit chien.",
+    "I have a small dog."
+   ],
+   "forms": [
+    "petite",
+    "petits",
+    "petites"
+   ],
+   "ant": [
+    "grand"
+   ]
+  },
+  {
+   "lemma": "bon",
+   "pos": "adj",
+   "level": "A1",
+   "meaning": {
+    "en": "good",
+    "ar": "جيد"
+   },
+   "example": [
+    "C'est un très bon livre.",
+    "It's a very good book."
+   ],
+   "forms": [
+    "bonne",
+    "bons",
+    "bonnes"
+   ],
+   "ant": [
+    "mauvais"
+   ]
+  },
+  {
+   "lemma": "parler",
+   "pos": "verb",
+   "level": "A1",
+   "meaning": {
+    "en": "to speak",
+    "ar": "يتكلّم"
+   },
+   "example": [
+    "Je parle français et arabe.",
+    "I speak French and Arabic."
+   ],
+   "forms": [
+    "parle",
+    "parles",
+    "parlons",
+    "parlez",
+    "parlent"
+   ]
+  },
+  {
+   "lemma": "travailler",
+   "pos": "verb",
+   "level": "A1",
+   "meaning": {
+    "en": "to work",
+    "ar": "يعمل"
+   },
+   "example": [
+    "Elle travaille dans un hôpital.",
+    "She works in a hospital."
+   ],
+   "forms": [
+    "travaille",
+    "travailles",
+    "travaillons",
+    "travaillez",
+    "travaillent"
+   ]
+  },
+  {
+   "lemma": "étudier",
+   "pos": "verb",
+   "level": "A1",
+   "meaning": {
+    "en": "to study",
+    "ar": "يدرس"
+   },
+   "example": [
+    "Nous étudions ensemble.",
+    "We study together."
+   ],
+   "forms": [
+    "étudie",
+    "étudies",
+    "étudions",
+    "étudiez",
+    "étudient"
+   ]
+  },
+  {
+   "lemma": "acheter",
+   "pos": "verb",
+   "level": "A1",
+   "meaning": {
+    "en": "to buy",
+    "ar": "يشتري"
+   },
+   "example": [
+    "J'achète des fruits au marché.",
+    "I buy fruit at the market."
+   ],
+   "forms": [
+    "achète",
+    "achètes",
+    "achetons",
+    "achetez",
+    "achètent"
+   ]
+  },
+  {
+   "lemma": "marché",
+   "pos": "noun",
+   "level": "A1",
+   "meaning": {
+    "en": "market",
+    "ar": "سوق"
+   },
+   "example": [
+    "Le marché ouvre à huit heures.",
+    "The market opens at eight."
+   ],
+   "forms": [
+    "marchés"
+   ],
+   "gender": "m"
+  },
+  {
+   "lemma": "magasin",
+   "pos": "noun",
+   "level": "A1",
+   "meaning": {
+    "en": "shop",
+    "ar": "متجر"
+   },
+   "example": [
+    "Le magasin est fermé.",
+    "The shop is closed."
+   ],
+   "forms": [
+    "magasins"
+   ],
+   "gender": "m"
+  }
+ ],
+ "exercises": [
+  {
+   "key": "fr-a1-etre-cloze",
+   "type": "cloze",
+   "skill": "grammar",
+   "level": "A1",
+   "topic": "etre_present",
+   "questions": [
+    {
+     "p": "Je ___ de Tunis.",
+     "a": [
+      "suis"
+     ]
+    },
+    {
+     "p": "Tu ___ étudiant ?",
+     "a": [
+      "es"
+     ]
+    },
+    {
+     "p": "Nous ___ amis.",
+     "a": [
+      "sommes"
+     ]
+    },
+    {
+     "p": "Elles ___ médecins.",
+     "a": [
+      "sont"
+     ]
+    }
+   ]
+  },
+  {
+   "key": "fr-a1-articles-mcq",
+   "type": "mcq",
+   "skill": "grammar",
+   "level": "A1",
+   "questions": [
+    {
+     "p": "___ maison est grande.",
+     "o": [
+      "La",
+      "Le",
+      "Les",
+      "Un"
+     ]
+    },
+    {
+     "p": "J'ai ___ livre.",
+     "o": [
+      "un",
+      "une",
+      "des",
+      "la"
+     ]
+    },
+    {
+     "p": "___ tables sont petites.",
+     "o": [
+      "Les",
+      "Le",
+      "La",
+      "Une"
+     ]
+    },
+    {
+     "p": "C'est ___ ville magnifique.",
+     "o": [
+      "une",
+      "un",
+      "des",
+      "le"
+     ]
+    }
+   ],
+   "topic": "article_gender"
+  },
+  {
+   "key": "fr-a1-er-cloze",
+   "type": "cloze",
+   "skill": "grammar",
+   "level": "A1",
+   "topic": "present_er",
+   "questions": [
+    {
+     "p": "Je ___ (parler) français.",
+     "a": [
+      "parle"
+     ]
+    },
+    {
+     "p": "Elle ___ (travailler) dans un magasin.",
+     "a": [
+      "travaille"
+     ]
+    },
+    {
+     "p": "Nous ___ (étudier) le soir.",
+     "a": [
+      "étudions"
+     ]
+    },
+    {
+     "p": "Vous ___ (acheter) du pain ?",
+     "a": [
+      "achetez"
+     ]
+    }
+   ]
+  },
+  {
+   "key": "fr-a1-aimer-mcq",
+   "type": "mcq",
+   "skill": "grammar",
+   "level": "A1",
+   "questions": [
+    {
+     "p": "Nous ___ les livres.",
+     "o": [
+      "aimons",
+      "aime",
+      "aimez",
+      "aiment"
+     ]
+    },
+    {
+     "p": "Elle n'aime pas ___ thé.",
+     "o": [
+      "le",
+      "du",
+      "de",
+      "un"
+     ]
+    },
+    {
+     "p": "Ils aiment ___ au football.",
+     "o": [
+      "jouer",
+      "jouent",
+      "joué",
+      "jouant"
+     ]
+    },
+    {
+     "p": "Tu ___ le chocolat ?",
+     "o": [
+      "aimes",
+      "aime",
+      "aimons",
+      "aiment"
+     ]
+    }
+   ],
+   "topic": "aimer"
+  },
+  {
+   "key": "fr-a1-vocab-mcq",
+   "type": "mcq",
+   "skill": "vocabulary",
+   "level": "A1",
+   "questions": [
+    {
+     "p": "Je bois un verre d'___.",
+     "o": [
+      "eau",
+      "pain",
+      "table",
+      "livre"
+     ]
+    },
+    {
+     "p": "Le contraire de « grand » est ___.",
+     "o": [
+      "petit",
+      "bon",
+      "haut",
+      "nouveau"
+     ]
+    },
+    {
+     "p": "J'achète des fruits au ___.",
+     "o": [
+      "marché",
+      "livre",
+      "jour",
+      "travail"
+     ]
+    },
+    {
+     "p": "Je lis un ___ le soir.",
+     "o": [
+      "livre",
+      "pain",
+      "café",
+      "jour"
+     ]
+    },
+    {
+     "p": "Le matin, je prends un ___.",
+     "o": [
+      "café",
+      "table",
+      "ville",
+      "nuit"
+     ]
+    }
+   ]
+  },
+  {
+   "key": "fr-a1-order",
+   "type": "ordering",
+   "skill": "grammar",
+   "level": "A1",
+   "questions": [
+    {
+     "o": [
+      "Je",
+      "suis",
+      "de",
+      "France"
+     ]
+    },
+    {
+     "o": [
+      "Nous",
+      "aimons",
+      "le",
+      "café"
+     ]
+    },
+    {
+     "o": [
+      "Elle",
+      "travaille",
+      "dans",
+      "un",
+      "magasin"
+     ]
+    }
+   ]
+  },
+  {
+   "key": "fr-a1-read-1",
+   "type": "reading",
+   "skill": "reading",
+   "level": "A1",
+   "title": {
+    "en": "Lucie's family",
+    "ar": "عائلة لوسي"
+   },
+   "text": "Je m'appelle Lucie et j'habite à Lyon avec ma famille. Mon père travaille dans un hôpital et ma mère est professeure. J'ai un petit frère, Paul. Le samedi, nous achetons du pain et des fruits au marché.",
+   "questions": [
+    {
+     "p": "Où habite Lucie ?",
+     "o": [
+      "À Lyon",
+      "À Paris",
+      "Dans un hôpital",
+      "Au marché"
+     ]
+    },
+    {
+     "p": "Que fait la mère de Lucie ?",
+     "o": [
+      "Elle est professeure",
+      "Elle travaille dans un hôpital",
+      "Elle travaille au marché",
+      "Elle est étudiante"
+     ]
+    },
+    {
+     "p": "Qu'achètent-ils le samedi ?",
+     "o": [
+      "Du pain et des fruits",
+      "Des livres",
+      "Du café et de l'eau",
+      "Des vêtements"
+     ]
+    }
+   ]
+  },
+  {
+   "key": "fr-a2-read-2",
+   "type": "reading",
+   "skill": "reading",
+   "level": "A2",
+   "title": {
+    "en": "A new job",
+    "ar": "عمل جديد"
+   },
+   "text": "Daniel a commencé un nouveau travail lundi. Avant, il travaillait dans un petit magasin, mais maintenant il travaille dans un bureau au centre-ville. Le premier jour, il était nerveux, mais ses collègues ont été très gentils. Maintenant, il va au travail en métro et le trajet dure vingt minutes.",
+   "questions": [
+    {
+     "p": "Où travaillait Daniel avant ?",
+     "o": [
+      "Dans un petit magasin",
+      "Dans un bureau",
+      "Dans le métro",
+      "Au centre-ville"
+     ]
+    },
+    {
+     "p": "Comment se sentait-il le premier jour ?",
+     "o": [
+      "Nerveux",
+      "Fatigué",
+      "Ennuyé",
+      "En colère"
+     ]
+    },
+    {
+     "p": "Combien de temps dure son trajet ?",
+     "o": [
+      "Vingt minutes",
+      "Une heure",
+      "Dix minutes",
+      "Deux heures"
+     ]
+    }
+   ]
+  },
+  {
+   "key": "fr-a1-listen-1",
+   "type": "listening",
+   "skill": "listening",
+   "level": "A1",
+   "title": {
+    "en": "At the café",
+    "ar": "في المقهى"
+   },
+   "text": "Bonjour. Je voudrais un café au lait et un croissant, s'il vous plaît. C'est combien ? Ça fait quatre euros cinquante.",
+   "questions": [
+    {
+     "p": "Que boit la personne ?",
+     "o": [
+      "Un café au lait",
+      "Un thé",
+      "De l'eau",
+      "Un jus d'orange"
+     ]
+    },
+    {
+     "p": "Que mange-t-elle ?",
+     "o": [
+      "Un croissant",
+      "Un fruit",
+      "Une salade",
+      "Rien"
+     ]
+    },
+    {
+     "p": "Combien ça coûte ?",
+     "o": [
+      "Quatre euros cinquante",
+      "Cinq euros",
+      "Quatre euros",
+      "Trois euros cinquante"
+     ]
+    }
+   ]
+  },
+  {
+   "key": "fr-a1-dictation",
+   "type": "dictation",
+   "skill": "listening",
+   "level": "A1",
+   "questions": [
+    {
+     "a": [
+      "Je m'appelle Anne et je suis de Lyon."
+     ]
+    },
+    {
+     "a": [
+      "Ma maison est petite."
+     ]
+    },
+    {
+     "a": [
+      "Nous étudions le soir."
+     ]
+    }
+   ]
+  }
+ ],
+ "course": {
+  "slug": "fr-foundations",
+  "level_from": "PRE_A1",
+  "level_to": "A2",
+  "title": {
+   "en": "French foundations",
+   "ar": "أساسيات الفرنسية"
+  },
+  "description": {
+   "en": "Your first steps in French: introductions, everyday objects, routines and likes.",
+   "ar": "خطواتك الأولى في الفرنسية: التعارف والأشياء اليومية والروتين وما تحبه."
+  },
+  "units": [
+   {
+    "title": {
+     "en": "First steps",
+     "ar": "الخطوات الأولى"
+    },
+    "lessons": [
+     {
+      "key": "fr-u1-l1",
+      "skill": "grammar",
+      "level": "A1",
+      "topic": "etre_present",
+      "minutes": 12,
+      "title": {
+       "en": "Who are you?",
+       "ar": "من أنت؟"
+      },
+      "intro": {
+       "en": "Introduce yourself and others, and learn your first greetings.",
+       "ar": "عرّف بنفسك وبالآخرين وتعلّم أولى عبارات التحية."
+      },
+      "objectives": [
+       {
+        "code": "fr.a1.introduce",
+        "skill": "speaking",
+        "text": {
+         "en": "Introduce yourself and say where you are from",
+         "ar": "التعريف بنفسك وذكر بلدك"
+        }
+       },
+       {
+        "code": "fr.a1.etre_present",
+        "skill": "grammar",
+        "text": {
+         "en": "Use the key verb or structure for describing people",
+         "ar": "استخدام التركيب الأساسي لوصف الأشخاص"
+        }
+       }
+      ],
+      "words": [
+       "bonjour",
+       "au revoir",
+       "merci",
+       "ami",
+       "famille",
+       "ville"
+      ],
+      "exercises": [
+       "fr-a1-etre-cloze",
+       "fr-a1-order"
+      ]
+     },
+     {
+      "key": "fr-u1-l2",
+      "skill": "grammar",
+      "level": "A1",
+      "topic": "article_gender",
+      "minutes": 12,
+      "title": {
+       "en": "Things around you",
+       "ar": "الأشياء من حولك"
+      },
+      "intro": {
+       "en": "Name everyday objects and describe them correctly.",
+       "ar": "سمِّ الأشياء اليومية وصِفها بشكل صحيح."
+      },
+      "objectives": [
+       {
+        "code": "fr.a1.article_gender",
+        "skill": "grammar",
+        "text": {
+         "en": "Match nouns with the right articles and adjectives",
+         "ar": "مطابقة الأسماء مع أدوات التعريف والصفات الصحيحة"
+        }
+       },
+       {
+        "code": "fr.a1.objects",
+        "skill": "vocabulary",
+        "text": {
+         "en": "Name common objects, food and drinks",
+         "ar": "تسمية الأشياء والأطعمة والمشروبات الشائعة"
+        }
+       }
+      ],
+      "words": [
+       "maison",
+       "livre",
+       "table",
+       "café",
+       "eau",
+       "pain",
+       "grand",
+       "petit"
+      ],
+      "exercises": [
+       "fr-a1-articles-mcq",
+       "fr-a1-vocab-mcq"
+      ]
+     }
+    ]
+   },
+   {
+    "title": {
+     "en": "Everyday life",
+     "ar": "الحياة اليومية"
+    },
+    "lessons": [
+     {
+      "key": "fr-u2-l1",
+      "skill": "grammar",
+      "level": "A1",
+      "topic": "present_er",
+      "minutes": 15,
+      "title": {
+       "en": "What do you do?",
+       "ar": "ماذا تفعل؟"
+      },
+      "intro": {
+       "en": "Talk about work, study and daily routines in the present tense.",
+       "ar": "تحدّث عن العمل والدراسة والروتين اليومي بصيغة المضارع."
+      },
+      "objectives": [
+       {
+        "code": "fr.a1.routine",
+        "skill": "speaking",
+        "text": {
+         "en": "Describe your daily routine",
+         "ar": "وصف روتينك اليومي"
+        }
+       },
+       {
+        "code": "fr.a1.read_family",
+        "skill": "reading",
+        "text": {
+         "en": "Understand a short text about a family",
+         "ar": "فهم نص قصير عن عائلة"
+        }
+       }
+      ],
+      "words": [
+       "parler",
+       "travailler",
+       "étudier",
+       "acheter",
+       "travail",
+       "jour",
+       "nuit"
+      ],
+      "exercises": [
+       "fr-a1-er-cloze",
+       "fr-a1-read-1",
+       "fr-a1-dictation"
+      ]
+     },
+     {
+      "key": "fr-u2-l2",
+      "skill": "grammar",
+      "level": "A1",
+      "topic": "aimer",
+      "minutes": 15,
+      "title": {
+       "en": "Likes and plans",
+       "ar": "ما تحبه وخططك"
+      },
+      "intro": {
+       "en": "Say what you like and understand short everyday conversations.",
+       "ar": "عبّر عمّا تحبه وافهم محادثات يومية قصيرة."
+      },
+      "objectives": [
+       {
+        "code": "fr.a1.aimer",
+        "skill": "grammar",
+        "text": {
+         "en": "Use the lesson's grammar to talk about everyday things",
+         "ar": "استخدام قاعدة الدرس للحديث عن الأمور اليومية"
+        }
+       },
+       {
+        "code": "fr.a1.cafe",
+        "skill": "listening",
+        "text": {
+         "en": "Understand a simple order in a café",
+         "ar": "فهم طلب بسيط في مقهى"
+        }
+       }
+      ],
+      "words": [
+       "bon",
+       "marché",
+       "magasin"
+      ],
+      "exercises": [
+       "fr-a1-aimer-mcq",
+       "fr-a1-listen-1",
+       "fr-a2-read-2"
+      ]
+     }
+    ]
+   }
+  ]
+ }
+}

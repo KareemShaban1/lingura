@@ -1,0 +1,1128 @@
+{
+ "language": "it",
+ "topics": [
+  {
+   "slug": "essere_present",
+   "level": "A1",
+   "title": {
+    "en": "The verb essere (present)",
+    "ar": "الفعل essere في المضارع"
+   },
+   "explanation": {
+    "en": "Use essere to say who someone is, where they are from and to describe them. Forms: io sono, tu sei, lui/lei è, noi siamo, voi siete, loro sono.",
+    "ar": "يُستخدم الفعل essere للتعريف بالشخص وبلده ووصفه. تصريفه: io sono، tu sei، lui/lei è، noi siamo، voi siete، loro sono."
+   },
+   "examples": [
+    [
+     "Sono di Roma.",
+     "I am from Rome."
+    ],
+    [
+     "Lei è medico.",
+     "She is a doctor."
+    ],
+    [
+     "Siamo amici.",
+     "We are friends."
+    ]
+   ]
+  },
+  {
+   "slug": "article_gender",
+   "level": "A1",
+   "title": {
+    "en": "Articles and gender",
+    "ar": "أدوات التعريف والتذكير والتأنيث"
+   },
+   "explanation": {
+    "en": "Italian nouns are masculine (often -o) or feminine (often -a). Masculine: il/un, lo/uno before s+consonant or z. Feminine: la/una. Plural: i/gli (masculine), le (feminine).",
+    "ar": "الأسماء الإيطالية مذكرة (غالبًا تنتهي بـ -o) أو مؤنثة (غالبًا تنتهي بـ -a). للمذكر: il/un، وlo/uno قبل s مع ساكن أو z. للمؤنث: la/una. وفي الجمع: i/gli للمذكر وle للمؤنث."
+   },
+   "examples": [
+    [
+     "il libro",
+     "the book"
+    ],
+    [
+     "la casa",
+     "the house"
+    ],
+    [
+     "i tavoli",
+     "the tables"
+    ]
+   ]
+  },
+  {
+   "slug": "present_are",
+   "level": "A1",
+   "title": {
+    "en": "Present tense of -are verbs",
+    "ar": "المضارع للأفعال المنتهية بـ -are"
+   },
+   "explanation": {
+    "en": "Remove -are and add -o, -i, -a, -iamo, -ate, -ano. Parlare → parlo, parli, parla, parliamo, parlate, parlano.",
+    "ar": "احذف -are وأضف -o، -i، -a، -iamo، -ate، -ano. مثال: parlare ← parlo، parli، parla، parliamo، parlate، parlano."
+   },
+   "examples": [
+    [
+     "Parlo italiano.",
+     "I speak Italian."
+    ],
+    [
+     "Lavori qui?",
+     "Do you work here?"
+    ],
+    [
+     "Studiano molto.",
+     "They study a lot."
+    ]
+   ]
+  },
+  {
+   "slug": "piacere",
+   "level": "A1",
+   "title": {
+    "en": "Saying what you like with piacere",
+    "ar": "التعبير عمّا تحبه بالفعل piacere"
+   },
+   "explanation": {
+    "en": "Piacere agrees with the thing that is liked: mi piace + singular noun or verb, mi piacciono + plural noun. The person is shown with mi, ti, gli/le, ci, vi, gli.",
+    "ar": "يتطابق الفعل piacere مع الشيء المحبوب: mi piace مع المفرد أو الفعل، وmi piacciono مع الجمع. ويُعبَّر عن الشخص بـ mi وti وgli/le وci وvi وgli."
+   },
+   "examples": [
+    [
+     "Mi piace il caffè.",
+     "I like coffee."
+    ],
+    [
+     "Ci piacciono i libri.",
+     "We like books."
+    ],
+    [
+     "Ti piace ballare?",
+     "Do you like dancing?"
+    ]
+   ]
+  }
+ ],
+ "words": [
+  {
+   "lemma": "ciao",
+   "pos": "interj",
+   "level": "A1",
+   "meaning": {
+    "en": "hi, bye",
+    "ar": "مرحبًا / وداعًا"
+   },
+   "example": [
+    "Ciao, come stai?",
+    "Hi, how are you?"
+   ]
+  },
+  {
+   "lemma": "arrivederci",
+   "pos": "interj",
+   "level": "A1",
+   "meaning": {
+    "en": "goodbye",
+    "ar": "مع السلامة"
+   },
+   "example": [
+    "Arrivederci, a domani!",
+    "Goodbye, see you tomorrow!"
+   ]
+  },
+  {
+   "lemma": "grazie",
+   "pos": "interj",
+   "level": "A1",
+   "meaning": {
+    "en": "thank you",
+    "ar": "شكرًا"
+   },
+   "example": [
+    "Grazie mille!",
+    "Thanks a lot!"
+   ]
+  },
+  {
+   "lemma": "amico",
+   "pos": "noun",
+   "level": "A1",
+   "meaning": {
+    "en": "friend",
+    "ar": "صديق"
+   },
+   "example": [
+    "Il mio amico abita a Roma.",
+    "My friend lives in Rome."
+   ],
+   "forms": [
+    "amici",
+    "amica",
+    "amiche"
+   ],
+   "gender": "m"
+  },
+  {
+   "lemma": "casa",
+   "pos": "noun",
+   "level": "A1",
+   "meaning": {
+    "en": "house, home",
+    "ar": "بيت"
+   },
+   "example": [
+    "La mia casa è piccola.",
+    "My house is small."
+   ],
+   "forms": [
+    "case"
+   ],
+   "gender": "f"
+  },
+  {
+   "lemma": "famiglia",
+   "pos": "noun",
+   "level": "A1",
+   "meaning": {
+    "en": "family",
+    "ar": "عائلة"
+   },
+   "example": [
+    "La mia famiglia è grande.",
+    "My family is big."
+   ],
+   "forms": [
+    "famiglie"
+   ],
+   "gender": "f"
+  },
+  {
+   "lemma": "libro",
+   "pos": "noun",
+   "level": "A1",
+   "meaning": {
+    "en": "book",
+    "ar": "كتاب"
+   },
+   "example": [
+    "Leggo un libro.",
+    "I'm reading a book."
+   ],
+   "forms": [
+    "libri"
+   ],
+   "gender": "m"
+  },
+  {
+   "lemma": "tavolo",
+   "pos": "noun",
+   "level": "A1",
+   "meaning": {
+    "en": "table",
+    "ar": "طاولة"
+   },
+   "example": [
+    "Il caffè è sul tavolo.",
+    "The coffee is on the table."
+   ],
+   "forms": [
+    "tavoli"
+   ],
+   "gender": "m"
+  },
+  {
+   "lemma": "caffè",
+   "pos": "noun",
+   "level": "A1",
+   "meaning": {
+    "en": "coffee",
+    "ar": "قهوة"
+   },
+   "example": [
+    "Prendo un caffè la mattina.",
+    "I have a coffee in the morning."
+   ],
+   "gender": "m"
+  },
+  {
+   "lemma": "acqua",
+   "pos": "noun",
+   "level": "A1",
+   "meaning": {
+    "en": "water",
+    "ar": "ماء"
+   },
+   "example": [
+    "Vorrei un bicchiere d'acqua.",
+    "I'd like a glass of water."
+   ],
+   "forms": [
+    "acque"
+   ],
+   "gender": "f"
+  },
+  {
+   "lemma": "pane",
+   "pos": "noun",
+   "level": "A1",
+   "meaning": {
+    "en": "bread",
+    "ar": "خبز"
+   },
+   "example": [
+    "Compro il pane ogni giorno.",
+    "I buy bread every day."
+   ],
+   "forms": [
+    "pani"
+   ],
+   "gender": "m"
+  },
+  {
+   "lemma": "lavoro",
+   "pos": "noun",
+   "level": "A1",
+   "meaning": {
+    "en": "work, job",
+    "ar": "عمل"
+   },
+   "example": [
+    "Il mio lavoro è interessante.",
+    "My job is interesting."
+   ],
+   "forms": [
+    "lavori"
+   ],
+   "gender": "m"
+  },
+  {
+   "lemma": "città",
+   "pos": "noun",
+   "level": "A1",
+   "meaning": {
+    "en": "city",
+    "ar": "مدينة"
+   },
+   "example": [
+    "Milano è una grande città.",
+    "Milan is a big city."
+   ],
+   "gender": "f"
+  },
+  {
+   "lemma": "giorno",
+   "pos": "noun",
+   "level": "A1",
+   "meaning": {
+    "en": "day",
+    "ar": "يوم"
+   },
+   "example": [
+    "Oggi è un bel giorno.",
+    "Today is a lovely day."
+   ],
+   "forms": [
+    "giorni"
+   ],
+   "gender": "m"
+  },
+  {
+   "lemma": "notte",
+   "pos": "noun",
+   "level": "A1",
+   "meaning": {
+    "en": "night",
+    "ar": "ليل"
+   },
+   "example": [
+    "Studio di notte.",
+    "I study at night."
+   ],
+   "forms": [
+    "notti"
+   ],
+   "gender": "f"
+  },
+  {
+   "lemma": "grande",
+   "pos": "adj",
+   "level": "A1",
+   "meaning": {
+    "en": "big",
+    "ar": "كبير"
+   },
+   "example": [
+    "È una casa grande.",
+    "It's a big house."
+   ],
+   "forms": [
+    "grandi"
+   ],
+   "ant": [
+    "piccolo"
+   ]
+  },
+  {
+   "lemma": "piccolo",
+   "pos": "adj",
+   "level": "A1",
+   "meaning": {
+    "en": "small",
+    "ar": "صغير"
+   },
+   "example": [
+    "Ho un cane piccolo.",
+    "I have a small dog."
+   ],
+   "forms": [
+    "piccola",
+    "piccoli",
+    "piccole"
+   ],
+   "ant": [
+    "grande"
+   ]
+  },
+  {
+   "lemma": "buono",
+   "pos": "adj",
+   "level": "A1",
+   "meaning": {
+    "en": "good",
+    "ar": "جيد"
+   },
+   "example": [
+    "È un libro molto buono.",
+    "It's a very good book."
+   ],
+   "forms": [
+    "buona",
+    "buoni",
+    "buone",
+    "buon"
+   ],
+   "ant": [
+    "cattivo"
+   ]
+  },
+  {
+   "lemma": "parlare",
+   "pos": "verb",
+   "level": "A1",
+   "meaning": {
+    "en": "to speak",
+    "ar": "يتكلّم"
+   },
+   "example": [
+    "Parlo italiano e arabo.",
+    "I speak Italian and Arabic."
+   ],
+   "forms": [
+    "parlo",
+    "parli",
+    "parla",
+    "parliamo",
+    "parlate",
+    "parlano"
+   ]
+  },
+  {
+   "lemma": "lavorare",
+   "pos": "verb",
+   "level": "A1",
+   "meaning": {
+    "en": "to work",
+    "ar": "يعمل"
+   },
+   "example": [
+    "Lavora in un ospedale.",
+    "She works in a hospital."
+   ],
+   "forms": [
+    "lavori",
+    "lavora",
+    "lavoriamo",
+    "lavorate",
+    "lavorano"
+   ]
+  },
+  {
+   "lemma": "studiare",
+   "pos": "verb",
+   "level": "A1",
+   "meaning": {
+    "en": "to study",
+    "ar": "يدرس"
+   },
+   "example": [
+    "Studiamo insieme.",
+    "We study together."
+   ],
+   "forms": [
+    "studi",
+    "studia",
+    "studiamo",
+    "studiate",
+    "studiano"
+   ]
+  },
+  {
+   "lemma": "comprare",
+   "pos": "verb",
+   "level": "A1",
+   "meaning": {
+    "en": "to buy",
+    "ar": "يشتري"
+   },
+   "example": [
+    "Compro la frutta al mercato.",
+    "I buy fruit at the market."
+   ],
+   "forms": [
+    "compro",
+    "compri",
+    "compra",
+    "compriamo",
+    "comprate",
+    "comprano"
+   ]
+  },
+  {
+   "lemma": "mercato",
+   "pos": "noun",
+   "level": "A1",
+   "meaning": {
+    "en": "market",
+    "ar": "سوق"
+   },
+   "example": [
+    "Il mercato apre alle otto.",
+    "The market opens at eight."
+   ],
+   "forms": [
+    "mercati"
+   ],
+   "gender": "m"
+  },
+  {
+   "lemma": "negozio",
+   "pos": "noun",
+   "level": "A1",
+   "meaning": {
+    "en": "shop",
+    "ar": "متجر"
+   },
+   "example": [
+    "Il negozio è chiuso.",
+    "The shop is closed."
+   ],
+   "forms": [
+    "negozi"
+   ],
+   "gender": "m"
+  }
+ ],
+ "exercises": [
+  {
+   "key": "it-a1-essere-cloze",
+   "type": "cloze",
+   "skill": "grammar",
+   "level": "A1",
+   "topic": "essere_present",
+   "questions": [
+    {
+     "p": "Io ___ di Roma.",
+     "a": [
+      "sono"
+     ]
+    },
+    {
+     "p": "Tu ___ studente?",
+     "a": [
+      "sei"
+     ]
+    },
+    {
+     "p": "Noi ___ amici.",
+     "a": [
+      "siamo"
+     ]
+    },
+    {
+     "p": "Loro ___ medici.",
+     "a": [
+      "sono"
+     ]
+    }
+   ]
+  },
+  {
+   "key": "it-a1-articles-mcq",
+   "type": "mcq",
+   "skill": "grammar",
+   "level": "A1",
+   "questions": [
+    {
+     "p": "___ casa è grande.",
+     "o": [
+      "La",
+      "Il",
+      "Lo",
+      "I"
+     ]
+    },
+    {
+     "p": "Ho ___ libro.",
+     "o": [
+      "un",
+      "una",
+      "uno",
+      "un'"
+     ]
+    },
+    {
+     "p": "___ tavoli sono piccoli.",
+     "o": [
+      "I",
+      "Il",
+      "Le",
+      "Gli"
+     ]
+    },
+    {
+     "p": "È ___ città bellissima.",
+     "o": [
+      "una",
+      "un",
+      "uno",
+      "le"
+     ]
+    }
+   ],
+   "topic": "article_gender"
+  },
+  {
+   "key": "it-a1-are-cloze",
+   "type": "cloze",
+   "skill": "grammar",
+   "level": "A1",
+   "topic": "present_are",
+   "questions": [
+    {
+     "p": "Io ___ (parlare) italiano.",
+     "a": [
+      "parlo"
+     ]
+    },
+    {
+     "p": "Lei ___ (lavorare) in un negozio.",
+     "a": [
+      "lavora"
+     ]
+    },
+    {
+     "p": "Noi ___ (studiare) la sera.",
+     "a": [
+      "studiamo"
+     ]
+    },
+    {
+     "p": "Voi ___ (comprare) il pane?",
+     "a": [
+      "comprate"
+     ]
+    }
+   ]
+  },
+  {
+   "key": "it-a1-piacere-mcq",
+   "type": "mcq",
+   "skill": "grammar",
+   "level": "A1",
+   "questions": [
+    {
+     "p": "Mi ___ il caffè.",
+     "o": [
+      "piace",
+      "piacciono",
+      "piaccio",
+      "piaci"
+     ]
+    },
+    {
+     "p": "Ci ___ i libri.",
+     "o": [
+      "piacciono",
+      "piace",
+      "piacciamo",
+      "piacere"
+     ]
+    },
+    {
+     "p": "Ti ___ ballare?",
+     "o": [
+      "piace",
+      "piacciono",
+      "piaci",
+      "piaccio"
+     ]
+    },
+    {
+     "p": "A lei ___ piacciono le città grandi.",
+     "o": [
+      "le",
+      "la",
+      "si",
+      "lo"
+     ]
+    }
+   ],
+   "topic": "piacere"
+  },
+  {
+   "key": "it-a1-vocab-mcq",
+   "type": "mcq",
+   "skill": "vocabulary",
+   "level": "A1",
+   "questions": [
+    {
+     "p": "Bevo un bicchiere d'___.",
+     "o": [
+      "acqua",
+      "pane",
+      "tavolo",
+      "libro"
+     ]
+    },
+    {
+     "p": "Il contrario di «grande» è ___.",
+     "o": [
+      "piccolo",
+      "buono",
+      "alto",
+      "nuovo"
+     ]
+    },
+    {
+     "p": "Compro la frutta al ___.",
+     "o": [
+      "mercato",
+      "libro",
+      "tavolo",
+      "lavoro"
+     ]
+    },
+    {
+     "p": "Leggo un ___ la sera.",
+     "o": [
+      "libro",
+      "pane",
+      "caffè",
+      "giorno"
+     ]
+    },
+    {
+     "p": "La mattina prendo un ___.",
+     "o": [
+      "caffè",
+      "tavolo",
+      "negozio",
+      "libro"
+     ]
+    }
+   ]
+  },
+  {
+   "key": "it-a1-order",
+   "type": "ordering",
+   "skill": "grammar",
+   "level": "A1",
+   "questions": [
+    {
+     "o": [
+      "Io",
+      "sono",
+      "di",
+      "Milano"
+     ]
+    },
+    {
+     "o": [
+      "Ci",
+      "piace",
+      "il",
+      "caffè"
+     ]
+    },
+    {
+     "o": [
+      "Lei",
+      "lavora",
+      "in",
+      "un",
+      "negozio"
+     ]
+    }
+   ]
+  },
+  {
+   "key": "it-a1-read-1",
+   "type": "reading",
+   "skill": "reading",
+   "level": "A1",
+   "title": {
+    "en": "Giulia's family",
+    "ar": "عائلة جوليا"
+   },
+   "text": "Mi chiamo Giulia e abito a Firenze con la mia famiglia. Mio padre lavora in un ospedale e mia madre è insegnante. Ho un fratello piccolo, Marco. Il sabato compriamo il pane e la frutta al mercato.",
+   "questions": [
+    {
+     "p": "Dove abita Giulia?",
+     "o": [
+      "A Firenze",
+      "A Roma",
+      "In un ospedale",
+      "Al mercato"
+     ]
+    },
+    {
+     "p": "Che lavoro fa la madre di Giulia?",
+     "o": [
+      "È insegnante",
+      "Lavora in un ospedale",
+      "Lavora al mercato",
+      "È studentessa"
+     ]
+    },
+    {
+     "p": "Che cosa comprano il sabato?",
+     "o": [
+      "Il pane e la frutta",
+      "Dei libri",
+      "Caffè e acqua",
+      "Dei vestiti"
+     ]
+    }
+   ]
+  },
+  {
+   "key": "it-a2-read-2",
+   "type": "reading",
+   "skill": "reading",
+   "level": "A2",
+   "title": {
+    "en": "A new job",
+    "ar": "عمل جديد"
+   },
+   "text": "Daniele ha cominciato un nuovo lavoro lunedì. Prima lavorava in un piccolo negozio, ma ora lavora in un ufficio in centro. Il primo giorno era nervoso, ma i colleghi sono stati molto gentili. Adesso va al lavoro in metropolitana e ci mette venti minuti.",
+   "questions": [
+    {
+     "p": "Dove lavorava Daniele prima?",
+     "o": [
+      "In un piccolo negozio",
+      "In un ufficio",
+      "In metropolitana",
+      "In centro"
+     ]
+    },
+    {
+     "p": "Come si sentiva il primo giorno?",
+     "o": [
+      "Nervoso",
+      "Stanco",
+      "Annoiato",
+      "Arrabbiato"
+     ]
+    },
+    {
+     "p": "Quanto ci mette per arrivare al lavoro?",
+     "o": [
+      "Venti minuti",
+      "Un'ora",
+      "Dieci minuti",
+      "Due ore"
+     ]
+    }
+   ]
+  },
+  {
+   "key": "it-a1-listen-1",
+   "type": "listening",
+   "skill": "listening",
+   "level": "A1",
+   "title": {
+    "en": "At the café",
+    "ar": "في المقهى"
+   },
+   "text": "Buongiorno. Vorrei un cappuccino e un cornetto, per favore. Quant'è? Sono quattro euro e cinquanta.",
+   "questions": [
+    {
+     "p": "Che cosa beve la persona?",
+     "o": [
+      "Un cappuccino",
+      "Un tè",
+      "Dell'acqua",
+      "Un succo d'arancia"
+     ]
+    },
+    {
+     "p": "Che cosa mangia?",
+     "o": [
+      "Un cornetto",
+      "Della frutta",
+      "Un'insalata",
+      "Niente"
+     ]
+    },
+    {
+     "p": "Quanto costa?",
+     "o": [
+      "Quattro euro e cinquanta",
+      "Cinque euro",
+      "Quattro euro",
+      "Tre euro e cinquanta"
+     ]
+    }
+   ]
+  },
+  {
+   "key": "it-a1-dictation",
+   "type": "dictation",
+   "skill": "listening",
+   "level": "A1",
+   "questions": [
+    {
+     "a": [
+      "Mi chiamo Anna e sono di Napoli."
+     ]
+    },
+    {
+     "a": [
+      "La mia casa è piccola."
+     ]
+    },
+    {
+     "a": [
+      "Noi studiamo la sera."
+     ]
+    }
+   ]
+  }
+ ],
+ "course": {
+  "slug": "it-foundations",
+  "level_from": "PRE_A1",
+  "level_to": "A2",
+  "title": {
+   "en": "Italian foundations",
+   "ar": "أساسيات الإيطالية"
+  },
+  "description": {
+   "en": "Your first steps in Italian: introductions, everyday objects, routines and likes.",
+   "ar": "خطواتك الأولى في الإيطالية: التعارف والأشياء اليومية والروتين وما تحبه."
+  },
+  "units": [
+   {
+    "title": {
+     "en": "First steps",
+     "ar": "الخطوات الأولى"
+    },
+    "lessons": [
+     {
+      "key": "it-u1-l1",
+      "skill": "grammar",
+      "level": "A1",
+      "topic": "essere_present",
+      "minutes": 12,
+      "title": {
+       "en": "Who are you?",
+       "ar": "من أنت؟"
+      },
+      "intro": {
+       "en": "Introduce yourself and others, and learn your first greetings.",
+       "ar": "عرّف بنفسك وبالآخرين وتعلّم أولى عبارات التحية."
+      },
+      "objectives": [
+       {
+        "code": "it.a1.introduce",
+        "skill": "speaking",
+        "text": {
+         "en": "Introduce yourself and say where you are from",
+         "ar": "التعريف بنفسك وذكر بلدك"
+        }
+       },
+       {
+        "code": "it.a1.essere_present",
+        "skill": "grammar",
+        "text": {
+         "en": "Use the key verb or structure for describing people",
+         "ar": "استخدام التركيب الأساسي لوصف الأشخاص"
+        }
+       }
+      ],
+      "words": [
+       "ciao",
+       "arrivederci",
+       "grazie",
+       "amico",
+       "famiglia",
+       "città"
+      ],
+      "exercises": [
+       "it-a1-essere-cloze",
+       "it-a1-order"
+      ]
+     },
+     {
+      "key": "it-u1-l2",
+      "skill": "grammar",
+      "level": "A1",
+      "topic": "article_gender",
+      "minutes": 12,
+      "title": {
+       "en": "Things around you",
+       "ar": "الأشياء من حولك"
+      },
+      "intro": {
+       "en": "Name everyday objects and describe them correctly.",
+       "ar": "سمِّ الأشياء اليومية وصِفها بشكل صحيح."
+      },
+      "objectives": [
+       {
+        "code": "it.a1.article_gender",
+        "skill": "grammar",
+        "text": {
+         "en": "Match nouns with the right articles and adjectives",
+         "ar": "مطابقة الأسماء مع أدوات التعريف والصفات الصحيحة"
+        }
+       },
+       {
+        "code": "it.a1.objects",
+        "skill": "vocabulary",
+        "text": {
+         "en": "Name common objects, food and drinks",
+         "ar": "تسمية الأشياء والأطعمة والمشروبات الشائعة"
+        }
+       }
+      ],
+      "words": [
+       "casa",
+       "libro",
+       "tavolo",
+       "caffè",
+       "acqua",
+       "pane",
+       "grande",
+       "piccolo"
+      ],
+      "exercises": [
+       "it-a1-articles-mcq",
+       "it-a1-vocab-mcq"
+      ]
+     }
+    ]
+   },
+   {
+    "title": {
+     "en": "Everyday life",
+     "ar": "الحياة اليومية"
+    },
+    "lessons": [
+     {
+      "key": "it-u2-l1",
+      "skill": "grammar",
+      "level": "A1",
+      "topic": "present_are",
+      "minutes": 15,
+      "title": {
+       "en": "What do you do?",
+       "ar": "ماذا تفعل؟"
+      },
+      "intro": {
+       "en": "Talk about work, study and daily routines in the present tense.",
+       "ar": "تحدّث عن العمل والدراسة والروتين اليومي بصيغة المضارع."
+      },
+      "objectives": [
+       {
+        "code": "it.a1.routine",
+        "skill": "speaking",
+        "text": {
+         "en": "Describe your daily routine",
+         "ar": "وصف روتينك اليومي"
+        }
+       },
+       {
+        "code": "it.a1.read_family",
+        "skill": "reading",
+        "text": {
+         "en": "Understand a short text about a family",
+         "ar": "فهم نص قصير عن عائلة"
+        }
+       }
+      ],
+      "words": [
+       "parlare",
+       "lavorare",
+       "studiare",
+       "comprare",
+       "lavoro",
+       "giorno",
+       "notte"
+      ],
+      "exercises": [
+       "it-a1-are-cloze",
+       "it-a1-read-1",
+       "it-a1-dictation"
+      ]
+     },
+     {
+      "key": "it-u2-l2",
+      "skill": "grammar",
+      "level": "A1",
+      "topic": "piacere",
+      "minutes": 15,
+      "title": {
+       "en": "Likes and plans",
+       "ar": "ما تحبه وخططك"
+      },
+      "intro": {
+       "en": "Say what you like and understand short everyday conversations.",
+       "ar": "عبّر عمّا تحبه وافهم محادثات يومية قصيرة."
+      },
+      "objectives": [
+       {
+        "code": "it.a1.piacere",
+        "skill": "grammar",
+        "text": {
+         "en": "Use the lesson's grammar to talk about everyday things",
+         "ar": "استخدام قاعدة الدرس للحديث عن الأمور اليومية"
+        }
+       },
+       {
+        "code": "it.a1.cafe",
+        "skill": "listening",
+        "text": {
+         "en": "Understand a simple order in a café",
+         "ar": "فهم طلب بسيط في مقهى"
+        }
+       }
+      ],
+      "words": [
+       "buono",
+       "mercato",
+       "negozio"
+      ],
+      "exercises": [
+       "it-a1-piacere-mcq",
+       "it-a1-listen-1",
+       "it-a2-read-2"
+      ]
+     }
+    ]
+   }
+  ]
+ }
+}

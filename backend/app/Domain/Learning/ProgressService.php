@@ -2,10 +2,15 @@
 
 namespace App\Domain\Learning;
 
+use App\Domain\Vocabulary\VocabularyService;
 use App\Models\AssessmentAttempt;
+use App\Models\ExerciseAttempt;
+use App\Models\GrammarMastery;
 use App\Models\LearnerProfile;
 use App\Models\LearningPlanItem;
 use App\Models\LearningSession;
+use App\Models\UserProgress;
+use App\Models\UserVocabulary;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 
@@ -51,6 +56,51 @@ class ProgressService
         return ['current_days' => $current, 'studied_today' => isset($daily[$today->toDateString()])];
     }
 
+    /**
+     * Practice accuracy per skill over the last 30 days, from recorded answers only.
+     *
+     * @return array<string, array{answered:int, correct:int, accuracy:?float}>
+     */
+    public function skillAccuracy(LearnerProfile $profile): array
+    {
+        return UserProgress::query()
+            ->join('skills', 'skills.id', '=', 'user_progress.skill_id')
+            ->where('learner_profile_id', $profile->id)
+            ->where('date', '>=', now()->subDays(30)->toDateString())
+            ->groupBy('skills.slug')
+            ->selectRaw('skills.slug, sum(questions_answered) as answered, sum(questions_correct) as correct')
+            ->get()
+            ->mapWithKeys(fn ($r) => [$r->slug => [
+                'answered' => (int) $r->answered,
+                'correct' => (int) $r->correct,
+                'accuracy' => $r->answered > 0 ? round($r->correct / $r->answered, 3) : null,
+            ]])->all();
+    }
+
+    /** @return list<array<string, int|string>> one row per day with questions answered per skill */
+    public function dailySkillActivity(LearnerProfile $profile, int $days): array
+    {
+        $tz = $this->timezone($profile);
+        $rows = UserProgress::query()->join('skills', 'skills.id', '=', 'user_progress.skill_id')
+            ->where('learner_profile_id', $profile->id)
+            ->where('date', '>=', Carbon::now($tz)->subDays($days - 1)->toDateString())
+            ->get(['date', 'skills.slug', 'questions_answered', 'words_reviewed']);
+
+        $series = [];
+        for ($i = $days - 1; $i >= 0; $i--) {
+            $date = Carbon::now($tz)->subDays($i)->toDateString();
+            $series[$date] = ['date' => $date];
+        }
+        foreach ($rows as $r) {
+            $date = $r->date->toDateString();
+            if (isset($series[$date])) {
+                $series[$date][$r->slug] = ($series[$date][$r->slug] ?? 0) + $r->questions_answered + $r->words_reviewed;
+            }
+        }
+
+        return array_values($series);
+    }
+
     public function dashboard(LearnerProfile $profile): array
     {
         $tz = $this->timezone($profile);
@@ -82,6 +132,7 @@ class ProgressService
             'streak' => $this->streak($profile),
             'skills' => $profile->skillProfiles()->with(['skill', 'level'])->get(),
             'latest_attempt' => $latestAttempt,
+            'vocabulary_due' => UserVocabulary::where('learner_profile_id', $profile->id)->where('due_at', '<=', now())->count(),
         ];
     }
 
@@ -118,6 +169,18 @@ class ProgressService
             'practice_by_skill' => $completedBySkill,
             'streak' => $this->streak($profile),
             'total_minutes' => round(LearningSession::where('learner_profile_id', $profile->id)->sum('active_seconds') / 60, 1),
+            'skill_accuracy' => $this->skillAccuracy($profile),
+            'daily_skill_activity' => $this->dailySkillActivity($profile, 30),
+            'vocabulary' => app(VocabularyService::class)->summary($profile),
+            'grammar' => [
+                'topics_practised' => GrammarMastery::where('learner_profile_id', $profile->id)->count(),
+                'topics_mastered' => GrammarMastery::where('learner_profile_id', $profile->id)->where('answers_total', '>=', 3)->where('mastery', '>=', 0.8)->count(),
+            ],
+            'reading' => [
+                'recent_wpm' => ExerciseAttempt::where('learner_profile_id', $profile->id)->whereNotNull('words_per_minute')
+                    ->latest('completed_at')->limit(5)->pluck('words_per_minute')->reverse()->values(),
+            ],
+            'exercises_completed' => ExerciseAttempt::where('learner_profile_id', $profile->id)->where('status', 'completed')->count(),
             'attempts' => $profile->assessmentAttempts()->where('status', AssessmentAttempt::STATUS_COMPLETED)
                 ->with(['overallLevel', 'sections.skill', 'sections.estimatedLevel'])->latest('completed_at')->get(),
         ];

@@ -12,9 +12,9 @@ class PlanItemResource extends JsonResource
 {
     public function toArray(Request $request): array
     {
-        $this->resource->loadMissing(['skill', 'targetLevel', 'version.plan.learnerProfile.targetLanguage']);
+        $this->resource->loadMissing(['skill', 'targetLevel', 'lesson', 'exercise', 'version.plan.learnerProfile.targetLanguage']);
         // Rendered in the reader's current locale from structured fields.
-        $text = app(PlanText::class)->forItem($this->resource, $this->version->plan->learnerProfile->targetLanguage->name);
+        $text = app(PlanText::class)->forItem($this->resource, $this->version->plan->learnerProfile->targetLanguage);
 
         return [
             'id' => $this->public_id,
@@ -23,6 +23,8 @@ class PlanItemResource extends JsonResource
             'skill' => $this->skill?->slug,
             'activity_type' => $this->activity_type,
             'topic' => $this->topic,
+            'lesson_id' => $this->lesson?->public_id,
+            'exercise_id' => $this->exercise?->public_id,
             'title' => $text['title'],
             'objective' => $text['objective'],
             'target_level' => $this->targetLevel ? new LevelResource($this->targetLevel) : null,

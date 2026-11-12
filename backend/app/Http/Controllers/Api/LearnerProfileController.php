@@ -71,6 +71,7 @@ class LearnerProfileController extends Controller
             'streak' => $data['streak'],
             'skills' => SkillProfileResource::collection($data['skills']),
             'latest_attempt' => $data['latest_attempt'] ? new AssessmentAttemptResource($data['latest_attempt']) : null,
+            'vocabulary_due' => $data['vocabulary_due'],
         ]]);
     }
 
@@ -85,6 +86,12 @@ class LearnerProfileController extends Controller
             'practice_by_skill' => $data['practice_by_skill'],
             'streak' => $data['streak'],
             'total_minutes' => $data['total_minutes'],
+            'skill_accuracy' => $data['skill_accuracy'],
+            'daily_skill_activity' => $data['daily_skill_activity'],
+            'vocabulary' => $data['vocabulary'],
+            'grammar' => $data['grammar'],
+            'reading' => $data['reading'],
+            'exercises_completed' => $data['exercises_completed'],
             'attempts' => $data['attempts']->map(fn ($a) => [
                 'id' => $a->public_id,
                 'completed_at' => $a->completed_at->toIso8601String(),

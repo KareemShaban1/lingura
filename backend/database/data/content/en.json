@@ -1,0 +1,1081 @@
+{
+ "language": "en",
+ "topics": [
+  {
+   "slug": "verb_to_be",
+   "level": "A1",
+   "title": {
+    "en": "The verb to be (present)",
+    "ar": "فعل الكينونة to be في المضارع"
+   },
+   "explanation": {
+    "en": "Use am, is and are to say who or what someone is, where they are from and how they are: I am, you are, he/she/it is, we are, they are. Short forms: I'm, you're, she's.",
+    "ar": "استخدم am وis وare لتقول من هو الشخص ومن أين هو وكيف حاله: I am وyou are وhe/she/it is وwe are وthey are. الصيغ المختصرة: I'm وyou're وshe's."
+   },
+   "examples": [
+    [
+     "I am from Egypt.",
+     "أنا من مصر."
+    ],
+    [
+     "She is a doctor.",
+     "هي طبيبة."
+    ],
+    [
+     "We are friends.",
+     "نحن أصدقاء."
+    ]
+   ]
+  },
+  {
+   "slug": "articles",
+   "level": "A1",
+   "title": {
+    "en": "Articles: a, an, the",
+    "ar": "أدوات التنكير والتعريف a وan وthe"
+   },
+   "explanation": {
+    "en": "Use a before consonant sounds and an before vowel sounds for one thing mentioned for the first time. Use the for something specific or already known. There is no article before most plural or uncountable nouns in general statements.",
+    "ar": "استخدم a قبل الأصوات الساكنة وan قبل الأصوات المتحركة عند ذكر شيء واحد لأول مرة. واستخدم the للشيء المحدد أو المعروف. لا نستخدم أداة قبل معظم أسماء الجمع أو الأسماء غير المعدودة في العبارات العامة."
+   },
+   "examples": [
+    [
+     "a book, an apple",
+     "كتاب، تفاحة"
+    ],
+    [
+     "The sun is hot.",
+     "الشمس حارة."
+    ],
+    [
+     "I like coffee.",
+     "أحب القهوة."
+    ]
+   ]
+  },
+  {
+   "slug": "present_simple",
+   "level": "A1",
+   "title": {
+    "en": "Present simple",
+    "ar": "المضارع البسيط"
+   },
+   "explanation": {
+    "en": "Use the present simple for habits and facts. Add -s or -es after he, she and it: I work → she works, I study → he studies. Questions and negatives use do/does: Do you work? She doesn't work.",
+    "ar": "يُستخدم المضارع البسيط للعادات والحقائق. أضف -s أو -es مع he وshe وit: I work ← she works، وI study ← he studies. وفي السؤال والنفي نستخدم do/does."
+   },
+   "examples": [
+    [
+     "She works in a shop.",
+     "هي تعمل في متجر."
+    ],
+    [
+     "He studies at night.",
+     "هو يدرس في الليل."
+    ],
+    [
+     "Do you speak English?",
+     "هل تتكلم الإنجليزية؟"
+    ]
+   ]
+  },
+  {
+   "slug": "like_ing",
+   "level": "A1",
+   "title": {
+    "en": "Talking about likes: like + -ing",
+    "ar": "التعبير عمّا تحبه: like مع -ing"
+   },
+   "explanation": {
+    "en": "Use like + noun or like + verb-ing to talk about things you enjoy: I like coffee. I like reading. With he/she/it use likes; for negatives use don't/doesn't like.",
+    "ar": "استخدم like مع اسم أو مع الفعل المنتهي بـ -ing للتعبير عمّا تستمتع به. ومع he/she/it نستخدم likes، وفي النفي don't/doesn't like."
+   },
+   "examples": [
+    [
+     "I like reading.",
+     "أحب القراءة."
+    ],
+    [
+     "She doesn't like tea.",
+     "هي لا تحب الشاي."
+    ],
+    [
+     "Do you like big cities?",
+     "هل تحب المدن الكبيرة؟"
+    ]
+   ]
+  }
+ ],
+ "words": [
+  {
+   "lemma": "hello",
+   "pos": "interj",
+   "level": "A1",
+   "meaning": {
+    "en": "hello",
+    "ar": "مرحبًا"
+   },
+   "example": [
+    "Hello! How are you?"
+   ]
+  },
+  {
+   "lemma": "goodbye",
+   "pos": "interj",
+   "level": "A1",
+   "meaning": {
+    "en": "goodbye",
+    "ar": "مع السلامة"
+   },
+   "example": [
+    "Goodbye, see you tomorrow."
+   ]
+  },
+  {
+   "lemma": "thanks",
+   "pos": "interj",
+   "level": "A1",
+   "meaning": {
+    "en": "thank you",
+    "ar": "شكرًا"
+   },
+   "example": [
+    "Thanks for your help."
+   ],
+   "forms": [
+    "thank you"
+   ]
+  },
+  {
+   "lemma": "friend",
+   "pos": "noun",
+   "level": "A1",
+   "meaning": {
+    "en": "friend",
+    "ar": "صديق"
+   },
+   "example": [
+    "My friend lives in Dubai."
+   ],
+   "forms": [
+    "friends"
+   ]
+  },
+  {
+   "lemma": "house",
+   "pos": "noun",
+   "level": "A1",
+   "meaning": {
+    "en": "house",
+    "ar": "بيت"
+   },
+   "example": [
+    "My house is small."
+   ],
+   "forms": [
+    "houses"
+   ]
+  },
+  {
+   "lemma": "family",
+   "pos": "noun",
+   "level": "A1",
+   "meaning": {
+    "en": "family",
+    "ar": "عائلة"
+   },
+   "example": [
+    "My family is big."
+   ],
+   "forms": [
+    "families"
+   ]
+  },
+  {
+   "lemma": "book",
+   "pos": "noun",
+   "level": "A1",
+   "meaning": {
+    "en": "book",
+    "ar": "كتاب"
+   },
+   "example": [
+    "I'm reading a book."
+   ],
+   "forms": [
+    "books"
+   ]
+  },
+  {
+   "lemma": "table",
+   "pos": "noun",
+   "level": "A1",
+   "meaning": {
+    "en": "table",
+    "ar": "طاولة"
+   },
+   "example": [
+    "The coffee is on the table."
+   ],
+   "forms": [
+    "tables"
+   ]
+  },
+  {
+   "lemma": "coffee",
+   "pos": "noun",
+   "level": "A1",
+   "meaning": {
+    "en": "coffee",
+    "ar": "قهوة"
+   },
+   "example": [
+    "I drink coffee in the morning."
+   ]
+  },
+  {
+   "lemma": "water",
+   "pos": "noun",
+   "level": "A1",
+   "meaning": {
+    "en": "water",
+    "ar": "ماء"
+   },
+   "example": [
+    "Can I have some water?"
+   ]
+  },
+  {
+   "lemma": "bread",
+   "pos": "noun",
+   "level": "A1",
+   "meaning": {
+    "en": "bread",
+    "ar": "خبز"
+   },
+   "example": [
+    "I buy bread every day."
+   ]
+  },
+  {
+   "lemma": "job",
+   "pos": "noun",
+   "level": "A1",
+   "meaning": {
+    "en": "job, work",
+    "ar": "وظيفة"
+   },
+   "example": [
+    "My job is interesting."
+   ],
+   "forms": [
+    "jobs"
+   ]
+  },
+  {
+   "lemma": "city",
+   "pos": "noun",
+   "level": "A1",
+   "meaning": {
+    "en": "city",
+    "ar": "مدينة"
+   },
+   "example": [
+    "Cairo is a big city."
+   ],
+   "forms": [
+    "cities"
+   ]
+  },
+  {
+   "lemma": "day",
+   "pos": "noun",
+   "level": "A1",
+   "meaning": {
+    "en": "day",
+    "ar": "يوم"
+   },
+   "example": [
+    "Today is a good day."
+   ],
+   "forms": [
+    "days"
+   ]
+  },
+  {
+   "lemma": "night",
+   "pos": "noun",
+   "level": "A1",
+   "meaning": {
+    "en": "night",
+    "ar": "ليل"
+   },
+   "example": [
+    "I study at night."
+   ],
+   "forms": [
+    "nights"
+   ]
+  },
+  {
+   "lemma": "big",
+   "pos": "adj",
+   "level": "A1",
+   "meaning": {
+    "en": "big",
+    "ar": "كبير"
+   },
+   "example": [
+    "It's a big house."
+   ],
+   "forms": [
+    "bigger",
+    "biggest"
+   ],
+   "ant": [
+    "small"
+   ]
+  },
+  {
+   "lemma": "small",
+   "pos": "adj",
+   "level": "A1",
+   "meaning": {
+    "en": "small",
+    "ar": "صغير"
+   },
+   "example": [
+    "I have a small car."
+   ],
+   "forms": [
+    "smaller",
+    "smallest"
+   ],
+   "ant": [
+    "big"
+   ]
+  },
+  {
+   "lemma": "good",
+   "pos": "adj",
+   "level": "A1",
+   "meaning": {
+    "en": "good",
+    "ar": "جيد"
+   },
+   "example": [
+    "It's a very good book."
+   ],
+   "forms": [
+    "better",
+    "best"
+   ],
+   "ant": [
+    "bad"
+   ]
+  },
+  {
+   "lemma": "speak",
+   "pos": "verb",
+   "level": "A1",
+   "meaning": {
+    "en": "to speak",
+    "ar": "يتكلّم"
+   },
+   "example": [
+    "I speak Arabic and English."
+   ],
+   "forms": [
+    "speaks",
+    "spoke",
+    "speaking"
+   ]
+  },
+  {
+   "lemma": "study",
+   "pos": "verb",
+   "level": "A1",
+   "meaning": {
+    "en": "to study",
+    "ar": "يدرس"
+   },
+   "example": [
+    "We study together."
+   ],
+   "forms": [
+    "studies",
+    "studied",
+    "studying"
+   ]
+  },
+  {
+   "lemma": "buy",
+   "pos": "verb",
+   "level": "A1",
+   "meaning": {
+    "en": "to buy",
+    "ar": "يشتري"
+   },
+   "example": [
+    "I buy fruit at the market."
+   ],
+   "forms": [
+    "buys",
+    "bought",
+    "buying"
+   ]
+  },
+  {
+   "lemma": "learn",
+   "pos": "verb",
+   "level": "A1",
+   "meaning": {
+    "en": "to learn",
+    "ar": "يتعلّم"
+   },
+   "example": [
+    "She learns very fast."
+   ],
+   "forms": [
+    "learns",
+    "learned",
+    "learnt",
+    "learning"
+   ]
+  },
+  {
+   "lemma": "market",
+   "pos": "noun",
+   "level": "A1",
+   "meaning": {
+    "en": "market",
+    "ar": "سوق"
+   },
+   "example": [
+    "The market opens at eight."
+   ],
+   "forms": [
+    "markets"
+   ]
+  },
+  {
+   "lemma": "shop",
+   "pos": "noun",
+   "level": "A1",
+   "meaning": {
+    "en": "shop",
+    "ar": "متجر"
+   },
+   "example": [
+    "The shop is closed."
+   ],
+   "forms": [
+    "shops"
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "key": "en-a1-be-cloze",
+   "type": "cloze",
+   "skill": "grammar",
+   "level": "A1",
+   "topic": "verb_to_be",
+   "questions": [
+    {
+     "p": "I ___ from Egypt.",
+     "a": [
+      "am",
+      "'m"
+     ]
+    },
+    {
+     "p": "You ___ a good student.",
+     "a": [
+      "are",
+      "'re"
+     ]
+    },
+    {
+     "p": "She ___ my sister.",
+     "a": [
+      "is",
+      "'s"
+     ]
+    },
+    {
+     "p": "They ___ at home today.",
+     "a": [
+      "are",
+      "'re"
+     ]
+    }
+   ]
+  },
+  {
+   "key": "en-a1-articles-mcq",
+   "type": "mcq",
+   "skill": "grammar",
+   "level": "A1",
+   "questions": [
+    {
+     "p": "I eat ___ apple every day.",
+     "o": [
+      "an",
+      "a",
+      "any",
+      "much"
+     ]
+    },
+    {
+     "p": "She is ___ doctor.",
+     "o": [
+      "a",
+      "an",
+      "any",
+      "much"
+     ]
+    },
+    {
+     "p": "___ sun is very hot today.",
+     "o": [
+      "The",
+      "A",
+      "An",
+      "Some"
+     ]
+    },
+    {
+     "p": "There is ___ old book on the table.",
+     "o": [
+      "an",
+      "a",
+      "any",
+      "many"
+     ]
+    }
+   ],
+   "topic": "articles"
+  },
+  {
+   "key": "en-a1-present-cloze",
+   "type": "cloze",
+   "skill": "grammar",
+   "level": "A1",
+   "topic": "present_simple",
+   "questions": [
+    {
+     "p": "She ___ (work) in a shop.",
+     "a": [
+      "works"
+     ]
+    },
+    {
+     "p": "He ___ (study) English at night.",
+     "a": [
+      "studies"
+     ]
+    },
+    {
+     "p": "We ___ (buy) bread every day.",
+     "a": [
+      "buy"
+     ]
+    },
+    {
+     "p": "My friend ___ (speak) three languages.",
+     "a": [
+      "speaks"
+     ]
+    }
+   ]
+  },
+  {
+   "key": "en-a1-like-mcq",
+   "type": "mcq",
+   "skill": "grammar",
+   "level": "A1",
+   "questions": [
+    {
+     "p": "I like ___ books.",
+     "o": [
+      "reading",
+      "read to",
+      "reads",
+      "readed"
+     ]
+    },
+    {
+     "p": "She ___ like tea.",
+     "o": [
+      "doesn't",
+      "don't",
+      "isn't",
+      "not"
+     ]
+    },
+    {
+     "p": "___ you like big cities?",
+     "o": [
+      "Do",
+      "Does",
+      "Are",
+      "Is"
+     ]
+    },
+    {
+     "p": "My brother likes ___ football.",
+     "o": [
+      "playing",
+      "plays",
+      "to playing",
+      "played"
+     ]
+    }
+   ],
+   "topic": "like_ing"
+  },
+  {
+   "key": "en-a1-vocab-mcq",
+   "type": "mcq",
+   "skill": "vocabulary",
+   "level": "A1",
+   "questions": [
+    {
+     "p": "I drink a glass of ___.",
+     "o": [
+      "water",
+      "bread",
+      "table",
+      "book"
+     ]
+    },
+    {
+     "p": "The opposite of \"big\" is ___.",
+     "o": [
+      "small",
+      "good",
+      "tall",
+      "new"
+     ]
+    },
+    {
+     "p": "I buy fruit at the ___.",
+     "o": [
+      "market",
+      "book",
+      "night",
+      "job"
+     ]
+    },
+    {
+     "p": "I read a ___ before bed.",
+     "o": [
+      "book",
+      "bread",
+      "water",
+      "day"
+     ]
+    },
+    {
+     "p": "In the morning I have a cup of ___.",
+     "o": [
+      "coffee",
+      "table",
+      "city",
+      "night"
+     ]
+    }
+   ]
+  },
+  {
+   "key": "en-a1-order",
+   "type": "ordering",
+   "skill": "grammar",
+   "level": "A1",
+   "questions": [
+    {
+     "o": [
+      "I",
+      "am",
+      "from",
+      "Egypt"
+     ]
+    },
+    {
+     "o": [
+      "She",
+      "works",
+      "in",
+      "a",
+      "shop"
+     ]
+    },
+    {
+     "o": [
+      "Do",
+      "you",
+      "like",
+      "coffee"
+     ]
+    }
+   ]
+  },
+  {
+   "key": "en-a1-read-1",
+   "type": "reading",
+   "skill": "reading",
+   "level": "A1",
+   "title": {
+    "en": "Omar's family",
+    "ar": "عائلة عمر"
+   },
+   "text": "My name is Omar and I live in Alexandria with my family. My father works in a hospital and my mother is a teacher. I have a little sister, Nour. On Saturdays we buy bread and fruit at the market.",
+   "questions": [
+    {
+     "p": "Where does Omar live?",
+     "o": [
+      "In Alexandria",
+      "In Cairo",
+      "In a hospital",
+      "At the market"
+     ]
+    },
+    {
+     "p": "What does Omar's mother do?",
+     "o": [
+      "She is a teacher",
+      "She works in a hospital",
+      "She works at the market",
+      "She is a student"
+     ]
+    },
+    {
+     "p": "What do they buy on Saturdays?",
+     "o": [
+      "Bread and fruit",
+      "Books",
+      "Coffee and water",
+      "Clothes"
+     ]
+    }
+   ]
+  },
+  {
+   "key": "en-a2-read-2",
+   "type": "reading",
+   "skill": "reading",
+   "level": "A2",
+   "title": {
+    "en": "A new job",
+    "ar": "وظيفة جديدة"
+   },
+   "text": "Daniel started a new job on Monday. Before, he worked in a small shop, but now he works in an office in the city centre. On his first day he was nervous, but his colleagues were very friendly. Now he goes to work by train and the journey takes twenty minutes.",
+   "questions": [
+    {
+     "p": "Where did Daniel work before?",
+     "o": [
+      "In a small shop",
+      "In an office",
+      "On a train",
+      "In the city centre"
+     ]
+    },
+    {
+     "p": "How did he feel on his first day?",
+     "o": [
+      "Nervous",
+      "Tired",
+      "Bored",
+      "Angry"
+     ]
+    },
+    {
+     "p": "How long does his journey take?",
+     "o": [
+      "Twenty minutes",
+      "An hour",
+      "Ten minutes",
+      "Two hours"
+     ]
+    }
+   ]
+  },
+  {
+   "key": "en-a1-listen-1",
+   "type": "listening",
+   "skill": "listening",
+   "level": "A1",
+   "title": {
+    "en": "At the café",
+    "ar": "في المقهى"
+   },
+   "text": "Good morning. Can I have a coffee with milk and a cheese sandwich, please? How much is that? That's four pounds fifty.",
+   "questions": [
+    {
+     "p": "What does the person drink?",
+     "o": [
+      "A coffee with milk",
+      "A tea",
+      "Water",
+      "Orange juice"
+     ]
+    },
+    {
+     "p": "What does the person eat?",
+     "o": [
+      "A cheese sandwich",
+      "Fruit",
+      "A salad",
+      "Nothing"
+     ]
+    },
+    {
+     "p": "How much does it cost?",
+     "o": [
+      "Four pounds fifty",
+      "Five pounds",
+      "Four pounds",
+      "Three pounds fifty"
+     ]
+    }
+   ]
+  },
+  {
+   "key": "en-a1-dictation",
+   "type": "dictation",
+   "skill": "listening",
+   "level": "A1",
+   "questions": [
+    {
+     "a": [
+      "My name is Sara and I am from Jordan."
+     ]
+    },
+    {
+     "a": [
+      "My house is small."
+     ]
+    },
+    {
+     "a": [
+      "We study English at night."
+     ]
+    }
+   ]
+  }
+ ],
+ "course": {
+  "slug": "en-foundations",
+  "level_from": "PRE_A1",
+  "level_to": "A2",
+  "title": {
+   "en": "English foundations",
+   "ar": "أساسيات الإنجليزية"
+  },
+  "description": {
+   "en": "Your first steps in English: introductions, everyday objects, routines and likes.",
+   "ar": "خطواتك الأولى في الإنجليزية: التعارف والأشياء اليومية والروتين وما تحبه."
+  },
+  "units": [
+   {
+    "title": {
+     "en": "First steps",
+     "ar": "الخطوات الأولى"
+    },
+    "lessons": [
+     {
+      "key": "en-u1-l1",
+      "skill": "grammar",
+      "level": "A1",
+      "topic": "verb_to_be",
+      "minutes": 12,
+      "title": {
+       "en": "Who are you?",
+       "ar": "من أنت؟"
+      },
+      "intro": {
+       "en": "Introduce yourself and others, and learn your first greetings.",
+       "ar": "عرّف بنفسك وبالآخرين وتعلّم أولى عبارات التحية."
+      },
+      "objectives": [
+       {
+        "code": "en.a1.introduce",
+        "skill": "speaking",
+        "text": {
+         "en": "Introduce yourself and say where you are from",
+         "ar": "التعريف بنفسك وذكر بلدك"
+        }
+       },
+       {
+        "code": "en.a1.verb_to_be",
+        "skill": "grammar",
+        "text": {
+         "en": "Use the key verb or structure for describing people",
+         "ar": "استخدام التركيب الأساسي لوصف الأشخاص"
+        }
+       }
+      ],
+      "words": [
+       "hello",
+       "goodbye",
+       "thanks",
+       "friend",
+       "family",
+       "city"
+      ],
+      "exercises": [
+       "en-a1-be-cloze",
+       "en-a1-order"
+      ]
+     },
+     {
+      "key": "en-u1-l2",
+      "skill": "grammar",
+      "level": "A1",
+      "topic": "articles",
+      "minutes": 12,
+      "title": {
+       "en": "Things around you",
+       "ar": "الأشياء من حولك"
+      },
+      "intro": {
+       "en": "Name everyday objects and describe them correctly.",
+       "ar": "سمِّ الأشياء اليومية وصِفها بشكل صحيح."
+      },
+      "objectives": [
+       {
+        "code": "en.a1.articles",
+        "skill": "grammar",
+        "text": {
+         "en": "Match nouns with the right articles and adjectives",
+         "ar": "مطابقة الأسماء مع أدوات التعريف والصفات الصحيحة"
+        }
+       },
+       {
+        "code": "en.a1.objects",
+        "skill": "vocabulary",
+        "text": {
+         "en": "Name common objects, food and drinks",
+         "ar": "تسمية الأشياء والأطعمة والمشروبات الشائعة"
+        }
+       }
+      ],
+      "words": [
+       "house",
+       "book",
+       "table",
+       "coffee",
+       "water",
+       "bread",
+       "big",
+       "small"
+      ],
+      "exercises": [
+       "en-a1-articles-mcq",
+       "en-a1-vocab-mcq"
+      ]
+     }
+    ]
+   },
+   {
+    "title": {
+     "en": "Everyday life",
+     "ar": "الحياة اليومية"
+    },
+    "lessons": [
+     {
+      "key": "en-u2-l1",
+      "skill": "grammar",
+      "level": "A1",
+      "topic": "present_simple",
+      "minutes": 15,
+      "title": {
+       "en": "What do you do?",
+       "ar": "ماذا تفعل؟"
+      },
+      "intro": {
+       "en": "Talk about work, study and daily routines in the present tense.",
+       "ar": "تحدّث عن العمل والدراسة والروتين اليومي بصيغة المضارع."
+      },
+      "objectives": [
+       {
+        "code": "en.a1.routine",
+        "skill": "speaking",
+        "text": {
+         "en": "Describe your daily routine",
+         "ar": "وصف روتينك اليومي"
+        }
+       },
+       {
+        "code": "en.a1.read_family",
+        "skill": "reading",
+        "text": {
+         "en": "Understand a short text about a family",
+         "ar": "فهم نص قصير عن عائلة"
+        }
+       }
+      ],
+      "words": [
+       "speak",
+       "study",
+       "buy",
+       "learn",
+       "job",
+       "day",
+       "night"
+      ],
+      "exercises": [
+       "en-a1-present-cloze",
+       "en-a1-read-1",
+       "en-a1-dictation"
+      ]
+     },
+     {
+      "key": "en-u2-l2",
+      "skill": "grammar",
+      "level": "A1",
+      "topic": "like_ing",
+      "minutes": 15,
+      "title": {
+       "en": "Likes and plans",
+       "ar": "ما تحبه وخططك"
+      },
+      "intro": {
+       "en": "Say what you like and understand short everyday conversations.",
+       "ar": "عبّر عمّا تحبه وافهم محادثات يومية قصيرة."
+      },
+      "objectives": [
+       {
+        "code": "en.a1.like_ing",
+        "skill": "grammar",
+        "text": {
+         "en": "Use the lesson's grammar to talk about everyday things",
+         "ar": "استخدام قاعدة الدرس للحديث عن الأمور اليومية"
+        }
+       },
+       {
+        "code": "en.a1.cafe",
+        "skill": "listening",
+        "text": {
+         "en": "Understand a simple order in a café",
+         "ar": "فهم طلب بسيط في مقهى"
+        }
+       }
+      ],
+      "words": [
+       "good",
+       "market",
+       "shop"
+      ],
+      "exercises": [
+       "en-a1-like-mcq",
+       "en-a1-listen-1",
+       "en-a2-read-2"
+      ]
+     }
+    ]
+   }
+  ]
+ }
+}

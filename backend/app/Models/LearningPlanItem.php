@@ -41,6 +41,16 @@ class LearningPlanItem extends Model
         return $this->belongsTo(CefrLevel::class, 'target_level_id');
     }
 
+    public function lesson(): BelongsTo
+    {
+        return $this->belongsTo(Lesson::class);
+    }
+
+    public function exercise(): BelongsTo
+    {
+        return $this->belongsTo(Exercise::class);
+    }
+
     public function sessions(): HasMany
     {
         return $this->hasMany(LearningSession::class);
