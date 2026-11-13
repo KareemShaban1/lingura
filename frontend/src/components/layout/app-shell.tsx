@@ -1,17 +1,19 @@
 "use client";
 
-import { Suspense, useEffect } from "react";
+import { Suspense, useCallback, useEffect } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useQueryClient } from "@tanstack/react-query";
 import { useTheme } from "next-themes";
-import { BarChart3, Bot, CreditCard, Dumbbell, Home, Layers, LogOut, Map, Moon, Plus, ShieldCheck, Sun, Trophy, UserRound, type LucideIcon } from "lucide-react";
+import { BarChart3, Bot, CloudOff, CreditCard, Dumbbell, Home, Layers, LogOut, Map, Moon, Plus, ShieldCheck, Sun, Trophy, UserRound, type LucideIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Select } from "@/components/ui/input";
 import { NotificationBell } from "@/features/notifications/notifications";
+import { OfflineSyncer } from "@/features/offline/offline-views";
 import { useActiveProfile, useMe } from "@/features/queries";
 import { api } from "@/lib/api";
 import { setErrorNavigator } from "@/lib/errors";
+import { clearOffline } from "@/lib/offline-store";
 import { useI18n } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 import { useUiStore } from "@/stores/ui-store";
@@ -101,6 +103,7 @@ function SecondaryLinks() {
   const cls = "flex items-center gap-3 rounded-lg px-3 py-2 text-sm text-muted-foreground hover:bg-muted";
   return (
     <>
+      {data?.features.includes("offline") && <Link href="/offline" className={cls}><CloudOff className="size-4" aria-hidden /> {t.offline.title}</Link>}
       {data?.features.includes("billing") && <Link href="/billing" className={cls}><CreditCard className="size-4" aria-hidden /> {t.nav.plan}</Link>}
       {data?.is_staff && <Link href="/admin" className={cls}><ShieldCheck className="size-4" aria-hidden /> {t.nav.admin}</Link>}
     </>
@@ -123,6 +126,7 @@ export function useSignOut() {
   const router = useRouter();
   return async () => {
     await api("/auth/logout", { method: "POST" }).catch(() => undefined);
+    await clearOffline(); // saved lessons and unsynced answers never outlive the session on a shared device
     qc.clear();
     router.replace("/login");
   };
@@ -142,6 +146,8 @@ export function AppShell({ children }: { children: React.ReactNode }) {
   const signOut = useSignOut();
   const router = useRouter();
   useEffect(() => setErrorNavigator((href) => router.push(href)), [router]);
+  const qc = useQueryClient();
+  const onSynced = useCallback(() => qc.invalidateQueries(), [qc]);
   const navFallback = <div className="h-40" />;
 
   return (
@@ -182,6 +188,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
           </div>
         </header>
         <main className="mx-auto w-full max-w-5xl flex-1 px-4 pb-28 pt-6 md:px-8 md:pb-12">{children}</main>
+        <OfflineSyncer onSynced={onSynced} />
       </div>
 
       <nav className="fixed inset-x-0 bottom-0 z-30 flex border-t bg-card/95 pb-[env(safe-area-inset-bottom)] backdrop-blur md:hidden">

@@ -14,7 +14,8 @@ import { Progress } from "@/components/ui/progress";
 import { EmptyState, ErrorState } from "@/components/ui/states";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useActivitySession } from "@/features/practice/use-activity-session";
-import { useActiveProfile, useCourses, useInvalidateProfile, useLesson } from "@/features/queries";
+import { useActiveProfile, useCourses, useInvalidateProfile, useLesson, useMe } from "@/features/queries";
+import { SaveOfflineButton } from "@/features/offline/offline-views";
 import { api } from "@/lib/api";
 import { useI18n } from "@/lib/i18n";
 import type { LessonSummary } from "@/lib/types";
@@ -76,6 +77,7 @@ export function CoursesView() {
 }
 
 export function LessonView() {
+  const me = useMe();
   const { lessonId } = useParams<{ lessonId: string }>();
   const planSession = useSearchParams().get("session");
   const { t } = useI18n();
@@ -114,6 +116,7 @@ export function LessonView() {
       <div>
         <div className="flex items-center gap-2 text-xs text-muted-foreground"><Badge variant="outline" className="font-mono">{l.level.label}</Badge> {l.estimated_minutes} {t.common.minutes}</div>
         <h1 className="mt-2 font-display text-3xl md:text-4xl">{l.title}</h1>
+        {me.data?.features.includes("offline") && profile && <div className="mt-3"><SaveOfflineButton profileId={profile.id} lessonId={l.id} /></div>}
         <p className="mt-2 text-lg text-muted-foreground">{l.intro}</p>
       </div>
 

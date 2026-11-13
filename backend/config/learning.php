@@ -2,7 +2,7 @@
 
 return [
     // Features exposed to the client navigation. Modules not listed are not rendered (no dead buttons).
-    'features' => array_filter(explode(',', env('LF_FEATURES', 'onboarding,assessment,plan,progress,courses,practice,grammar,vocabulary,tutor,writing,billing,rewards,family,exams'))),
+    'features' => array_filter(explode(',', env('LF_FEATURES', 'onboarding,assessment,plan,progress,courses,practice,grammar,vocabulary,tutor,writing,billing,rewards,family,exams,offline'))),
 
     'assessment' => [
         'engine_version' => 'irt_v1',
@@ -59,6 +59,10 @@ return [
         'target_high' => 0.9,
         'prior_weight' => 5,   // max pseudo-observations borrowed from the population
         'unresolved_after_days' => 7, // assigned but never finished → reward 0
+    ],
+
+    'offline' => [
+        'pack_ttl_days' => 30, // packs refresh after this; offline answers are re-checked on sync
     ],
 
     'exams' => [

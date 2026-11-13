@@ -19,6 +19,7 @@ use App\Http\Controllers\Api\LearnerProfileController;
 use App\Http\Controllers\Api\MeController;
 use App\Http\Controllers\Api\MediaController;
 use App\Http\Controllers\Api\NotificationController;
+use App\Http\Controllers\Api\OfflineController;
 use App\Http\Controllers\Api\OpenApiController;
 use App\Http\Controllers\Api\OrganizationController;
 use App\Http\Controllers\Api\PlanController;
@@ -181,6 +182,10 @@ Route::prefix('v1')->group(function () {
         Route::get('me/challenges', [GamificationController::class, 'challenges']);
         Route::get('leaderboards/weekly', [GamificationController::class, 'leaderboard']);
         Route::patch('me/leaderboard', [GamificationController::class, 'updateLeaderboard']);
+
+        // Phase 5 — offline lesson packs
+        Route::get('learner-profiles/{learnerProfile}/lessons/{lesson}/offline-pack', [OfflineController::class, 'pack']);
+        Route::post('learner-profiles/{learnerProfile}/offline-sync', [OfflineController::class, 'sync'])->middleware('throttle:30,1');
 
         // Phase 5 — exam preparation
         Route::get('learner-profiles/{learnerProfile}/exams', [ExamController::class, 'index']);

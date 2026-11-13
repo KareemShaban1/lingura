@@ -283,6 +283,7 @@ export function ProfileView() {
         {me.data.features.includes("billing") && <Button asChild variant="outline" size="sm"><Link href="/billing">{t.nav.plan}</Link></Button>}
         {me.data.features.includes("family") && <Button asChild variant="outline" size="sm"><Link href="/family">{t.family.title}</Link></Button>}
         {me.data.features.includes("rewards") && <Button asChild variant="outline" size="sm"><Link href="/rewards">{t.nav.rewards}</Link></Button>}
+        {me.data.features.includes("offline") && <Button asChild variant="outline" size="sm"><Link href="/offline">{t.offline.title}</Link></Button>}
         {me.data.is_staff && <Button asChild variant="outline" size="sm"><Link href="/admin">{t.nav.admin}</Link></Button>}
       </nav>
       <div className="grid gap-6 lg:grid-cols-2">
