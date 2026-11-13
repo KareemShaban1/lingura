@@ -2,13 +2,13 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { ArrowRight, Clock, Layers, PenLine, Puzzle } from "lucide-react";
+import { ArrowRight, Clock, GraduationCap, Layers, PenLine, Puzzle } from "lucide-react";
 import { SkillIcon } from "@/components/skill";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { EmptyState, ErrorState } from "@/components/ui/states";
 import { Skeleton } from "@/components/ui/skeleton";
-import { useActiveProfile, useExercises } from "@/features/queries";
+import { useActiveProfile, useExercises, useMe } from "@/features/queries";
 import { useI18n } from "@/lib/i18n";
 import type { ExerciseSummary, SkillSlug } from "@/lib/types";
 import { cn } from "@/lib/utils";
@@ -39,6 +39,7 @@ export function ExerciseCard({ exercise, href }: { exercise: ExerciseSummary; hr
 const FILTERS: (SkillSlug | "all")[] = ["all", "grammar", "vocabulary", "reading", "listening", "speaking"];
 
 export function PracticeView() {
+  const me = useMe();
   const { t } = useI18n();
   const profile = useActiveProfile();
   const [skill, setSkill] = useState<SkillSlug | "all">("all");
@@ -58,6 +59,11 @@ export function PracticeView() {
           <Link href="/practice/writing" className="flex items-center gap-2 rounded-lg border bg-card px-4 py-2 text-sm font-medium hover:border-primary/50">
             <PenLine className="size-4 text-skill-writing" /> {t.writing.title}
           </Link>
+          {me.data?.features.includes("exams") && (
+            <Link href="/practice/exams" className="flex items-center gap-2 rounded-lg border bg-card px-4 py-2 text-sm font-medium hover:border-primary/50">
+              <GraduationCap className="size-4 text-primary" /> {t.exams.title}
+            </Link>
+          )}
           <Link href="/vocabulary" className="flex items-center gap-2 rounded-lg border bg-card px-4 py-2 text-sm font-medium hover:border-primary/50 md:hidden">
             <Layers className="size-4 text-skill-vocabulary" /> {t.vocab.title}
           </Link>

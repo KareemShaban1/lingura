@@ -12,6 +12,7 @@ use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\BillingController;
 use App\Http\Controllers\Api\CatalogController;
 use App\Http\Controllers\Api\CourseController;
+use App\Http\Controllers\Api\ExamController;
 use App\Http\Controllers\Api\GamificationController;
 use App\Http\Controllers\Api\GrammarController;
 use App\Http\Controllers\Api\LearnerProfileController;
@@ -180,6 +181,17 @@ Route::prefix('v1')->group(function () {
         Route::get('me/challenges', [GamificationController::class, 'challenges']);
         Route::get('leaderboards/weekly', [GamificationController::class, 'leaderboard']);
         Route::patch('me/leaderboard', [GamificationController::class, 'updateLeaderboard']);
+
+        // Phase 5 — exam preparation
+        Route::get('learner-profiles/{learnerProfile}/exams', [ExamController::class, 'index']);
+        Route::post('learner-profiles/{learnerProfile}/exams/{framework}/attempts', [ExamController::class, 'start'])->middleware('throttle:10,1');
+        Route::get('exam-attempts/{attempt}', [ExamController::class, 'show']);
+        Route::post('exam-attempts/{attempt}/sections/{skill}/start', [ExamController::class, 'startSection']);
+        Route::post('exam-attempts/{attempt}/answers', [ExamController::class, 'answer']);
+        Route::post('exam-attempts/{attempt}/sections/{skill}/submit', [ExamController::class, 'submit'])->middleware('throttle:ai');
+        Route::post('exam-attempts/{attempt}/sections/{skill}/skip', [ExamController::class, 'skip']);
+        Route::get('exam-attempts/{attempt}/review', [ExamController::class, 'review']);
+        Route::get('exam-attempts/{attempt}/items/{item}/audio', [ExamController::class, 'audio']);
 
         // Phase 4 — administration (RBAC: admin.access + a per-area permission; every mutation is audited)
         Route::prefix('admin')->group(function () {

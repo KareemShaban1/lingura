@@ -100,7 +100,7 @@ class ContentSelector
             return null;
         }
         $recent = WritingSubmission::where('learner_profile_id', $profile->id)->where('created_at', '>=', now()->subDays(self::RECENT_DAYS))->pluck('production_task_id');
-        $task = ProductionTask::where('language_id', $profile->target_language_id)->where('mode', 'written')->where('review_status', 'published')
+        $task = ProductionTask::where('language_id', $profile->target_language_id)->where('mode', 'written')->where('is_exam', false)->where('review_status', 'published')
             ->whereNotIn('id', $recent)->with('level')->get()
             ->filter(fn ($t) => $t->level->ordinal <= $ordinal + 1)
             ->sortBy(fn ($t) => [abs($t->level->ordinal - $ordinal), $t->id])

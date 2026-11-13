@@ -32,12 +32,13 @@ return [
         'pronunciation_checks' => 'day',
         'placement_productive' => 'month',
         'target_languages' => 'total',
+        'exam_mocks' => 'month',
     ],
 
     'plans' => [
         'free' => ['tier' => 'free', 'interval' => null, 'price_minor' => 0, 'rank' => 0, 'seats' => 1, 'limits' => [
             'tutor_messages' => 10, 'realtime_minutes' => 0, 'writing_evaluations' => 3,
-            'pronunciation_checks' => 10, 'placement_productive' => 2, 'target_languages' => 1,
+            'pronunciation_checks' => 10, 'placement_productive' => 2, 'target_languages' => 1, 'exam_mocks' => 1,
         ]],
         'premium_monthly' => ['tier' => 'premium', 'interval' => 'month', 'price_minor' => 1299, 'rank' => 10, 'seats' => 1, 'price_env' => 'STRIPE_PRICE_PREMIUM_MONTHLY'],
         'premium_yearly' => ['tier' => 'premium', 'interval' => 'year', 'price_minor' => 9999, 'rank' => 10, 'seats' => 1, 'price_env' => 'STRIPE_PRICE_PREMIUM_YEARLY'],
@@ -49,8 +50,8 @@ return [
 
     // Limits per tier (monthly and yearly variants share them). null = unlimited.
     'tier_limits' => [
-        'premium' => ['tutor_messages' => 150, 'realtime_minutes' => 30, 'writing_evaluations' => 40, 'pronunciation_checks' => 100, 'placement_productive' => 10, 'target_languages' => 3],
-        'family' => ['tutor_messages' => 150, 'realtime_minutes' => 30, 'writing_evaluations' => 40, 'pronunciation_checks' => 100, 'placement_productive' => 10, 'target_languages' => 3],
-        'pro' => ['tutor_messages' => 400, 'realtime_minutes' => 120, 'writing_evaluations' => 100, 'pronunciation_checks' => 300, 'placement_productive' => 20, 'target_languages' => null],
+        'premium' => ['tutor_messages' => 150, 'realtime_minutes' => 30, 'writing_evaluations' => 40, 'pronunciation_checks' => 100, 'placement_productive' => 10, 'target_languages' => 3, 'exam_mocks' => 4],
+        'family' => ['tutor_messages' => 150, 'realtime_minutes' => 30, 'writing_evaluations' => 40, 'pronunciation_checks' => 100, 'placement_productive' => 10, 'target_languages' => 3, 'exam_mocks' => 4],
+        'pro' => ['tutor_messages' => 400, 'realtime_minutes' => 120, 'writing_evaluations' => 100, 'pronunciation_checks' => 300, 'placement_productive' => 20, 'target_languages' => null, 'exam_mocks' => 10],
     ],
 ];

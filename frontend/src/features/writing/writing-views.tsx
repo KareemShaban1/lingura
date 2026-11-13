@@ -214,3 +214,19 @@ export function WritingTaskView() {
     </div>
   );
 }
+
+/** A single evaluated text (e.g. from an exam practice test). */
+export function SubmissionView() {
+  const { id } = useParams<{ id: string }>();
+  const { t } = useI18n();
+  const submission = useWritingSubmission(id);
+  if (submission.error) return <ErrorState error={submission.error} onRetry={() => submission.refetch()} />;
+  if (!submission.data) return <Skeleton className="h-96" />;
+  return (
+    <div className="mx-auto max-w-4xl space-y-6">
+      <h1 className="font-display text-3xl">{submission.data.task.title ?? t.writing.title}</h1>
+      <p lang={submission.data.language.code} dir={submission.data.language.direction} className="rounded-xl border bg-secondary/30 p-4">{submission.data.task.prompt}</p>
+      <SubmissionResult submission={submission.data} />
+    </div>
+  );
+}

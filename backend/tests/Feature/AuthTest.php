@@ -49,7 +49,7 @@ class AuthTest extends TestCase
         $this->withToken($token)->getJson('/api/v1/auth/me')
             ->assertOk()
             ->assertJsonPath('data.email', 'lina@example.test')
-            ->assertJsonPath('data.features', ['onboarding', 'assessment', 'plan', 'progress', 'courses', 'practice', 'grammar', 'vocabulary', 'tutor', 'writing', 'billing', 'rewards', 'family']);
+            ->assertJsonPath('data.features', ['onboarding', 'assessment', 'plan', 'progress', 'courses', 'practice', 'grammar', 'vocabulary', 'tutor', 'writing', 'billing', 'rewards', 'family', 'exams']);
 
         $this->withToken($token)->postJson('/api/v1/auth/logout')->assertOk();
         $this->assertSame(0, $user->tokens()->count());

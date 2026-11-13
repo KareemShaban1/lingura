@@ -2,7 +2,7 @@
 
 return [
     // Features exposed to the client navigation. Modules not listed are not rendered (no dead buttons).
-    'features' => array_filter(explode(',', env('LF_FEATURES', 'onboarding,assessment,plan,progress,courses,practice,grammar,vocabulary,tutor,writing,billing,rewards,family'))),
+    'features' => array_filter(explode(',', env('LF_FEATURES', 'onboarding,assessment,plan,progress,courses,practice,grammar,vocabulary,tutor,writing,billing,rewards,family,exams'))),
 
     'assessment' => [
         'engine_version' => 'irt_v1',
@@ -50,6 +50,11 @@ return [
     'productive_assessment' => [
         'standard_error' => 0.7, // rubric-based estimates are less precise than adaptive closed items
         'short_response_standard_error' => 0.9,
+    ],
+
+    'exams' => [
+        'grace_seconds' => 15,             // network allowance after a closed section's deadline
+        'productive_grace_seconds' => 90,  // writing/speaking: time to upload and submit what was produced
     ],
 
     'adaptive' => [

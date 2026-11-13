@@ -23,7 +23,7 @@ class WritingController extends Controller
         $latest = WritingSubmission::where('learner_profile_id', $learnerProfile->id)->whereNull('assessment_attempt_id')
             ->with('evaluation')->latest()->get()->unique('production_task_id')->keyBy('production_task_id');
 
-        return response()->json(['data' => ProductionTask::where('language_id', $learnerProfile->target_language_id)
+        return response()->json(['data' => ProductionTask::where('language_id', $learnerProfile->target_language_id)->where('is_exam', false)
             ->where('mode', 'written')->where('review_status', 'published')->orderBy('cefr_level_id')->get()
             ->map(fn ($t) => (new ProductionTaskResource($t))->toArray(request()) + [
                 'last_score' => $latest->get($t->id)?->evaluation?->overall_score,

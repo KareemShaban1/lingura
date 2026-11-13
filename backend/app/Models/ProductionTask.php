@@ -15,7 +15,7 @@ class ProductionTask extends Model
 
     protected function casts(): array
     {
-        return ['is_placement' => 'boolean'];
+        return ['is_placement' => 'boolean', 'is_exam' => 'boolean'];
     }
 
     public function language(): BelongsTo

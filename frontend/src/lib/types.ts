@@ -506,3 +506,28 @@ export type Leaderboard = {
   entries: { rank: number; name: string; xp: number; is_you: boolean }[];
   you: { rank: number; name: string; xp: number } | null;
 };
+
+// ── Phase 5: exam practice ───────────────────────────────────────────────────
+export type ExamEstimate = { band?: number; low?: number; high?: number; probability?: number; label?: string };
+export type ExamFramework = {
+  slug: string; exam_name: string; title: string; description: string; disclaimer: string; scale: "band" | "readiness"; target_level: string | null;
+  sections: { skill: SkillSlug; minutes: number }[];
+  attempts?: { id: string; status: string; started_at: string; completed_at: string | null; overall: ExamEstimate | null }[];
+};
+export type ExamSectionState = {
+  skill: SkillSlug; status: "pending" | "in_progress" | "completed" | "expired" | "skipped" | "unavailable"; reason: string | null;
+  minutes: number; deadline_at: string | null; remaining_seconds: number | null; raw: { correct: number; total: number } | null;
+  level: string | null; estimate: ExamEstimate | null; writing_submission_id: string | null;
+};
+export type ExamAttempt = {
+  id: string; status: "in_progress" | "completed"; framework: ExamFramework; language: { code: string; direction: Direction };
+  sections: ExamSectionState[];
+  current: null | {
+    skill: SkillSlug;
+    task?: ProductionTask;
+    groups?: { key: string; stimulus: string | null; has_audio: boolean; audio_item_id: string; items: { id: string; prompt: string; options: { id: number; label: string }[]; chosen_option_id: number | null }[] }[];
+  };
+  result: { overall: ExamEstimate | null; scale: string; sections_scored: number; sections_total: number } | null;
+  server_time: string;
+};
+export type ExamReviewItem = { id: string; skill: SkillSlug; group: string; stimulus: string | null; prompt: string; explanation: string | null; options: { id: number; label: string; is_correct: boolean }[]; chosen_option_id: number | null };
