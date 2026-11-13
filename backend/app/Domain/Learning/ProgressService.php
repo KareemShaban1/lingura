@@ -179,6 +179,7 @@ class ProgressService
             'reading' => [
                 'recent_wpm' => ExerciseAttempt::where('learner_profile_id', $profile->id)->whereNotNull('words_per_minute')
                     ->latest('completed_at')->limit(5)->pluck('words_per_minute')->reverse()->values(),
+                'unit' => $profile->targetLanguage->countUnit(),
             ],
             'exercises_completed' => ExerciseAttempt::where('learner_profile_id', $profile->id)->where('status', 'completed')->count(),
             'level_progress' => app(AdaptiveEngine::class)->levelProgress($profile),

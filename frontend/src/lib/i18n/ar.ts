@@ -320,6 +320,7 @@ export const ar: Dictionary = {
     score: "النتيجة",
     readingSpeed: "سرعة القراءة",
     wpm: "{n} كلمة/دقيقة",
+    cpm: "{n} حرفًا/دقيقة",
     transcript: "النص المكتوب",
     review: "راجع إجاباتك",
     backToLesson: "العودة إلى الدرس",
@@ -392,7 +393,7 @@ export const ar: Dictionary = {
   speech: {
     understood: "فُهمت {pct}% من الكلمات",
     method: "تقدير لوضوح النطق اعتمادًا على التعرّف على الكلام — وليس تقييمًا على مستوى الأصوات.",
-    legend: { correct: "مفهومة", substituted: "سُمعت بشكل مختلف", omitted: "ناقصة", inserted: "زائدة" },
+    legend: { correct: "مفهومة", substituted: "سُمعت بشكل مختلف", tone: "سُمعت بنغمة مختلفة", omitted: "ناقصة", inserted: "زائدة" },
   },
   tutor: {
     messagesLeft: "تبقّى {n} رسالة مع المعلم اليوم",
@@ -457,6 +458,8 @@ export const ar: Dictionary = {
     subtitle: "اكتب بلغتك المستهدفة واحصل على تقييم وفق معايير مع تصحيحات.",
     words: "{n} كلمة",
     target: "{min}–{max} كلمة",
+    characters: "{n} حرفًا",
+    targetChars: "{min}–{max} حرفًا",
     write: "اكتب",
     submit: "أرسل للتقييم",
     evaluating: "جارٍ تقييم نصك…",
@@ -477,8 +480,8 @@ export const ar: Dictionary = {
   placement: {
     writingTitle: "الكتابة",
     speakingTitle: "المحادثة",
-    writingIntro: "اكتب إجابتك أدناه. استهدف {min}–{max} كلمة.",
-    speakingIntro: "سجّل إجابتك (حتى دقيقتين). استهدف نحو {min}–{max} كلمة.",
+    writingIntro: "اكتب إجابتك أدناه. استهدف {target}.",
+    speakingIntro: "سجّل إجابتك (حتى دقيقتين). استهدف نحو {target}.",
     submit: "أرسل الإجابة",
     evaluating: "جارٍ تقييم إجابتك…",
     evaluation: "كيف قيّمنا هذا",

@@ -12,7 +12,7 @@ class OnboardingTest extends TestCase
         $response = $this->getJson('/api/v1/catalog/onboarding')->assertOk();
 
         $codes = collect($response->json('languages'))->pluck('code')->all();
-        $this->assertEqualsCanonicalizing(['en', 'ar', 'es', 'fr', 'de', 'it'], $codes);
+        $this->assertEqualsCanonicalizing(['en', 'ar', 'es', 'fr', 'de', 'it', 'zh'], $codes);
 
         $arabic = collect($response->json('languages'))->firstWhere('code', 'ar');
         $this->assertSame('rtl', $arabic['direction']);

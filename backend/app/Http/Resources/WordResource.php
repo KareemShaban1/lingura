@@ -16,6 +16,7 @@ class WordResource extends JsonResource
         return [
             'id' => $this->id,
             'lemma' => $this->lemma,
+            'pronunciation' => $this->ipa, // IPA, or pinyin for Chinese
             'part_of_speech' => $this->part_of_speech,
             'gender' => $this->gender,
             'level' => $this->level?->label,

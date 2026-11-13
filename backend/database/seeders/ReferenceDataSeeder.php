@@ -75,16 +75,18 @@ class ReferenceDataSeeder extends Seeder
             ['fr', 'French', 'Français', 'ltr', 'Latn', [['fr-FR', 'France', true], ['fr-CA', 'Canada', false]]],
             ['de', 'German', 'Deutsch', 'ltr', 'Latn', [['de-DE', 'Germany', true], ['de-AT', 'Austria', false]]],
             ['it', 'Italian', 'Italiano', 'ltr', 'Latn', [['it-IT', 'Italy', true]]],
+            // Content is authored in simplified characters with pinyin; a Traditional variant needs its own content.
+            ['zh', 'Chinese (Mandarin)', '中文', 'ltr', 'Hans', [['zh-CN', 'Mandarin (Simplified)', true]]],
         ];
 
         // Conservative initial matrix — admins must revalidate against provider docs and internal evaluations.
         $matrix = [
-            'content_generation' => ['en' => ['supported', 1], 'es' => ['supported', 1], 'fr' => ['supported', 1], 'de' => ['supported', 1], 'it' => ['supported', 1], 'ar' => ['supported', 2]],
-            'tts' => ['en' => ['supported', 1], 'es' => ['supported', 1], 'fr' => ['supported', 1], 'de' => ['supported', 1], 'it' => ['supported', 1], 'ar' => ['beta', 2]],
-            'stt' => ['en' => ['supported', 1], 'es' => ['supported', 1], 'fr' => ['supported', 1], 'de' => ['supported', 1], 'it' => ['supported', 1], 'ar' => ['supported', 2]],
-            'realtime_voice' => ['en' => ['supported', 1], 'es' => ['supported', 1], 'fr' => ['supported', 1], 'de' => ['supported', 1], 'it' => ['supported', 1], 'ar' => ['beta', 2]],
-            'pronunciation' => ['en' => ['beta', 2], 'es' => ['beta', 2], 'fr' => ['beta', 2], 'de' => ['beta', 2], 'it' => ['beta', 2], 'ar' => ['unsupported', 3]],
-            'writing_evaluation' => ['en' => ['supported', 1], 'es' => ['supported', 1], 'fr' => ['supported', 1], 'de' => ['supported', 1], 'it' => ['supported', 1], 'ar' => ['beta', 2]],
+            'content_generation' => ['en' => ['supported', 1], 'es' => ['supported', 1], 'fr' => ['supported', 1], 'de' => ['supported', 1], 'it' => ['supported', 1], 'ar' => ['supported', 2], 'zh' => ['supported', 1]],
+            'tts' => ['en' => ['supported', 1], 'es' => ['supported', 1], 'fr' => ['supported', 1], 'de' => ['supported', 1], 'it' => ['supported', 1], 'ar' => ['beta', 2], 'zh' => ['supported', 1]],
+            'stt' => ['en' => ['supported', 1], 'es' => ['supported', 1], 'fr' => ['supported', 1], 'de' => ['supported', 1], 'it' => ['supported', 1], 'ar' => ['supported', 2], 'zh' => ['supported', 1]],
+            'realtime_voice' => ['en' => ['supported', 1], 'es' => ['supported', 1], 'fr' => ['supported', 1], 'de' => ['supported', 1], 'it' => ['supported', 1], 'ar' => ['beta', 2], 'zh' => ['beta', 2]],
+            'pronunciation' => ['en' => ['beta', 2], 'es' => ['beta', 2], 'fr' => ['beta', 2], 'de' => ['beta', 2], 'it' => ['beta', 2], 'ar' => ['unsupported', 3], 'zh' => ['beta', 2]],
+            'writing_evaluation' => ['en' => ['supported', 1], 'es' => ['supported', 1], 'fr' => ['supported', 1], 'de' => ['supported', 1], 'it' => ['supported', 1], 'ar' => ['beta', 2], 'zh' => ['supported', 2]],
         ];
 
         $ids = [];
@@ -101,7 +103,8 @@ class ReferenceDataSeeder extends Seeder
             }
             foreach ($matrix as $feature => $perLanguage) {
                 [$status, $tier] = $perLanguage[$code];
-                LanguageCapability::updateOrCreate(
+                // firstOrCreate: re-seeding must never undo an admin's capability decision.
+                LanguageCapability::firstOrCreate(
                     ['language_id' => $language->id, 'feature' => $feature, 'provider_slug' => 'default'],
                     ['status' => $status, 'quality_tier' => $tier],
                 );

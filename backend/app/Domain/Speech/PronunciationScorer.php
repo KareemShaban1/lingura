@@ -11,13 +11,19 @@ use App\Domain\Practice\TextNormalizer;
  * sentence; the transcript is then aligned word-by-word with the reference. A word the recogniser
  * understood counts as intelligible. This measures intelligibility, not phoneme-level accuracy —
  * the UI labels it accordingly. Phoneme scoring can be plugged in via PronunciationAssessor later.
+ *
+ * Tonal languages (`transcript_alignment_tone_v1`): unspaced scripts are aligned character by character.
+ * When the recogniser heard a different character with the same toneless pinyin syllable but another tone
+ * (e.g. 买 mǎi heard as 卖 mài), the unit is marked `tone` — a tone-sensitive intelligibility signal,
+ * not acoustic pitch analysis. Readings come from the language's lexicon (PronunciationLexicon).
  */
 final class PronunciationScorer
 {
     /**
      * @return array{accuracy: float, completeness: float, words: list<array{expected: ?string, heard: ?string, status: string}>}
      */
-    public function score(string $reference, string $heard): array
+    /** @param array<string, string> $readings character => pinyin (empty for non-tonal languages) */
+    public function score(string $reference, string $heard, array $readings = []): array
     {
         $ref = TextNormalizer::words($reference);
         $hyp = TextNormalizer::words($heard);
@@ -43,7 +49,7 @@ final class PronunciationScorer
         [$i, $j] = [$n, $m];
         while ($i > 0 || $j > 0) {
             if ($i > 0 && $j > 0 && $d[$i][$j] === $d[$i - 1][$j - 1] + ($eq($ref[$i - 1], $hyp[$j - 1]) ? 0 : 1)) {
-                $words[] = ['expected' => $ref[$i - 1], 'heard' => $hyp[$j - 1], 'status' => $eq($ref[$i - 1], $hyp[$j - 1]) ? 'correct' : 'substituted'];
+                $words[] = ['expected' => $ref[$i - 1], 'heard' => $hyp[$j - 1], 'status' => $eq($ref[$i - 1], $hyp[$j - 1]) ? 'correct' : $this->mismatch($ref[$i - 1], $hyp[$j - 1], $readings)];
                 $i--;
                 $j--;
             } elseif ($i > 0 && $d[$i][$j] === $d[$i - 1][$j] + 1) {
@@ -56,12 +62,24 @@ final class PronunciationScorer
         }
         $words = array_reverse($words);
         $correct = count(array_filter($words, fn ($w) => $w['status'] === 'correct'));
-        $attempted = count(array_filter($words, fn ($w) => in_array($w['status'], ['correct', 'substituted'], true)));
+        $attempted = count(array_filter($words, fn ($w) => in_array($w['status'], ['correct', 'substituted', 'tone'], true)));
 
         return [
             'accuracy' => $n ? round($correct / $n, 4) : 0.0,
             'completeness' => $n ? round($attempted / $n, 4) : 0.0,
             'words' => $words,
         ];
+    }
+
+    /** `tone` when both characters are known and differ only in tone; otherwise `substituted`. */
+    private function mismatch(string $expected, string $heard, array $readings): string
+    {
+        $a = $readings[$expected] ?? null;
+        $b = $readings[$heard] ?? null;
+        if ($a === null || $b === null) {
+            return 'substituted';
+        }
+
+        return Pinyin::base($a) === Pinyin::base($b) && Pinyin::tone($a) !== Pinyin::tone($b) ? 'tone' : 'substituted';
     }
 }

@@ -37,9 +37,10 @@ class Phase3ContentSeeder extends Seeder
         foreach ($data['task_prompts'] as $code => $prompts) {
             $language = Language::where('code', $code)->firstOrFail();
             foreach ($data['task_types'] as $i => [$suffix, $mode, $type, $level, $min, $max, $titleEn, $titleAr]) {
+                $factor = $data['length_factor'][$code] ?? 1;
                 $task = ProductionTask::updateOrCreate(['key' => "{$code}-{$suffix}"], [
                     'language_id' => $language->id, 'cefr_level_id' => $levels[$level], 'mode' => $mode, 'type' => $type,
-                    'prompt' => $prompts[$i], 'min_words' => $min, 'max_words' => $max, 'is_placement' => true,
+                    'prompt' => $prompts[$i], 'min_words' => $min * $factor, 'max_words' => $max * $factor, 'is_placement' => true,
                     'review_status' => 'published',
                 ]);
                 $task->setTranslations('title', ['en' => $titleEn, 'ar' => $titleAr]);

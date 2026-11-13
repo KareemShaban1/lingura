@@ -19,6 +19,7 @@ import { useActiveProfile } from "@/features/queries";
 import type { AssessmentAttempt, AssessmentItem, Direction, ProductionTask } from "@/lib/types";
 import { cn } from "@/lib/utils";
 import { toastError } from "@/lib/errors";
+import { countUnits } from "@/lib/text";
 
 /** Renders a cloze prompt with a visible gap instead of raw underscores. */
 function Prompt({ text, lang, dir }: { text: string; lang: string; dir: Direction }) {
@@ -107,7 +108,8 @@ function ProductiveTask({ attemptId, task, lang, onDone }: { attemptId: string; 
   const profile = useActiveProfile();
   const [text, setText] = useState("");
   const [busy, setBusy] = useState(false);
-  const words = (text.trim().match(/[\p{L}\p{M}\p{N}']+/gu) ?? []).length;
+  const words = countUnits(text);
+  const chars = task.count_unit === "characters";
 
   async function submit(body: Record<string, unknown>) {
     setBusy(true);
@@ -125,7 +127,7 @@ function ProductiveTask({ attemptId, task, lang, onDone }: { attemptId: string; 
     <div className="space-y-4">
       <p lang={lang.code} dir={lang.direction} className="rounded-xl border bg-secondary/30 p-4 text-lg leading-relaxed">{task.prompt}</p>
       <p className="text-sm text-muted-foreground">
-        {f(task.skill === "writing" ? t.placement.writingIntro : t.placement.speakingIntro, { min: task.min_words, max: task.max_words })}
+        {f(task.skill === "writing" ? t.placement.writingIntro : t.placement.speakingIntro, { target: f(chars ? t.writing.targetChars : t.writing.target, { min: task.min_words, max: task.max_words }) })}
       </p>
       {busy ? (
         <p role="status" className="flex items-center gap-2 text-muted-foreground"><Loader2 className="size-4 animate-spin" /> {t.placement.evaluating}</p>
@@ -134,7 +136,7 @@ function ProductiveTask({ attemptId, task, lang, onDone }: { attemptId: string; 
           <textarea value={text} onChange={(e) => setText(e.target.value)} rows={8} lang={lang.code} dir={lang.direction} aria-label={t.placement.writingTitle}
             className="w-full rounded-xl border border-input bg-card p-4 text-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40" />
           <div className="flex items-center justify-between">
-            <span className="text-sm text-muted-foreground">{f(t.writing.words, { n: words })}</span>
+            <span className="text-sm text-muted-foreground">{f(chars ? t.writing.characters : t.writing.words, { n: words })}</span>
             <Button size="lg" onClick={() => submit({ text })} disabled={words < 3}>{t.placement.submit}</Button>
           </div>
         </>

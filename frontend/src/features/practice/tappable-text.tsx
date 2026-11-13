@@ -6,6 +6,7 @@ import { Check, Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { api } from "@/lib/api";
 import { useI18n } from "@/lib/i18n";
+import { segmentTokens } from "@/lib/text";
 import type { Direction, Word } from "@/lib/types";
 
 /** Mirrors the server's TextNormalizer closely enough to match extracted tokens. */
@@ -26,7 +27,7 @@ export function TappableText({ text, profileId, lang, dir }: { text: string; pro
     staleTime: Infinity,
   });
   const words = found.data ?? {};
-  const tokens = text.split(/([\p{L}\p{M}']+)/u);
+  const tokens = segmentTokens(text, (token) => normalize(token) in words);
 
   async function add(word: Word) {
     await api(`/learner-profiles/${profileId}/vocabulary`, { method: "POST", body: { word_id: word.id, source: "reading" } });
@@ -52,7 +53,7 @@ export function TappableText({ text, profileId, lang, dir }: { text: string; pro
             </button>
             {open === `${i}` && (
               <span role="dialog" dir="auto" className="absolute start-0 top-full z-20 mt-1 block w-60 rounded-lg border bg-card p-3 text-sm leading-normal shadow-lg">
-                <span className="block font-semibold" lang={lang}>{word.lemma}</span>
+                <span className="block font-semibold" lang={lang}>{word.lemma}{word.pronunciation && <span className="ms-2 font-normal text-muted-foreground">{word.pronunciation}</span>}</span>
                 <span className="block text-muted-foreground">{word.meaning}</span>
                 <Button size="sm" variant={inDeck ? "ghost" : "secondary"} className="mt-2 w-full" disabled={inDeck} onClick={() => add(word)}>
                   {inDeck ? <><Check /> {t.exercise.inDeck}</> : <><Plus /> {t.exercise.addToDeck}</>}

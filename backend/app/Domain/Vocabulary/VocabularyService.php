@@ -155,7 +155,9 @@ class VocabularyService
      */
     public function extract(LearnerProfile $profile, string $text): array
     {
-        $tokens = array_unique(TextNormalizer::words($text));
+        // Spaced scripts: word tokens. Unspaced scripts (e.g. Chinese): every substring that could be a word;
+        // the client segments the text with the longest-match rule over the returned keys.
+        $tokens = array_values(array_unique([...TextNormalizer::words($text), ...TextNormalizer::candidates($text)]));
         if ($tokens === []) {
             return [];
         }

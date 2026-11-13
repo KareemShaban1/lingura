@@ -1,8 +1,9 @@
 import json, sys
 OUT = sys.argv[1]
 
-def W(lemma, pos, meaning_en, meaning_ar, example, gloss, forms=(), gender=None, level="A1", syn=(), ant=()):
+def W(lemma, pos, meaning_en, meaning_ar, example, gloss, forms=(), gender=None, level="A1", syn=(), ant=(), pron=None):
     d = {"lemma": lemma, "pos": pos, "level": level, "meaning": {"en": meaning_en, "ar": meaning_ar}, "example": [example, gloss]}
+    if pron: d["pron"] = pron
     if forms: d["forms"] = list(forms)
     if gender: d["gender"] = gender
     if syn: d["syn"] = list(syn)
@@ -458,6 +459,72 @@ ar_ex = [
 packs["ar"] = {"language":"ar","topics":ar_topics,"words":ar_words,"exercises":ar_ex,
   "course":course("ar","Arabic","العربية",[t["slug"] for t in ar_topics],[["مرحبا","مع السلامة","شكرا","صديق","عائلة","مدينة"],["بيت","كتاب","طاولة","قهوة","ماء","خبز","كبير","صغير"],["تكلّم","درس","اشترى","يوم","ليل"],["جيد","سوق","متجر"]],[e["key"] for e in ar_ex],
      l4=({"en":"At the café and the market","ar":"في المقهى والسوق"},{"en":"Say who things belong to and understand a simple order in a café.","ar":"عبّر عن الملكية وافهم طلبًا بسيطًا في مقهى."}))}
+
+
+# ---------------------------------------------------------------- Chinese (Mandarin, simplified characters + pinyin)
+Z = lambda lemma, pron, pos, en, ar, ex, gl, **k: W(lemma, pos, en, ar, ex, gl, pron=pron, **k)
+zh_words = [
+    Z("你好","nǐ hǎo","interj","hello","مرحبًا","你好！我叫王明。","Hello! My name is Wang Ming."),
+    Z("再见","zài jiàn","interj","goodbye","مع السلامة","老师，再见！","Goodbye, teacher!"),
+    Z("谢谢","xiè xie","interj","thank you","شكرًا","谢谢你的帮助。","Thank you for your help."),
+    Z("朋友","péng you","noun","friend","صديق","他是我的好朋友。","He is my good friend."),
+    Z("家","jiā","noun","home, family","بيت، عائلة","我家有四口人。","There are four people in my family."),
+    Z("城市","chéng shì","noun","city","مدينة","北京是一个大城市。","Beijing is a big city."),
+    Z("书","shū","noun","book","كتاب","这本书很好。","This book is very good."),
+    Z("桌子","zhuō zi","noun","table","طاولة","书在桌子上。","The book is on the table."),
+    Z("茶","chá","noun","tea","شاي","我喝一杯茶。","I drink a cup of tea."),
+    Z("水","shuǐ","noun","water","ماء","请给我一杯水。","Please give me a glass of water."),
+    Z("米饭","mǐ fàn","noun","rice (cooked)","أرز","我们中午吃米饭。","We eat rice at noon."),
+    Z("大","dà","adj","big","كبير","他的家很大。","His home is big.",ant=["小"]),
+    Z("小","xiǎo","adj","small","صغير","这个杯子很小。","This cup is small.",ant=["大"]),
+    Z("学生","xué sheng","noun","student","طالب","我是学生。","I am a student."),
+    Z("老师","lǎo shī","noun","teacher","معلّم","王老师是中国人。","Teacher Wang is Chinese."),
+    Z("工作","gōng zuò","verb","to work; job","يعمل؛ عمل","我在医院工作。","I work in a hospital."),
+    Z("学习","xué xí","verb","to study","يدرس","我们一起学习汉语。","We study Chinese together."),
+    Z("买","mǎi","verb","to buy","يشتري","我去商店买水果。","I go to the shop to buy fruit."),
+    Z("卖","mài","verb","to sell","يبيع","这个商店卖书。","This shop sells books."),
+    Z("喜欢","xǐ huan","verb","to like","يحبّ","我喜欢喝茶。","I like drinking tea."),
+    Z("今天","jīn tiān","noun","today","اليوم","今天是星期一。","Today is Monday."),
+    Z("晚上","wǎn shang","noun","evening","مساء","我晚上学习。","I study in the evening."),
+    Z("商店","shāng diàn","noun","shop","متجر","商店九点开门。","The shop opens at nine."),
+    Z("好","hǎo","adj","good","جيد","今天天气很好。","The weather is good today."),
+]
+zh_topics = [
+    T("shi_sentences","Sentences with 是 (shì)","الجمل مع 是",
+      "Use 是 to link two nouns: A 是 B (A is B). Negate with 不是. Adjectives do not take 是: say 我很好 (I am well), not 我是好.",
+      "يُستخدم 是 للربط بين اسمين: A 是 B (أ هو ب). والنفي بـ 不是. لا تُستخدم 是 مع الصفات: نقول 我很好 (أنا بخير) وليس 我是好.",
+      [["我是学生。","I am a student."],["他不是老师。","He is not a teacher."],["这是我的书。","This is my book."]]),
+    T("measure_words","Numbers and measure words","الأعداد ومميِّزات العدّ",
+      "Between a number (or 这/那) and a noun, Chinese needs a measure word: 一个人, 两本书, 三杯茶. 个 is the general one; 本 is for books, 杯 for cups and glasses. Use 两, not 二, before a measure word.",
+      "بين العدد (أو 这/那) والاسم يلزم مميِّز عدّ: 一个人، 两本书، 三杯茶. المميِّز العام هو 个، و本 للكتب، و杯 للأكواب. استخدم 两 لا 二 قبل المميِّز.",
+      [["我有两本书。","I have two books."],["一杯茶","a cup of tea"],["这个学生","this student"]]),
+    T("verb_sentences","Verb sentences, time and 在 (at)","الجملة الفعلية والزمن و在",
+      "Word order is subject + time + 在 + place + verb + object: 我晚上在家学习. Time and place come before the verb. Chinese verbs never change form for person or tense.",
+      "ترتيب الجملة: الفاعل + الزمن + 在 + المكان + الفعل + المفعول: 我晚上在家学习. يأتي الزمن والمكان قبل الفعل، ولا يتغيّر الفعل الصيني بحسب الشخص أو الزمن.",
+      [["我去商店买水果。","I go to the shop to buy fruit."],["我在医院工作。","I work in a hospital."],["我们晚上在家吃饭。","We eat at home in the evening."]]),
+    T("ma_questions","Questions with 吗 and 喜欢 + verb","السؤال بـ 吗 و喜欢 + فعل",
+      "Turn a statement into a yes/no question by adding 吗 at the end: 你是学生吗？ To say what you like doing, use 喜欢 + verb: 我喜欢喝茶. Negate with 不喜欢.",
+      "حوِّل الجملة الخبرية إلى سؤال بنعم أو لا بإضافة 吗 في آخرها: 你是学生吗؟ وللتعبير عمّا تحب فعله استخدم 喜欢 + فعل: 我喜欢喝茶، والنفي بـ 不喜欢.",
+      [["你喜欢喝茶吗？","Do you like drinking tea?"],["我不喜欢买东西。","I don't like shopping."],["你是老师吗？","Are you a teacher?"]]),
+]
+zh_ex = [
+    mcq("zh-a1-shi-mcq",[("我___学生。",["是","很","在","有"]),("他___老师，他是学生。",["不是","没是","不","没有"]),("我___好。",["很","是","在","个"]),("这___我的书。",["是","很","个","在"])],"shi_sentences"),
+    mcq("zh-a1-measure-mcq",[("我有两___书。",["本","个","杯","口"]),("请给我一___茶。",["杯","本","个","张"]),("这___学生是我朋友。",["个","本","杯","口"]),("我买___本书。",["两","二","双","第二"])],"measure_words"),
+    cloze("zh-a1-verb-cloze","verb_sentences",[("我___医院工作。(zài)","在"),("他们今天___家吃饭。(zài)","在"),("我们一起___汉语。(xuéxí)","学习"),("我去商店___水果。(mǎi)","买")]),
+    mcq("zh-a1-ma-mcq",[("你是学生___？",["吗","呢","吧","的"]),("我___喝茶，我每天都喝。",["喜欢","不喜欢","是","在"]),("你喜欢___吗？",["喝茶","茶喝","喝喝","是茶"]),("他___喜欢买东西。",["不","没","吗","是"])],"ma_questions"),
+    mcq("zh-a1-vocab-mcq",[("我喝一杯___。",["水","书","桌子","城市"]),("“大”的反义词是___。",["小","好","多","高"]),("我去___买水果。",["商店","学生","晚上","朋友"]),("我晚上看___。",["书","米饭","水","茶"])],skill="vocabulary"),
+    order("zh-a1-order",[["我","是","学生"],["他","在","医院","工作"],["你","喜欢","喝茶","吗"]]),
+    reading("zh-a1-read-1",{"en":"Wang Ming's family","ar":"عائلة وانغ مينغ"},"我叫王明，我家在北京。我家有四口人：爸爸、妈妈、妹妹和我。爸爸是医生，妈妈是老师。周末我们去商店买水果。",
+      [("王明的家在哪儿？",["北京","上海","商店","医院"]),("王明的妈妈做什么工作？",["老师","医生","学生","没有工作"]),("周末他们买什么？",["水果","书","茶","米饭"])]),
+    reading("zh-a2-read-2",{"en":"A new job","ar":"عمل جديد"},"李华上个月开始了新的工作。以前她在一个小商店卖东西，现在她在公司上班。第一天她有点儿紧张，但是同事们都很友好。她每天坐地铁去公司，路上要二十分钟。",
+      [("李华以前在哪儿工作？",["小商店","公司","地铁","医院"]),("第一天她觉得怎么样？",["有点儿紧张","很累","很高兴","生气"]),("她去公司要多长时间？",["二十分钟","一个小时","十分钟","两个小时"])],level="A2"),
+    reading("zh-a1-listen-1",{"en":"At the café","ar":"في المقهى"},"你好，我要一杯茶和一个面包。一共多少钱？一共二十五块。",
+      [("他要喝什么？",["茶","咖啡","水","牛奶"]),("他要吃什么？",["面包","米饭","水果","什么也不吃"]),("一共多少钱？",["二十五块","十五块","二十块","三十五块"])],kind="listening"),
+    dictation("zh-a1-dictation",["我叫李明，我是学生。","我的家很小。","我们晚上学习汉语。"]),
+]
+packs["zh"] = {"language":"zh","topics":zh_topics,"words":zh_words,"exercises":zh_ex,
+  "course":course("zh","Chinese","الصينية",[t["slug"] for t in zh_topics],[["你好","再见","谢谢","朋友","家","城市"],["书","桌子","茶","水","米饭","大","小"],["学生","老师","工作","学习","买","今天","晚上"],["喜欢","商店","好","卖"]],[e["key"] for e in zh_ex],
+     l4=({"en":"Likes and questions","ar":"ما تحبه والأسئلة"},{"en":"Ask yes/no questions, say what you like and understand a simple order in a café.","ar":"اطرح أسئلة بنعم أو لا، وعبّر عمّا تحبه، وافهم طلبًا بسيطًا في مقهى."}))}
 
 for code, pack in packs.items():
     dictation_ex = next(e for e in pack["exercises"] if e["type"] == "dictation")

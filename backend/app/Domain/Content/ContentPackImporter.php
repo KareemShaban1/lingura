@@ -3,6 +3,7 @@
 namespace App\Domain\Content;
 
 use App\Domain\Practice\TextNormalizer;
+use App\Domain\Speech\PronunciationLexicon;
 use App\Models\CefrLevel;
 use App\Models\Course;
 use App\Models\Exercise;
@@ -52,6 +53,8 @@ class ContentPackImporter
             $exercises = $this->importExercises($pack['exercises'] ?? [], $topics);
             $lessons = isset($pack['course']) ? $this->importCourse($pack['course'], $topics, $words, $exercises) : 0;
 
+            DB::afterCommit(fn () => app(PronunciationLexicon::class)->flush($pack['language']));
+
             return ['topics' => count($topics), 'words' => count($words), 'exercises' => count($exercises), 'lessons' => $lessons];
         });
     }
@@ -91,6 +94,7 @@ class ContentPackImporter
                     'gender' => $w['gender'] ?? null,
                     'cefr_level_id' => $this->level($w['level']),
                     'frequency_rank' => $rank + 1,
+                    'ipa' => $w['pron'] ?? null, // IPA, or pinyin with tone marks for Chinese
                     'review_status' => 'published',
                 ],
             );
@@ -310,9 +314,11 @@ class ContentPackImporter
         $pattern = match ($this->language->script) {
             'Arab' => '/\p{Arabic}/u',
             'Latn' => '/\p{Latin}/u',
+            'Hans', 'Hant' => '/\p{Han}/u',
             default => null,
         };
-        $letters = preg_replace('/[^\p{L}]/u', '', $text);
+        // Bracketed hints ("(xuéxí)", "(to study)") may use another script.
+        $letters = preg_replace('/[^\p{L}]/u', '', preg_replace('/\([^)]*\)/u', '', $text));
         if ($pattern && $letters !== '' && preg_match_all($pattern, $letters) / mb_strlen($letters) < 0.6) {
             throw new InvalidArgumentException("{$where}: text is not in the {$this->language->script} script");
         }

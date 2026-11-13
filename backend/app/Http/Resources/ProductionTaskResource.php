@@ -23,6 +23,7 @@ class ProductionTaskResource extends JsonResource
             'level' => new LevelResource($this->level),
             'min_words' => $this->min_words,
             'max_words' => $this->max_words,
+            'count_unit' => $this->language?->countUnit() ?? 'words', // min/max are characters for e.g. Chinese
         ];
     }
 }

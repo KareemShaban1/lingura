@@ -41,4 +41,15 @@ class Language extends Model
     {
         return $this->direction === 'rtl';
     }
+
+    /** Scripts written without spaces count text length (and reading speed) in characters, not words. */
+    public function countsCharacters(): bool
+    {
+        return in_array($this->script, ['Hans', 'Hant', 'Hani', 'Jpan', 'Thai', 'Laoo', 'Khmr', 'Mymr'], true);
+    }
+
+    public function countUnit(): string
+    {
+        return $this->countsCharacters() ? 'characters' : 'words';
+    }
 }

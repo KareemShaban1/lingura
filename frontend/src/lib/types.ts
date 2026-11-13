@@ -244,6 +244,7 @@ export interface ExerciseAttempt {
   questions_total: number;
   questions_answered: number;
   words_per_minute: number | null;
+  reading_unit?: "words" | "characters";
   lesson_id: string | null;
   started_at: string;
   completed_at: string | null;
@@ -259,6 +260,8 @@ export interface ExerciseAttempt {
 export interface Word {
   id: number;
   lemma: string;
+  /** IPA, or pinyin with tone marks for Chinese */
+  pronunciation?: string | null;
   part_of_speech: string;
   gender: string | null;
   level: string | null;
@@ -346,7 +349,7 @@ export interface ProgressPhase2 {
   daily_skill_activity: ({ date: string } & Partial<Record<SkillSlug, number>>)[];
   vocabulary: VocabularySummary;
   grammar: { topics_practised: number; topics_mastered: number };
-  reading: { recent_wpm: number[] };
+  reading: { recent_wpm: number[]; unit?: "words" | "characters" };
   exercises_completed: number;
 }
 
@@ -412,6 +415,7 @@ export interface ProductionTask {
   source_text: string | null;
   level: Level;
   min_words: number;
+  count_unit?: "words" | "characters";
   max_words: number;
   last_score?: number | null;
   last_status?: string | null;
@@ -441,7 +445,7 @@ export interface PronunciationFeedback {
   accuracy: number;
   completeness: number;
   words_per_minute: number | null;
-  words: { expected: string | null; heard: string | null; status: "correct" | "substituted" | "omitted" | "inserted" }[];
+  words: { expected: string | null; heard: string | null; status: "correct" | "substituted" | "tone" | "omitted" | "inserted" }[];
 }
 
 export interface ProgressPhase3 {

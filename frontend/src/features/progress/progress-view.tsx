@@ -181,7 +181,7 @@ export function ProgressView() {
           <CardContent className="space-y-3 text-sm">
             {p.reading?.recent_wpm.length ? (
               <>
-                <p className="font-display text-3xl">{p.reading.recent_wpm[p.reading.recent_wpm.length - 1]} <span className="font-sans text-sm text-muted-foreground">wpm</span></p>
+                <p className="font-display text-3xl">{p.reading.recent_wpm[p.reading.recent_wpm.length - 1]} <span className="font-sans text-sm text-muted-foreground">{p.reading.unit === "characters" ? "cpm" : "wpm"}</span></p>
                 <p className="font-mono text-xs text-muted-foreground">{p.reading.recent_wpm.join(" → ")}</p>
               </>
             ) : <p className="text-muted-foreground">—</p>}

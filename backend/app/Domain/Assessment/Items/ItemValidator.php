@@ -67,7 +67,7 @@ class ItemValidator
             'Arab' => '/\p{Arabic}/u',
             'Latn' => '/\p{Latin}/u',
             'Cyrl' => '/\p{Cyrillic}/u',
-            'Hani' => '/\p{Han}/u',
+            'Hani', 'Hans', 'Hant' => '/\p{Han}/u',
             default => null,
         };
         if ($pattern === null) {

@@ -320,6 +320,7 @@ export const en = {
     score: "Score",
     readingSpeed: "Reading speed",
     wpm: "{n} words/min",
+    cpm: "{n} characters/min",
     transcript: "Transcript",
     review: "Review your answers",
     backToLesson: "Back to lesson",
@@ -392,7 +393,7 @@ export const en = {
   speech: {
     understood: "Understood {pct}% of the words",
     method: "Intelligibility estimate from speech recognition — not a phoneme-level score.",
-    legend: { correct: "understood", substituted: "heard differently", omitted: "missing", inserted: "extra" },
+    legend: { correct: "understood", substituted: "heard differently", tone: "tone heard differently", omitted: "missing", inserted: "extra" },
   },
   tutor: {
     messagesLeft: "{n} tutor messages left today",
@@ -457,6 +458,8 @@ export const en = {
     subtitle: "Write in your target language and get rubric-based feedback with corrections.",
     words: "{n} words",
     target: "{min}–{max} words",
+    characters: "{n} characters",
+    targetChars: "{min}–{max} characters",
     write: "Write",
     submit: "Submit for feedback",
     evaluating: "Evaluating your text…",
@@ -477,8 +480,8 @@ export const en = {
   placement: {
     writingTitle: "Writing",
     speakingTitle: "Speaking",
-    writingIntro: "Write your answer below. Aim for {min}–{max} words.",
-    speakingIntro: "Record your answer (up to 2 minutes). Aim for about {min}–{max} words.",
+    writingIntro: "Write your answer below. Aim for {target}.",
+    speakingIntro: "Record your answer (up to 2 minutes). Aim for about {target}.",
     submit: "Submit answer",
     evaluating: "Evaluating your answer…",
     evaluation: "How we assessed this",

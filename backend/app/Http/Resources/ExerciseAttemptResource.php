@@ -29,6 +29,7 @@ class ExerciseAttemptResource extends JsonResource
             'questions_total' => $this->questions_total,
             'questions_answered' => $this->questions_answered,
             'words_per_minute' => $this->words_per_minute,
+            'reading_unit' => $exercise->language->countUnit(), // characters per minute for unspaced scripts
             'lesson_id' => $this->lesson?->public_id,
             'started_at' => $this->started_at->toIso8601String(),
             'completed_at' => $this->completed_at?->toIso8601String(),

@@ -1,0 +1,1103 @@
+{
+ "language": "zh",
+ "topics": [
+  {
+   "slug": "shi_sentences",
+   "level": "A1",
+   "title": {
+    "en": "Sentences with 是 (shì)",
+    "ar": "الجمل مع 是"
+   },
+   "explanation": {
+    "en": "Use 是 to link two nouns: A 是 B (A is B). Negate with 不是. Adjectives do not take 是: say 我很好 (I am well), not 我是好.",
+    "ar": "يُستخدم 是 للربط بين اسمين: A 是 B (أ هو ب). والنفي بـ 不是. لا تُستخدم 是 مع الصفات: نقول 我很好 (أنا بخير) وليس 我是好."
+   },
+   "examples": [
+    [
+     "我是学生。",
+     "I am a student."
+    ],
+    [
+     "他不是老师。",
+     "He is not a teacher."
+    ],
+    [
+     "这是我的书。",
+     "This is my book."
+    ]
+   ]
+  },
+  {
+   "slug": "measure_words",
+   "level": "A1",
+   "title": {
+    "en": "Numbers and measure words",
+    "ar": "الأعداد ومميِّزات العدّ"
+   },
+   "explanation": {
+    "en": "Between a number (or 这/那) and a noun, Chinese needs a measure word: 一个人, 两本书, 三杯茶. 个 is the general one; 本 is for books, 杯 for cups and glasses. Use 两, not 二, before a measure word.",
+    "ar": "بين العدد (أو 这/那) والاسم يلزم مميِّز عدّ: 一个人، 两本书، 三杯茶. المميِّز العام هو 个، و本 للكتب، و杯 للأكواب. استخدم 两 لا 二 قبل المميِّز."
+   },
+   "examples": [
+    [
+     "我有两本书。",
+     "I have two books."
+    ],
+    [
+     "一杯茶",
+     "a cup of tea"
+    ],
+    [
+     "这个学生",
+     "this student"
+    ]
+   ]
+  },
+  {
+   "slug": "verb_sentences",
+   "level": "A1",
+   "title": {
+    "en": "Verb sentences, time and 在 (at)",
+    "ar": "الجملة الفعلية والزمن و在"
+   },
+   "explanation": {
+    "en": "Word order is subject + time + 在 + place + verb + object: 我晚上在家学习. Time and place come before the verb. Chinese verbs never change form for person or tense.",
+    "ar": "ترتيب الجملة: الفاعل + الزمن + 在 + المكان + الفعل + المفعول: 我晚上在家学习. يأتي الزمن والمكان قبل الفعل، ولا يتغيّر الفعل الصيني بحسب الشخص أو الزمن."
+   },
+   "examples": [
+    [
+     "我去商店买水果。",
+     "I go to the shop to buy fruit."
+    ],
+    [
+     "我在医院工作。",
+     "I work in a hospital."
+    ],
+    [
+     "我们晚上在家吃饭。",
+     "We eat at home in the evening."
+    ]
+   ]
+  },
+  {
+   "slug": "ma_questions",
+   "level": "A1",
+   "title": {
+    "en": "Questions with 吗 and 喜欢 + verb",
+    "ar": "السؤال بـ 吗 و喜欢 + فعل"
+   },
+   "explanation": {
+    "en": "Turn a statement into a yes/no question by adding 吗 at the end: 你是学生吗？ To say what you like doing, use 喜欢 + verb: 我喜欢喝茶. Negate with 不喜欢.",
+    "ar": "حوِّل الجملة الخبرية إلى سؤال بنعم أو لا بإضافة 吗 في آخرها: 你是学生吗؟ وللتعبير عمّا تحب فعله استخدم 喜欢 + فعل: 我喜欢喝茶، والنفي بـ 不喜欢."
+   },
+   "examples": [
+    [
+     "你喜欢喝茶吗？",
+     "Do you like drinking tea?"
+    ],
+    [
+     "我不喜欢买东西。",
+     "I don't like shopping."
+    ],
+    [
+     "你是老师吗？",
+     "Are you a teacher?"
+    ]
+   ]
+  }
+ ],
+ "words": [
+  {
+   "lemma": "你好",
+   "pos": "interj",
+   "level": "A1",
+   "meaning": {
+    "en": "hello",
+    "ar": "مرحبًا"
+   },
+   "example": [
+    "你好！我叫王明。",
+    "Hello! My name is Wang Ming."
+   ],
+   "pron": "nǐ hǎo"
+  },
+  {
+   "lemma": "再见",
+   "pos": "interj",
+   "level": "A1",
+   "meaning": {
+    "en": "goodbye",
+    "ar": "مع السلامة"
+   },
+   "example": [
+    "老师，再见！",
+    "Goodbye, teacher!"
+   ],
+   "pron": "zài jiàn"
+  },
+  {
+   "lemma": "谢谢",
+   "pos": "interj",
+   "level": "A1",
+   "meaning": {
+    "en": "thank you",
+    "ar": "شكرًا"
+   },
+   "example": [
+    "谢谢你的帮助。",
+    "Thank you for your help."
+   ],
+   "pron": "xiè xie"
+  },
+  {
+   "lemma": "朋友",
+   "pos": "noun",
+   "level": "A1",
+   "meaning": {
+    "en": "friend",
+    "ar": "صديق"
+   },
+   "example": [
+    "他是我的好朋友。",
+    "He is my good friend."
+   ],
+   "pron": "péng you"
+  },
+  {
+   "lemma": "家",
+   "pos": "noun",
+   "level": "A1",
+   "meaning": {
+    "en": "home, family",
+    "ar": "بيت، عائلة"
+   },
+   "example": [
+    "我家有四口人。",
+    "There are four people in my family."
+   ],
+   "pron": "jiā"
+  },
+  {
+   "lemma": "城市",
+   "pos": "noun",
+   "level": "A1",
+   "meaning": {
+    "en": "city",
+    "ar": "مدينة"
+   },
+   "example": [
+    "北京是一个大城市。",
+    "Beijing is a big city."
+   ],
+   "pron": "chéng shì"
+  },
+  {
+   "lemma": "书",
+   "pos": "noun",
+   "level": "A1",
+   "meaning": {
+    "en": "book",
+    "ar": "كتاب"
+   },
+   "example": [
+    "这本书很好。",
+    "This book is very good."
+   ],
+   "pron": "shū"
+  },
+  {
+   "lemma": "桌子",
+   "pos": "noun",
+   "level": "A1",
+   "meaning": {
+    "en": "table",
+    "ar": "طاولة"
+   },
+   "example": [
+    "书在桌子上。",
+    "The book is on the table."
+   ],
+   "pron": "zhuō zi"
+  },
+  {
+   "lemma": "茶",
+   "pos": "noun",
+   "level": "A1",
+   "meaning": {
+    "en": "tea",
+    "ar": "شاي"
+   },
+   "example": [
+    "我喝一杯茶。",
+    "I drink a cup of tea."
+   ],
+   "pron": "chá"
+  },
+  {
+   "lemma": "水",
+   "pos": "noun",
+   "level": "A1",
+   "meaning": {
+    "en": "water",
+    "ar": "ماء"
+   },
+   "example": [
+    "请给我一杯水。",
+    "Please give me a glass of water."
+   ],
+   "pron": "shuǐ"
+  },
+  {
+   "lemma": "米饭",
+   "pos": "noun",
+   "level": "A1",
+   "meaning": {
+    "en": "rice (cooked)",
+    "ar": "أرز"
+   },
+   "example": [
+    "我们中午吃米饭。",
+    "We eat rice at noon."
+   ],
+   "pron": "mǐ fàn"
+  },
+  {
+   "lemma": "大",
+   "pos": "adj",
+   "level": "A1",
+   "meaning": {
+    "en": "big",
+    "ar": "كبير"
+   },
+   "example": [
+    "他的家很大。",
+    "His home is big."
+   ],
+   "pron": "dà",
+   "ant": [
+    "小"
+   ]
+  },
+  {
+   "lemma": "小",
+   "pos": "adj",
+   "level": "A1",
+   "meaning": {
+    "en": "small",
+    "ar": "صغير"
+   },
+   "example": [
+    "这个杯子很小。",
+    "This cup is small."
+   ],
+   "pron": "xiǎo",
+   "ant": [
+    "大"
+   ]
+  },
+  {
+   "lemma": "学生",
+   "pos": "noun",
+   "level": "A1",
+   "meaning": {
+    "en": "student",
+    "ar": "طالب"
+   },
+   "example": [
+    "我是学生。",
+    "I am a student."
+   ],
+   "pron": "xué sheng"
+  },
+  {
+   "lemma": "老师",
+   "pos": "noun",
+   "level": "A1",
+   "meaning": {
+    "en": "teacher",
+    "ar": "معلّم"
+   },
+   "example": [
+    "王老师是中国人。",
+    "Teacher Wang is Chinese."
+   ],
+   "pron": "lǎo shī"
+  },
+  {
+   "lemma": "工作",
+   "pos": "verb",
+   "level": "A1",
+   "meaning": {
+    "en": "to work; job",
+    "ar": "يعمل؛ عمل"
+   },
+   "example": [
+    "我在医院工作。",
+    "I work in a hospital."
+   ],
+   "pron": "gōng zuò"
+  },
+  {
+   "lemma": "学习",
+   "pos": "verb",
+   "level": "A1",
+   "meaning": {
+    "en": "to study",
+    "ar": "يدرس"
+   },
+   "example": [
+    "我们一起学习汉语。",
+    "We study Chinese together."
+   ],
+   "pron": "xué xí"
+  },
+  {
+   "lemma": "买",
+   "pos": "verb",
+   "level": "A1",
+   "meaning": {
+    "en": "to buy",
+    "ar": "يشتري"
+   },
+   "example": [
+    "我去商店买水果。",
+    "I go to the shop to buy fruit."
+   ],
+   "pron": "mǎi"
+  },
+  {
+   "lemma": "卖",
+   "pos": "verb",
+   "level": "A1",
+   "meaning": {
+    "en": "to sell",
+    "ar": "يبيع"
+   },
+   "example": [
+    "这个商店卖书。",
+    "This shop sells books."
+   ],
+   "pron": "mài"
+  },
+  {
+   "lemma": "喜欢",
+   "pos": "verb",
+   "level": "A1",
+   "meaning": {
+    "en": "to like",
+    "ar": "يحبّ"
+   },
+   "example": [
+    "我喜欢喝茶。",
+    "I like drinking tea."
+   ],
+   "pron": "xǐ huan"
+  },
+  {
+   "lemma": "今天",
+   "pos": "noun",
+   "level": "A1",
+   "meaning": {
+    "en": "today",
+    "ar": "اليوم"
+   },
+   "example": [
+    "今天是星期一。",
+    "Today is Monday."
+   ],
+   "pron": "jīn tiān"
+  },
+  {
+   "lemma": "晚上",
+   "pos": "noun",
+   "level": "A1",
+   "meaning": {
+    "en": "evening",
+    "ar": "مساء"
+   },
+   "example": [
+    "我晚上学习。",
+    "I study in the evening."
+   ],
+   "pron": "wǎn shang"
+  },
+  {
+   "lemma": "商店",
+   "pos": "noun",
+   "level": "A1",
+   "meaning": {
+    "en": "shop",
+    "ar": "متجر"
+   },
+   "example": [
+    "商店九点开门。",
+    "The shop opens at nine."
+   ],
+   "pron": "shāng diàn"
+  },
+  {
+   "lemma": "好",
+   "pos": "adj",
+   "level": "A1",
+   "meaning": {
+    "en": "good",
+    "ar": "جيد"
+   },
+   "example": [
+    "今天天气很好。",
+    "The weather is good today."
+   ],
+   "pron": "hǎo"
+  }
+ ],
+ "exercises": [
+  {
+   "key": "zh-a1-shi-mcq",
+   "type": "mcq",
+   "skill": "grammar",
+   "level": "A1",
+   "questions": [
+    {
+     "p": "我___学生。",
+     "o": [
+      "是",
+      "很",
+      "在",
+      "有"
+     ]
+    },
+    {
+     "p": "他___老师，他是学生。",
+     "o": [
+      "不是",
+      "没是",
+      "不",
+      "没有"
+     ]
+    },
+    {
+     "p": "我___好。",
+     "o": [
+      "很",
+      "是",
+      "在",
+      "个"
+     ]
+    },
+    {
+     "p": "这___我的书。",
+     "o": [
+      "是",
+      "很",
+      "个",
+      "在"
+     ]
+    }
+   ],
+   "topic": "shi_sentences"
+  },
+  {
+   "key": "zh-a1-measure-mcq",
+   "type": "mcq",
+   "skill": "grammar",
+   "level": "A1",
+   "questions": [
+    {
+     "p": "我有两___书。",
+     "o": [
+      "本",
+      "个",
+      "杯",
+      "口"
+     ]
+    },
+    {
+     "p": "请给我一___茶。",
+     "o": [
+      "杯",
+      "本",
+      "个",
+      "张"
+     ]
+    },
+    {
+     "p": "这___学生是我朋友。",
+     "o": [
+      "个",
+      "本",
+      "杯",
+      "口"
+     ]
+    },
+    {
+     "p": "我买___本书。",
+     "o": [
+      "两",
+      "二",
+      "双",
+      "第二"
+     ]
+    }
+   ],
+   "topic": "measure_words"
+  },
+  {
+   "key": "zh-a1-verb-cloze",
+   "type": "cloze",
+   "skill": "grammar",
+   "level": "A1",
+   "topic": "verb_sentences",
+   "questions": [
+    {
+     "p": "我___医院工作。(zài)",
+     "a": [
+      "在"
+     ]
+    },
+    {
+     "p": "他们今天___家吃饭。(zài)",
+     "a": [
+      "在"
+     ]
+    },
+    {
+     "p": "我们一起___汉语。(xuéxí)",
+     "a": [
+      "学习"
+     ]
+    },
+    {
+     "p": "我去商店___水果。(mǎi)",
+     "a": [
+      "买"
+     ]
+    }
+   ]
+  },
+  {
+   "key": "zh-a1-ma-mcq",
+   "type": "mcq",
+   "skill": "grammar",
+   "level": "A1",
+   "questions": [
+    {
+     "p": "你是学生___？",
+     "o": [
+      "吗",
+      "呢",
+      "吧",
+      "的"
+     ]
+    },
+    {
+     "p": "我___喝茶，我每天都喝。",
+     "o": [
+      "喜欢",
+      "不喜欢",
+      "是",
+      "在"
+     ]
+    },
+    {
+     "p": "你喜欢___吗？",
+     "o": [
+      "喝茶",
+      "茶喝",
+      "喝喝",
+      "是茶"
+     ]
+    },
+    {
+     "p": "他___喜欢买东西。",
+     "o": [
+      "不",
+      "没",
+      "吗",
+      "是"
+     ]
+    }
+   ],
+   "topic": "ma_questions"
+  },
+  {
+   "key": "zh-a1-vocab-mcq",
+   "type": "mcq",
+   "skill": "vocabulary",
+   "level": "A1",
+   "questions": [
+    {
+     "p": "我喝一杯___。",
+     "o": [
+      "水",
+      "书",
+      "桌子",
+      "城市"
+     ]
+    },
+    {
+     "p": "“大”的反义词是___。",
+     "o": [
+      "小",
+      "好",
+      "多",
+      "高"
+     ]
+    },
+    {
+     "p": "我去___买水果。",
+     "o": [
+      "商店",
+      "学生",
+      "晚上",
+      "朋友"
+     ]
+    },
+    {
+     "p": "我晚上看___。",
+     "o": [
+      "书",
+      "米饭",
+      "水",
+      "茶"
+     ]
+    }
+   ],
+   "title": {
+    "en": "Everyday words",
+    "ar": "كلمات يومية"
+   }
+  },
+  {
+   "key": "zh-a1-order",
+   "type": "ordering",
+   "skill": "grammar",
+   "level": "A1",
+   "title": {
+    "en": "Build simple sentences",
+    "ar": "كوّن جملًا بسيطة"
+   },
+   "questions": [
+    {
+     "o": [
+      "我",
+      "是",
+      "学生"
+     ]
+    },
+    {
+     "o": [
+      "他",
+      "在",
+      "医院",
+      "工作"
+     ]
+    },
+    {
+     "o": [
+      "你",
+      "喜欢",
+      "喝茶",
+      "吗"
+     ]
+    }
+   ]
+  },
+  {
+   "key": "zh-a1-read-1",
+   "type": "reading",
+   "skill": "reading",
+   "level": "A1",
+   "title": {
+    "en": "Wang Ming's family",
+    "ar": "عائلة وانغ مينغ"
+   },
+   "text": "我叫王明，我家在北京。我家有四口人：爸爸、妈妈、妹妹和我。爸爸是医生，妈妈是老师。周末我们去商店买水果。",
+   "questions": [
+    {
+     "p": "王明的家在哪儿？",
+     "o": [
+      "北京",
+      "上海",
+      "商店",
+      "医院"
+     ]
+    },
+    {
+     "p": "王明的妈妈做什么工作？",
+     "o": [
+      "老师",
+      "医生",
+      "学生",
+      "没有工作"
+     ]
+    },
+    {
+     "p": "周末他们买什么？",
+     "o": [
+      "水果",
+      "书",
+      "茶",
+      "米饭"
+     ]
+    }
+   ]
+  },
+  {
+   "key": "zh-a2-read-2",
+   "type": "reading",
+   "skill": "reading",
+   "level": "A2",
+   "title": {
+    "en": "A new job",
+    "ar": "عمل جديد"
+   },
+   "text": "李华上个月开始了新的工作。以前她在一个小商店卖东西，现在她在公司上班。第一天她有点儿紧张，但是同事们都很友好。她每天坐地铁去公司，路上要二十分钟。",
+   "questions": [
+    {
+     "p": "李华以前在哪儿工作？",
+     "o": [
+      "小商店",
+      "公司",
+      "地铁",
+      "医院"
+     ]
+    },
+    {
+     "p": "第一天她觉得怎么样？",
+     "o": [
+      "有点儿紧张",
+      "很累",
+      "很高兴",
+      "生气"
+     ]
+    },
+    {
+     "p": "她去公司要多长时间？",
+     "o": [
+      "二十分钟",
+      "一个小时",
+      "十分钟",
+      "两个小时"
+     ]
+    }
+   ]
+  },
+  {
+   "key": "zh-a1-listen-1",
+   "type": "listening",
+   "skill": "listening",
+   "level": "A1",
+   "title": {
+    "en": "At the café",
+    "ar": "في المقهى"
+   },
+   "text": "你好，我要一杯茶和一个面包。一共多少钱？一共二十五块。",
+   "questions": [
+    {
+     "p": "他要喝什么？",
+     "o": [
+      "茶",
+      "咖啡",
+      "水",
+      "牛奶"
+     ]
+    },
+    {
+     "p": "他要吃什么？",
+     "o": [
+      "面包",
+      "米饭",
+      "水果",
+      "什么也不吃"
+     ]
+    },
+    {
+     "p": "一共多少钱？",
+     "o": [
+      "二十五块",
+      "十五块",
+      "二十块",
+      "三十五块"
+     ]
+    }
+   ]
+  },
+  {
+   "key": "zh-a1-dictation",
+   "type": "dictation",
+   "skill": "listening",
+   "level": "A1",
+   "title": {
+    "en": "Short everyday sentences",
+    "ar": "جمل يومية قصيرة"
+   },
+   "questions": [
+    {
+     "a": [
+      "我叫李明，我是学生。"
+     ]
+    },
+    {
+     "a": [
+      "我的家很小。"
+     ]
+    },
+    {
+     "a": [
+      "我们晚上学习汉语。"
+     ]
+    }
+   ]
+  },
+  {
+   "key": "zh-a1-repeat",
+   "type": "repeat",
+   "skill": "speaking",
+   "level": "A1",
+   "title": {
+    "en": "Say it aloud",
+    "ar": "قلها بصوت عالٍ"
+   },
+   "objectives": [
+    {
+     "code": "zh.a1.pronounce",
+     "skill": "speaking",
+     "text": {
+      "en": "Pronounce everyday sentences clearly enough to be understood",
+      "ar": "نطق جمل يومية بوضوح يكفي لفهمها"
+     }
+    }
+   ],
+   "questions": [
+    {
+     "r": "我叫李明，我是学生。"
+    },
+    {
+     "r": "我的家很小。"
+    },
+    {
+     "r": "我们晚上学习汉语。"
+    },
+    {
+     "r": "我是学生。"
+    },
+    {
+     "r": "我去商店买水果。"
+    }
+   ]
+  }
+ ],
+ "course": {
+  "slug": "zh-foundations",
+  "level_from": "PRE_A1",
+  "level_to": "A2",
+  "title": {
+   "en": "Chinese foundations",
+   "ar": "أساسيات الصينية"
+  },
+  "description": {
+   "en": "Your first steps in Chinese: introductions, everyday objects, routines and likes.",
+   "ar": "خطواتك الأولى في الصينية: التعارف والأشياء اليومية والروتين وما تحبه."
+  },
+  "units": [
+   {
+    "title": {
+     "en": "First steps",
+     "ar": "الخطوات الأولى"
+    },
+    "lessons": [
+     {
+      "key": "zh-u1-l1",
+      "skill": "grammar",
+      "level": "A1",
+      "topic": "shi_sentences",
+      "minutes": 12,
+      "title": {
+       "en": "Who are you?",
+       "ar": "من أنت؟"
+      },
+      "intro": {
+       "en": "Introduce yourself and others, and learn your first greetings.",
+       "ar": "عرّف بنفسك وبالآخرين وتعلّم أولى عبارات التحية."
+      },
+      "objectives": [
+       {
+        "code": "zh.a1.introduce",
+        "skill": "speaking",
+        "text": {
+         "en": "Introduce yourself and say where you are from",
+         "ar": "التعريف بنفسك وذكر بلدك"
+        }
+       },
+       {
+        "code": "zh.a1.shi_sentences",
+        "skill": "grammar",
+        "text": {
+         "en": "Use the key verb or structure for describing people",
+         "ar": "استخدام التركيب الأساسي لوصف الأشخاص"
+        }
+       }
+      ],
+      "words": [
+       "你好",
+       "再见",
+       "谢谢",
+       "朋友",
+       "家",
+       "城市"
+      ],
+      "exercises": [
+       "zh-a1-shi-mcq",
+       "zh-a1-order"
+      ]
+     },
+     {
+      "key": "zh-u1-l2",
+      "skill": "grammar",
+      "level": "A1",
+      "topic": "measure_words",
+      "minutes": 12,
+      "title": {
+       "en": "Things around you",
+       "ar": "الأشياء من حولك"
+      },
+      "intro": {
+       "en": "Name everyday objects and describe them correctly.",
+       "ar": "سمِّ الأشياء اليومية وصِفها بشكل صحيح."
+      },
+      "objectives": [
+       {
+        "code": "zh.a1.measure_words",
+        "skill": "grammar",
+        "text": {
+         "en": "Match nouns with the right articles and adjectives",
+         "ar": "مطابقة الأسماء مع أدوات التعريف والصفات الصحيحة"
+        }
+       },
+       {
+        "code": "zh.a1.objects",
+        "skill": "vocabulary",
+        "text": {
+         "en": "Name common objects, food and drinks",
+         "ar": "تسمية الأشياء والأطعمة والمشروبات الشائعة"
+        }
+       }
+      ],
+      "words": [
+       "书",
+       "桌子",
+       "茶",
+       "水",
+       "米饭",
+       "大",
+       "小"
+      ],
+      "exercises": [
+       "zh-a1-measure-mcq",
+       "zh-a1-vocab-mcq"
+      ]
+     }
+    ]
+   },
+   {
+    "title": {
+     "en": "Everyday life",
+     "ar": "الحياة اليومية"
+    },
+    "lessons": [
+     {
+      "key": "zh-u2-l1",
+      "skill": "grammar",
+      "level": "A1",
+      "topic": "verb_sentences",
+      "minutes": 15,
+      "title": {
+       "en": "What do you do?",
+       "ar": "ماذا تفعل؟"
+      },
+      "intro": {
+       "en": "Talk about work, study and daily routines in the present tense.",
+       "ar": "تحدّث عن العمل والدراسة والروتين اليومي بصيغة المضارع."
+      },
+      "objectives": [
+       {
+        "code": "zh.a1.routine",
+        "skill": "speaking",
+        "text": {
+         "en": "Describe your daily routine",
+         "ar": "وصف روتينك اليومي"
+        }
+       },
+       {
+        "code": "zh.a1.read_family",
+        "skill": "reading",
+        "text": {
+         "en": "Understand a short text about a family",
+         "ar": "فهم نص قصير عن عائلة"
+        }
+       }
+      ],
+      "words": [
+       "学生",
+       "老师",
+       "工作",
+       "学习",
+       "买",
+       "今天",
+       "晚上"
+      ],
+      "exercises": [
+       "zh-a1-verb-cloze",
+       "zh-a1-read-1",
+       "zh-a1-dictation"
+      ]
+     },
+     {
+      "key": "zh-u2-l2",
+      "skill": "grammar",
+      "level": "A1",
+      "topic": "ma_questions",
+      "minutes": 15,
+      "title": {
+       "en": "Likes and questions",
+       "ar": "ما تحبه والأسئلة"
+      },
+      "intro": {
+       "en": "Ask yes/no questions, say what you like and understand a simple order in a café.",
+       "ar": "اطرح أسئلة بنعم أو لا، وعبّر عمّا تحبه، وافهم طلبًا بسيطًا في مقهى."
+      },
+      "objectives": [
+       {
+        "code": "zh.a1.ma_questions",
+        "skill": "grammar",
+        "text": {
+         "en": "Use the lesson's grammar to talk about everyday things",
+         "ar": "استخدام قاعدة الدرس للحديث عن الأمور اليومية"
+        }
+       },
+       {
+        "code": "zh.a1.cafe",
+        "skill": "listening",
+        "text": {
+         "en": "Understand a simple order in a café",
+         "ar": "فهم طلب بسيط في مقهى"
+        }
+       }
+      ],
+      "words": [
+       "喜欢",
+       "商店",
+       "好",
+       "卖"
+      ],
+      "exercises": [
+       "zh-a1-ma-mcq",
+       "zh-a1-listen-1",
+       "zh-a2-read-2"
+      ]
+     }
+    ]
+   }
+  ]
+ }
+}

@@ -152,6 +152,7 @@ export function LessonView() {
                 <li key={w.id} className="border-b pb-2">
                   <p className="flex items-baseline justify-between gap-2">
                     <span lang={l.language.code} dir={l.language.direction} className="text-lg font-medium">{w.lemma}</span>
+                    {w.pronunciation && <span className="text-sm text-muted-foreground">{w.pronunciation}</span>}
                     <span className="text-xs text-muted-foreground">{w.part_of_speech}{w.gender ? ` · ${w.gender}` : ""}</span>
                   </p>
                   <p className="text-sm text-muted-foreground">{w.meaning}</p>

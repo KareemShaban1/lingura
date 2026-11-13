@@ -164,7 +164,7 @@ function Results({ attempt, backHref, backLabel, onRetry }: { attempt: ExerciseA
       <div className="grid gap-3 sm:grid-cols-2">
         <Card><CardContent className="p-5"><p className="text-xs text-muted-foreground">{t.exercise.score}</p><p className="font-display text-4xl">{Math.round((attempt.score ?? 0) * 100)}%</p></CardContent></Card>
         {attempt.words_per_minute && (
-          <Card><CardContent className="p-5"><p className="text-xs text-muted-foreground">{t.exercise.readingSpeed}</p><p className="font-display text-4xl">{f(t.exercise.wpm, { n: attempt.words_per_minute })}</p></CardContent></Card>
+          <Card><CardContent className="p-5"><p className="text-xs text-muted-foreground">{t.exercise.readingSpeed}</p><p className="font-display text-4xl">{f(attempt.reading_unit === "characters" ? t.exercise.cpm : t.exercise.wpm, { n: attempt.words_per_minute })}</p></CardContent></Card>
         )}
       </div>
       {exercise.type === "listening" && exercise.stimulus && (

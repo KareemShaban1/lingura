@@ -17,8 +17,8 @@ import { api } from "@/lib/api";
 import { useI18n } from "@/lib/i18n";
 import type { WritingSubmission } from "@/lib/types";
 import { toastError } from "@/lib/errors";
+import { countUnits } from "@/lib/text";
 
-const wordCount = (text: string) => (text.trim().match(/[\p{L}\p{M}\p{N}']+/gu) ?? []).length;
 
 export function WritingListView() {
   const { t, f } = useI18n();
@@ -41,7 +41,7 @@ export function WritingListView() {
                   <span className="grid size-9 shrink-0 place-items-center rounded-lg bg-muted text-skill-writing"><PenLine className="size-[18px]" /></span>
                   <div className="min-w-0 flex-1">
                     <p className="font-medium">{task.title}</p>
-                    <p className="mt-0.5 text-xs text-muted-foreground">{f(t.writing.target, { min: task.min_words, max: task.max_words })}</p>
+                    <p className="mt-0.5 text-xs text-muted-foreground">{f(task.count_unit === "characters" ? t.writing.targetChars : t.writing.target, { min: task.min_words, max: task.max_words })}</p>
                     <div className="mt-2 flex gap-2">
                       <Badge variant="outline" className="font-mono">{task.level.label}</Badge>
                       {task.last_score != null && <Badge variant="success">{f(t.writing.last, { score: task.last_score })}</Badge>}
@@ -154,7 +154,7 @@ export function WritingTaskView() {
   if (task.error) return <ErrorState error={task.error} onRetry={() => task.refetch()} />;
   if (!task.data || !profile) return <Skeleton className="h-96" />;
   const d = task.data;
-  const words = wordCount(text);
+  const words = countUnits(text);
 
   async function submit() {
     setSubmitting(true);
@@ -175,7 +175,7 @@ export function WritingTaskView() {
     <div className="mx-auto max-w-4xl space-y-6">
       <Link href="/practice/writing" className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground"><ArrowLeft className="size-4 rtl:rotate-180" /> {t.writing.title}</Link>
       <div>
-        <div className="flex items-center gap-2 text-xs text-muted-foreground"><Badge variant="outline" className="font-mono">{d.level.label}</Badge>{f(t.writing.target, { min: d.min_words, max: d.max_words })}</div>
+        <div className="flex items-center gap-2 text-xs text-muted-foreground"><Badge variant="outline" className="font-mono">{d.level.label}</Badge>{f(d.count_unit === "characters" ? t.writing.targetChars : t.writing.target, { min: d.min_words, max: d.max_words })}</div>
         <h1 className="mt-2 font-display text-3xl">{d.title}</h1>
         <p lang={d.language.code} dir={d.language.direction} className="mt-3 rounded-xl border bg-secondary/30 p-4 text-lg leading-relaxed">{d.prompt}</p>
       </div>
@@ -192,7 +192,7 @@ export function WritingTaskView() {
             className="w-full rounded-xl border border-input bg-card p-4 text-lg leading-relaxed focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40" />
           <div className="flex flex-wrap items-center justify-between gap-3">
             <span className={words < d.min_words || words > d.max_words ? "text-sm text-warning" : "text-sm text-success"} aria-live="polite">
-              {f(t.writing.words, { n: words })} · {f(t.writing.target, { min: d.min_words, max: d.max_words })}
+              {f(d.count_unit === "characters" ? t.writing.characters : t.writing.words, { n: words })} · {f(d.count_unit === "characters" ? t.writing.targetChars : t.writing.target, { min: d.min_words, max: d.max_words })}
             </span>
             <Button size="lg" onClick={submit} loading={submitting} disabled={words < 3}>{t.writing.submit}</Button>
           </div>
@@ -204,7 +204,7 @@ export function WritingTaskView() {
           <CardContent><ul className="divide-y text-sm">
             {d.submissions.map((s) => (
               <li key={s.id}><button className="flex w-full justify-between py-2 hover:text-primary" onClick={() => setSubmissionId(s.id)}>
-                <span>{new Date(s.created_at).toLocaleString()} · {f(t.writing.words, { n: s.word_count })}</span>
+                <span>{new Date(s.created_at).toLocaleString()} · {f(d.count_unit === "characters" ? t.writing.characters : t.writing.words, { n: s.word_count })}</span>
                 <span className="font-mono">{s.score != null ? `${s.score}/5` : s.status}</span>
               </button></li>
             ))}

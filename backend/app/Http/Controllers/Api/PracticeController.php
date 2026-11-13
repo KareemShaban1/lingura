@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Domain\Media\MediaUrlService;
 use App\Domain\Practice\ExerciseService;
+use App\Domain\Practice\TextNormalizer;
 use App\Domain\Shared\DomainError;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\ExerciseAttemptResource;
@@ -120,10 +121,12 @@ class PracticeController extends Controller
     /** Feedback for one answered question: correctness, partial credit, the correct answer and the explanation. */
     public static function feedback(Exercise $exercise, ExerciseQuestion $question, ExerciseAnswer $answer): array
     {
+        // Words are joined with spaces, except in scripts written without them (Chinese, Japanese…).
+        $glue = TextNormalizer::isUnspaced($question->options->pluck('label')->implode('')) ? '' : ' ';
         $correct = match ($exercise->type) {
             'repeat' => $question->reference_text,
             'cloze', 'dictation' => $question->acceptedAnswers->first()?->answer,
-            'ordering' => $question->options->sortBy('correct_position')->pluck('label')->implode(' '),
+            'ordering' => $question->options->sortBy('correct_position')->pluck('label')->implode($glue),
             default => $question->options->firstWhere('is_correct', true)?->label,
         };
 
@@ -135,7 +138,7 @@ class PracticeController extends Controller
             'given' => match ($exercise->type) {
                 'cloze', 'dictation', 'repeat' => $answer->response_text,
                 'ordering' => collect(explode(',', (string) $answer->response_text))
-                    ->map(fn ($id) => $question->options->firstWhere('id', (int) $id)?->label)->filter()->implode(' '),
+                    ->map(fn ($id) => $question->options->firstWhere('id', (int) $id)?->label)->filter()->implode($glue),
                 default => $question->options->firstWhere('id', $answer->selected_option_id)?->label,
             },
             'selected_option_id' => $answer->selected_option_id,

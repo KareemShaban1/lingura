@@ -52,7 +52,7 @@ function DictionarySearch({ profile }: { profile: LearnerProfile }) {
           {results.data.map((w) => (
             <li key={w.id} className="flex items-center gap-3 rounded-lg p-2 hover:bg-muted">
               <div className="min-w-0 flex-1">
-                <p className="font-medium" lang={profile.target_language.code} dir={profile.target_language.direction}>{w.lemma}</p>
+                <p className="font-medium" lang={profile.target_language.code} dir={profile.target_language.direction}>{w.lemma}{w.pronunciation && <span className="ms-2 text-sm font-normal text-muted-foreground">{w.pronunciation}</span>}</p>
                 <p className="truncate text-xs text-muted-foreground">{w.meaning}</p>
               </div>
               <Button size="sm" variant={added.has(w.id) ? "ghost" : "secondary"} disabled={added.has(w.id)} onClick={() => add(w)}>
@@ -81,6 +81,7 @@ function WordRow({ card, profile, collections, onChanged }: { card: UserWord; pr
       <div className="min-w-0 flex-1">
         <p className="flex items-center gap-2">
           <span className="text-lg font-medium" lang={profile.target_language.code} dir={profile.target_language.direction}>{card.word.lemma}</span>
+          {card.word.pronunciation && <span className="text-sm text-muted-foreground">{card.word.pronunciation}</span>}
           {card.mastered ? <Badge variant="success">{t.vocab.mastered}</Badge> : <Badge variant="muted">{t.vocab.states[card.state]}</Badge>}
         </p>
         <p className="text-sm text-muted-foreground">{card.word.meaning}</p>
@@ -251,6 +252,7 @@ export function ReviewSession() {
       <Card className="min-h-72">
         <CardContent className="flex min-h-72 flex-col items-center justify-center gap-4 p-8 text-center">
           <p lang={lang.code} dir={lang.direction} className="font-display text-5xl">{card.word.lemma}</p>
+          {card.word.pronunciation && <p className="text-lg text-muted-foreground">{card.word.pronunciation}</p>}
           <p className="text-xs uppercase tracking-wider text-muted-foreground">{card.word.part_of_speech}{card.word.gender ? ` · ${card.word.gender}` : ""}</p>
           {revealed && (
             <div className="w-full space-y-3 border-t pt-4 motion-safe:animate-[fadeIn_200ms_ease-out]">
