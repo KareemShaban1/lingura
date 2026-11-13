@@ -1,9 +1,9 @@
 openapi: 3.1.0
 info:
   title: LinguaForge API
-  version: 4.0.0-phase4
+  version: 5.0.0-phase5
   description: |
-    REST API for the LinguaForge language-learning platform (identity, onboarding, placement, plans, content & practice, AI tutor, speech, writing, billing, family groups, gamification and administration).
+    REST API for the LinguaForge language-learning platform (identity, onboarding, placement, plans, content & practice, AI tutor, speech, writing, billing, family groups, gamification, administration, exam practice and offline sync).
     Authentication: Sanctum SPA cookies (call `GET /sanctum/csrf-cookie` first and send `X-XSRF-TOKEN`) or a bearer token
     (pass `device_name` to register/login). Errors use `{message, code?, errors?}`.
     Assessment results are estimates aligned to CEFR descriptors, never official certifications.
@@ -30,6 +30,8 @@ tags:
   - name: Family
   - name: Gamification
   - name: Admin
+  - name: Exams
+  - name: Offline
 paths:
   /auth/register:
     post:
@@ -518,6 +520,43 @@ paths:
     get: { tags: [Admin], description: 'Permission analytics.view.', responses: { '200': { description: 'users, subscriptions (MRR), engagement_7d, ai_cost_30d, retention cohorts' }, '403': { description: forbidden } } }
   /admin/users:
     get: { tags: [Admin], description: 'Permission users.manage. Other admin routes (users/{id}, status, roles, grants, review, content, ai, billing, languages, audit-logs) are documented in docs/13-business-and-admin.md §5.', responses: { '200': { description: Paginated users } } }
+  /learner-profiles/{profile}/exams:
+    parameters: [{ $ref: '#/components/parameters/Profile' }]
+    get: { tags: [Exams], responses: { '200': { description: 'Exam practice for the profile language: sections, disclaimer, past attempts with overall estimates' } } }
+  /learner-profiles/{profile}/exams/{framework}/attempts:
+    parameters: [{ $ref: '#/components/parameters/Profile' }, { name: framework, in: path, required: true, schema: { type: string, enum: [ielts_academic, dele_a2, delf_a2, goethe_a2, hsk_1] } }]
+    post: { tags: [Exams], description: Starts a practice test (quota exam_mocks) or resumes the open one., responses: { '201': { description: New attempt }, '200': { description: Resumed attempt }, '429': { description: quota_exceeded } } }
+  /exam-attempts/{attempt}:
+    parameters: [{ $ref: '#/components/parameters/Attempt' }]
+    get: { tags: [Exams], description: 'Sweeps sections whose server deadline has passed. The current section returns questions without keys (listening without scripts) or the writing/speaking task.', responses: { '200': { description: 'Attempt with sections (status, deadline_at, remaining_seconds, raw, level, estimate), current, result' } } }
+  /exam-attempts/{attempt}/sections/{skill}/start:
+    parameters: [{ $ref: '#/components/parameters/Attempt' }, { name: skill, in: path, required: true, schema: { type: string, enum: [listening, reading, writing, speaking] } }]
+    post: { tags: [Exams], responses: { '200': { description: Section started; deadline set server-side }, '409': { description: section_in_progress | section_closed } } }
+  /exam-attempts/{attempt}/sections/{skill}/skip:
+    parameters: [{ $ref: '#/components/parameters/Attempt' }, { name: skill, in: path, required: true, schema: { type: string, enum: [listening, reading, writing, speaking] } }]
+    post: { tags: [Exams], responses: { '200': { description: Section skipped (no estimate) } } }
+  /exam-attempts/{attempt}/answers:
+    parameters: [{ $ref: '#/components/parameters/Attempt' }]
+    post: { tags: [Exams], requestBody: { content: { application/json: { schema: { type: object, required: [item_id, option_id], properties: { item_id: { type: string }, option_id: { type: integer } } } } } }, responses: { '200': { description: Saved (correctness only in the review) }, '409': { description: section_time_over | section_closed } } }
+  /exam-attempts/{attempt}/sections/{skill}/submit:
+    parameters: [{ $ref: '#/components/parameters/Attempt' }, { name: skill, in: path, required: true, schema: { type: string, enum: [listening, reading, writing, speaking] } }]
+    post: { tags: [Exams], requestBody: { content: { application/json: { schema: { type: object, properties: { text: { type: string, maxLength: 8000 }, recording_id: { type: string } } } } } }, responses: { '200': { description: 'Section closed with an estimate: band {band, low, high} or readiness {probability, label}' } } }
+  /exam-attempts/{attempt}/review:
+    parameters: [{ $ref: '#/components/parameters/Attempt' }]
+    get: { tags: [Exams], responses: { '200': { description: Questions with keys, chosen options, explanations and listening scripts }, '409': { description: Test not finished } } }
+  /exam-attempts/{attempt}/items/{item}/audio:
+    parameters: [{ $ref: '#/components/parameters/Attempt' }, { name: item, in: path, required: true, schema: { type: string } }]
+    get: { tags: [Exams], responses: { '200': { description: '{ url } signed, only while the section is open' } } }
+  /learner-profiles/{profile}/lessons/{lesson}/offline-pack:
+    parameters: [{ $ref: '#/components/parameters/Profile' }, { name: lesson, in: path, required: true, schema: { type: string } }]
+    get: { tags: [Offline], description: Text exercises with answer keys for provisional on-device feedback; never cached by intermediaries., responses: { '200': { description: 'lesson, language, exercises, version, expires_at, skipped_exercises' } } }
+  /learner-profiles/{profile}/offline-sync:
+    parameters: [{ $ref: '#/components/parameters/Profile' }]
+    post:
+      tags: [Offline]
+      description: Replays offline attempts through the normal exercise service (answers re-checked server-side). Idempotent per client_ref.
+      requestBody: { content: { application/json: { schema: { type: object, required: [attempts], properties: { attempts: { type: array, maxItems: 50, items: { type: object, required: [client_ref, exercise_id, answers], properties: { client_ref: { type: string }, exercise_id: { type: string }, lesson_id: { type: string }, answers: { type: array } } } }, complete_lessons: { type: array, items: { type: string } } } } } } }
+      responses: { '200': { description: 'Per attempt: synced | duplicate | rejected, with the server score' } }
 components:
   securitySchemes:
     bearerAuth: { type: http, scheme: bearer }

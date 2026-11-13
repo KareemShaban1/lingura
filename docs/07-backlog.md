@@ -56,5 +56,12 @@ Definition of done for every item: migrations + seed data, API with FormRequest 
 | 4.6 | Platform analytics: active users, MRR, engagement, AI cost, retention cohorts | ✅ |
 | — | Deferred: live Stripe verification, proration/plan switching in-app, tax/VAT, school/company seats, WYSIWYG authoring, analytics rollups | → later |
 
-## Phase 5 — Expansion
-Exam preparation frameworks (original/licensed material, timed mocks, *estimated* band scores) · more languages (HSK requires Chinese: tone-aware pronunciation, character script handling) · advanced personalization (bandit-based activity selection) · mobile app (Expo) on token auth · offline lesson packs.
+## Phase 5 — Expansion ✅
+| # | Item | Status |
+|---|---|---|
+| 5.1 | Chinese (Mandarin): course with pinyin, placement bank, script-aware tokenisation and segmentation, tone-aware pronunciation estimate | ✅ |
+| 5.2 | Exam practice: IELTS Academic, DELE A2, DELF A2, Goethe A2, HSK 1 formats with original forms, server-timed sections, estimated bands/readiness with uncertainty | ✅ |
+| 5.3 | Bandit-based exercise-format personalisation with logged propensities | ✅ |
+| 5.4 | Offline lesson packs (PWA) with server-verified sync | ✅ |
+| 5.5 | Expo mobile companion on token auth (plan, flashcards, rewards) | ✅ |
+| — | Deferred: exam calibration and more forms, more languages (Japanese, Korean), pitch-based tone analysis, native offline, EAS builds and push notifications | → later |

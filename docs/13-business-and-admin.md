@@ -13,6 +13,7 @@ What Phase 4 ships, the rules it enforces, and where its limits are.
 | `pronunciation_checks` | day | 10 | 100 | 300 |
 | `placement_productive` (AI-scored placement sections) | month | 2 | 10 | 20 |
 | `target_languages` | standing | 1 | 3 | unlimited |
+| `exam_mocks` (Phase 5) | month | 1 | 4 | 10 |
 
 Placement (closed sections), plans, lessons, exercises, grammar and flashcards are free on every plan. Prices: Premium $12.99/mo · $99.99/yr, Pro $24.99/mo · $199.99/yr, Family (6 seats) $19.99/mo · $159.99/yr. Displayed prices come from the database; **the charged amount is the provider price** (`provider_price_id`), so keep them in sync.
 

@@ -37,6 +37,9 @@ app/
 │  ├─ rewards/page.tsx                 ✅ P4 XP, streak & freezes, achievements, challenges, opt-in leaderboard
 │  ├─ notifications/page.tsx           ✅ P4 in-app notifications (bell with unread count in the header)
 ├─ (focus)/invitations/[token]         ✅ P4 accept a family invitation
+├─ (app)/practice/exams                ✅ P5 exam practice catalog
+├─ (focus)/exams/[attemptId]/…         ✅ P5 timed player (server deadline countdown) and results with review
+├─ offline/page.tsx                    ✅ P5 offline lessons (no API needed; IndexedDB + service worker)
 └─ (admin)/admin/…                     ✅ P4 overview, users, review, content, ai, billing, languages, audit (sections by permission)
 ```
 

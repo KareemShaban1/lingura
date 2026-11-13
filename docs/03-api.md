@@ -139,7 +139,23 @@ Details: [13-business-and-admin.md](13-business-and-admin.md). Quota errors: `42
 | GET · PATCH | `/leaderboards/weekly` · `/me/leaderboard` | Opt-in weekly leaderboard / `{opt_in, alias?}` |
 | — | `/admin/*` | Analytics, users, review queue, content, AI, billing, languages, audit (see doc 13 §5) |
 
-- **Exams (P5):** `/exam-frameworks`, `/exam-attempts`, `/exam-attempts/{id}/sections/{s}`.
+## Phase 5 — exams, offline, Chinese ✅
+Details: [14-expansion.md](14-expansion.md).
+
+| Method | Path | Description |
+|---|---|---|
+| GET | `/learner-profiles/{id}/exams` | Exam practice for the profile language (sections, disclaimer, past attempts) |
+| POST | `/learner-profiles/{id}/exams/{framework}/attempts` | Start or resume (quota `exam_mocks`) |
+| GET | `/exam-attempts/{a}` | State; sweeps expired sections; current section's questions (no keys, no listening scripts) or task |
+| POST | `/exam-attempts/{a}/sections/{skill}/start` · `/skip` | Start (sets the server deadline) / skip a section |
+| POST | `/exam-attempts/{a}/answers` | `{item_id, option_id}` — changeable until submit; refused after the deadline |
+| POST | `/exam-attempts/{a}/sections/{skill}/submit` | Closed sections, `{text}` for writing, `{recording_id}` for speaking |
+| GET | `/exam-attempts/{a}/review` | After the test: answers, keys, explanations, scripts |
+| GET | `/exam-attempts/{a}/items/{item}/audio` | Signed recording URL while that section is open |
+| GET | `/learner-profiles/{id}/lessons/{lesson}/offline-pack` | Lesson pack with text exercises and keys (`no-store`) |
+| POST | `/learner-profiles/{id}/offline-sync` | `{attempts:[{client_ref, exercise_id, lesson_id?, answers}], complete_lessons?}` — idempotent, re-checked server-side |
+
+Words now include `pronunciation` (IPA or pinyin); writing tasks include `count_unit`; exercise attempts include `reading_unit`.
 
 ## Rate limits
 | Limiter | Limit |
