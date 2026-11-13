@@ -228,6 +228,7 @@ export const ar4: typeof en4 = {
       aiCost: "تكلفة الذكاء الاصطناعي (30 يومًا)", operation: "العملية", calls: "الاستدعاءات", errors: "الأخطاء", cost: "التكلفة",
       engagement: "التفاعل (7 أيام)", minutes: "الدقائق", exercises: "التمارين", conversations: "المحادثات", writings: "النصوص", reviews: "البطاقات",
       retention: "الاحتفاظ الأسبوعي حسب أسبوع التسجيل", cohort: "الفوج", size: "المستخدمون", week: "أ{n}",
+      bandit: "صيغ التمارين المخصّصة (30 يومًا)", context: "المهارة", format: "الصيغة", decisions: "مرات الاختيار", resolved: "أُنهيت أو تُخطّيت", meanReward: "متوسط المكافأة",
     },
     users: {
       name: "الاسم", email: "البريد", roles: "الأدوار", status: "الحالة", joined: "انضم", plan: "الخطة",

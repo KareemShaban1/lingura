@@ -4,6 +4,7 @@ namespace App\Domain\Learning;
 
 use App\Domain\Courses\CourseService;
 use App\Domain\Languages\CapabilityMatrix;
+use App\Domain\Personalization\FormatBandit;
 use App\Models\ConversationScenario;
 use App\Models\Exercise;
 use App\Models\ExerciseAttempt;
@@ -31,7 +32,7 @@ class ContentSelector
     /** @var array<string, true> */
     private array $used = [];
 
-    public function __construct(private readonly CourseService $courses) {}
+    public function __construct(private readonly CourseService $courses, private readonly FormatBandit $bandit) {}
 
     public function reset(): void
     {
@@ -165,9 +166,20 @@ class ContentSelector
             ->filter(fn ($e) => $e->level->ordinal <= $ordinal + 1)
             ->sortBy(fn ($e) => [abs($e->level->ordinal - $ordinal), $e->id]);
 
-        $exercise = $candidates->first(fn ($e) => $this->claim('exercise:'.$e->id));
+        // Best unclaimed candidate per format; the format bandit picks among formats when there is a choice.
+        $byFormat = [];
+        foreach ($candidates as $e) {
+            if (! isset($byFormat[$e->type]) && ! isset($this->used['exercise:'.$e->id])) {
+                $byFormat[$e->type] = $e;
+            }
+        }
+        if ($byFormat === []) {
+            return null;
+        }
+        $exercise = $this->bandit->choose($profile, $skillSlug ?? $activity, $byFormat);
+        $this->claim('exercise:'.$exercise->id);
 
-        return $exercise ? ['activity_type' => $activity, 'lesson' => null, 'exercise' => $exercise] : null;
+        return ['activity_type' => $activity, 'lesson' => null, 'exercise' => $exercise];
     }
 
     private function claim(string $key): bool

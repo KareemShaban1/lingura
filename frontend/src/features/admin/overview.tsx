@@ -14,6 +14,7 @@ type Overview = {
   engagement_7d: { minutes: number; exercises: number; conversations: number; writings: number; reviews: number };
   ai_cost_30d: { total_micros: number; by_operation: { operation: string; cost_micros: number; calls: number; errors: number }[]; daily: { date: string; cost_micros: number; calls: number }[] };
   retention: { cohort: string; size: number; weeks: (number | null)[] }[];
+  personalization?: { context: string; arm: string; decisions: number; resolved: number; mean_reward: number | null }[];
 };
 
 const usd = (micros: number) => `$${(micros / 1_000_000).toFixed(micros < 10_000_000 ? 4 : 2)}`;
@@ -90,6 +91,20 @@ export function AdminOverview() {
           </Table>
         </CardContent>
       </Card>
+
+      {!!d.personalization?.length && (
+        <Card>
+          <CardHeader><CardTitle className="text-base">{o.bandit}</CardTitle></CardHeader>
+          <CardContent>
+            <Table>
+              <thead><tr><th>{o.context}</th><th>{o.format}</th><th>{o.decisions}</th><th>{o.resolved}</th><th>{o.meanReward}</th></tr></thead>
+              <tbody>{d.personalization.map((r) => (
+                <tr key={`${r.context}-${r.arm}`}><td>{r.context}</td><td className="font-mono text-xs">{r.arm}</td><td>{r.decisions}</td><td>{r.resolved}</td><td>{r.mean_reward ?? "—"}</td></tr>
+              ))}</tbody>
+            </Table>
+          </CardContent>
+        </Card>
+      )}
 
       <Card>
         <CardHeader><CardTitle className="text-base">{o.retention}</CardTitle></CardHeader>

@@ -226,6 +226,7 @@ export const en4 = {
       aiCost: "AI cost (30 days)", operation: "Operation", calls: "Calls", errors: "Errors", cost: "Cost",
       engagement: "Engagement (7 days)", minutes: "Minutes", exercises: "Exercises", conversations: "Conversations", writings: "Texts", reviews: "Flashcards",
       retention: "Weekly retention by signup cohort", cohort: "Cohort", size: "Users", week: "W{n}",
+      bandit: "Personalised exercise formats (30 days)", context: "Skill", format: "Format", decisions: "Chosen", resolved: "Finished or skipped", meanReward: "Mean reward",
     },
     users: {
       name: "Name", email: "Email", roles: "Roles", status: "Status", joined: "Joined", plan: "Plan",

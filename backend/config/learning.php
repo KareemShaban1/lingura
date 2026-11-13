@@ -52,6 +52,15 @@ return [
         'short_response_standard_error' => 0.9,
     ],
 
+    // Exercise-format bandit (docs/14). Only reorders formats among already-eligible exercises.
+    'personalization' => [
+        'enabled' => (bool) env('LF_PERSONALIZATION', true),
+        'target_low' => 0.6,   // desirable-difficulty band for a full reward
+        'target_high' => 0.9,
+        'prior_weight' => 5,   // max pseudo-observations borrowed from the population
+        'unresolved_after_days' => 7, // assigned but never finished → reward 0
+    ],
+
     'exams' => [
         'grace_seconds' => 15,             // network allowance after a closed section's deadline
         'productive_grace_seconds' => 90,  // writing/speaking: time to upload and submit what was produced

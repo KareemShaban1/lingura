@@ -57,6 +57,12 @@ class AnalyticsController extends Controller
                 'daily' => $aiDaily->map(fn ($r) => ['date' => $r->day, 'cost_micros' => (int) $r->cost, 'calls' => (int) $r->calls]),
             ],
             'retention' => $this->cohorts(8),
+            // Format bandit (30 days): how often each format was chosen and its mean reward once resolved.
+            'personalization' => DB::table('personalization_decisions')->where('created_at', '>=', $now->copy()->subDays(30))
+                ->groupBy('context', 'chosen_arm')->orderBy('context')->orderBy('chosen_arm')
+                ->selectRaw('context, chosen_arm, count(*) as decisions, count(reward) as resolved, avg(reward) as mean_reward')
+                ->get()->map(fn ($r) => ['context' => $r->context, 'arm' => $r->chosen_arm, 'decisions' => (int) $r->decisions,
+                    'resolved' => (int) $r->resolved, 'mean_reward' => $r->mean_reward === null ? null : round((float) $r->mean_reward, 3)]),
         ]]);
     }
 

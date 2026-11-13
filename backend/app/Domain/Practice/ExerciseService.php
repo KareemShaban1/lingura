@@ -3,6 +3,7 @@
 namespace App\Domain\Practice;
 
 use App\Domain\Billing\QuotaGuard;
+use App\Domain\Personalization\FormatBandit;
 use App\Domain\Shared\DomainError;
 use App\Domain\Shared\LearningEventRecorder;
 use App\Domain\Speech\PronunciationService;
@@ -190,6 +191,7 @@ class ExerciseService
             $this->events->record($profile, 'exercise.completed', $attempt, $exercise->skill_id, round($score, 4), [
                 'exercise' => $exercise->key, 'type' => $exercise->type, 'wpm' => $wpm,
             ]);
+            app(FormatBandit::class)->observeAttempt($attempt->fresh());
             RefreshAdaptiveState::dispatch($profile->id)->afterCommit();
 
             return $attempt;

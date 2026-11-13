@@ -2,6 +2,7 @@
 
 namespace App\Domain\Learning;
 
+use App\Domain\Personalization\FormatBandit;
 use App\Domain\Shared\AuditLogger;
 use App\Domain\Shared\DomainError;
 use App\Domain\Shared\LearningEventRecorder;
@@ -149,6 +150,7 @@ class PlanService
             throw new DomainError('Completed activities cannot be skipped.', 'item_finished');
         }
         $item->update(['status' => LearningPlanItem::SKIPPED, 'skip_reason' => $reason]);
+        app(FormatBandit::class)->observeSkip($item->version->plan->learner_profile_id, $item->exercise_id);
         $item->sessions()->whereNull('ended_at')->update(['ended_at' => now(), 'outcome' => 'abandoned']);
         $this->events->record($item->version->plan->learnerProfile, 'plan_item.skipped', $item, $item->skill_id, metadata: ['reason' => $reason]);
 
