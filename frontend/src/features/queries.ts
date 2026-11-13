@@ -7,6 +7,8 @@ import type {
   Course, ExerciseAttempt, ExerciseSummary, GrammarTopic, GrammarTopicDetail, LessonDetail, UserWord, VocabularySummary, Word,
   AssessmentAttempt, AssessmentItem, AssessmentReport, Dashboard, LearningPlan, LearningSession,
   OnboardingCatalog, PlanItem, PlanVersion, Progress, User,
+  AchievementRow, AppNotification, BillingPlan, BillingState, ChallengeRow, GamificationSummary, Leaderboard,
+  OrganizationDetail, OrganizationSummary, PaymentRow, XpHistory,
 } from "@/lib/types";
 import { useUiStore } from "@/stores/ui-store";
 
@@ -111,6 +113,9 @@ export function useInvalidateProfile() {
   return (profileId: string) => {
     qc.invalidateQueries({ queryKey: ["profile", profileId] });
     qc.invalidateQueries({ queryKey: keys.me });
+    qc.invalidateQueries({ queryKey: ["gamification"] }); // XP, streak, achievements follow learning outcomes
+    qc.invalidateQueries({ queryKey: ["billing", "subscription"] }); // usage meters
+    qc.invalidateQueries({ queryKey: ["notifications"] });
   };
 }
 
@@ -276,4 +281,62 @@ export function useWritingSubmission(id: string | null) {
     enabled: !!id,
     refetchInterval: (q) => (q.state.data?.status === "pending" ? 2000 : false),
   });
+}
+
+// ── Phase 4: billing, notifications, family groups, gamification ─────────────────
+export function usePlans() {
+  return useQuery({
+    queryKey: ["billing", "plans"],
+    queryFn: () => api<{ data: BillingPlan[]; meta: { checkout_available: boolean } }>("/billing/plans"),
+    staleTime: 10 * 60_000,
+  });
+}
+
+export function useBilling() {
+  return useQuery({ queryKey: ["billing", "subscription"], queryFn: () => api<{ data: BillingState }>("/billing/subscription").then((r) => r.data) });
+}
+
+export function usePayments() {
+  return useQuery({ queryKey: ["billing", "payments"], queryFn: () => api<{ data: PaymentRow[] }>("/billing/payments").then((r) => r.data) });
+}
+
+export function useNotifications() {
+  return useQuery({
+    queryKey: ["notifications"],
+    queryFn: () => api<{ data: AppNotification[]; meta: { unread: number } }>("/me/notifications"),
+    refetchInterval: 120_000,
+    staleTime: 30_000,
+  });
+}
+
+export function useOrganizations() {
+  return useQuery({ queryKey: ["organizations"], queryFn: () => api<{ data: OrganizationSummary[] }>("/organizations").then((r) => r.data) });
+}
+
+export function useOrganization(id?: string) {
+  return useQuery({
+    queryKey: ["organization", id],
+    queryFn: () => api<{ data: OrganizationDetail }>(`/organizations/${id}`).then((r) => r.data),
+    enabled: !!id,
+  });
+}
+
+export function useGamification() {
+  return useQuery({ queryKey: ["gamification"], queryFn: () => api<{ data: GamificationSummary }>("/me/gamification").then((r) => r.data), staleTime: 30_000 });
+}
+
+export function useXpHistory() {
+  return useQuery({ queryKey: ["gamification", "xp"], queryFn: () => api<{ data: XpHistory }>("/me/xp").then((r) => r.data) });
+}
+
+export function useAchievements() {
+  return useQuery({ queryKey: ["gamification", "achievements"], queryFn: () => api<{ data: AchievementRow[] }>("/me/achievements").then((r) => r.data) });
+}
+
+export function useChallenges() {
+  return useQuery({ queryKey: ["gamification", "challenges"], queryFn: () => api<{ data: ChallengeRow[] }>("/me/challenges").then((r) => r.data) });
+}
+
+export function useLeaderboard() {
+  return useQuery({ queryKey: ["gamification", "leaderboard"], queryFn: () => api<{ data: Leaderboard }>("/leaderboards/weekly").then((r) => r.data) });
 }

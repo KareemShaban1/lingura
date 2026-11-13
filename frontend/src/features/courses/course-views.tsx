@@ -19,6 +19,7 @@ import { api } from "@/lib/api";
 import { useI18n } from "@/lib/i18n";
 import type { LessonSummary } from "@/lib/types";
 import { cn } from "@/lib/utils";
+import { toastError } from "@/lib/errors";
 
 const statusIcon = { not_started: Circle, in_progress: CircleDot, completed: CheckCircle2 } as const;
 
@@ -101,7 +102,7 @@ export function LessonView() {
       invalidate(profile!.id);
       qc.invalidateQueries({ queryKey: ["profile", profile!.id] });
     } catch (e) {
-      toast.error(e instanceof Error ? e.message : t.common.errorTitle);
+      toastError(e, t.common.errorTitle);
     } finally {
       setCompleting(false);
     }

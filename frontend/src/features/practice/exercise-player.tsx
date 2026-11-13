@@ -5,7 +5,6 @@ import Link from "next/link";
 import { useParams, useSearchParams } from "next/navigation";
 import { useQueryClient } from "@tanstack/react-query";
 import { CheckCircle2, CircleAlert, RotateCcw, XCircle } from "lucide-react";
-import { toast } from "sonner";
 import { Choice } from "@/components/choice";
 import { SkillIcon } from "@/components/skill";
 import { Badge } from "@/components/ui/badge";
@@ -25,6 +24,7 @@ import { Recorder } from "@/features/speech/recorder";
 import { AudioPlayer } from "./audio-player";
 import { TappableText } from "./tappable-text";
 import { useActivitySession } from "./use-activity-session";
+import { toastError } from "@/lib/errors";
 
 type Question = ExerciseAttempt["exercise"]["questions"][number];
 
@@ -259,7 +259,7 @@ export function ExercisePlayer() {
       });
       setAttempt({ ...attempt, exercise: { ...attempt.exercise, questions: attempt.exercise.questions.map((q) => (q.id === question.id ? { ...q, answer: data } : q)) } });
     } catch (e) {
-      toast.error(e instanceof Error ? e.message : t.common.errorTitle);
+      toastError(e, t.common.errorTitle);
     } finally {
       setBusy(false);
     }
@@ -282,7 +282,7 @@ export function ExercisePlayer() {
       invalidate(profile!.id);
       qc.invalidateQueries({ queryKey: ["profile", profile!.id] });
     } catch (e) {
-      toast.error(e instanceof Error ? e.message : t.common.errorTitle);
+      toastError(e, t.common.errorTitle);
     } finally {
       setBusy(false);
     }

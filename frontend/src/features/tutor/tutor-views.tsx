@@ -5,7 +5,6 @@ import Link from "next/link";
 import { useParams, useRouter, useSearchParams } from "next/navigation";
 import { useQueryClient } from "@tanstack/react-query";
 import { ArrowRight, ChevronDown, Lightbulb, MessageCircle, Send, Sparkles, Volume2 } from "lucide-react";
-import { toast } from "sonner";
 import { Choice } from "@/components/choice";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -21,6 +20,21 @@ import { useI18n } from "@/lib/i18n";
 import type { Conversation, TutorMessage } from "@/lib/types";
 import { cn } from "@/lib/utils";
 import { RealtimeVoice } from "./realtime-voice";
+import { toastError } from "@/lib/errors";
+import type { TutorCatalog } from "@/lib/types";
+
+/** "12 messages left today" with an upgrade link when the plan limit is close — shown before a 429 can happen. */
+function QuotaHint({ quota }: { quota?: TutorCatalog["quota"]["tutor_messages"] }) {
+  const { t, f } = useI18n();
+  if (!quota || quota.limit === null || quota.remaining === null) return null;
+  const low = quota.remaining <= Math.max(2, Math.floor(quota.limit * 0.2));
+  return (
+    <p className="text-sm text-muted-foreground">
+      {f(t.tutor.messagesLeft, { n: quota.remaining })}
+      {low && <> · <Link href="/pricing" className="font-medium text-primary hover:underline">{t.billing.upgrade}</Link></>}
+    </p>
+  );
+}
 
 export function TutorHome() {
   const { t, f } = useI18n();
@@ -49,7 +63,7 @@ export function TutorHome() {
       });
       router.push(`/tutor/${data.id}`);
     } catch (e) {
-      toast.error(e instanceof Error ? e.message : t.common.errorTitle);
+      toastError(e, t.common.errorTitle);
       setStarting(false);
     }
   }
@@ -101,7 +115,10 @@ export function TutorHome() {
           {mode === "realtime" && <p className="text-xs text-muted-foreground">{t.tutor.realtimeNote}</p>}
         </div>
       </div>
-      <Button size="lg" onClick={start} loading={starting}><MessageCircle /> {t.tutor.start}</Button>
+      <div className="flex flex-wrap items-center gap-3">
+        <Button size="lg" onClick={start} loading={starting}><MessageCircle /> {t.tutor.start}</Button>
+        <QuotaHint quota={c.quota.tutor_messages} />
+      </div>
 
       <section>
         <h2 className="mb-3 text-lg font-semibold">{t.tutor.history}</h2>
@@ -135,7 +152,7 @@ function PlayButton({ messageId }: { messageId: number }) {
       const { url } = await api<{ url: string }>(`/ai-messages/${messageId}/audio`);
       await new Audio(url).play();
     } catch (e) {
-      toast.error(e instanceof Error ? e.message : t.common.errorTitle);
+      toastError(e, t.common.errorTitle);
     } finally {
       setLoading(false);
     }
@@ -221,8 +238,9 @@ export function ConversationView() {
       const { data } = await api<{ data: { learner: TutorMessage; reply: TutorMessage; new_vocabulary: { term: string; meaning: string }[] } }>(
         `/conversations/${id}/${path}`, { method: "POST", body: { ...body, response_ms: Date.now() - lastReplyAt.current } });
       appendTurn(data);
+      catalog.refetch(); // remaining messages
     } catch (e) {
-      toast.error(e instanceof Error ? e.message : t.common.errorTitle);
+      toastError(e, t.common.errorTitle);
     } finally {
       setBusy(false);
     }
@@ -235,7 +253,7 @@ export function ConversationView() {
       invalidate(profile!.id);
       router.push(`/tutor/${id}/report`);
     } catch (e) {
-      toast.error(e instanceof Error ? e.message : t.common.errorTitle);
+      toastError(e, t.common.errorTitle);
       setFinishing(false);
     }
   }
@@ -265,6 +283,7 @@ export function ConversationView() {
         ) : <Button asChild size="sm"><Link href={`/tutor/${id}/report`}>{t.tutor.viewReport}</Link></Button>}
       </div>
 
+      {active && <QuotaHint quota={catalog.data?.quota.tutor_messages} />}
       {cv.mode === "realtime" && active && <RealtimeVoice conversationId={id} onTranscript={() => conversation.refetch()} />}
 
       <ol className="flex min-h-[45vh] flex-col gap-4 rounded-2xl border bg-muted/30 p-4" aria-live="polite">

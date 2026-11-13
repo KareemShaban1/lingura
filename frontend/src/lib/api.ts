@@ -10,6 +10,7 @@ export class ApiError extends Error {
     message: string,
     public code?: string,
     public errors?: Record<string, string[]>,
+    public details?: Record<string, unknown>,
   ) {
     super(message);
   }
@@ -62,7 +63,7 @@ export async function api<T>(path: string, { method = "GET", body, signal }: Opt
   if (response.status === 204) return undefined as T;
   const data = await response.json().catch(() => ({}));
   if (!response.ok) {
-    throw new ApiError(response.status, data.message ?? "Something went wrong.", data.code, data.errors);
+    throw new ApiError(response.status, data.message ?? "Something went wrong.", data.code, data.errors, data.details);
   }
   return data as T;
 }
@@ -80,7 +81,7 @@ export async function apiUpload<T>(path: string, form: FormData): Promise<T> {
     throw new ApiError(0, "We couldn't reach the server. Check your connection and try again.", "network_error");
   });
   const data = await response.json().catch(() => ({}));
-  if (!response.ok) throw new ApiError(response.status, data.message ?? "Something went wrong.", data.code, data.errors);
+  if (!response.ok) throw new ApiError(response.status, data.message ?? "Something went wrong.", data.code, data.errors, data.details);
   return data as T;
 }
 

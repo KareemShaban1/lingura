@@ -20,6 +20,7 @@ import { useI18n } from "@/lib/i18n";
 import type { PlanItem } from "@/lib/types";
 import { localDate } from "@/lib/utils";
 import { PlanItemCard } from "./plan-item-card";
+import { toastError } from "@/lib/errors";
 
 function StudySettings({ profileId, dailyMinutes, purpose }: { profileId: string; dailyMinutes: number; purpose: string }) {
   const { t } = useI18n();
@@ -37,7 +38,7 @@ function StudySettings({ profileId, dailyMinutes, purpose }: { profileId: string
       invalidate(profileId);
       toast.success(t.common.saved);
     } catch (e) {
-      toast.error(e instanceof Error ? e.message : t.common.errorTitle);
+      toastError(e, t.common.errorTitle);
     } finally {
       setSaving(false);
     }

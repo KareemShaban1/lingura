@@ -35,6 +35,13 @@ class GamificationService
         if (! $user) {
             return;
         }
+        // Time-tracked study (capped at real elapsed time) keeps the streak alive but earns no XP by itself.
+        if ($event->event_type === 'session.completed' && (float) $event->value >= config('gamification.streak.min_session_minutes')) {
+            $this->touchStreak($user);
+            $this->checkAchievements($user);
+
+            return;
+        }
         $award = $this->xpFor($event, $user);
         if ($award === null) {
             return;

@@ -1,3 +1,5 @@
+import { en4 } from "./en4";
+
 export const en = {
   common: {
     appName: "LinguaForge",
@@ -30,6 +32,10 @@ export const en = {
     profile: "Profile",
     addLanguage: "Add a language",
     learningLanguage: "Learning",
+    rewards: "Rewards",
+    plan: "Plan & billing",
+    admin: "Administration",
+    notifications: "Notifications",
   },
   skills: {
     listening: "Listening",
@@ -389,6 +395,8 @@ export const en = {
     legend: { correct: "understood", substituted: "heard differently", omitted: "missing", inserted: "extra" },
   },
   tutor: {
+    messagesLeft: "{n} tutor messages left today",
+    blockEnded: "The live call ended at the end of its time block. Start it again to continue.",
     title: "AI tutor",
     subtitle: "Practise real conversations. Your tutor adapts to your level and corrects you along the way.",
     chooseTutor: "Choose your tutor",
@@ -510,6 +518,7 @@ export const en = {
     deleteConfirm: "Enter your password to confirm",
     deleteButton: "Delete my account",
   },
+  ...en4,
 };
 
 export type Dictionary = typeof en;

@@ -5,7 +5,6 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { CheckCircle2, Layers, Plus, Search, Trash2 } from "lucide-react";
-import { toast } from "sonner";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -18,6 +17,7 @@ import { api } from "@/lib/api";
 import { useI18n } from "@/lib/i18n";
 import type { LearnerProfile, UserWord, Word } from "@/lib/types";
 import { cn } from "@/lib/utils";
+import { toastError } from "@/lib/errors";
 
 function DictionarySearch({ profile }: { profile: LearnerProfile }) {
   const { t } = useI18n();
@@ -37,7 +37,7 @@ function DictionarySearch({ profile }: { profile: LearnerProfile }) {
       setAdded((s) => new Set(s).add(w.id));
       invalidate(profile.id);
     } catch (e) {
-      toast.error(e instanceof Error ? e.message : t.common.errorTitle);
+      toastError(e, t.common.errorTitle);
     }
   }
 
@@ -124,7 +124,7 @@ export function VocabularyView() {
       setNewName("");
       qc.invalidateQueries({ queryKey: keys2.collections(profile!.id) });
     } catch (e) {
-      toast.error(e instanceof Error ? e.message : t.common.errorTitle);
+      toastError(e, t.common.errorTitle);
     }
   }
 
@@ -210,7 +210,7 @@ export function ReviewSession() {
     try {
       await api(`/user-vocabulary/${card.id}/reviews`, { method: "POST", body: { rating, duration_ms: msSince(shownAt.current) } });
     } catch (e) {
-      toast.error(e instanceof Error ? e.message : t.common.errorTitle);
+      toastError(e, t.common.errorTitle);
       return;
     }
     setReviewed((n) => n + 1);

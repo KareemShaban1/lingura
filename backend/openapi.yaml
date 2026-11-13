@@ -1,9 +1,9 @@
 openapi: 3.1.0
 info:
   title: LinguaForge API
-  version: 3.0.0-phase3
+  version: 4.0.0-phase4
   description: |
-    REST API for the LinguaForge language-learning platform (identity, onboarding, placement, plans, content & practice, AI tutor, speech and writing).
+    REST API for the LinguaForge language-learning platform (identity, onboarding, placement, plans, content & practice, AI tutor, speech, writing, billing, family groups, gamification and administration).
     Authentication: Sanctum SPA cookies (call `GET /sanctum/csrf-cookie` first and send `X-XSRF-TOKEN`) or a bearer token
     (pass `device_name` to register/login). Errors use `{message, code?, errors?}`.
     Assessment results are estimates aligned to CEFR descriptors, never official certifications.
@@ -26,6 +26,10 @@ tags:
   - name: Tutor
   - name: Speech
   - name: Writing
+  - name: Billing
+  - name: Family
+  - name: Gamification
+  - name: Admin
 paths:
   /auth/register:
     post:
@@ -451,6 +455,69 @@ paths:
   /assessment-attempts/{attempt}/speaking:
     parameters: [{ $ref: '#/components/parameters/Attempt' }]
     post: { tags: [Assessment], requestBody: { content: { application/json: { schema: { type: object, required: [recording_id], properties: { recording_id: { type: string } } } } } }, responses: { '200': { description: Section scored by rubric from the transcript } } }
+  /billing/plans:
+    get: { tags: [Billing], security: [], responses: { '200': { description: 'Active public plans with limits (null = unlimited); meta.checkout_available' } } }
+  /billing/subscription:
+    get: { tags: [Billing], responses: { '200': { description: 'Effective plan, source (free|personal|organization), subscription, usage per feature' } } }
+  /billing/checkout:
+    post: { tags: [Billing], requestBody: { content: { application/json: { schema: { type: object, required: [plan], properties: { plan: { type: string } } } } } }, responses: { '200': { description: '{ url } of the provider-hosted checkout' }, '409': { description: already_subscribed } } }
+  /billing/checkout/confirm:
+    post: { tags: [Billing], description: Completes a test-mode session; paid sessions are confirmed by webhook and return pending., requestBody: { content: { application/json: { schema: { type: object, required: [session_id], properties: { session_id: { type: string } } } } } }, responses: { '200': { description: '{ status }' } } }
+  /billing/subscription/cancel:
+    post: { tags: [Billing], description: Cancel at the end of the current period., responses: { '200': { description: Updated billing state } } }
+  /billing/subscription/resume:
+    post: { tags: [Billing], responses: { '200': { description: Updated billing state } } }
+  /billing/portal:
+    post: { tags: [Billing], responses: { '200': { description: '{ url } of the provider portal' }, '404': { description: portal_unavailable } } }
+  /billing/payments:
+    get: { tags: [Billing], responses: { '200': { description: Payment history } } }
+  /webhooks/billing:
+    post: { tags: [Billing], security: [], description: 'Provider webhook. Verified with the Stripe-Signature header (HMAC-SHA256, 5-minute tolerance); idempotent per event id; subscription state is re-fetched from the provider.', responses: { '200': { description: '{ received, result: processed|duplicate|ignored }' }, '400': { description: Invalid signature } } }
+  /me/notifications:
+    get: { tags: [Account], responses: { '200': { description: 'Latest notifications { id, data: { kind, … }, read }; meta.unread' } } }
+  /me/notifications/read:
+    post: { tags: [Account], responses: { '200': { description: All marked read } } }
+  /organizations:
+    get: { tags: [Family], responses: { '200': { description: My groups and role } } }
+    post: { tags: [Family], requestBody: { content: { application/json: { schema: { type: object, required: [name], properties: { name: { type: string } } } } } }, responses: { '201': { description: Group }, '409': { description: organization_exists } } }
+  /organizations/{organization}:
+    parameters: [{ name: organization, in: path, required: true, schema: { type: string } }]
+    get: { tags: [Family], description: Members see names only; emails and pending invitations only for group admins., responses: { '200': { description: 'Group with seats, members, invitations' }, '404': { description: Not a member } } }
+    patch: { tags: [Family], requestBody: { content: { application/json: { schema: { type: object, required: [name], properties: { name: { type: string } } } } } }, responses: { '200': { description: Group } } }
+  /organizations/{organization}/invitations:
+    parameters: [{ name: organization, in: path, required: true, schema: { type: string } }]
+    post: { tags: [Family], requestBody: { content: { application/json: { schema: { type: object, required: [email], properties: { email: { type: string, format: email }, role: { type: string, enum: [member, admin] } } } } } }, responses: { '201': { description: 'Invitation with shareable accept_url (works only for that email)' }, '402': { description: plan_required }, '409': { description: seats_exhausted } } }
+  /organization-invitations/{invitation}:
+    parameters: [{ name: invitation, in: path, required: true, schema: { type: string } }]
+    delete: { tags: [Family], responses: { '200': { description: Revoked } } }
+  /invitations/{token}:
+    parameters: [{ name: token, in: path, required: true, schema: { type: string } }]
+    get: { tags: [Family], responses: { '200': { description: 'organization, invited_by, status, email_matches' }, '404': { description: invitation_invalid } } }
+  /invitations/{token}/accept:
+    parameters: [{ name: token, in: path, required: true, schema: { type: string } }]
+    post: { tags: [Family], responses: { '200': { description: Group }, '403': { description: invitation_email_mismatch }, '410': { description: invitation_expired } } }
+  /organizations/{organization}/members/{member}:
+    parameters: [{ name: organization, in: path, required: true, schema: { type: string } }, { name: member, in: path, required: true, schema: { type: integer } }]
+    delete: { tags: [Family], responses: { '200': { description: Group } } }
+  /organizations/{organization}/leave:
+    parameters: [{ name: organization, in: path, required: true, schema: { type: string } }]
+    post: { tags: [Family], responses: { '200': { description: Left } } }
+  /me/gamification:
+    get: { tags: [Gamification], responses: { '200': { description: 'xp_total, xp_today, xp_week, streak (current, longest, freezes, active_today, at_risk), achievements counts, leaderboard_opt_in' } } }
+  /me/xp:
+    get: { tags: [Gamification], responses: { '200': { description: 30-day XP by day and source; streak days (active|frozen) } } }
+  /me/achievements:
+    get: { tags: [Gamification], responses: { '200': { description: Achievements with progress and unlock dates } } }
+  /me/challenges:
+    get: { tags: [Gamification], responses: { '200': { description: This week's challenges with progress } } }
+  /leaderboards/weekly:
+    get: { tags: [Gamification], description: Only learners who opted in; alias or first name + initial., responses: { '200': { description: 'entries, you' } } }
+  /me/leaderboard:
+    patch: { tags: [Gamification], requestBody: { content: { application/json: { schema: { type: object, required: [opt_in], properties: { opt_in: { type: boolean }, alias: { type: string, maxLength: 40 } } } } } }, responses: { '200': { description: Gamification summary } } }
+  /admin/analytics/overview:
+    get: { tags: [Admin], description: 'Permission analytics.view.', responses: { '200': { description: 'users, subscriptions (MRR), engagement_7d, ai_cost_30d, retention cohorts' }, '403': { description: forbidden } } }
+  /admin/users:
+    get: { tags: [Admin], description: 'Permission users.manage. Other admin routes (users/{id}, status, roles, grants, review, content, ai, billing, languages, audit-logs) are documented in docs/13-business-and-admin.md §5.', responses: { '200': { description: Paginated users } } }
 components:
   securitySchemes:
     bearerAuth: { type: http, scheme: bearer }

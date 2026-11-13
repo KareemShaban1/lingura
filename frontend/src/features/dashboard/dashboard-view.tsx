@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { ArrowRight, ClipboardCheck, Flame, Layers, PauseCircle } from "lucide-react";
 import { Bar, BarChart, ResponsiveContainer, Tooltip, XAxis } from "recharts";
-import { toast } from "sonner";
 import { LevelLadder, SKILLS, SkillIcon } from "@/components/skill";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -14,10 +13,13 @@ import { PlanItemCard } from "@/features/plan/plan-item-card";
 import { useActiveProfile, useDashboard, useMe, usePlanAction, useStartAssessment } from "@/features/queries";
 import { useI18n } from "@/lib/i18n";
 import { useRouter } from "next/navigation";
+import { toastError } from "@/lib/errors";
+import { RewardsWidget } from "@/features/rewards/rewards-views";
 
 export function DashboardView() {
   const { t, f, locale } = useI18n();
   const me = useMe();
+  const features = me.data?.features ?? [];
   const profile = useActiveProfile();
   const dashboard = useDashboard(profile?.id);
   const startAssessment = useStartAssessment();
@@ -45,7 +47,7 @@ export function DashboardView() {
       const a = await startAssessment.mutateAsync(profile!.id);
       router.push(`/assessment/${a.id}`);
     } catch (e) {
-      toast.error(e instanceof Error ? e.message : t.common.errorTitle);
+      toastError(e, t.common.errorTitle);
     }
   }
 
@@ -72,15 +74,17 @@ export function DashboardView() {
       )}
 
       <div className="grid gap-4 sm:grid-cols-3">
-        <Card>
-          <CardContent className="flex items-center gap-4 p-5">
-            <Flame className={d.streak.current_days ? "size-8 text-accent" : "size-8 text-muted-foreground"} aria-hidden />
-            <div>
-              <p className="font-display text-3xl leading-none">{d.streak.current_days}</p>
-              <p className="mt-1 text-xs text-muted-foreground">{d.streak.current_days ? t.home.streak : t.home.streakNone}</p>
-            </div>
-          </CardContent>
-        </Card>
+        {features.includes("rewards") ? <RewardsWidget /> : (
+          <Card>
+            <CardContent className="flex items-center gap-4 p-5">
+              <Flame className={d.streak.current_days ? "size-8 text-accent" : "size-8 text-muted-foreground"} aria-hidden />
+              <div>
+                <p className="font-display text-3xl leading-none">{d.streak.current_days}</p>
+                <p className="mt-1 text-xs text-muted-foreground">{d.streak.current_days ? t.home.streak : t.home.streakNone}</p>
+              </div>
+            </CardContent>
+          </Card>
+        )}
         <Card>
           <CardContent className="p-5">
             <p className="text-xs text-muted-foreground">{t.common.today}</p>

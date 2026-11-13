@@ -45,8 +45,16 @@ Definition of done for every item: migrations + seed data, API with FormRequest 
 | 3.9 | Adaptive engine v1: mistake patterns, difficulty offsets, revision, readiness, adaptive plan versions | ✅ |
 | — | Deferred: SSE token streaming for tutor replies; phoneme-level pronunciation; antivirus scan of uploads; human-review UI (Phase 4 admin); live-provider integration tests | → later |
 
-## Phase 4 — Business
-Admin dashboard (RBAC) for all content and AI configuration · content review queue · Stripe subscriptions (monthly/annual), entitlements, quotas, usage metering, billing notifications · organizations/family seats · gamification (XP tied to verified learning outcomes, streaks with freeze, achievements, weekly challenges, leaderboards opt-in) · platform analytics (retention cohorts, AI cost, engagement).
+## Phase 4 — Business ✅
+| # | Item | Status |
+|---|---|---|
+| 4.1 | Plans & entitlements (DB-editable), atomic quota guard with refunds, quota UX | ✅ |
+| 4.2 | Provider-agnostic billing: Stripe checkout, signed idempotent webhooks, cancel/resume, portal, payments, notifications | ✅ |
+| 4.3 | Family groups: seats, hashed email-bound invitations, inherited plans | ✅ |
+| 4.4 | Gamification: XP for verified outcomes, streaks with freezes, achievements, weekly challenges, opt-in leaderboard | ✅ |
+| 4.5 | Admin (RBAC per section, audited): users/roles/grants, review queue + writing calibration, content import/retire, AI kill switch/prices/prompt versions, plans/limits, capabilities, audit log | ✅ |
+| 4.6 | Platform analytics: active users, MRR, engagement, AI cost, retention cohorts | ✅ |
+| — | Deferred: live Stripe verification, proration/plan switching in-app, tax/VAT, school/company seats, WYSIWYG authoring, analytics rollups | → later |
 
 ## Phase 5 — Expansion
 Exam preparation frameworks (original/licensed material, timed mocks, *estimated* band scores) · more languages (HSK requires Chinese: tone-aware pronunciation, character script handling) · advanced personalization (bandit-based activity selection) · mobile app (Expo) on token auth · offline lesson packs.

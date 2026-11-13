@@ -18,6 +18,7 @@ return [
     'streak' => [
         'freeze_every_days' => 7, // one freeze earned per 7 consecutive days
         'max_freezes' => 2,
+        'min_session_minutes' => 5, // a completed study session this long counts as a streak day
     ],
     'leaderboard_size' => 50,
     // Weekly challenges: three are drawn per ISO week, deterministically, from this pool.

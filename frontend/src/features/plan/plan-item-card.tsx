@@ -3,7 +3,6 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Check, ChevronDown, ClipboardCheck, Clock, RotateCcw } from "lucide-react";
-import { toast } from "sonner";
 import { SkillIcon } from "@/components/skill";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -12,6 +11,7 @@ import { api } from "@/lib/api";
 import { useI18n } from "@/lib/i18n";
 import type { LearningSession, PlanItem } from "@/lib/types";
 import { cn } from "@/lib/utils";
+import { toastError } from "@/lib/errors";
 
 /** Content-bound items open their player; self-guided items open the session runner. */
 export function planItemHref(item: PlanItem, sessionId: string) {
@@ -44,7 +44,7 @@ export function PlanItemCard({ item, profileId, paused, compact = false }: { ite
       invalidate(profileId);
       router.push(planItemHref(item, data.id));
     } catch (e) {
-      toast.error(e instanceof Error ? e.message : t.common.errorTitle);
+      toastError(e, t.common.errorTitle);
       setBusy(false);
     }
   }
@@ -54,7 +54,7 @@ export function PlanItemCard({ item, profileId, paused, compact = false }: { ite
       await api(`/plan-items/${item.id}/skip`, { method: "POST", body: {} });
       invalidate(profileId);
     } catch (e) {
-      toast.error(e instanceof Error ? e.message : t.common.errorTitle);
+      toastError(e, t.common.errorTitle);
     }
   }
 

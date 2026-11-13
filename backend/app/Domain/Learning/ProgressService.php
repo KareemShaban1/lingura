@@ -3,6 +3,7 @@
 namespace App\Domain\Learning;
 
 use App\Domain\Adaptive\AdaptiveEngine;
+use App\Domain\Gamification\GamificationService;
 use App\Domain\Vocabulary\VocabularyService;
 use App\Models\AiConversation;
 use App\Models\AssessmentAttempt;
@@ -47,18 +48,12 @@ class ProgressService
             ->all();
     }
 
+    /** One streak definition app-wide: days with a verified outcome or ≥ 5 credited study minutes, with freezes (GamificationService). */
     public function streak(LearnerProfile $profile): array
     {
-        $daily = $this->dailySeconds($profile, 400);
-        $today = Carbon::now($this->timezone($profile))->startOfDay();
-        $cursor = isset($daily[$today->toDateString()]) ? $today->copy() : $today->copy()->subDay();
-        $current = 0;
-        while (isset($daily[$cursor->toDateString()])) {
-            $current++;
-            $cursor->subDay();
-        }
+        $streak = app(GamificationService::class)->streak($profile->user);
 
-        return ['current_days' => $current, 'studied_today' => isset($daily[$today->toDateString()])];
+        return ['current_days' => $streak['current_days'], 'studied_today' => $streak['active_today'], 'freezes_available' => $streak['freezes_available'], 'at_risk' => $streak['at_risk']];
     }
 
     /**

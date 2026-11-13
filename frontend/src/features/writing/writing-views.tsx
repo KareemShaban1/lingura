@@ -5,7 +5,6 @@ import Link from "next/link";
 import { useParams, useSearchParams } from "next/navigation";
 import { useQueryClient } from "@tanstack/react-query";
 import { ArrowLeft, ArrowRight, Info, Loader2, PenLine } from "lucide-react";
-import { toast } from "sonner";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -17,6 +16,7 @@ import { ScoreBar } from "@/features/tutor/report-view";
 import { api } from "@/lib/api";
 import { useI18n } from "@/lib/i18n";
 import type { WritingSubmission } from "@/lib/types";
+import { toastError } from "@/lib/errors";
 
 const wordCount = (text: string) => (text.trim().match(/[\p{L}\p{M}\p{N}']+/gu) ?? []).length;
 
@@ -165,7 +165,7 @@ export function WritingTaskView() {
       invalidate(profile!.id);
       qc.invalidateQueries({ queryKey: ["profile", profile!.id, "writing-task", taskId] });
     } catch (e) {
-      toast.error(e instanceof Error ? e.message : t.common.errorTitle);
+      toastError(e, t.common.errorTitle);
     } finally {
       setSubmitting(false);
     }

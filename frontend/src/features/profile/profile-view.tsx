@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
@@ -19,6 +20,7 @@ import { dictionaries, useI18n, type Locale } from "@/lib/i18n";
 import type { User } from "@/lib/types";
 import { cn } from "@/lib/utils";
 import { useUiStore } from "@/stores/ui-store";
+import { toastError } from "@/lib/errors";
 
 type ExportRow = { id: string; status: string; requested_at: string; ready_at: string | null; expires_at: string | null };
 
@@ -149,7 +151,7 @@ function LanguagesCard({ user }: { user: User }) {
       await qc.invalidateQueries({ queryKey: keys.me });
       if (user.learner_profiles.length <= 1) router.replace("/onboarding");
     } catch (e) {
-      toast.error(e instanceof Error ? e.message : t.common.errorTitle);
+      toastError(e, t.common.errorTitle);
     }
   }
 
@@ -195,7 +197,7 @@ function PrivacyCard() {
       toast.success(t.profile.exportRequested);
       exports.refetch();
     } catch (e) {
-      toast.error(e instanceof Error ? e.message : t.common.errorTitle);
+      toastError(e, t.common.errorTitle);
     } finally {
       setRequesting(false);
     }
@@ -206,7 +208,7 @@ function PrivacyCard() {
       const { url } = await api<{ url: string }>(`/me/data-exports/${id}/download`);
       window.location.assign(url);
     } catch (e) {
-      toast.error(e instanceof Error ? e.message : t.common.errorTitle);
+      toastError(e, t.common.errorTitle);
     }
   }
 
@@ -276,6 +278,13 @@ export function ProfileView() {
   return (
     <div className="space-y-6">
       <h1 className="font-display text-3xl md:text-4xl">{t.profile.title}</h1>
+      {/* Phones have no sidebar: plan, family, rewards and admin are reachable from here. */}
+      <nav className="flex flex-wrap gap-2" aria-label={t.nav.profile}>
+        {me.data.features.includes("billing") && <Button asChild variant="outline" size="sm"><Link href="/billing">{t.nav.plan}</Link></Button>}
+        {me.data.features.includes("family") && <Button asChild variant="outline" size="sm"><Link href="/family">{t.family.title}</Link></Button>}
+        {me.data.features.includes("rewards") && <Button asChild variant="outline" size="sm"><Link href="/rewards">{t.nav.rewards}</Link></Button>}
+        {me.data.is_staff && <Button asChild variant="outline" size="sm"><Link href="/admin">{t.nav.admin}</Link></Button>}
+      </nav>
       <div className="grid gap-6 lg:grid-cols-2">
         <div className="space-y-6">
           <AccountCard key={me.data.profile.interface_language + me.data.profile.timezone} user={me.data} />

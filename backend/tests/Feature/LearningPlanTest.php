@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Domain\Shared\LearningEventRecorder;
 use App\Models\LearningPlanItem;
 use App\Models\LearningSession;
 use Illuminate\Support\Carbon;
@@ -100,11 +101,14 @@ class LearningPlanTest extends TestCase
 
         // Study yesterday and today.
         foreach (['2026-11-11 09:00:00', '2026-11-12 09:00:00'] as $at) {
-            LearningSession::create([
+            Carbon::setTestNow(Carbon::parse($at)->addMinutes(15));
+            $session = LearningSession::create([
                 'learner_profile_id' => $profile->id, 'started_at' => Carbon::parse($at),
                 'ended_at' => Carbon::parse($at)->addMinutes(15), 'active_seconds' => 900, 'outcome' => 'completed',
             ]);
+            app(LearningEventRecorder::class)->record($profile, 'session.completed', $session, value: 15); // as PlanService does
         }
+        Carbon::setTestNow('2026-11-12 10:00:00');
 
         $dashboard = $this->getJson("/api/v1/learner-profiles/{$id}/dashboard")->json('data');
         $this->assertSame(2, $dashboard['streak']['current_days']);

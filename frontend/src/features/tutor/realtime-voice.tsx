@@ -5,8 +5,10 @@ import { PhoneOff, Radio } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { api } from "@/lib/api";
 import { useI18n } from "@/lib/i18n";
+import { toast } from "sonner";
+import { isQuotaError, toastError } from "@/lib/errors";
 
-type Session = { client_secret: string; model: string; provider: string };
+type Session = { client_secret: string; model: string; provider: string; max_seconds: number };
 
 /**
  * Live voice over WebRTC, directly between the browser and the provider, authenticated with a short-lived
@@ -18,8 +20,9 @@ export function RealtimeVoice({ conversationId, onTranscript }: { conversationId
   const [state, setState] = useState<"idle" | "connecting" | "live" | "failed">("idle");
   const pc = useRef<RTCPeerConnection | null>(null);
   const audio = useRef<HTMLAudioElement | null>(null);
+  const limit = useRef<number | null>(null);
 
-  useEffect(() => () => pc.current?.close(), []);
+  useEffect(() => () => { pc.current?.close(); if (limit.current) window.clearTimeout(limit.current); }, []);
 
   async function save(role: "learner" | "assistant", text: string) {
     if (!text.trim()) return;
@@ -58,13 +61,18 @@ export function RealtimeVoice({ conversationId, onTranscript }: { conversationId
       if (!response.ok) throw new Error(`realtime ${response.status}`);
       await peer.setRemoteDescription({ type: "answer", sdp: await response.text() });
       setState("live");
-    } catch {
+      // The session was pre-paid as a block of minutes: end the call when it runs out (the learner can start another).
+      limit.current = window.setTimeout(() => { disconnect(); toast.info(t.tutor.blockEnded); }, data.max_seconds * 1000);
+    } catch (e) {
       pc.current?.close();
       setState("failed");
+      if (isQuotaError(e)) toastError(e, t.common.errorTitle);
     }
   }
 
   function disconnect() {
+    if (limit.current) window.clearTimeout(limit.current);
+    limit.current = null;
     pc.current?.getSenders().forEach((s) => s.track?.stop());
     pc.current?.close();
     setState("idle");

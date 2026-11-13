@@ -4,7 +4,6 @@ import { useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useQueryClient } from "@tanstack/react-query";
 import { ArrowLeft, ArrowRight } from "lucide-react";
-import { toast } from "sonner";
 import { Choice } from "@/components/choice";
 import { SKILLS, SkillIcon } from "@/components/skill";
 import { Badge } from "@/components/ui/badge";
@@ -18,6 +17,7 @@ import { useI18n } from "@/lib/i18n";
 import type { AssessmentAttempt, LearnerProfile, SkillSlug } from "@/lib/types";
 import { cn } from "@/lib/utils";
 import { useUiStore } from "@/stores/ui-store";
+import { toastError } from "@/lib/errors";
 
 type Draft = {
   target_language?: string;
@@ -80,7 +80,7 @@ export function OnboardingWizard() {
       const { data: attempt } = await api<{ data: AssessmentAttempt }>(`/learner-profiles/${profile.id}/assessments`, { method: "POST" });
       router.push(`/assessment/${attempt.id}`);
     } catch (e) {
-      toast.error(e instanceof Error ? e.message : t.common.errorTitle);
+      toastError(e, t.common.errorTitle);
       setSubmitting(false);
     }
   }

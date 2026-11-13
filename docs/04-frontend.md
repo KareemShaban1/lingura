@@ -32,7 +32,12 @@ app/
 │  ├─ tutor/[id]/page.tsx              ✅ P3 conversation (corrections, TTS playback, recorder, realtime WebRTC)
 │  ├─ tutor/[id]/report/page.tsx       ✅ P3 conversation report
 │  ├─ practice/writing/…               ✅ P3 writing tasks, editor with word count, evaluation with annotated text
-└─ admin/…                             P4
+│  ├─ pricing, billing, billing/return ✅ P4 plans, plan & usage, checkout return
+│  ├─ family/page.tsx                  ✅ P4 family group: seats, members, invitations
+│  ├─ rewards/page.tsx                 ✅ P4 XP, streak & freezes, achievements, challenges, opt-in leaderboard
+│  ├─ notifications/page.tsx           ✅ P4 in-app notifications (bell with unread count in the header)
+├─ (focus)/invitations/[token]         ✅ P4 accept a family invitation
+└─ (admin)/admin/…                     ✅ P4 overview, users, review, content, ai, billing, languages, audit (sections by permission)
 ```
 
 Navigation items are driven by a `features` list returned from `/auth/me`; items for unreleased modules are **not rendered** (no dead buttons).
@@ -52,7 +57,9 @@ src/
 │  ├─ profile/               PreferencesForm, DangerZone
 │  ├─ speech/                Recorder (MediaRecorder, level meter, limits), PronunciationView
 │  ├─ tutor/                 TutorHome, ConversationView, RealtimeVoice, ConversationReportView
-│  └─ writing/               WritingListView, WritingTaskView, SubmissionResult, AnnotatedText
+│  ├─ writing/               WritingListView, WritingTaskView, SubmissionResult, AnnotatedText
+│  ├─ billing/ family/ rewards/ notifications/   Phase 4 learner screens
+│  └─ admin/                 AdminGate (permission-filtered nav), one module per section
 ├─ lib/                      api client (fetch + CSRF), query keys, i18n, cn()
 ├─ stores/                   useActiveProfileStore (Zustand, persisted)
 └─ types/                    API types (hand-written to match Laravel Resources; OpenAPI-generated in P2)
@@ -63,4 +70,5 @@ src/
 - **Target-language text** is rendered with its own `dir`/`lang` attributes (an Arabic item inside an English UI renders RTL correctly).
 - **States:** every query renders skeleton → content | empty state with a real next action | error with retry.
 - **Theme:** light/dark via `class` strategy, tokens in CSS variables; contrast ≥ 4.5:1.
+- **Plan limits:** every error toast goes through `toastError`; `quota_exceeded` adds a **See plans** action, and the tutor shows remaining messages before a limit is hit.
 - **Motion:** 150–200 ms transitions, `prefers-reduced-motion` respected.

@@ -115,10 +115,30 @@ All routes below use the `ai` limiter (30/min per user). Details: [12-tutor-and-
 
 `GET /assessment-attempts/{a}/next` returns `{item}` or `{task}`. Progress adds `level_progress`, `writing`, `speaking`, `mistake_patterns`; plan items add `writing_task_id` and `scenario`.
 
-## Later phases (contract sketch)
-- **Billing (P4):** `GET /billing/plans`, `POST /billing/checkout`, `POST /billing/portal`, `GET /billing/subscription`, `GET /billing/usage`, `POST /webhooks/stripe` (signature-verified).
-- **Gamification (P4):** `GET /me/xp`, `/me/achievements`, `/leaderboards/{scope}`, `/challenges`.
-- **Admin (P4):** `/admin/users`, `/admin/languages`, `/admin/language-capabilities`, `/admin/assessment-items` (+ `/review`), `/admin/courses|lessons|exercises`, `/admin/ai/providers|models|prompts`, `/admin/subscriptions`, `/admin/analytics/*`, `/admin/audit-logs` — all behind `role:admin|content_editor|support` + per-ability policies.
+## Phase 4 — billing, family, gamification, admin ✅
+Details: [13-business-and-admin.md](13-business-and-admin.md). Quota errors: `429 {code: "quota_exceeded", details: {feature, limit, resets_at, plan}}`.
+
+| Method | Path | Description |
+|---|---|---|
+| GET | `/billing/plans` | Public plan list with limits; `meta.checkout_available` |
+| GET | `/billing/subscription` | Effective plan, source (`free\|personal\|organization`), subscription, usage per feature |
+| POST | `/billing/checkout` | `{plan}` → `{url}` (provider-hosted checkout) |
+| POST | `/billing/checkout/confirm` | `{session_id}` — completes test-mode sessions; paid ones are confirmed by webhook |
+| POST | `/billing/subscription/cancel` · `/resume` | Cancel at period end / undo |
+| POST | `/billing/portal` | `{url}` of the provider portal (payment methods, invoices) |
+| GET | `/billing/payments` | Payment history |
+| POST | `/webhooks/billing` | Provider webhook (signature-verified, idempotent) |
+| GET · POST | `/me/notifications` · `/me/notifications/read` | In-app notifications / mark all read |
+| GET · POST | `/organizations` | My groups / create a family group |
+| GET · PATCH | `/organizations/{id}` | Group with seats, members, pending invitations (admins) / rename |
+| POST | `/organizations/{id}/invitations` | `{email, role?}` → invitation + shareable `accept_url` |
+| DELETE | `/organization-invitations/{id}` | Revoke |
+| GET · POST | `/invitations/{token}` · `/accept` | Preview / accept (invited email only) |
+| DELETE · POST | `/organizations/{id}/members/{member}` · `/leave` | Remove a member / leave |
+| GET | `/me/gamification` · `/me/xp` · `/me/achievements` · `/me/challenges` | XP, streak, history, achievements, weekly challenges |
+| GET · PATCH | `/leaderboards/weekly` · `/me/leaderboard` | Opt-in weekly leaderboard / `{opt_in, alias?}` |
+| — | `/admin/*` | Analytics, users, review queue, content, AI, billing, languages, audit (see doc 13 §5) |
+
 - **Exams (P5):** `/exam-frameworks`, `/exam-attempts`, `/exam-attempts/{id}/sections/{s}`.
 
 ## Rate limits
@@ -127,4 +147,5 @@ All routes below use the `ai` limiter (30/min per user). Details: [12-tutor-and-
 | `auth` | 10/min per IP+email |
 | `api` | 300/min per user (interactive practice makes several calls per minute) |
 | `assessment` | 60/min per user |
-| `ai` | 30/min per user ✅; tutor daily turn cap (150); per-plan monthly quotas from entitlements in P4 |
+| `ai` | 30/min per user ✅ plus per-plan quotas (`QuotaGuard`) ✅ |
+| checkout / invitations | 10/min and 20/min per user ✅; webhooks 120/min |

@@ -4,7 +4,6 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
 import { CheckCircle2, Info, Pause, Play } from "lucide-react";
-import { toast } from "sonner";
 import { SkillIcon } from "@/components/skill";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -15,6 +14,7 @@ import { api } from "@/lib/api";
 import { useI18n } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 import { planItemHref } from "./plan-item-card";
+import { toastError } from "@/lib/errors";
 
 /** Counts focused time; pauses automatically when the tab is hidden. The server caps credit at real elapsed time. */
 function useFocusTimer(initialRunning: boolean) {
@@ -61,7 +61,7 @@ export function SessionView() {
       invalidate(session.data.learner_profile_id);
       await session.refetch();
     } catch (e) {
-      toast.error(e instanceof Error ? e.message : t.common.errorTitle);
+      toastError(e, t.common.errorTitle);
     } finally {
       setSaving(false);
     }

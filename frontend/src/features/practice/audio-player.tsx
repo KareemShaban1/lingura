@@ -2,11 +2,11 @@
 
 import { useEffect, useRef, useState } from "react";
 import { Pause, Play } from "lucide-react";
-import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { api } from "@/lib/api";
 import { useI18n } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
+import { toastError } from "@/lib/errors";
 
 const SPEEDS = [0.75, 1, 1.25];
 
@@ -38,7 +38,7 @@ export function AudioPlayer({ src, compact = false }: { src: string; compact?: b
       audio.current.onpause = audio.current.onended = () => setPlaying(false);
       await audio.current.play();
     } catch (e) {
-      toast.error(e instanceof Error ? e.message : t.common.errorTitle);
+      toastError(e, t.common.errorTitle);
     } finally {
       setLoading(false);
     }

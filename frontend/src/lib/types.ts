@@ -51,6 +51,7 @@ export interface User {
   email_verified: boolean;
   roles: string[];
   is_staff: boolean;
+  permissions: string[];
   profile: {
     native_language: string | null;
     interface_language: "en" | "ar";
@@ -383,6 +384,7 @@ export interface TutorCatalog {
   levels: Level[];
   default_level: string;
   capabilities: { text: boolean; voice: boolean; realtime: boolean };
+  quota: Record<"tutor_messages" | "realtime_minutes", { limit: number | null; remaining: number | null; resets_at: string | null }>;
 }
 
 export interface ConversationReport {
@@ -448,3 +450,55 @@ export interface ProgressPhase3 {
   speaking: { conversations: number; learner_turns: number; conversation_minutes: number; speaking_minutes: number; pronunciation_accuracy: number | null };
   mistake_patterns: { category: string; topic: string | null; occurrences: number; sources: number; example: string | null }[];
 }
+
+// ── Phase 4: billing, family groups, gamification, notifications ─────────────────
+export type QuotaFeature = "tutor_messages" | "realtime_minutes" | "writing_evaluations" | "pronunciation_checks" | "placement_productive" | "target_languages";
+export type BillingPlan = {
+  slug: string;
+  tier: "free" | "premium" | "pro" | "family";
+  interval: "month" | "year" | null;
+  price_minor: number;
+  currency: string;
+  seats: number;
+  limits: Partial<Record<QuotaFeature, number | null>>;
+};
+export type UsageRow = { feature: QuotaFeature; period: "day" | "month" | "total"; limit: number | null; used: number; resets_at: string | null };
+export type BillingState = {
+  plan: BillingPlan;
+  source: "free" | "personal" | "organization";
+  subscription: {
+    id: string; status: string; provider: string; current_period_end: string | null; cancel_at_period_end: boolean;
+    organization: { id: string; name: string } | null; can_manage: boolean;
+  } | null;
+  usage: UsageRow[];
+  portal_available: boolean;
+  driver: string;
+};
+export type PaymentRow = { id: number; amount_minor: number; currency: string; status: "paid" | "failed" | "refunded"; plan: string | null; invoice_url: string | null; date: string };
+export type AppNotification = { id: string; data: { kind: string; [key: string]: unknown }; read: boolean; created_at: string };
+
+export type OrganizationSummary = { id: string; name: string; type: string; role: "owner" | "admin" | "member" };
+export type OrganizationDetail = OrganizationSummary & {
+  plan: { slug: string; status: string; current_period_end: string | null } | null;
+  seats: { seats: number; used: number; members: number; pending: number };
+  members: { id: number; name: string; role: string; joined_at: string; is_you: boolean; email?: string }[];
+  invitations: { id: string; email: string; role: string; expires_at: string }[];
+};
+export type InvitationPreview = { organization: string; invited_by: string; status: "pending" | "accepted" | "expired"; email_matches: boolean };
+
+export type StreakState = { current_days: number; longest_days: number; freezes_available: number; active_today: boolean; at_risk: boolean };
+export type GamificationSummary = {
+  xp_total: number; xp_today: number; xp_week: number; streak: StreakState;
+  achievements_unlocked: number; achievements_total: number; leaderboard_opt_in: boolean;
+};
+export type XpHistory = { daily: { date: string; source: string; xp: number }[]; streak_days: { date: string; kind: "active" | "frozen" }[] };
+export type AchievementRow = {
+  slug: string; title: string; description: string; icon: string; metric: string; threshold: number; xp_reward: number;
+  progress: number; unlocked_at: string | null;
+};
+export type ChallengeRow = { slug: string; metric: "xp" | "exercises" | "reviews" | "minutes" | "conversations"; target: number; xp_reward: number; progress: number; completed: boolean; ends_on: string };
+export type Leaderboard = {
+  week_start: string; opted_in: boolean;
+  entries: { rank: number; name: string; xp: number; is_you: boolean }[];
+  you: { rank: number; name: string; xp: number } | null;
+};

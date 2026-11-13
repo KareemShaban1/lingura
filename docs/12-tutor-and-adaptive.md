@@ -27,7 +27,7 @@ Learner input is placed inside an explicit boundary and the prompt instructs the
 - **Catalog:** 4 original tutor personas (`ai_tutors`: patient, lively, precise, business-like) × 10 scenarios (`conversation_scenarios`: café, directions, job interview, doctor, …) with level ranges. Language-agnostic: scenarios carry translated titles/briefs, not language-specific assumptions.
 - **Modes:** `text`, `voice` (push-to-talk: record → upload → STT → turn), `realtime` (WebRTC with ephemeral secret; transcripts posted back to `/realtime-transcript` so reports and mistake detection work the same way).
 - **Turn flow (`TutorService`):** last 16 messages as history → `tutor.turn` → schema-validated JSON → corrections kept only if `original` occurs in the learner's message → `ai_feedback` rows (`source=tutor`) → reply stored; TTS on demand via `GET /ai-messages/{id}/audio` (cached, signed URL).
-- **Limits:** message ≤ 1000 chars, daily turn cap 150 (`LF_TUTOR_DAILY_TURNS`, moves to plan entitlements in Phase 4), throttle 30/min, an existing open conversation for the same tutor/scenario is reused.
+- **Limits:** message ≤ 1000 chars, daily message quota per plan (`tutor_messages`, see doc 13), throttle 30/min, an existing open conversation for the same tutor/scenario is reused.
 - **Report:** `finish` closes the conversation (time credited from the linked learning session, capped at real elapsed time) and queues `GenerateConversationReport` on the `ai` queue. The report lists strengths, mistakes with corrections, useful vocabulary and criterion scores, and is labelled *AI feedback, not an official assessment*. Failed reports can be retried.
 
 ## 4. Speech pipeline

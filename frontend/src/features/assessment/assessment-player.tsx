@@ -4,7 +4,6 @@ import { useEffect, useRef, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { useQueryClient } from "@tanstack/react-query";
 import { CheckCircle2, CircleDashed, Headphones, Info, Loader2, MinusCircle, Play } from "lucide-react";
-import { toast } from "sonner";
 import { Choice } from "@/components/choice";
 import { SkillIcon } from "@/components/skill";
 import { Button } from "@/components/ui/button";
@@ -19,6 +18,7 @@ import { Recorder } from "@/features/speech/recorder";
 import { useActiveProfile } from "@/features/queries";
 import type { AssessmentAttempt, AssessmentItem, Direction, ProductionTask } from "@/lib/types";
 import { cn } from "@/lib/utils";
+import { toastError } from "@/lib/errors";
 
 /** Renders a cloze prompt with a visible gap instead of raw underscores. */
 function Prompt({ text, lang, dir }: { text: string; lang: string; dir: Direction }) {
@@ -54,7 +54,7 @@ function AudioPlayer({ attemptId, itemId }: { attemptId: string; itemId: string 
       await audio.current.play();
       setPlays((p) => p + 1);
     } catch (e) {
-      toast.error(e instanceof Error ? e.message : t.common.errorTitle);
+      toastError(e, t.common.errorTitle);
     } finally {
       setLoading(false);
     }
@@ -115,7 +115,7 @@ function ProductiveTask({ attemptId, task, lang, onDone }: { attemptId: string; 
       await api(`/assessment-attempts/${attemptId}/${task.skill}`, { method: "POST", body });
       await onDone();
     } catch (e) {
-      toast.error(e instanceof Error ? e.message : t.common.errorTitle);
+      toastError(e, t.common.errorTitle);
     } finally {
       setBusy(false);
     }
@@ -189,7 +189,7 @@ export function AssessmentPlayer() {
       });
       await refresh();
     } catch (e) {
-      toast.error(e instanceof Error ? e.message : t.common.errorTitle);
+      toastError(e, t.common.errorTitle);
     } finally {
       setBusy(false);
     }
@@ -212,7 +212,7 @@ export function AssessmentPlayer() {
       await api(`/assessment-attempts/${attemptId}/complete`, { method: "POST" });
       router.replace(`/assessment/${attemptId}/results`);
     } catch (e) {
-      toast.error(e instanceof Error ? e.message : t.common.errorTitle);
+      toastError(e, t.common.errorTitle);
       setBusy(false);
     }
   }

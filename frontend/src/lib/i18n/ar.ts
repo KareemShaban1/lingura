@@ -1,3 +1,4 @@
+import { ar4 } from "./ar4";
 import type { Dictionary } from "./en";
 
 export const ar: Dictionary = {
@@ -32,6 +33,10 @@ export const ar: Dictionary = {
     profile: "الملف الشخصي",
     addLanguage: "إضافة لغة",
     learningLanguage: "تتعلم",
+    rewards: "المكافآت",
+    plan: "الخطة والفوترة",
+    admin: "الإدارة",
+    notifications: "الإشعارات",
   },
   skills: {
     listening: "الاستماع",
@@ -390,6 +395,8 @@ export const ar: Dictionary = {
     legend: { correct: "مفهومة", substituted: "سُمعت بشكل مختلف", omitted: "ناقصة", inserted: "زائدة" },
   },
   tutor: {
+    messagesLeft: "تبقّى {n} رسالة مع المعلم اليوم",
+    blockEnded: "انتهت المكالمة المباشرة بانتهاء فترتها الزمنية. ابدأها من جديد للمتابعة.",
     title: "المعلّم الذكي",
     subtitle: "تدرّب على محادثات حقيقية. يتكيّف معلمك مع مستواك ويصحّح لك أثناء الحديث.",
     chooseTutor: "اختر معلمك",
@@ -511,4 +518,5 @@ export const ar: Dictionary = {
     deleteConfirm: "أدخل كلمة المرور للتأكيد",
     deleteButton: "احذف حسابي",
   },
+  ...ar4,
 };

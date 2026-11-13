@@ -1,20 +1,22 @@
 "use client";
 
-import { Suspense } from "react";
+import { Suspense, useEffect } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useQueryClient } from "@tanstack/react-query";
 import { useTheme } from "next-themes";
-import { BarChart3, Bot, Dumbbell, Home, Layers, LogOut, Map, Moon, Plus, Sun, UserRound, type LucideIcon } from "lucide-react";
+import { BarChart3, Bot, CreditCard, Dumbbell, Home, Layers, LogOut, Map, Moon, Plus, ShieldCheck, Sun, Trophy, UserRound, type LucideIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Select } from "@/components/ui/input";
+import { NotificationBell } from "@/features/notifications/notifications";
 import { useActiveProfile, useMe } from "@/features/queries";
 import { api } from "@/lib/api";
+import { setErrorNavigator } from "@/lib/errors";
 import { useI18n } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 import { useUiStore } from "@/stores/ui-store";
 
-type NavItem = { href: string; key: "home" | "learning" | "practice" | "tutor" | "vocabulary" | "progress" | "profile"; icon: LucideIcon; feature?: string; mobile?: boolean };
+type NavItem = { href: string; key: "home" | "learning" | "practice" | "tutor" | "vocabulary" | "progress" | "rewards" | "profile"; icon: LucideIcon; feature?: string; mobile?: boolean };
 
 /** Only modules that are enabled for this account are rendered — no dead navigation. */
 const NAV: NavItem[] = [
@@ -25,6 +27,8 @@ const NAV: NavItem[] = [
   // On phones vocabulary is reached from Practice to keep the tab bar at five items.
   { href: "/vocabulary", key: "vocabulary", icon: Layers, feature: "vocabulary", mobile: false },
   { href: "/progress", key: "progress", icon: BarChart3, feature: "progress" },
+  // On phones rewards are reached from the dashboard's streak card.
+  { href: "/rewards", key: "rewards", icon: Trophy, feature: "rewards", mobile: false },
   // On phones the profile lives in the header to keep the tab bar at five items.
   { href: "/profile", key: "profile", icon: UserRound, mobile: false },
 ];
@@ -90,10 +94,24 @@ function ProfileSwitcher() {
   );
 }
 
+/** Plan & billing and (for staff) the admin area, below the main navigation. */
+function SecondaryLinks() {
+  const { data } = useMe();
+  const { t } = useI18n();
+  const cls = "flex items-center gap-3 rounded-lg px-3 py-2 text-sm text-muted-foreground hover:bg-muted";
+  return (
+    <>
+      {data?.features.includes("billing") && <Link href="/billing" className={cls}><CreditCard className="size-4" aria-hidden /> {t.nav.plan}</Link>}
+      {data?.is_staff && <Link href="/admin" className={cls}><ShieldCheck className="size-4" aria-hidden /> {t.nav.admin}</Link>}
+    </>
+  );
+}
+
 function ThemeToggle() {
   const { resolvedTheme, setTheme } = useTheme();
   return (
-    <Button variant="ghost" size="icon" aria-label="Toggle theme" onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}>
+    // Phones: the header has no room for it (theme is in Profile → Appearance).
+    <Button variant="ghost" size="icon" className="hidden md:inline-flex" aria-label="Toggle theme" onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}>
       <Sun className="hidden dark:block" />
       <Moon className="dark:hidden" />
     </Button>
@@ -122,6 +140,8 @@ export function Logo({ className }: { className?: string }) {
 export function AppShell({ children }: { children: React.ReactNode }) {
   const { t } = useI18n();
   const signOut = useSignOut();
+  const router = useRouter();
+  useEffect(() => setErrorNavigator((href) => router.push(href)), [router]);
   const navFallback = <div className="h-40" />;
 
   return (
@@ -136,6 +156,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
           </Suspense>
         </nav>
         <div className="mt-auto flex flex-col gap-1">
+          <SecondaryLinks />
           <Link href="/onboarding" className="flex items-center gap-3 rounded-lg px-3 py-2 text-sm text-muted-foreground hover:bg-muted">
             <Plus className="size-4" aria-hidden /> {t.nav.addLanguage}
           </Link>
@@ -153,6 +174,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
           <div className="hidden md:block" />
           <div className="flex items-center gap-1">
             <ProfileSwitcher />
+            <NotificationBell />
             <ThemeToggle />
             <Button asChild variant="ghost" size="icon" className="md:hidden" aria-label={t.nav.profile}>
               <Link href="/profile"><UserRound /></Link>
