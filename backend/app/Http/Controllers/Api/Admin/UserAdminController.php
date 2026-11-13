@@ -11,6 +11,7 @@ use App\Models\Role;
 use App\Models\Subscription;
 use App\Models\SubscriptionPlan;
 use App\Models\User;
+use App\Support\Sql;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
@@ -23,7 +24,7 @@ class UserAdminController extends Controller
     {
         $q = trim((string) $request->query('q', ''));
         $users = User::query()
-            ->when($q !== '', fn ($query) => $query->where(fn ($w) => $w->where('email', 'ilike', "%{$q}%")->orWhere('name', 'ilike', "%{$q}%")))
+            ->when($q !== '', fn ($query) => $query->where(fn ($w) => $w->where('email', Sql::ilike(), "%{$q}%")->orWhere('name', Sql::ilike(), "%{$q}%")))
             ->when($request->query('status'), fn ($query, $s) => $query->where('status', $s))
             ->with('roles')->latest('id')->paginate(min(100, (int) $request->query('per_page', 25)));
 

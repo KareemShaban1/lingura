@@ -10,6 +10,7 @@ use App\Models\BillingEvent;
 use App\Models\PlanEntitlement;
 use App\Models\Subscription;
 use App\Models\SubscriptionPlan;
+use App\Support\Sql;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -24,7 +25,7 @@ class BillingAdminController extends Controller
         $rows = Subscription::query()
             ->when($request->query('status'), fn ($query, $s) => $query->where('status', $s))
             ->when($request->query('provider'), fn ($query, $p) => $query->where('provider', $p))
-            ->when($q !== '', fn ($query) => $query->whereHas('user', fn ($u) => $u->where('email', 'ilike', "%{$q}%")))
+            ->when($q !== '', fn ($query) => $query->whereHas('user', fn ($u) => $u->where('email', Sql::ilike(), "%{$q}%")))
             ->with(['plan', 'user'])->latest('id')->paginate(25);
 
         return response()->json([

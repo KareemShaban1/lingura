@@ -18,7 +18,7 @@ use App\Models\UserVocabulary;
 use App\Models\WritingSubmission;
 use App\Models\XpEntry;
 use App\Notifications\AccountNotice;
-use Illuminate\Database\QueryException;
+use Illuminate\Database\UniqueConstraintViolationException;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
@@ -84,11 +84,8 @@ class GamificationService
             ]));
 
             return true;
-        } catch (QueryException $e) {
-            if ($e->getCode() === '23505') { // unique violation on dedupe_key (savepoint rolled back)
-                return false;
-            }
-            throw $e;
+        } catch (UniqueConstraintViolationException) { // dedupe_key already rewarded (savepoint rolled back)
+            return false;
         }
     }
 

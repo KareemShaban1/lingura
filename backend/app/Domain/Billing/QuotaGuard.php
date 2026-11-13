@@ -4,6 +4,7 @@ namespace App\Domain\Billing;
 
 use App\Domain\Shared\DomainError;
 use App\Models\User;
+use App\Support\Sql;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Throwable;
@@ -23,28 +24,52 @@ class QuotaGuard
         $period = $this->periodStart($user, $feature);
 
         if ($limit === null) { // unlimited: still metered for analytics
-            DB::statement('insert into usage_counters (user_id, feature, period_start, used, updated_at) values (?, ?, ?, ?, now())
-                on conflict (user_id, feature, period_start) do update set used = usage_counters.used + excluded.used, updated_at = now()',
-                [$user->id, $feature, $period->toDateString(), $quantity]);
+            $this->consumeLocked($user, $feature, $period->toDateString(), $quantity, null);
 
             return;
         }
 
-        $granted = $quantity <= $limit && DB::selectOne('insert into usage_counters (user_id, feature, period_start, used, updated_at) values (?, ?, ?, ?, now())
-            on conflict (user_id, feature, period_start) do update set used = usage_counters.used + excluded.used, updated_at = now()
-            where usage_counters.used + excluded.used <= ? returning used',
-            [$user->id, $feature, $period->toDateString(), $quantity, $limit]) !== null;
-
+        $granted = $quantity <= $limit && (Sql::isPgsql()
+            ? $this->consumePgsql($user, $feature, $period->toDateString(), $quantity, $limit)
+            : $this->consumeLocked($user, $feature, $period->toDateString(), $quantity, $limit));
         if (! $granted) {
             throw $this->exceeded($user, $feature, $limit);
         }
     }
 
+    /** PostgreSQL: one conditional upsert — granted only if the row was written. */
+    private function consumePgsql(User $user, string $feature, string $period, int $quantity, int $limit): bool
+    {
+        return DB::selectOne('insert into usage_counters (user_id, feature, period_start, used, updated_at) values (?, ?, ?, ?, now())
+            on conflict (user_id, feature, period_start) do update set used = usage_counters.used + excluded.used, updated_at = now()
+            where usage_counters.used + excluded.used <= ? returning used',
+            [$user->id, $feature, $period, $quantity, $limit]) !== null;
+    }
+
+    /**
+     * Portable path (MySQL/MariaDB, and unlimited features): make sure the row exists, then lock it,
+     * check and add — concurrent requests serialise on the row lock, so the limit still holds.
+     */
+    private function consumeLocked(User $user, string $feature, string $period, int $quantity, ?int $limit): bool
+    {
+        return DB::transaction(function () use ($user, $feature, $period, $quantity, $limit) {
+            DB::table('usage_counters')->insertOrIgnore(['user_id' => $user->id, 'feature' => $feature, 'period_start' => $period, 'used' => 0, 'updated_at' => now()]);
+            $row = DB::table('usage_counters')->where('user_id', $user->id)->where('feature', $feature)->where('period_start', $period)->lockForUpdate()->first();
+            if ($limit !== null && $row->used + $quantity > $limit) {
+                return false;
+            }
+            DB::table('usage_counters')->where('id', $row->id)->update(['used' => $row->used + $quantity, 'updated_at' => now()]);
+
+            return true;
+        });
+    }
+
     /** Returns units after a failed operation (never below zero). */
     public function release(User $user, string $feature, int $quantity = 1): void
     {
-        DB::update('update usage_counters set used = greatest(used - ?, 0), updated_at = now() where user_id = ? and feature = ? and period_start = ?',
-            [$quantity, $user->id, $feature, $this->periodStart($user, $feature)->toDateString()]);
+        // CASE rather than greatest(used - ?, 0): `used` is unsigned, and MySQL rejects a negative intermediate.
+        DB::update('update usage_counters set used = case when used > ? then used - ? else 0 end, updated_at = CURRENT_TIMESTAMP where user_id = ? and feature = ? and period_start = ?',
+            [$quantity, $quantity, $user->id, $feature, $this->periodStart($user, $feature)->toDateString()]);
     }
 
     /**

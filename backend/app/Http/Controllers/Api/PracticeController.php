@@ -39,7 +39,7 @@ class PracticeController extends Controller
         ]);
 
         $lastScores = DB::table('exercise_attempts')->where('learner_profile_id', $learnerProfile->id)->where('status', 'completed')
-            ->selectRaw('DISTINCT ON (exercise_id) exercise_id, score')->orderBy('exercise_id')->orderByDesc('completed_at')
+            ->orderBy('completed_at')->orderBy('id') // later attempts overwrite earlier ones: latest score per exercise
             ->pluck('score', 'exercise_id');
 
         $exercises = Exercise::available()

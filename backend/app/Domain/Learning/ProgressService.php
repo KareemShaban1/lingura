@@ -37,15 +37,20 @@ class ProgressService
         $tz = $this->timezone($profile);
         $since = Carbon::now($tz)->startOfDay()->subDays($days - 1)->utc();
 
-        return LearningSession::query()
+        // Grouped by the learner's local date in PHP: portable across databases (MySQL's CONVERT_TZ needs
+        // time-zone tables that are often not loaded).
+        $days = [];
+        LearningSession::query()
             ->where('learner_profile_id', $profile->id)
             ->whereNotNull('ended_at')
             ->where('ended_at', '>=', $since)
-            ->selectRaw("to_char((ended_at AT TIME ZONE 'UTC') AT TIME ZONE ?, 'YYYY-MM-DD') as day, sum(active_seconds) as seconds", [$tz])
-            ->groupBy('day')
-            ->pluck('seconds', 'day')
-            ->map(fn ($s) => (int) $s)
-            ->all();
+            ->get(['ended_at', 'active_seconds'])
+            ->each(function ($s) use (&$days, $tz) {
+                $day = $s->ended_at->copy()->setTimezone($tz)->toDateString();
+                $days[$day] = ($days[$day] ?? 0) + (int) $s->active_seconds;
+            });
+
+        return $days;
     }
 
     /** One streak definition app-wide: days with a verified outcome or ≥ 5 credited study minutes, with freezes (GamificationService). */

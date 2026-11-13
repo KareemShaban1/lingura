@@ -48,7 +48,9 @@ Open http://localhost:3000 once the `web` container is up (the first build takes
 The database and Redis live in memory: stopping the stack (`Ctrl+C`, then `docker compose -f docker-compose.demo.yml down -v`) deletes all data, and the next start creates fresh data. AI features use the built-in fake provider (placeholder replies) and checkout runs in test mode (no payment).
 
 ## Local development (without Docker)
-Requirements: PHP 8.3 (pdo_pgsql, redis, intl), Composer, Node 22, PostgreSQL 16, Redis 7.
+Requirements: PHP 8.3 (pdo_pgsql or pdo_mysql, redis, intl), Composer, Node 22, PostgreSQL 16 **or MySQL 8.0+**, Redis 7.
+
+For MySQL set `DB_CONNECTION=mysql`, `DB_PORT=3306` (and the database created with `utf8mb4`) in `backend/.env`; everything else is the same. PostgreSQL remains the primary target; both run the full test suite in CI.
 
 ```bash
 # database

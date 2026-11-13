@@ -10,6 +10,7 @@ use App\Models\ContentReview;
 use App\Models\Course;
 use App\Models\Exercise;
 use App\Models\Language;
+use App\Support\Sql;
 use ErrorException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\JsonResponse;
@@ -44,7 +45,7 @@ class ContentAdminController extends Controller
         $rows = Exercise::query()
             ->when($request->query('language'), fn ($q, $code) => $q->whereHas('language', fn ($l) => $l->where('code', $code)))
             ->when($request->query('status'), fn ($q, $s) => $q->where('review_status', $s))
-            ->when($request->query('q'), fn ($q, $term) => $q->where('key', 'ilike', "%{$term}%"))
+            ->when($request->query('q'), fn ($q, $term) => $q->where('key', Sql::ilike(), "%{$term}%"))
             ->with(['language', 'skill', 'level', 'translations'])->withCount(['questions'])
             ->orderBy('key')->paginate(25);
 
