@@ -14,7 +14,11 @@ Authored packs live in `backend/database/data/content/{lang}.json` (generated fr
 - **published content with learner attempts is immutable** — editing it is refused; retire it and publish a new key;
 - ordering exercises are never displayed pre-solved.
 
-The starter packs cover A1–A2 for en/ar/es/fr/de/it: 4 grammar topics, 24 words, 10 exercises and a 4-lesson course per language. They are a foundation for the review workflow, not a complete curriculum; native-speaker review is required before production.
+The packs cover two courses per language for en/ar/es/fr/de/it/zh:
+- **Foundations** (`{lang}.json`, Pre-A1→A2): 4 grammar topics, 24 words, 11 exercises and a 4-lesson course.
+- **Intermediate** (`{lang}-b1.json`, B1→B2, authored in `content_b1.py`): 4 B1 grammar topics (e.g. preterite vs imperfect, subjunctive, conditional and por/para for Spanish; 了, 过, 比 and 把 for Chinese), 20 words, 11 exercises (including a B2 reading and a B1 listening) and a 4-lesson course.
+
+Courses are ordered by their starting level (`position` = the level's ordinal). The "next lesson" skips courses whose target level the learner has already reached (latest placement, else self-reported level) while a course at their level still has lessons; after that, earlier courses are offered again. This is a foundation for the review workflow, not a complete curriculum: native-speaker review is required before production. Single exercises can also be written in the in-app editor (see doc 13, §5.1).
 
 ## 2. Exercise types and deterministic scoring
 | Type | Learner action | Scoring |

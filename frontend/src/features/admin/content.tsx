@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useState } from "react";
+import { useRouter } from "next/navigation";
 import { useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { Badge } from "@/components/ui/badge";
@@ -21,6 +22,7 @@ export function AdminContent() {
   const { t, f } = useI18n();
   const c = t.admin.content;
   const qc = useQueryClient();
+  const router = useRouter();
   const summary = useAdmin<{ data: Summary[] }>("/content/summary");
   const [language, setLanguage] = useState("");
   const [status, setStatus] = useState("");
@@ -38,6 +40,15 @@ export function AdminContent() {
       await api(`/admin/content/exercises/${id}`, { method: "PATCH", body: { status: next } });
       toast.success(t.admin.saved);
       qc.invalidateQueries({ queryKey: ["admin"] });
+    } catch (e) {
+      toastError(e, t.common.errorTitle);
+    }
+  }
+
+  async function edit(id: string) {
+    try {
+      const { data } = await api<{ data: { id: string } }>(`/admin/content/exercises/${id}/drafts`, { method: "POST" });
+      router.push(`/admin/editor?draft=${data.id}`);
     } catch (e) {
       toastError(e, t.common.errorTitle);
     }
@@ -114,7 +125,8 @@ export function AdminContent() {
                 <td>{e.type}{!e.has_audio && ["listening", "dictation"].includes(e.type) && <Badge variant="warning" className="ms-1">{c.missingAudio}</Badge>}</td>
                 <td>{e.questions}</td><td>{e.attempts}</td>
                 <td><Badge variant={e.status === "published" ? "success" : "muted"}>{e.status === "published" ? c.published : c.retired}</Badge></td>
-                <td className="text-end">
+                <td className="space-x-2 text-end rtl:space-x-reverse">
+                  <Button size="sm" variant="ghost" onClick={() => edit(e.id)}>{t.admin.editor.editExercise}</Button>
                   <Button size="sm" variant="outline" onClick={() => setExercise(e.id, e.status === "published" ? "retired" : "published")}>
                     {e.status === "published" ? c.retire : c.restore}
                   </Button>

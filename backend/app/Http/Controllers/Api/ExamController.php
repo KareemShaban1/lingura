@@ -9,6 +9,7 @@ use App\Http\Resources\ProductionTaskResource;
 use App\Models\AudioRecording;
 use App\Models\ExamAttempt;
 use App\Models\ExamAttemptSection;
+use App\Models\ExamForm;
 use App\Models\ExamFramework;
 use App\Models\ExamItem;
 use App\Models\LearnerProfile;
@@ -18,6 +19,9 @@ use Illuminate\Http\Request;
 
 class ExamController extends Controller
 {
+    /** @var array<int, array<int, int>> framework id => [form id => index] */
+    private array $formOrder = [];
+
     public function __construct(private readonly ExamService $exams) {}
 
     public function index(LearnerProfile $learnerProfile): JsonResponse
@@ -29,8 +33,9 @@ class ExamController extends Controller
 
         return response()->json(['data' => $frameworks->map(fn (ExamFramework $f) => [
             ...$this->framework($f),
+            'forms_count' => $f->activeForms()->count(),
             'attempts' => ($attempts->get($f->id) ?? collect())->take(10)->map(fn (ExamAttempt $a) => [
-                'id' => $a->public_id, 'status' => $a->status, 'started_at' => $a->started_at->toIso8601String(),
+                'id' => $a->public_id, 'status' => $a->status, 'form_number' => $this->formNumber($a), 'started_at' => $a->started_at->toIso8601String(),
                 'completed_at' => $a->completed_at?->toIso8601String(), 'overall' => $a->result['overall'] ?? null,
             ])->values(),
         ])]);
@@ -119,6 +124,15 @@ class ExamController extends Controller
     }
 
     /** @return array<string, mixed> */
+    /** 1-based position of the attempt's form among its framework's forms (stable: ordered by key). */
+    private function formNumber(ExamAttempt $attempt): int
+    {
+        $frameworkId = $attempt->form->exam_framework_id;
+        $this->formOrder[$frameworkId] ??= ExamForm::where('exam_framework_id', $frameworkId)->orderBy('key')->pluck('id')->flip()->all();
+
+        return ($this->formOrder[$frameworkId][$attempt->exam_form_id] ?? 0) + 1;
+    }
+
     private function framework(ExamFramework $f): array
     {
         return [
@@ -140,6 +154,7 @@ class ExamController extends Controller
             'id' => $attempt->public_id,
             'status' => $attempt->status,
             'framework' => $this->framework($framework),
+            'form_number' => $this->formNumber($attempt),
             'language' => ['code' => $framework->language->code, 'direction' => $framework->language->direction],
             'sections' => $sections->map(fn (ExamAttemptSection $s) => [
                 'skill' => $s->section->skill->slug,

@@ -512,7 +512,8 @@ export type ExamEstimate = { band?: number; low?: number; high?: number; probabi
 export type ExamFramework = {
   slug: string; exam_name: string; title: string; description: string; disclaimer: string; scale: "band" | "readiness"; target_level: string | null;
   sections: { skill: SkillSlug; minutes: number }[];
-  attempts?: { id: string; status: string; started_at: string; completed_at: string | null; overall: ExamEstimate | null }[];
+  forms_count?: number;
+  attempts?: { id: string; status: string; started_at: string; completed_at: string | null; overall: ExamEstimate | null; form_number?: number }[];
 };
 export type ExamSectionState = {
   skill: SkillSlug; status: "pending" | "in_progress" | "completed" | "expired" | "skipped" | "unavailable"; reason: string | null;
@@ -520,7 +521,7 @@ export type ExamSectionState = {
   level: string | null; estimate: ExamEstimate | null; writing_submission_id: string | null;
 };
 export type ExamAttempt = {
-  id: string; status: "in_progress" | "completed"; framework: ExamFramework; language: { code: string; direction: Direction };
+  id: string; status: "in_progress" | "completed"; framework: ExamFramework; form_number?: number; language: { code: string; direction: Direction };
   sections: ExamSectionState[];
   current: null | {
     skill: SkillSlug;

@@ -70,10 +70,20 @@ Area at `/admin`, gated by `admin.access`; each section needs its own permission
 | Users | `users.manage` (+ `billing.manage` for grants) | Search, suspend/reactivate (revokes API tokens), roles (only super admins grant or remove admin roles; nobody edits their own), complimentary grants |
 | Review queue | `content.review` | Approve/reject AI-drafted assessment items; score the 5 % writing calibration sample (shown without learner identity) and see AI–human agreement per prompt version |
 | Content | `content.manage` | Per-language summary, retire/restore exercises (retirements survive re-imports), validate (dry run) or import a content pack through the same importer as the seeders |
+| Editor | `content.manage` (publish: `content.review`) | Write or edit single exercises in the browser; see §5.1 |
 | AI | `ai.manage` | Provider and model kill switches (effective within a minute; learners see "temporarily unavailable" and are refunded), unit prices, prompt versions: draft → activate (cache flushed; drafts that drop template variables are rejected) |
 | Billing | `billing.manage` | Plan prices, provider price ids, visibility and limits; subscriptions; webhook events |
 | Languages | `languages.manage` | Capability matrix (supported/beta/unsupported per feature) |
 | Audit log | `audit.view` | Filterable log of administrative and billing actions |
+
+### 5.1 Exercise editor
+Single exercises can be authored in the browser (`/admin/editor`) instead of a JSON pack. Drafts use the pack format, so everything an editor writes goes through the same importer rules.
+- **Lifecycle:** `draft → in_review → published`, or `in_review → rejected` (with required notes) `→ draft` again. Drafts are editable only while `draft` or `rejected`.
+- **Checks:** field rules per exercise type (key must start with the language code; first option is the answer; cloze needs `___`; ordering lists chunks in the correct order), then **Check** runs the real importer in a rolled-back transaction, so duplicate options, script mismatches, unknown topics or an immutable key are reported before review. Nothing is written.
+- **Four-eyes:** publishing needs `content.review` and a reviewer **other than the author** (`self_review`, 403). Publishing imports the draft for real; the exercise appears in the practice library (listening and dictation once `lf:content:synthesize-audio` has produced audio).
+- **Editing existing exercises:** "Edit in editor" on the Content page exports the exercise to a draft. If learners have already answered it, the draft gets a new key (`…-v2`) and publishing **retires the original**, so past answers keep pointing at the questions they were given.
+- Every step (`admin.content_draft_created|updated|submitted|rejected|published`) is audited, and publishing also records a content review.
+- Courses and lessons are still authored as packs: the editor covers exercises only.
 
 ## 6. Known limitations
 - Stripe is implemented against its REST API and tested with recorded responses (`Http::fake`); it has **not** been run against a live Stripe account. Do a test-mode run before launch (checkout, renewal, failed payment, cancellation, portal).
@@ -81,5 +91,5 @@ Area at `/admin`, gated by `admin.access`; each section needs its own permission
 - Taxes/VAT, coupons beyond Stripe promotion codes, refunds UI and dunning emails beyond Stripe's own are not implemented.
 - Family is the only organization type; school/company seats, teacher dashboards and pooled quotas are future work.
 - Realtime voice is charged in blocks without refunds (see §1).
-- Content authoring is pack-based (JSON import with validation), not a WYSIWYG editor.
+- The in-app editor covers single exercises; courses, lessons, grammar topics and vocabulary are still authored as JSON packs.
 - Analytics are computed on request from raw tables; at scale they should move to nightly rollups.

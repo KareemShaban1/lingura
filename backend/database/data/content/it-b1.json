@@ -1,0 +1,1091 @@
+{
+ "language": "it",
+ "topics": [
+  {
+   "slug": "passato_prossimo_imperfetto",
+   "level": "B1",
+   "title": {
+    "en": "Passato prossimo vs imperfetto",
+    "ar": "الماضي القريب والماضي الناقص"
+   },
+   "explanation": {
+    "en": "Use the passato prossimo for completed events (sono arrivato, ho mangiato) and the imperfetto for background, descriptions and habits (pioveva, ero stanco). Quando sono arrivato, pioveva.",
+    "ar": "استخدم passato prossimo للأحداث المكتملة (sono arrivato، ho mangiato) وimperfetto للخلفية والوصف والعادات (pioveva، ero stanco). مثال: Quando sono arrivato, pioveva."
+   },
+   "examples": [
+    [
+     "Quando ero piccolo, abitavo a Napoli.",
+     "When I was little, I lived in Naples."
+    ],
+    [
+     "Ieri sono tornato tardi.",
+     "Yesterday I came home late."
+    ],
+    [
+     "Leggevo quando è suonato il telefono.",
+     "I was reading when the phone rang."
+    ]
+   ]
+  },
+  {
+   "slug": "congiuntivo_presente",
+   "level": "B1",
+   "title": {
+    "en": "Present subjunctive",
+    "ar": "صيغة الـ congiuntivo في المضارع"
+   },
+   "explanation": {
+    "en": "After verbs of opinion, wish and doubt (penso che, credo che, spero che, voglio che), use the congiuntivo: penso che sia vero, spero che tu venga.",
+    "ar": "بعد أفعال الرأي والتمني والشك (penso che، credo che، spero che، voglio che) تُستخدم صيغة congiuntivo: penso che sia vero، spero che tu venga."
+   },
+   "examples": [
+    [
+     "Penso che sia una buona idea.",
+     "I think it's a good idea."
+    ],
+    [
+     "Spero che tu stia bene.",
+     "I hope you are well."
+    ],
+    [
+     "Voglio che voi arriviate puntuali.",
+     "I want you to arrive on time."
+    ]
+   ]
+  },
+  {
+   "slug": "condizionale",
+   "level": "B1",
+   "title": {
+    "en": "The conditional",
+    "ar": "صيغة الشرط"
+   },
+   "explanation": {
+    "en": "Use the conditional (vorrei, potresti, andrei) for polite requests, advice (al posto tuo, parlerei con lei) and hypotheses (se avessi tempo, viaggerei).",
+    "ar": "تُستخدم صيغة الشرط (vorrei، potresti، andrei) للطلب المهذب والنصيحة (al posto tuo, parlerei con lei) والافتراض (se avessi tempo, viaggerei)."
+   },
+   "examples": [
+    [
+     "Potresti aiutarmi?",
+     "Could you help me?"
+    ],
+    [
+     "Al posto tuo, dormirei di più.",
+     "If I were you, I'd sleep more."
+    ],
+    [
+     "Se avessi soldi, viaggerei.",
+     "If I had money, I would travel."
+    ]
+   ]
+  },
+  {
+   "slug": "pronomi_relativi",
+   "level": "B1",
+   "title": {
+    "en": "Relative pronouns che and cui",
+    "ar": "اسما الموصول che وcui"
+   },
+   "explanation": {
+    "en": "Che is the subject or direct object (la donna che abita qui, il libro che leggo). After a preposition, use cui: la città in cui vivo, l'amico a cui scrivo.",
+    "ar": "che فاعل أو مفعول به مباشر (la donna che abita qui، il libro che leggo)، وبعد حرف الجر يُستخدم cui: la città in cui vivo، l'amico a cui scrivo."
+   },
+   "examples": [
+    [
+     "È la donna che abita qui accanto.",
+     "She's the woman who lives next door."
+    ],
+    [
+     "Il libro che leggo è bellissimo.",
+     "The book I'm reading is wonderful."
+    ],
+    [
+     "La città in cui sono nato è piccola.",
+     "The town where I was born is small."
+    ]
+   ]
+  }
+ ],
+ "words": [
+  {
+   "lemma": "viaggio",
+   "pos": "noun",
+   "level": "B1",
+   "meaning": {
+    "en": "trip, journey",
+    "ar": "رحلة"
+   },
+   "example": [
+    "Il viaggio è durato sei ore.",
+    "The journey took six hours."
+   ],
+   "forms": [
+    "viaggi"
+   ],
+   "gender": "m"
+  },
+  {
+   "lemma": "ricordo",
+   "pos": "noun",
+   "level": "B1",
+   "meaning": {
+    "en": "memory",
+    "ar": "ذكرى"
+   },
+   "example": [
+    "Ho bei ricordi di quell'estate.",
+    "I have lovely memories of that summer."
+   ],
+   "forms": [
+    "ricordi"
+   ],
+   "gender": "m"
+  },
+  {
+   "lemma": "all'improvviso",
+   "pos": "adv",
+   "level": "B1",
+   "meaning": {
+    "en": "suddenly",
+    "ar": "فجأة"
+   },
+   "example": [
+    "All'improvviso è andata via la luce.",
+    "Suddenly the power went out."
+   ]
+  },
+  {
+   "lemma": "mentre",
+   "pos": "conj",
+   "level": "B1",
+   "meaning": {
+    "en": "while",
+    "ar": "بينما"
+   },
+   "example": [
+    "Cucinava mentre io leggevo.",
+    "He was cooking while I was reading."
+   ]
+  },
+  {
+   "lemma": "avvenimento",
+   "pos": "noun",
+   "level": "B1",
+   "meaning": {
+    "en": "event",
+    "ar": "حدث"
+   },
+   "example": [
+    "Il matrimonio è stato un grande avvenimento.",
+    "The wedding was a big event."
+   ],
+   "forms": [
+    "avvenimenti"
+   ],
+   "gender": "m"
+  },
+  {
+   "lemma": "sperare",
+   "pos": "verb",
+   "level": "B1",
+   "meaning": {
+    "en": "to hope",
+    "ar": "يأمل"
+   },
+   "example": [
+    "Spero che tu stia bene.",
+    "I hope you are well."
+   ],
+   "forms": [
+    "spero",
+    "speri",
+    "spera",
+    "sperato"
+   ]
+  },
+  {
+   "lemma": "consigliare",
+   "pos": "verb",
+   "level": "B1",
+   "meaning": {
+    "en": "to recommend, to advise",
+    "ar": "ينصح"
+   },
+   "example": [
+    "Ti consiglio questo ristorante.",
+    "I recommend this restaurant to you."
+   ],
+   "forms": [
+    "consiglio",
+    "consigli",
+    "consiglia",
+    "consigliato"
+   ]
+  },
+  {
+   "lemma": "opinione",
+   "pos": "noun",
+   "level": "B1",
+   "meaning": {
+    "en": "opinion",
+    "ar": "رأي"
+   },
+   "example": [
+    "Secondo la mia opinione, è un'ottima idea.",
+    "In my opinion, it's an excellent idea."
+   ],
+   "forms": [
+    "opinioni"
+   ],
+   "gender": "f"
+  },
+  {
+   "lemma": "ambiente",
+   "pos": "noun",
+   "level": "B1",
+   "meaning": {
+    "en": "environment",
+    "ar": "البيئة"
+   },
+   "example": [
+    "Dobbiamo proteggere l'ambiente.",
+    "We must protect the environment."
+   ],
+   "gender": "m"
+  },
+  {
+   "lemma": "consiglio",
+   "pos": "noun",
+   "level": "B1",
+   "meaning": {
+    "en": "piece of advice",
+    "ar": "نصيحة"
+   },
+   "example": [
+    "Grazie del consiglio.",
+    "Thanks for the advice."
+   ],
+   "forms": [
+    "consigli"
+   ],
+   "gender": "m"
+  },
+  {
+   "lemma": "dovere",
+   "pos": "verb",
+   "level": "B1",
+   "meaning": {
+    "en": "must, should",
+    "ar": "يجب"
+   },
+   "example": [
+    "Dovresti dormire di più.",
+    "You should sleep more."
+   ],
+   "forms": [
+    "devo",
+    "devi",
+    "deve",
+    "dovresti"
+   ]
+  },
+  {
+   "lemma": "salute",
+   "pos": "noun",
+   "level": "B1",
+   "meaning": {
+    "en": "health",
+    "ar": "صحة"
+   },
+   "example": [
+    "Lo sport fa bene alla salute.",
+    "Sport is good for your health."
+   ],
+   "gender": "f"
+  },
+  {
+   "lemma": "riuscire",
+   "pos": "verb",
+   "level": "B1",
+   "meaning": {
+    "en": "to manage, to succeed",
+    "ar": "يتمكّن؛ ينجح"
+   },
+   "example": [
+    "È riuscita a trovare lavoro.",
+    "She managed to find a job."
+   ],
+   "forms": [
+    "riesco",
+    "riesce",
+    "riuscito",
+    "riuscita"
+   ]
+  },
+  {
+   "lemma": "traffico",
+   "pos": "noun",
+   "level": "B1",
+   "meaning": {
+    "en": "traffic",
+    "ar": "حركة المرور"
+   },
+   "example": [
+    "C'è molto traffico in centro.",
+    "There's a lot of traffic in the centre."
+   ],
+   "gender": "m"
+  },
+  {
+   "lemma": "quartiere",
+   "pos": "noun",
+   "level": "B1",
+   "meaning": {
+    "en": "neighbourhood",
+    "ar": "حي"
+   },
+   "example": [
+    "Abito in un quartiere tranquillo.",
+    "I live in a quiet neighbourhood."
+   ],
+   "forms": [
+    "quartieri"
+   ],
+   "gender": "m"
+  },
+  {
+   "lemma": "vicino",
+   "pos": "noun",
+   "level": "B1",
+   "meaning": {
+    "en": "neighbour",
+    "ar": "جار"
+   },
+   "example": [
+    "Il mio vicino è molto gentile.",
+    "My neighbour is very kind."
+   ],
+   "forms": [
+    "vicini",
+    "vicina",
+    "vicine"
+   ],
+   "gender": "m"
+  },
+  {
+   "lemma": "affittare",
+   "pos": "verb",
+   "level": "B1",
+   "meaning": {
+    "en": "to rent",
+    "ar": "يستأجر"
+   },
+   "example": [
+    "Vogliamo affittare un appartamento più grande.",
+    "We want to rent a bigger flat."
+   ],
+   "forms": [
+    "affitto",
+    "affittiamo",
+    "affittato"
+   ]
+  },
+  {
+   "lemma": "cambiare",
+   "pos": "verb",
+   "level": "B1",
+   "meaning": {
+    "en": "to change",
+    "ar": "يغيّر"
+   },
+   "example": [
+    "La città è cambiata molto.",
+    "The town has changed a lot."
+   ],
+   "forms": [
+    "cambia",
+    "cambiato",
+    "cambiata"
+   ]
+  },
+  {
+   "lemma": "anche se",
+   "pos": "conj",
+   "level": "B1",
+   "meaning": {
+    "en": "even though",
+    "ar": "رغم أنّ"
+   },
+   "example": [
+    "Siamo usciti anche se pioveva.",
+    "We went out even though it was raining."
+   ]
+  },
+  {
+   "lemma": "vantaggio",
+   "pos": "noun",
+   "level": "B1",
+   "meaning": {
+    "en": "advantage",
+    "ar": "ميزة"
+   },
+   "example": [
+    "Vivere in città ha molti vantaggi.",
+    "Living in the city has many advantages."
+   ],
+   "forms": [
+    "vantaggi"
+   ],
+   "gender": "m",
+   "ant": [
+    "svantaggio"
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "key": "it-b1-pp-imp-mcq",
+   "type": "mcq",
+   "skill": "grammar",
+   "level": "B1",
+   "questions": [
+    {
+     "p": "Quando ___ piccolo, abitavo in campagna.",
+     "o": [
+      "ero",
+      "sono stato",
+      "sono",
+      "sarei"
+     ]
+    },
+    {
+     "p": "Ieri ___ alle otto.",
+     "o": [
+      "mi sono alzato",
+      "mi alzavo",
+      "mi alzo",
+      "mi alzerò"
+     ]
+    },
+    {
+     "p": "Leggevo quando ___ il telefono.",
+     "o": [
+      "è suonato",
+      "suonava",
+      "suona",
+      "suonerà"
+     ]
+    },
+    {
+     "p": "Ogni estate ___ dai nonni.",
+     "o": [
+      "andavamo",
+      "siamo andati",
+      "andiamo",
+      "andremo"
+     ]
+    }
+   ],
+   "topic": "passato_prossimo_imperfetto"
+  },
+  {
+   "key": "it-b1-cong-cloze",
+   "type": "cloze",
+   "skill": "grammar",
+   "level": "B1",
+   "topic": "congiuntivo_presente",
+   "questions": [
+    {
+     "p": "Penso che ___ (essere) una buona idea.",
+     "a": [
+      "sia"
+     ]
+    },
+    {
+     "p": "Spero che tu ___ (venire) alla festa.",
+     "a": [
+      "venga"
+     ]
+    },
+    {
+     "p": "Credo che loro ___ (avere) ragione.",
+     "a": [
+      "abbiano"
+     ]
+    },
+    {
+     "p": "Voglio che voi ___ (arrivare) puntuali.",
+     "a": [
+      "arriviate"
+     ]
+    }
+   ]
+  },
+  {
+   "key": "it-b1-cond-cloze",
+   "type": "cloze",
+   "skill": "grammar",
+   "level": "B1",
+   "topic": "condizionale",
+   "questions": [
+    {
+     "p": "Al posto tuo, ___ (parlare) con lei.",
+     "a": [
+      "parlerei"
+     ]
+    },
+    {
+     "p": "___ aiutarmi, per favore? (potere, tu)",
+     "a": [
+      "Potresti"
+     ]
+    },
+    {
+     "p": "Se avessi tempo, ___ (viaggiare) di più.",
+     "a": [
+      "viaggerei"
+     ]
+    },
+    {
+     "p": "Con più soldi, ___ (comprare) una casa. (noi)",
+     "a": [
+      "compreremmo"
+     ]
+    }
+   ]
+  },
+  {
+   "key": "it-b1-relativi-mcq",
+   "type": "mcq",
+   "skill": "grammar",
+   "level": "B1",
+   "questions": [
+    {
+     "p": "È la donna ___ abita qui accanto.",
+     "o": [
+      "che",
+      "cui",
+      "chi",
+      "quale"
+     ]
+    },
+    {
+     "p": "Il libro ___ leggo è bellissimo.",
+     "o": [
+      "che",
+      "cui",
+      "a cui",
+      "dove che"
+     ]
+    },
+    {
+     "p": "La città in ___ sono nato è piccola.",
+     "o": [
+      "cui",
+      "che",
+      "quale",
+      "dove"
+     ]
+    },
+    {
+     "p": "L'amico a ___ scrivo vive a Roma.",
+     "o": [
+      "cui",
+      "che",
+      "chi",
+      "quale"
+     ]
+    }
+   ],
+   "topic": "pronomi_relativi"
+  },
+  {
+   "key": "it-b1-vocab-mcq",
+   "type": "mcq",
+   "skill": "vocabulary",
+   "level": "B1",
+   "questions": [
+    {
+     "p": "Dobbiamo proteggere l'___ e riciclare di più.",
+     "o": [
+      "ambiente",
+      "opinione",
+      "traffico",
+      "ricordo"
+     ]
+    },
+    {
+     "p": "Il mio ___ abita nell'appartamento accanto.",
+     "o": [
+      "vicino",
+      "consiglio",
+      "viaggio",
+      "vantaggio"
+     ]
+    },
+    {
+     "p": "___ è andata via la luce.",
+     "o": [
+      "All'improvviso",
+      "Anche se",
+      "Mentre",
+      "Vantaggio"
+     ]
+    },
+    {
+     "p": "Lo sport fa bene alla ___.",
+     "o": [
+      "salute",
+      "opinione",
+      "vicina",
+      "riuscita"
+     ]
+    },
+    {
+     "p": "Un ___ della città è che tutto è vicino.",
+     "o": [
+      "vantaggio",
+      "ricordo",
+      "viaggio",
+      "consiglio"
+     ]
+    }
+   ],
+   "title": {
+    "en": "Everyday words",
+    "ar": "كلمات يومية"
+   }
+  },
+  {
+   "key": "it-b1-order",
+   "type": "ordering",
+   "skill": "grammar",
+   "level": "B1",
+   "title": {
+    "en": "Build longer sentences",
+    "ar": "كوّن جملًا أطول"
+   },
+   "questions": [
+    {
+     "o": [
+      "Quando",
+      "sono",
+      "arrivato",
+      "pioveva"
+     ]
+    },
+    {
+     "o": [
+      "Penso",
+      "che",
+      "sia",
+      "vero"
+     ]
+    },
+    {
+     "o": [
+      "Al",
+      "posto",
+      "tuo",
+      "dormirei",
+      "di",
+      "più"
+     ]
+    }
+   ]
+  },
+  {
+   "key": "it-b1-read-1",
+   "type": "reading",
+   "skill": "reading",
+   "level": "B1",
+   "title": {
+    "en": "Working from home",
+    "ar": "العمل من المنزل"
+   },
+   "text": "Da due anni Giulia lavora da casa tre giorni alla settimana. All'inizio le piaceva moltissimo: non perdeva più tempo nel traffico e organizzava la giornata come voleva. Dopo qualche mese, però, ha cominciato a sentirsi sola e le mancavano i colleghi. Adesso va in ufficio il martedì e il giovedì e dice di aver trovato il giusto equilibrio.",
+   "questions": [
+    {
+     "p": "Che cosa piaceva a Giulia all'inizio?",
+     "o": [
+      "Non perdere tempo nel traffico",
+      "Parlare con i colleghi",
+      "Andare in ufficio",
+      "Lavorare nel fine settimana"
+     ]
+    },
+    {
+     "p": "Che problema ha avuto dopo?",
+     "o": [
+      "Si sentiva sola",
+      "Guadagnava meno",
+      "Lavorava troppo",
+      "Ha perso il lavoro"
+     ]
+    },
+    {
+     "p": "Che cosa fa adesso?",
+     "o": [
+      "Va in ufficio due giorni alla settimana",
+      "Lavora sempre a casa",
+      "Lavora sempre in ufficio",
+      "Ha cambiato lavoro"
+     ]
+    }
+   ]
+  },
+  {
+   "key": "it-b2-read-2",
+   "type": "reading",
+   "skill": "reading",
+   "level": "B2",
+   "title": {
+    "en": "Cities without cars",
+    "ar": "مدن بلا سيارات"
+   },
+   "text": "Sempre più città europee chiudono il centro storico alle auto. I sostenitori dicono che l'aria è più pulita e che le strade ritrovano una vita di quartiere. I commercianti, invece, temevano di perdere clienti; tuttavia diversi studi dimostrano che le vendite sono aumentate, perché i pedoni passeggiano di più e si fermano nei negozi. Il dibattito continua comunque nelle città in cui i trasporti pubblici non sono sufficienti.",
+   "questions": [
+    {
+     "p": "Che cosa temevano i commercianti?",
+     "o": [
+      "Di perdere clienti",
+      "Di pagare più tasse",
+      "Più traffico",
+      "Di chiudere la sera"
+     ]
+    },
+    {
+     "p": "Secondo gli studi, che cosa è successo alle vendite?",
+     "o": [
+      "Sono aumentate",
+      "Sono diminuite",
+      "Non sono cambiate",
+      "Sono aumentate solo la sera"
+     ]
+    },
+    {
+     "p": "Dove continua il dibattito?",
+     "o": [
+      "Nelle città con trasporti pubblici insufficienti",
+      "In tutte le città",
+      "Solo nei paesi",
+      "Da nessuna parte"
+     ]
+    }
+   ]
+  },
+  {
+   "key": "it-b1-listen-1",
+   "type": "listening",
+   "skill": "listening",
+   "level": "B1",
+   "title": {
+    "en": "A message from the doctor's",
+    "ar": "رسالة من العيادة"
+   },
+   "text": "Buongiorno, la chiamo dallo studio della dottoressa Rossi. Il suo appuntamento di mercoledì alle dieci deve essere spostato, perché la dottoressa non c'è quel giorno. Le proponiamo giovedì alla stessa ora oppure venerdì alle sedici. La preghiamo di richiamarci entro martedì per confermare.",
+   "questions": [
+    {
+     "p": "Perché l'appuntamento viene spostato?",
+     "o": [
+      "La dottoressa mercoledì non c'è",
+      "Il paziente è in viaggio",
+      "Lo studio è chiuso",
+      "C'è uno sciopero"
+     ]
+    },
+    {
+     "p": "Quali possibilità propongono?",
+     "o": [
+      "Giovedì alle dieci o venerdì alle sedici",
+      "Mercoledì alle sedici",
+      "Lunedì alle dieci",
+      "Venerdì alle dieci"
+     ]
+    },
+    {
+     "p": "Che cosa deve fare il paziente?",
+     "o": [
+      "Richiamare entro martedì",
+      "Andare mercoledì",
+      "Scrivere una mail",
+      "Niente"
+     ]
+    }
+   ]
+  },
+  {
+   "key": "it-b1-dictation",
+   "type": "dictation",
+   "skill": "listening",
+   "level": "B1",
+   "title": {
+    "en": "Everyday sentences",
+    "ar": "جمل من الحياة اليومية"
+   },
+   "questions": [
+    {
+     "a": [
+      "Quando ero piccolo, abitavo vicino al mare."
+     ]
+    },
+    {
+     "a": [
+      "Spero che tu venga alla festa."
+     ]
+    },
+    {
+     "a": [
+      "Al posto tuo, parlerei con il capo."
+     ]
+    }
+   ]
+  },
+  {
+   "key": "it-b1-repeat",
+   "type": "repeat",
+   "skill": "speaking",
+   "level": "B1",
+   "title": {
+    "en": "Say it aloud",
+    "ar": "قلها بصوت عالٍ"
+   },
+   "objectives": [
+    {
+     "code": "it.b1.pronounce",
+     "skill": "speaking",
+     "text": {
+      "en": "Pronounce everyday sentences clearly enough to be understood",
+      "ar": "نطق جمل يومية بوضوح يكفي لفهمها"
+     }
+    }
+   ],
+   "questions": [
+    {
+     "r": "Quando ero piccolo, abitavo vicino al mare."
+    },
+    {
+     "r": "Spero che tu venga alla festa."
+    },
+    {
+     "r": "Al posto tuo, parlerei con il capo."
+    },
+    {
+     "r": "Quando ero piccolo, abitavo a Napoli."
+    },
+    {
+     "r": "Potresti aiutarmi?"
+    }
+   ]
+  }
+ ],
+ "course": {
+  "slug": "it-intermediate",
+  "level_from": "B1",
+  "level_to": "B2",
+  "title": {
+   "en": "Italian B1: everyday independence",
+   "ar": "الإيطالية B1: الاستقلالية في الحياة اليومية"
+  },
+  "description": {
+   "en": "Tell stories about the past, give opinions and advice, and understand longer texts in Italian.",
+   "ar": "احكِ عن الماضي، وعبّر عن آرائك وقدّم النصائح، وافهم نصوصًا أطول في الإيطالية."
+  },
+  "units": [
+   {
+    "title": {
+     "en": "Stories and opinions",
+     "ar": "القصص والآراء"
+    },
+    "lessons": [
+     {
+      "key": "it-b1-u1-l1",
+      "skill": "grammar",
+      "level": "B1",
+      "topic": "passato_prossimo_imperfetto",
+      "minutes": 20,
+      "title": {
+       "en": "What happened?",
+       "ar": "ماذا حدث؟"
+      },
+      "intro": {
+       "en": "Tell a story about the past and describe how things were.",
+       "ar": "احكِ قصة عن الماضي وصِف كيف كانت الأمور."
+      },
+      "objectives": [
+       {
+        "code": "it.b1.narrate",
+        "skill": "speaking",
+        "text": {
+         "en": "Tell a short story about something that happened",
+         "ar": "رواية قصة قصيرة عن شيء حدث"
+        }
+       },
+       {
+        "code": "it.b1.passato_prossimo_imperfetto",
+        "skill": "grammar",
+        "text": {
+         "en": "Use past forms to narrate events and describe situations",
+         "ar": "استخدام صيغ الماضي لسرد الأحداث ووصف المواقف"
+        }
+       }
+      ],
+      "words": [
+       "viaggio",
+       "ricordo",
+       "all'improvviso",
+       "mentre",
+       "avvenimento"
+      ],
+      "exercises": [
+       "it-b1-pp-imp-mcq",
+       "it-b1-order"
+      ]
+     },
+     {
+      "key": "it-b1-u1-l2",
+      "skill": "grammar",
+      "level": "B1",
+      "topic": "congiuntivo_presente",
+      "minutes": 20,
+      "title": {
+       "en": "Wishes and opinions",
+       "ar": "الأمنيات والآراء"
+      },
+      "intro": {
+       "en": "Say what you want others to do and what you think.",
+       "ar": "عبّر عمّا تريده من الآخرين وعمّا تفكر فيه."
+      },
+      "objectives": [
+       {
+        "code": "it.b1.congiuntivo_presente",
+        "skill": "grammar",
+        "text": {
+         "en": "Express wishes, opinions and recommendations",
+         "ar": "التعبير عن الأمنيات والآراء والتوصيات"
+        }
+       },
+       {
+        "code": "it.b1.read_opinion",
+        "skill": "reading",
+        "text": {
+         "en": "Understand the main points of an opinion text",
+         "ar": "فهم الأفكار الرئيسية في نص رأي"
+        }
+       }
+      ],
+      "words": [
+       "sperare",
+       "consigliare",
+       "opinione",
+       "ambiente",
+       "consiglio"
+      ],
+      "exercises": [
+       "it-b1-cong-cloze",
+       "it-b1-read-1",
+       "it-b1-vocab-mcq"
+      ]
+     }
+    ]
+   },
+   {
+    "title": {
+     "en": "Out in the world",
+     "ar": "في العالم من حولك"
+    },
+    "lessons": [
+     {
+      "key": "it-b1-u2-l1",
+      "skill": "grammar",
+      "level": "B1",
+      "topic": "condizionale",
+      "minutes": 20,
+      "title": {
+       "en": "Advice and what-ifs",
+       "ar": "النصائح والاحتمالات"
+      },
+      "intro": {
+       "en": "Give advice and imagine different situations.",
+       "ar": "قدّم النصائح وتخيّل مواقف مختلفة."
+      },
+      "objectives": [
+       {
+        "code": "it.b1.condizionale",
+        "skill": "grammar",
+        "text": {
+         "en": "Give advice and talk about hypothetical situations",
+         "ar": "تقديم النصائح والحديث عن مواقف افتراضية"
+        }
+       },
+       {
+        "code": "it.b1.listen_announcement",
+        "skill": "listening",
+        "text": {
+         "en": "Understand practical information in announcements and conversations",
+         "ar": "فهم المعلومات العملية في الإعلانات والمحادثات"
+        }
+       }
+      ],
+      "words": [
+       "dovere",
+       "salute",
+       "riuscire",
+       "traffico",
+       "quartiere"
+      ],
+      "exercises": [
+       "it-b1-cond-cloze",
+       "it-b1-listen-1",
+       "it-b1-dictation"
+      ]
+     },
+     {
+      "key": "it-b1-u2-l2",
+      "skill": "grammar",
+      "level": "B1",
+      "topic": "pronomi_relativi",
+      "minutes": 20,
+      "title": {
+       "en": "Saying more precisely",
+       "ar": "التعبير بدقة أكبر"
+      },
+      "intro": {
+       "en": "Join ideas to describe people, places and things precisely.",
+       "ar": "اربط الأفكار لتصف الأشخاص والأماكن والأشياء بدقة."
+      },
+      "objectives": [
+       {
+        "code": "it.b1.pronomi_relativi",
+        "skill": "grammar",
+        "text": {
+         "en": "Connect ideas into longer, more precise sentences",
+         "ar": "ربط الأفكار في جمل أطول وأدق"
+        }
+       },
+       {
+        "code": "it.b1.read_article",
+        "skill": "reading",
+        "text": {
+         "en": "Follow a short article on a familiar topic",
+         "ar": "متابعة مقال قصير عن موضوع مألوف"
+        }
+       }
+      ],
+      "words": [
+       "vicino",
+       "affittare",
+       "cambiare",
+       "anche se",
+       "vantaggio"
+      ],
+      "exercises": [
+       "it-b1-relativi-mcq",
+       "it-b2-read-2"
+      ]
+     }
+    ]
+   }
+  ]
+ }
+}

@@ -13,11 +13,13 @@ use Tests\TestCase;
 
 class ContentImportTest extends TestCase
 {
-    public function test_all_seven_packs_are_imported_with_complete_exercise_metadata(): void
+    public function test_all_fourteen_packs_are_imported_with_complete_exercise_metadata(): void
     {
-        $this->assertSame(7, Course::count());
-        $this->assertSame(28, Lesson::count());
-        $this->assertSame(77, Exercise::count());
+        // Seven languages × (A1 foundations + B1 intermediate).
+        $this->assertSame(14, Course::count());
+        $this->assertSame(56, Lesson::count());
+        $this->assertSame(154, Exercise::count());
+        $this->assertSame(7, Exercise::where('key', 'like', '%-b1-repeat')->count());
 
         // Every exercise has a language, level, skill, objectives, questions and a way to be scored.
         foreach (Exercise::with(['questions.options', 'questions.acceptedAnswers', 'objectives'])->get() as $e) {
@@ -53,8 +55,8 @@ class ContentImportTest extends TestCase
         $importer = app(ContentPackImporter::class);
         $path = database_path('data/content/es.json');
         $importer->importFile($path);
-        $this->assertSame(77, Exercise::count());
-        $this->assertSame(24, VocabularyWord::where('language_id', Exercise::where('key', 'es-a1-ser-cloze')->value('language_id'))->count());
+        $this->assertSame(154, Exercise::count());
+        $this->assertSame(44, VocabularyWord::where('language_id', Exercise::where('key', 'es-a1-ser-cloze')->value('language_id'))->count());
 
         $profile = $this->makeLearner('es');
         ExerciseAttempt::create([

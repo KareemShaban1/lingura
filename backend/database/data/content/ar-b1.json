@@ -1,0 +1,1122 @@
+{
+ "language": "ar",
+ "topics": [
+  {
+   "slug": "negation_past_future",
+   "level": "B1",
+   "title": {
+    "en": "Negating the past and the future",
+    "ar": "نفي الماضي والمستقبل"
+   },
+   "explanation": {
+    "en": "Negate the past with لم + the jussive present (لم أذهبْ) or ما + past (ما ذهبتُ). Express the future with سـ or سوف + present (سأسافر) and negate it with لن + the subjunctive present (لن أسافرَ).",
+    "ar": "يُنفى الماضي بـ «لم» + المضارع المجزوم (لم أذهبْ) أو «ما» + الماضي (ما ذهبتُ). ويُعبَّر عن المستقبل بـ «سـ» أو «سوف» + المضارع (سأسافر)، ويُنفى بـ «لن» + المضارع المنصوب (لن أسافرَ)."
+   },
+   "examples": [
+    [
+     "لم أذهب إلى العمل أمس.",
+     "I didn't go to work yesterday."
+    ],
+    [
+     "سأسافر إلى عمّان الأسبوع القادم.",
+     "I will travel to Amman next week."
+    ],
+    [
+     "لن أتأخر مرة أخرى.",
+     "I won't be late again."
+    ]
+   ]
+  },
+  {
+   "slug": "kana_past_continuous",
+   "level": "B1",
+   "title": {
+    "en": "كان for past descriptions and habits",
+    "ar": "«كان» لوصف الماضي والعادات"
+   },
+   "explanation": {
+    "en": "Use كان + present to describe habits or ongoing actions in the past: كنتُ أدرسُ كل مساء (I used to study every evening). كان agrees with the subject: كانت تعمل، كانوا يلعبون.",
+    "ar": "تُستخدم «كان» + المضارع لوصف العادات أو الأفعال المستمرة في الماضي: كنتُ أدرسُ كل مساء. وتتطابق «كان» مع الفاعل: كانت تعمل، كانوا يلعبون."
+   },
+   "examples": [
+    [
+     "كنتُ أسكن في القاهرة عندما كنتُ صغيرًا.",
+     "I used to live in Cairo when I was young."
+    ],
+    [
+     "كانت تقرأ عندما رنّ الهاتف.",
+     "She was reading when the phone rang."
+    ],
+    [
+     "كانوا يلعبون في الحديقة كل يوم.",
+     "They used to play in the park every day."
+    ]
+   ]
+  },
+  {
+   "slug": "advice_should",
+   "level": "B1",
+   "title": {
+    "en": "Giving advice: يجب أن and ينبغي أن",
+    "ar": "تقديم النصيحة: يجب أن وينبغي أن"
+   },
+   "explanation": {
+    "en": "Give advice or express obligation with يجب أن / ينبغي أن / عليك أن + subjunctive present: يجب أن تنامَ أكثر، عليك أن تزورَ الطبيب. For politeness: من الأفضل أن…",
+    "ar": "قدّم النصيحة أو عبّر عن الوجوب بـ «يجب أن / ينبغي أن / عليك أن» + المضارع المنصوب: يجب أن تنامَ أكثر، عليك أن تزورَ الطبيب. وللتلطيف: من الأفضل أن…"
+   },
+   "examples": [
+    [
+     "يجب أن تشرب ماءً أكثر.",
+     "You must drink more water."
+    ],
+    [
+     "ينبغي أن نصل مبكرًا.",
+     "We should arrive early."
+    ],
+    [
+     "من الأفضل أن تسأل المعلم.",
+     "It's better to ask the teacher."
+    ]
+   ]
+  },
+  {
+   "slug": "relative_pronouns",
+   "level": "B1",
+   "title": {
+    "en": "Relative pronouns الذي والتي والذين",
+    "ar": "الأسماء الموصولة: الذي والتي والذين"
+   },
+   "explanation": {
+    "en": "Use a relative pronoun after a definite noun, matching its gender and number: الرجلُ الذي يسكن بجانبنا، المدينةُ التي وُلدتُ فيها، الطلابُ الذين نجحوا. After an indefinite noun, no relative pronoun is used: رأيتُ فيلمًا أعجبني.",
+    "ar": "يأتي الاسم الموصول بعد الاسم المعرفة مطابقًا له في الجنس والعدد: الرجلُ الذي يسكن بجانبنا، المدينةُ التي وُلدتُ فيها، الطلابُ الذين نجحوا. وبعد النكرة لا يُستخدم اسم موصول: رأيتُ فيلمًا أعجبني."
+   },
+   "examples": [
+    [
+     "هذا هو الرجل الذي ساعدني.",
+     "This is the man who helped me."
+    ],
+    [
+     "المدينة التي أسكن فيها صغيرة.",
+     "The town where I live is small."
+    ],
+    [
+     "الطلاب الذين درسوا نجحوا.",
+     "The students who studied passed."
+    ]
+   ]
+  }
+ ],
+ "words": [
+  {
+   "lemma": "رحلة",
+   "pos": "noun",
+   "level": "B1",
+   "meaning": {
+    "en": "trip, journey",
+    "ar": "رحلة"
+   },
+   "example": [
+    "استغرقت الرحلة ست ساعات.",
+    "The journey took six hours."
+   ],
+   "forms": [
+    "رحلات"
+   ],
+   "gender": "f"
+  },
+  {
+   "lemma": "ذكرى",
+   "pos": "noun",
+   "level": "B1",
+   "meaning": {
+    "en": "memory",
+    "ar": "ذكرى"
+   },
+   "example": [
+    "عندي ذكريات جميلة عن ذلك الصيف.",
+    "I have lovely memories of that summer."
+   ],
+   "forms": [
+    "ذكريات"
+   ],
+   "gender": "f"
+  },
+  {
+   "lemma": "فجأة",
+   "pos": "adv",
+   "level": "B1",
+   "meaning": {
+    "en": "suddenly",
+    "ar": "فجأة"
+   },
+   "example": [
+    "فجأة انقطعت الكهرباء.",
+    "Suddenly the power went out."
+   ]
+  },
+  {
+   "lemma": "بينما",
+   "pos": "conj",
+   "level": "B1",
+   "meaning": {
+    "en": "while",
+    "ar": "بينما"
+   },
+   "example": [
+    "كان يطبخ بينما كنت أقرأ.",
+    "He was cooking while I was reading."
+   ]
+  },
+  {
+   "lemma": "حدث",
+   "pos": "noun",
+   "level": "B1",
+   "meaning": {
+    "en": "event",
+    "ar": "حدث"
+   },
+   "example": [
+    "كان الزفاف حدثًا كبيرًا.",
+    "The wedding was a big event."
+   ],
+   "forms": [
+    "أحداث"
+   ],
+   "gender": "m"
+  },
+  {
+   "lemma": "أمل",
+   "pos": "verb",
+   "level": "B1",
+   "meaning": {
+    "en": "to hope",
+    "ar": "يأمل"
+   },
+   "example": [
+    "آمل أن تكون بخير.",
+    "I hope you are well."
+   ],
+   "forms": [
+    "آمل",
+    "تأمل",
+    "يأمل",
+    "نأمل"
+   ]
+  },
+  {
+   "lemma": "نصح",
+   "pos": "verb",
+   "level": "B1",
+   "meaning": {
+    "en": "to advise",
+    "ar": "ينصح"
+   },
+   "example": [
+    "أنصحك بهذا المطعم.",
+    "I recommend this restaurant to you."
+   ],
+   "forms": [
+    "أنصح",
+    "ينصح",
+    "تنصح",
+    "نصحني"
+   ]
+  },
+  {
+   "lemma": "رأي",
+   "pos": "noun",
+   "level": "B1",
+   "meaning": {
+    "en": "opinion",
+    "ar": "رأي"
+   },
+   "example": [
+    "في رأيي، هذه فكرة جيدة.",
+    "In my opinion, this is a good idea."
+   ],
+   "forms": [
+    "آراء",
+    "رأيي"
+   ],
+   "gender": "m"
+  },
+  {
+   "lemma": "بيئة",
+   "pos": "noun",
+   "level": "B1",
+   "meaning": {
+    "en": "environment",
+    "ar": "البيئة"
+   },
+   "example": [
+    "يجب أن نحمي البيئة.",
+    "We must protect the environment."
+   ],
+   "forms": [
+    "البيئة"
+   ],
+   "gender": "f"
+  },
+  {
+   "lemma": "نصيحة",
+   "pos": "noun",
+   "level": "B1",
+   "meaning": {
+    "en": "piece of advice",
+    "ar": "نصيحة"
+   },
+   "example": [
+    "شكرًا على النصيحة.",
+    "Thanks for the advice."
+   ],
+   "forms": [
+    "نصائح",
+    "النصيحة"
+   ],
+   "gender": "f"
+  },
+  {
+   "lemma": "وجب",
+   "pos": "verb",
+   "level": "B1",
+   "meaning": {
+    "en": "must",
+    "ar": "يجب"
+   },
+   "example": [
+    "يجب أن تنام أكثر.",
+    "You must sleep more."
+   ],
+   "forms": [
+    "يجب"
+   ]
+  },
+  {
+   "lemma": "صحة",
+   "pos": "noun",
+   "level": "B1",
+   "meaning": {
+    "en": "health",
+    "ar": "صحة"
+   },
+   "example": [
+    "الرياضة مفيدة للصحة.",
+    "Sport is good for your health."
+   ],
+   "forms": [
+    "الصحة",
+    "للصحة"
+   ],
+   "gender": "f"
+  },
+  {
+   "lemma": "نجح",
+   "pos": "verb",
+   "level": "B1",
+   "meaning": {
+    "en": "to succeed, to pass",
+    "ar": "ينجح"
+   },
+   "example": [
+    "نجحت في الامتحان.",
+    "She passed the exam."
+   ],
+   "forms": [
+    "ينجح",
+    "نجحت",
+    "نجحوا"
+   ]
+  },
+  {
+   "lemma": "زحمة",
+   "pos": "noun",
+   "level": "B1",
+   "meaning": {
+    "en": "traffic jam",
+    "ar": "زحمة"
+   },
+   "example": [
+    "كانت هناك زحمة شديدة صباح اليوم.",
+    "There was a bad traffic jam this morning."
+   ],
+   "forms": [
+    "الزحمة"
+   ],
+   "gender": "f"
+  },
+  {
+   "lemma": "حي",
+   "pos": "noun",
+   "level": "B1",
+   "meaning": {
+    "en": "neighbourhood",
+    "ar": "حي"
+   },
+   "example": [
+    "أسكن في حي هادئ.",
+    "I live in a quiet neighbourhood."
+   ],
+   "forms": [
+    "أحياء"
+   ],
+   "gender": "m"
+  },
+  {
+   "lemma": "جار",
+   "pos": "noun",
+   "level": "B1",
+   "meaning": {
+    "en": "neighbour",
+    "ar": "جار"
+   },
+   "example": [
+    "جاري لطيف جدًا.",
+    "My neighbour is very kind."
+   ],
+   "forms": [
+    "جيران",
+    "جاري",
+    "جارة"
+   ],
+   "gender": "m"
+  },
+  {
+   "lemma": "استأجر",
+   "pos": "verb",
+   "level": "B1",
+   "meaning": {
+    "en": "to rent",
+    "ar": "يستأجر"
+   },
+   "example": [
+    "نريد أن نستأجر شقة أكبر.",
+    "We want to rent a bigger flat."
+   ],
+   "forms": [
+    "يستأجر",
+    "نستأجر",
+    "استأجرنا"
+   ]
+  },
+  {
+   "lemma": "تغيّر",
+   "pos": "verb",
+   "level": "B1",
+   "meaning": {
+    "en": "to change",
+    "ar": "يتغيّر"
+   },
+   "example": [
+    "تغيّرت المدينة كثيرًا.",
+    "The town has changed a lot."
+   ],
+   "forms": [
+    "تغيرت",
+    "يتغير"
+   ]
+  },
+  {
+   "lemma": "رغم",
+   "pos": "prep",
+   "level": "B1",
+   "meaning": {
+    "en": "despite",
+    "ar": "رغم"
+   },
+   "example": [
+    "خرجنا رغم المطر.",
+    "We went out despite the rain."
+   ],
+   "forms": [
+    "بالرغم"
+   ]
+  },
+  {
+   "lemma": "ميزة",
+   "pos": "noun",
+   "level": "B1",
+   "meaning": {
+    "en": "advantage",
+    "ar": "ميزة"
+   },
+   "example": [
+    "للحياة في المدينة مزايا كثيرة.",
+    "Life in the city has many advantages."
+   ],
+   "forms": [
+    "مزايا"
+   ],
+   "gender": "f"
+  }
+ ],
+ "exercises": [
+  {
+   "key": "ar-b1-negation-mcq",
+   "type": "mcq",
+   "skill": "grammar",
+   "level": "B1",
+   "questions": [
+    {
+     "p": "___ أذهبْ إلى العمل أمس لأنني كنت مريضًا.",
+     "o": [
+      "لم",
+      "لن",
+      "لا",
+      "ليس"
+     ]
+    },
+    {
+     "p": "___ أتأخرَ مرة أخرى، أعدك.",
+     "o": [
+      "لن",
+      "لم",
+      "ما",
+      "ليس"
+     ]
+    },
+    {
+     "p": "___ أسافر إلى دبي الأسبوع القادم.",
+     "o": [
+      "سوف",
+      "لم",
+      "قد",
+      "ما"
+     ]
+    },
+    {
+     "p": "لم ___ الواجب بعد.",
+     "o": [
+      "أكتبْ",
+      "كتبتُ",
+      "أكتبُ",
+      "سأكتب"
+     ]
+    }
+   ],
+   "topic": "negation_past_future"
+  },
+  {
+   "key": "ar-b1-kana-mcq",
+   "type": "mcq",
+   "skill": "grammar",
+   "level": "B1",
+   "questions": [
+    {
+     "p": "___ أسكن في القاهرة عندما كنت صغيرًا.",
+     "o": [
+      "كنتُ",
+      "كانت",
+      "كانوا",
+      "يكون"
+     ]
+    },
+    {
+     "p": "كانت سارة ___ عندما رنّ الهاتف.",
+     "o": [
+      "تقرأ",
+      "قرأت",
+      "ستقرأ",
+      "اقرئي"
+     ]
+    },
+    {
+     "p": "___ الأطفال يلعبون في الحديقة كل يوم.",
+     "o": [
+      "كان",
+      "كانت",
+      "كنتُ",
+      "كنّ"
+     ]
+    },
+    {
+     "p": "كنا ___ معًا كل مساء.",
+     "o": [
+      "ندرس",
+      "درسنا",
+      "سندرس",
+      "ادرسوا"
+     ]
+    }
+   ],
+   "topic": "kana_past_continuous"
+  },
+  {
+   "key": "ar-b1-advice-mcq",
+   "type": "mcq",
+   "skill": "grammar",
+   "level": "B1",
+   "questions": [
+    {
+     "p": "يجب أن ___ ماءً أكثر.",
+     "o": [
+      "تشربَ",
+      "شربتَ",
+      "تشربُ",
+      "اشربْ"
+     ]
+    },
+    {
+     "p": "ينبغي أن ___ مبكرًا غدًا.",
+     "o": [
+      "نصلَ",
+      "وصلنا",
+      "نصلُ",
+      "سنصل"
+     ]
+    },
+    {
+     "p": "عليك ___ تزور الطبيب.",
+     "o": [
+      "أن",
+      "لن",
+      "لم",
+      "إن"
+     ]
+    },
+    {
+     "p": "من الأفضل أن ___ المعلم.",
+     "o": [
+      "تسألَ",
+      "سألت",
+      "تسألُ",
+      "اسأل"
+     ]
+    }
+   ],
+   "topic": "advice_should"
+  },
+  {
+   "key": "ar-b1-relative-mcq",
+   "type": "mcq",
+   "skill": "grammar",
+   "level": "B1",
+   "questions": [
+    {
+     "p": "هذا هو الرجل ___ ساعدني.",
+     "o": [
+      "الذي",
+      "التي",
+      "الذين",
+      "اللواتي"
+     ]
+    },
+    {
+     "p": "المدينة ___ أسكن فيها صغيرة.",
+     "o": [
+      "التي",
+      "الذي",
+      "الذين",
+      "اللذان"
+     ]
+    },
+    {
+     "p": "الطلاب ___ درسوا نجحوا.",
+     "o": [
+      "الذين",
+      "الذي",
+      "التي",
+      "اللتان"
+     ]
+    },
+    {
+     "p": "هذه هي السيارة ___ اشتريتها.",
+     "o": [
+      "التي",
+      "الذي",
+      "الذين",
+      "من"
+     ]
+    }
+   ],
+   "topic": "relative_pronouns"
+  },
+  {
+   "key": "ar-b1-vocab-mcq",
+   "type": "mcq",
+   "skill": "vocabulary",
+   "level": "B1",
+   "questions": [
+    {
+     "p": "يجب أن نحمي ___ ونقلل التلوث.",
+     "o": [
+      "البيئة",
+      "الزحمة",
+      "الذكرى",
+      "الحي"
+     ]
+    },
+    {
+     "p": "___ يسكن في الشقة المجاورة.",
+     "o": [
+      "جاري",
+      "نصيحتي",
+      "رحلتي",
+      "رأيي"
+     ]
+    },
+    {
+     "p": "___ انقطعت الكهرباء.",
+     "o": [
+      "فجأة",
+      "رغم",
+      "بينما",
+      "ميزة"
+     ]
+    },
+    {
+     "p": "الرياضة مفيدة ___.",
+     "o": [
+      "للصحة",
+      "للرأي",
+      "للزحمة",
+      "للحدث"
+     ]
+    },
+    {
+     "p": "من ___ الحياة في المدينة أن كل شيء قريب.",
+     "o": [
+      "مزايا",
+      "ذكريات",
+      "أحداث",
+      "نصائح"
+     ]
+    }
+   ],
+   "title": {
+    "en": "Everyday words",
+    "ar": "كلمات يومية"
+   }
+  },
+  {
+   "key": "ar-b1-order",
+   "type": "ordering",
+   "skill": "grammar",
+   "level": "B1",
+   "title": {
+    "en": "Build longer sentences",
+    "ar": "كوّن جملًا أطول"
+   },
+   "questions": [
+    {
+     "o": [
+      "لم",
+      "أذهب",
+      "إلى",
+      "العمل",
+      "أمس"
+     ]
+    },
+    {
+     "o": [
+      "يجب",
+      "أن",
+      "تنام",
+      "أكثر"
+     ]
+    },
+    {
+     "o": [
+      "هذا",
+      "هو",
+      "الرجل",
+      "الذي",
+      "ساعدني"
+     ]
+    }
+   ]
+  },
+  {
+   "key": "ar-b1-read-1",
+   "type": "reading",
+   "skill": "reading",
+   "level": "B1",
+   "title": {
+    "en": "Working from home",
+    "ar": "العمل من المنزل"
+   },
+   "text": "منذ سنتين تعمل ريم من البيت ثلاثة أيام في الأسبوع. في البداية كانت سعيدة جدًا: لم تعد تضيّع الوقت في الزحمة، وكانت تنظّم يومها كما تريد. لكن بعد بضعة أشهر بدأت تشعر بالوحدة واشتاقت إلى زملائها. الآن تذهب إلى المكتب يومي الثلاثاء والخميس، وتقول إنها وجدت التوازن المناسب.",
+   "questions": [
+    {
+     "p": "ماذا كانت ريم تحب في البداية؟",
+     "o": [
+      "أنها لم تعد تضيّع الوقت في الزحمة",
+      "الحديث مع زملائها",
+      "الذهاب إلى المكتب",
+      "العمل في عطلة نهاية الأسبوع"
+     ]
+    },
+    {
+     "p": "ما المشكلة التي واجهتها بعد ذلك؟",
+     "o": [
+      "بدأت تشعر بالوحدة",
+      "صارت تكسب أقل",
+      "كانت تعمل كثيرًا",
+      "فقدت عملها"
+     ]
+    },
+    {
+     "p": "ماذا تفعل الآن؟",
+     "o": [
+      "تذهب إلى المكتب يومين في الأسبوع",
+      "تعمل دائمًا من البيت",
+      "تعمل دائمًا في المكتب",
+      "غيّرت عملها"
+     ]
+    }
+   ]
+  },
+  {
+   "key": "ar-b2-read-2",
+   "type": "reading",
+   "skill": "reading",
+   "level": "B2",
+   "title": {
+    "en": "Cities without cars",
+    "ar": "مدن بلا سيارات"
+   },
+   "text": "تُغلق مدن أوروبية كثيرة مراكزها التاريخية أمام السيارات. ويرى المؤيدون أن الهواء أصبح أنظف وأن الشوارع استعادت حيويتها. أما التجار فكانوا يخشون خسارة الزبائن، لكن عدة دراسات تُظهر أن المبيعات ارتفعت، لأن المشاة يتجولون أكثر ويدخلون المتاجر. ومع ذلك، ما زال النقاش مستمرًا في المدن التي لا تتوفر فيها مواصلات عامة كافية.",
+   "questions": [
+    {
+     "p": "ممّ كان التجار يخشون؟",
+     "o": [
+      "خسارة الزبائن",
+      "دفع ضرائب أكثر",
+      "زيادة السيارات",
+      "الإغلاق مساءً"
+     ]
+    },
+    {
+     "p": "ماذا حدث للمبيعات بحسب الدراسات؟",
+     "o": [
+      "ارتفعت",
+      "انخفضت",
+      "لم تتغير",
+      "ارتفعت مساءً فقط"
+     ]
+    },
+    {
+     "p": "أين ما زال النقاش مستمرًا؟",
+     "o": [
+      "في المدن التي لا تتوفر فيها مواصلات عامة كافية",
+      "في كل المدن",
+      "في القرى فقط",
+      "لا يوجد نقاش"
+     ]
+    }
+   ]
+  },
+  {
+   "key": "ar-b1-listen-1",
+   "type": "listening",
+   "skill": "listening",
+   "level": "B1",
+   "title": {
+    "en": "A message from the clinic",
+    "ar": "رسالة من العيادة"
+   },
+   "text": "مرحبًا، معك عيادة الدكتورة سلمى. موعدك يوم الأربعاء الساعة العاشرة يجب أن يتغيّر، لأن الطبيبة لن تكون موجودة ذلك اليوم. نقترح عليك يوم الخميس في الساعة نفسها أو يوم الجمعة الساعة الرابعة. من فضلك اتصل بنا قبل يوم الثلاثاء للتأكيد.",
+   "questions": [
+    {
+     "p": "لماذا تغيّر الموعد؟",
+     "o": [
+      "الطبيبة لن تكون موجودة يوم الأربعاء",
+      "المريض مسافر",
+      "العيادة مغلقة",
+      "هناك إضراب"
+     ]
+    },
+    {
+     "p": "ما المواعيد المقترحة؟",
+     "o": [
+      "الخميس الساعة العاشرة أو الجمعة الساعة الرابعة",
+      "الأربعاء الساعة الرابعة",
+      "الاثنين الساعة العاشرة",
+      "الجمعة الساعة العاشرة"
+     ]
+    },
+    {
+     "p": "ماذا يجب على المريض أن يفعل؟",
+     "o": [
+      "أن يتصل قبل يوم الثلاثاء",
+      "أن يذهب يوم الأربعاء",
+      "أن يرسل رسالة بريد إلكتروني",
+      "لا شيء"
+     ]
+    }
+   ]
+  },
+  {
+   "key": "ar-b1-dictation",
+   "type": "dictation",
+   "skill": "listening",
+   "level": "B1",
+   "title": {
+    "en": "Everyday sentences",
+    "ar": "جمل من الحياة اليومية"
+   },
+   "questions": [
+    {
+     "a": [
+      "كنت أسكن قرب البحر عندما كنت صغيرًا."
+     ]
+    },
+    {
+     "a": [
+      "لم أذهب إلى العمل أمس."
+     ]
+    },
+    {
+     "a": [
+      "يجب أن تتحدث مع مديرك."
+     ]
+    }
+   ]
+  },
+  {
+   "key": "ar-b1-repeat",
+   "type": "repeat",
+   "skill": "speaking",
+   "level": "B1",
+   "title": {
+    "en": "Say it aloud",
+    "ar": "قلها بصوت عالٍ"
+   },
+   "objectives": [
+    {
+     "code": "ar.b1.pronounce",
+     "skill": "speaking",
+     "text": {
+      "en": "Pronounce everyday sentences clearly enough to be understood",
+      "ar": "نطق جمل يومية بوضوح يكفي لفهمها"
+     }
+    }
+   ],
+   "questions": [
+    {
+     "r": "كنت أسكن قرب البحر عندما كنت صغيرًا."
+    },
+    {
+     "r": "لم أذهب إلى العمل أمس."
+    },
+    {
+     "r": "يجب أن تتحدث مع مديرك."
+    },
+    {
+     "r": "لم أذهب إلى العمل أمس."
+    },
+    {
+     "r": "يجب أن تشرب ماءً أكثر."
+    }
+   ]
+  }
+ ],
+ "course": {
+  "slug": "ar-intermediate",
+  "level_from": "B1",
+  "level_to": "B2",
+  "title": {
+   "en": "Arabic B1: everyday independence",
+   "ar": "العربية B1: الاستقلالية في الحياة اليومية"
+  },
+  "description": {
+   "en": "Tell stories about the past, give opinions and advice, and understand longer texts in Arabic.",
+   "ar": "احكِ عن الماضي، وعبّر عن آرائك وقدّم النصائح، وافهم نصوصًا أطول في العربية."
+  },
+  "units": [
+   {
+    "title": {
+     "en": "Stories and opinions",
+     "ar": "القصص والآراء"
+    },
+    "lessons": [
+     {
+      "key": "ar-b1-u1-l1",
+      "skill": "grammar",
+      "level": "B1",
+      "topic": "negation_past_future",
+      "minutes": 20,
+      "title": {
+       "en": "What happened?",
+       "ar": "ماذا حدث؟"
+      },
+      "intro": {
+       "en": "Tell a story about the past and describe how things were.",
+       "ar": "احكِ قصة عن الماضي وصِف كيف كانت الأمور."
+      },
+      "objectives": [
+       {
+        "code": "ar.b1.narrate",
+        "skill": "speaking",
+        "text": {
+         "en": "Tell a short story about something that happened",
+         "ar": "رواية قصة قصيرة عن شيء حدث"
+        }
+       },
+       {
+        "code": "ar.b1.negation_past_future",
+        "skill": "grammar",
+        "text": {
+         "en": "Use past forms to narrate events and describe situations",
+         "ar": "استخدام صيغ الماضي لسرد الأحداث ووصف المواقف"
+        }
+       }
+      ],
+      "words": [
+       "رحلة",
+       "ذكرى",
+       "فجأة",
+       "بينما",
+       "حدث"
+      ],
+      "exercises": [
+       "ar-b1-negation-mcq",
+       "ar-b1-order"
+      ]
+     },
+     {
+      "key": "ar-b1-u1-l2",
+      "skill": "grammar",
+      "level": "B1",
+      "topic": "kana_past_continuous",
+      "minutes": 20,
+      "title": {
+       "en": "Wishes and opinions",
+       "ar": "الأمنيات والآراء"
+      },
+      "intro": {
+       "en": "Say what you want others to do and what you think.",
+       "ar": "عبّر عمّا تريده من الآخرين وعمّا تفكر فيه."
+      },
+      "objectives": [
+       {
+        "code": "ar.b1.kana_past_continuous",
+        "skill": "grammar",
+        "text": {
+         "en": "Express wishes, opinions and recommendations",
+         "ar": "التعبير عن الأمنيات والآراء والتوصيات"
+        }
+       },
+       {
+        "code": "ar.b1.read_opinion",
+        "skill": "reading",
+        "text": {
+         "en": "Understand the main points of an opinion text",
+         "ar": "فهم الأفكار الرئيسية في نص رأي"
+        }
+       }
+      ],
+      "words": [
+       "أمل",
+       "نصح",
+       "رأي",
+       "بيئة",
+       "نصيحة"
+      ],
+      "exercises": [
+       "ar-b1-kana-mcq",
+       "ar-b1-read-1",
+       "ar-b1-vocab-mcq"
+      ]
+     }
+    ]
+   },
+   {
+    "title": {
+     "en": "Out in the world",
+     "ar": "في العالم من حولك"
+    },
+    "lessons": [
+     {
+      "key": "ar-b1-u2-l1",
+      "skill": "grammar",
+      "level": "B1",
+      "topic": "advice_should",
+      "minutes": 20,
+      "title": {
+       "en": "Advice and what-ifs",
+       "ar": "النصائح والاحتمالات"
+      },
+      "intro": {
+       "en": "Give advice and imagine different situations.",
+       "ar": "قدّم النصائح وتخيّل مواقف مختلفة."
+      },
+      "objectives": [
+       {
+        "code": "ar.b1.advice_should",
+        "skill": "grammar",
+        "text": {
+         "en": "Give advice and talk about hypothetical situations",
+         "ar": "تقديم النصائح والحديث عن مواقف افتراضية"
+        }
+       },
+       {
+        "code": "ar.b1.listen_announcement",
+        "skill": "listening",
+        "text": {
+         "en": "Understand practical information in announcements and conversations",
+         "ar": "فهم المعلومات العملية في الإعلانات والمحادثات"
+        }
+       }
+      ],
+      "words": [
+       "وجب",
+       "صحة",
+       "نجح",
+       "زحمة",
+       "حي"
+      ],
+      "exercises": [
+       "ar-b1-advice-mcq",
+       "ar-b1-listen-1",
+       "ar-b1-dictation"
+      ]
+     },
+     {
+      "key": "ar-b1-u2-l2",
+      "skill": "grammar",
+      "level": "B1",
+      "topic": "relative_pronouns",
+      "minutes": 20,
+      "title": {
+       "en": "Saying more precisely",
+       "ar": "التعبير بدقة أكبر"
+      },
+      "intro": {
+       "en": "Join ideas to describe people, places and things precisely.",
+       "ar": "اربط الأفكار لتصف الأشخاص والأماكن والأشياء بدقة."
+      },
+      "objectives": [
+       {
+        "code": "ar.b1.relative_pronouns",
+        "skill": "grammar",
+        "text": {
+         "en": "Connect ideas into longer, more precise sentences",
+         "ar": "ربط الأفكار في جمل أطول وأدق"
+        }
+       },
+       {
+        "code": "ar.b1.read_article",
+        "skill": "reading",
+        "text": {
+         "en": "Follow a short article on a familiar topic",
+         "ar": "متابعة مقال قصير عن موضوع مألوف"
+        }
+       }
+      ],
+      "words": [
+       "جار",
+       "استأجر",
+       "تغيّر",
+       "رغم",
+       "ميزة"
+      ],
+      "exercises": [
+       "ar-b1-relative-mcq",
+       "ar-b2-read-2"
+      ]
+     }
+    ]
+   }
+  ]
+ }
+}

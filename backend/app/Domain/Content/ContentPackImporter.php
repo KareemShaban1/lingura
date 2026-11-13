@@ -149,7 +149,7 @@ class ContentPackImporter
                 'language_id' => $this->language->id,
                 'skill_id' => $this->skill($e['skill']),
                 'cefr_level_id' => $level->id,
-                'grammar_topic_id' => isset($e['topic']) ? ($topics[$e['topic']] ?? throw new InvalidArgumentException("Unknown topic {$e['topic']}")) : null,
+                'grammar_topic_id' => isset($e['topic']) ? $this->topicId($e['topic'], $topics) : null,
                 'type' => $e['type'],
                 'difficulty' => $level->anchor_theta,
                 'estimated_seconds' => $e['seconds'] ?? 30 * count($e['questions']) + (isset($e['text']) ? 60 : 0),
@@ -248,6 +248,8 @@ class ContentPackImporter
             'language_id' => $this->language->id,
             'level_from_id' => $this->level($c['level_from']),
             'level_to_id' => $this->level($c['level_to']),
+            // Courses of a language are listed (and followed) from the lowest starting level up.
+            'position' => (int) CefrLevel::whereKey($this->level($c['level_from']))->value('ordinal'),
             'review_status' => 'published',
             'deleted_at' => null,
         ]);
@@ -333,6 +335,14 @@ class ContentPackImporter
         usort($items, fn ($a, $b) => strcmp(hash('sha256', $seed.$a), hash('sha256', $seed.$b)));
 
         return $items;
+    }
+
+    /** A topic from this pack, or (for single-exercise drafts) one already published for the language. */
+    private function topicId(string $slug, array $topics): int
+    {
+        return $topics[$slug]
+            ?? GrammarTopic::where('language_id', $this->language->id)->where('slug', $slug)->value('id')
+            ?? throw new InvalidArgumentException("Unknown topic {$slug}");
     }
 
     private function level(string $code): int

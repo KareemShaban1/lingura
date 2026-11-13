@@ -85,7 +85,10 @@ export function ExamsView() {
                   <ul className="divide-y rounded-lg border text-sm">
                     {x.attempts.filter((a) => a.status === "completed").map((a) => (
                       <li key={a.id} className="flex flex-wrap items-center justify-between gap-2 px-3 py-2">
-                        <span className="text-muted-foreground">{new Date(a.completed_at ?? a.started_at).toLocaleDateString()}</span>
+                        <span className="text-muted-foreground">
+                          {new Date(a.completed_at ?? a.started_at).toLocaleDateString()}
+                          {(x.forms_count ?? 1) > 1 && a.form_number ? ` · ${f(t.exams.form, { n: a.form_number })}` : ""}
+                        </span>
                         <span>{estimate(a.overall, x.scale, true) ?? t.exams.noOverall}</span>
                         <Link className="text-primary hover:underline" href={`/exams/${a.id}/results`}>{t.exams.results}</Link>
                       </li>
@@ -342,7 +345,7 @@ export function ExamResults() {
     <div className="space-y-6">
       <Link href="/practice/exams" className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground"><ArrowLeft className="size-4 rtl:rotate-180" /> {t.exams.backToExams}</Link>
       <div>
-        <p className="text-sm text-muted-foreground">{t.exams.finished}</p>
+        <p className="text-sm text-muted-foreground">{t.exams.finished}{a.form_number ? ` · ${f(t.exams.form, { n: a.form_number })}` : ""}</p>
         <h1 className="font-display text-3xl">{a.framework.title}</h1>
       </div>
       <Card className="border-primary/40">

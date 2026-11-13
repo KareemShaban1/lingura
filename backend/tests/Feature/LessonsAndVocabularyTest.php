@@ -54,6 +54,22 @@ class LessonsAndVocabularyTest extends TestCase
         $this->assertNotSame($first['id'], $next);
     }
 
+    public function test_courses_are_ordered_by_level_and_next_lesson_follows_the_learner_level(): void
+    {
+        $beginner = $this->makeLearner('es', ['self_reported_level' => 'A1']);
+        $this->actingAsUser($beginner->user);
+        $courses = $this->getJson("/api/v1/learner-profiles/{$beginner->public_id}/courses")->assertOk()->json();
+        $this->assertSame(['PRE_A1', 'B1'], array_column(array_column($courses['data'], 'level_from'), 'code'));
+        $this->assertSame($courses['data'][0]['units'][0]['lessons'][0]['id'], $courses['next_lesson_id']);
+
+        // A learner who already reached B1 starts on the B1 course rather than repeating the basics.
+        $intermediate = $this->makeLearner('es', ['self_reported_level' => 'B1']);
+        $this->actingAsUser($intermediate->user);
+        $courses = $this->getJson("/api/v1/learner-profiles/{$intermediate->public_id}/courses")->assertOk()->json();
+        $this->assertSame($courses['data'][1]['units'][0]['lessons'][0]['id'], $courses['next_lesson_id']);
+        $this->assertSame('es-b1-u1-l1', Lesson::where('public_id', $courses['next_lesson_id'])->value('key'));
+    }
+
     public function test_lesson_content_follows_the_interface_language(): void
     {
         $profile = $this->makeLearner('de', user: $this->makeUser(['interface_language' => 'ar']));

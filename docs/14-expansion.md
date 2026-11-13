@@ -22,7 +22,8 @@ What Phase 5 ships, how each part keeps the platform's rules (no fake data, no o
 | Goethe-Zertifikat A2 | de | reading, listening, writing, speaking | estimated readiness for A2 |
 | HSK 1 | zh | listening, reading | estimated readiness for level 1 (≈ A1) |
 
-- **Content:** each exam has one original practice form: 12 questions in 4 passage/recording groups, plus writing and speaking tasks where the exam has them (`database/data/exams.php`). Exam names are used only to say which published format is followed. Every screen shows a disclaimer: *not affiliated, results are estimates, not official scores*. A form becomes immutable once someone has taken it, so changing it requires a new form key.
+- **Content:** each exam has two original practice forms (`database/data/exams.php`, `exams_forms_2.php`): 12 questions in 4 passage/recording groups, plus writing and speaking tasks where the exam has them Exam names are used only to say which published format is followed. Every screen shows a disclaimer: *not affiliated, results are estimates, not official scores*. A form becomes immutable once someone has taken it, so changing it requires a new form key.
+- **Retakes:** a new attempt uses the active form the learner has taken least (ties go to the first form), so a retake meets new material; an open attempt is always resumed first. The exam list and results show which form (1, 2, …) was taken.
 - **Timing is server-authoritative.** Starting a section sets a `deadline_at`. Answers after the deadline (plus 15 s of network grace) are refused, and the section is scored with what was answered in time. Any read sweeps expired sections closed, so closing the tab does not stop the clock. Writing and speaking get 90 s of grace to upload, and are marked `time_over` if later. As on paper, answers can be changed until the section is submitted.
 - **Listening:** recordings come from `php artisan lf:exams:synthesize-audio` (one TTS recording per group). Until they exist, the listening section is **not offered** (`audio_not_ready`); it is never scored without audio. Scripts are never sent during the test. They appear in the review afterwards.
 - **Scoring:**
@@ -55,7 +56,7 @@ What Phase 5 ships, how each part keeps the platform's rules (no fake data, no o
 - **CI:** typecheck and an Android bundle export (`expo export`).
 
 ## 6. Known limitations
-- Exam conversion tables are indicative alignments through the CEFR, not calibrated against real exam results; each practice form is short (6 questions per closed section), so ranges are wide. More forms and calibration data are needed before results are more than a rough guide.
+- Exam conversion tables are indicative alignments through the CEFR, not calibrated against real exam results; each practice form is short (6 questions per closed section) and there are two forms per exam, so ranges are wide. More forms and calibration data are needed before results are more than a rough guide.
 - Chinese tone feedback depends on the recogniser transcribing a wrong tone as a homophone with another tone; it is not pitch-contour analysis. Polyphonic characters may be misjudged.
 - Offline mode covers text exercises only; tutor, writing, listening and speaking need a connection. Offline attempts count towards the day they sync.
 - The mobile app has not been run on a physical device or emulator in CI; store builds (EAS), push notifications, RTL layout mirroring and native offline packs are not done.

@@ -1,0 +1,1056 @@
+{
+ "language": "en",
+ "topics": [
+  {
+   "slug": "present_perfect_past",
+   "level": "B1",
+   "title": {
+    "en": "Present perfect vs past simple",
+    "ar": "المضارع التام والماضي البسيط"
+   },
+   "explanation": {
+    "en": "Use the past simple for finished times (yesterday, in 2019, last week): I visited Rome in 2019. Use the present perfect for experiences and results that matter now, with no finished time: I have visited Rome three times.",
+    "ar": "استخدم الماضي البسيط مع زمن منتهٍ (yesterday، in 2019، last week): I visited Rome in 2019. واستخدم المضارع التام للتجارب والنتائج المهمة الآن دون زمن منتهٍ: I have visited Rome three times."
+   },
+   "examples": [
+    [
+     "I have never been to Japan.",
+     "I have never been to Japan."
+    ],
+    [
+     "She lost her keys yesterday.",
+     "She lost her keys yesterday."
+    ],
+    [
+     "Have you finished your homework?",
+     "Have you finished your homework?"
+    ]
+   ]
+  },
+  {
+   "slug": "wishes_suggestions",
+   "level": "B1",
+   "title": {
+    "en": "Suggestions and wishes",
+    "ar": "الاقتراحات والأمنيات"
+   },
+   "explanation": {
+    "en": "Make suggestions with Why don't we…?, How about + -ing, and I suggest (that) we + verb. Express wishes about the present with I wish + past simple: I wish I had more time.",
+    "ar": "قدّم الاقتراحات بـ Why don't we…? وHow about + -ing وI suggest (that) we + فعل. وعبّر عن أمنيات في الحاضر بـ I wish + ماضٍ بسيط: I wish I had more time."
+   },
+   "examples": [
+    [
+     "How about going to the cinema?",
+     "How about going to the cinema?"
+    ],
+    [
+     "I suggest that we leave early.",
+     "I suggest that we leave early."
+    ],
+    [
+     "I wish I spoke Spanish.",
+     "I wish I spoke Spanish."
+    ]
+   ]
+  },
+  {
+   "slug": "conditionals_1_2",
+   "level": "B1",
+   "title": {
+    "en": "First and second conditionals",
+    "ar": "الجمل الشرطية الأولى والثانية"
+   },
+   "explanation": {
+    "en": "First conditional for real possibilities: If it rains, we will stay at home. Second conditional for imaginary situations: If I had more money, I would travel more. Advice: If I were you, I would…",
+    "ar": "الشرطية الأولى للاحتمالات الواقعية: If it rains, we will stay at home. والثانية للمواقف الخيالية: If I had more money, I would travel more. وللنصيحة: If I were you, I would…"
+   },
+   "examples": [
+    [
+     "If you study, you will pass.",
+     "If you study, you will pass."
+    ],
+    [
+     "If I were you, I would call her.",
+     "If I were you, I would call her."
+    ],
+    [
+     "What would you do if you won the lottery?",
+     "What would you do if you won the lottery?"
+    ]
+   ]
+  },
+  {
+   "slug": "relative_clauses",
+   "level": "B1",
+   "title": {
+    "en": "Relative clauses",
+    "ar": "جمل الصلة"
+   },
+   "explanation": {
+    "en": "Use who for people, which for things and where for places to add information: The woman who lives next door is a doctor. The book which I bought is great. That's the café where we met.",
+    "ar": "استخدم who للأشخاص وwhich للأشياء وwhere للأماكن لإضافة معلومات: The woman who lives next door is a doctor. The book which I bought is great. That's the café where we met."
+   },
+   "examples": [
+    [
+     "This is the man who helped me.",
+     "This is the man who helped me."
+    ],
+    [
+     "I like films which make me laugh.",
+     "I like films which make me laugh."
+    ],
+    [
+     "That's the town where I grew up.",
+     "That's the town where I grew up."
+    ]
+   ]
+  }
+ ],
+ "words": [
+  {
+   "lemma": "journey",
+   "pos": "noun",
+   "level": "B1",
+   "meaning": {
+    "en": "journey, trip",
+    "ar": "رحلة"
+   },
+   "example": [
+    "The journey took six hours."
+   ],
+   "forms": [
+    "journeys"
+   ]
+  },
+  {
+   "lemma": "memory",
+   "pos": "noun",
+   "level": "B1",
+   "meaning": {
+    "en": "memory",
+    "ar": "ذكرى"
+   },
+   "example": [
+    "I have happy memories of that summer."
+   ],
+   "forms": [
+    "memories"
+   ]
+  },
+  {
+   "lemma": "suddenly",
+   "pos": "adv",
+   "level": "B1",
+   "meaning": {
+    "en": "suddenly",
+    "ar": "فجأة"
+   },
+   "example": [
+    "Suddenly, the lights went out."
+   ]
+  },
+  {
+   "lemma": "while",
+   "pos": "conj",
+   "level": "B1",
+   "meaning": {
+    "en": "while",
+    "ar": "بينما"
+   },
+   "example": [
+    "I fell asleep while I was reading."
+   ]
+  },
+  {
+   "lemma": "experience",
+   "pos": "noun",
+   "level": "B1",
+   "meaning": {
+    "en": "experience",
+    "ar": "تجربة؛ خبرة"
+   },
+   "example": [
+    "Living abroad was a great experience."
+   ],
+   "forms": [
+    "experiences"
+   ]
+  },
+  {
+   "lemma": "suggest",
+   "pos": "verb",
+   "level": "B1",
+   "meaning": {
+    "en": "to suggest",
+    "ar": "يقترح"
+   },
+   "example": [
+    "I suggest that we leave early."
+   ],
+   "forms": [
+    "suggests",
+    "suggested",
+    "suggesting"
+   ]
+  },
+  {
+   "lemma": "opinion",
+   "pos": "noun",
+   "level": "B1",
+   "meaning": {
+    "en": "opinion",
+    "ar": "رأي"
+   },
+   "example": [
+    "In my opinion, it's too expensive."
+   ],
+   "forms": [
+    "opinions"
+   ]
+  },
+  {
+   "lemma": "environment",
+   "pos": "noun",
+   "level": "B1",
+   "meaning": {
+    "en": "environment",
+    "ar": "البيئة"
+   },
+   "example": [
+    "We need to protect the environment."
+   ]
+  },
+  {
+   "lemma": "advice",
+   "pos": "noun",
+   "level": "B1",
+   "meaning": {
+    "en": "advice",
+    "ar": "نصيحة"
+   },
+   "example": [
+    "Can you give me some advice?"
+   ]
+  },
+  {
+   "lemma": "decide",
+   "pos": "verb",
+   "level": "B1",
+   "meaning": {
+    "en": "to decide",
+    "ar": "يقرّر"
+   },
+   "example": [
+    "We decided to stay at home."
+   ],
+   "forms": [
+    "decides",
+    "decided",
+    "deciding"
+   ]
+  },
+  {
+   "lemma": "should",
+   "pos": "verb",
+   "level": "B1",
+   "meaning": {
+    "en": "should",
+    "ar": "ينبغي"
+   },
+   "example": [
+    "You should see a doctor."
+   ]
+  },
+  {
+   "lemma": "health",
+   "pos": "noun",
+   "level": "B1",
+   "meaning": {
+    "en": "health",
+    "ar": "صحة"
+   },
+   "example": [
+    "Exercise is good for your health."
+   ]
+  },
+  {
+   "lemma": "achieve",
+   "pos": "verb",
+   "level": "B1",
+   "meaning": {
+    "en": "to achieve",
+    "ar": "يحقق"
+   },
+   "example": [
+    "She achieved all her goals."
+   ],
+   "forms": [
+    "achieves",
+    "achieved",
+    "achieving"
+   ]
+  },
+  {
+   "lemma": "traffic",
+   "pos": "noun",
+   "level": "B1",
+   "meaning": {
+    "en": "traffic",
+    "ar": "حركة المرور"
+   },
+   "example": [
+    "There was a lot of traffic this morning."
+   ]
+  },
+  {
+   "lemma": "neighbourhood",
+   "pos": "noun",
+   "level": "B1",
+   "meaning": {
+    "en": "neighbourhood",
+    "ar": "حي"
+   },
+   "example": [
+    "It's a quiet neighbourhood."
+   ],
+   "forms": [
+    "neighbourhoods",
+    "neighborhood"
+   ]
+  },
+  {
+   "lemma": "neighbour",
+   "pos": "noun",
+   "level": "B1",
+   "meaning": {
+    "en": "neighbour",
+    "ar": "جار"
+   },
+   "example": [
+    "Our neighbours are very friendly."
+   ],
+   "forms": [
+    "neighbours",
+    "neighbor"
+   ]
+  },
+  {
+   "lemma": "rent",
+   "pos": "verb",
+   "level": "B1",
+   "meaning": {
+    "en": "to rent",
+    "ar": "يستأجر"
+   },
+   "example": [
+    "They rent a flat near the station."
+   ],
+   "forms": [
+    "rents",
+    "rented",
+    "renting"
+   ]
+  },
+  {
+   "lemma": "although",
+   "pos": "conj",
+   "level": "B1",
+   "meaning": {
+    "en": "although",
+    "ar": "رغم أنّ"
+   },
+   "example": [
+    "We went out although it was raining."
+   ]
+  },
+  {
+   "lemma": "advantage",
+   "pos": "noun",
+   "level": "B1",
+   "meaning": {
+    "en": "advantage",
+    "ar": "ميزة"
+   },
+   "example": [
+    "One advantage of the city is the public transport."
+   ],
+   "forms": [
+    "advantages"
+   ],
+   "ant": [
+    "disadvantage"
+   ]
+  },
+  {
+   "lemma": "improve",
+   "pos": "verb",
+   "level": "B1",
+   "meaning": {
+    "en": "to improve",
+    "ar": "يحسّن"
+   },
+   "example": [
+    "My English has improved a lot."
+   ],
+   "forms": [
+    "improves",
+    "improved",
+    "improving"
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "key": "en-b1-perfect-mcq",
+   "type": "mcq",
+   "skill": "grammar",
+   "level": "B1",
+   "questions": [
+    {
+     "p": "I ___ to Paris three times.",
+     "o": [
+      "have been",
+      "went",
+      "was",
+      "have went"
+     ]
+    },
+    {
+     "p": "She ___ her keys yesterday.",
+     "o": [
+      "lost",
+      "has lost",
+      "loses",
+      "has losed"
+     ]
+    },
+    {
+     "p": "___ you ever eaten sushi?",
+     "o": [
+      "Have",
+      "Did",
+      "Do",
+      "Were"
+     ]
+    },
+    {
+     "p": "We ___ in this house since 2015.",
+     "o": [
+      "have lived",
+      "lived",
+      "live",
+      "are living"
+     ]
+    }
+   ],
+   "topic": "present_perfect_past"
+  },
+  {
+   "key": "en-b1-suggest-cloze",
+   "type": "cloze",
+   "skill": "grammar",
+   "level": "B1",
+   "topic": "wishes_suggestions",
+   "questions": [
+    {
+     "p": "How about ___ (go) to the beach?",
+     "a": [
+      "going"
+     ]
+    },
+    {
+     "p": "I wish I ___ (have) more free time.",
+     "a": [
+      "had"
+     ]
+    },
+    {
+     "p": "Why don't we ___ (take) a taxi?",
+     "a": [
+      "take"
+     ]
+    },
+    {
+     "p": "I wish I ___ (can) speak Chinese.",
+     "a": [
+      "could"
+     ]
+    }
+   ]
+  },
+  {
+   "key": "en-b1-cond-cloze",
+   "type": "cloze",
+   "skill": "grammar",
+   "level": "B1",
+   "topic": "conditionals_1_2",
+   "questions": [
+    {
+     "p": "If it rains tomorrow, we ___ (stay) at home.",
+     "a": [
+      "will stay",
+      "'ll stay"
+     ]
+    },
+    {
+     "p": "If I ___ (be) you, I would talk to her.",
+     "a": [
+      "were"
+     ]
+    },
+    {
+     "p": "If I had more money, I ___ (travel) more.",
+     "a": [
+      "would travel",
+      "'d travel"
+     ]
+    },
+    {
+     "p": "If you heat ice, it ___ (melt).",
+     "a": [
+      "melts"
+     ]
+    }
+   ]
+  },
+  {
+   "key": "en-b1-relative-mcq",
+   "type": "mcq",
+   "skill": "grammar",
+   "level": "B1",
+   "questions": [
+    {
+     "p": "The woman ___ lives next door is a nurse.",
+     "o": [
+      "who",
+      "which",
+      "where",
+      "whose"
+     ]
+    },
+    {
+     "p": "I like films ___ make me laugh.",
+     "o": [
+      "which",
+      "who",
+      "where",
+      "when"
+     ]
+    },
+    {
+     "p": "That's the café ___ we first met.",
+     "o": [
+      "where",
+      "which",
+      "who",
+      "what"
+     ]
+    },
+    {
+     "p": "He's the teacher ___ helped me most.",
+     "o": [
+      "who",
+      "which",
+      "where",
+      "whom he"
+     ]
+    }
+   ],
+   "topic": "relative_clauses"
+  },
+  {
+   "key": "en-b1-vocab-mcq",
+   "type": "mcq",
+   "skill": "vocabulary",
+   "level": "B1",
+   "questions": [
+    {
+     "p": "We should recycle more to protect the ___.",
+     "o": [
+      "environment",
+      "neighbourhood",
+      "traffic",
+      "memory"
+     ]
+    },
+    {
+     "p": "Can you give me some ___ about where to stay?",
+     "o": [
+      "advice",
+      "health",
+      "journey",
+      "opinion"
+     ]
+    },
+    {
+     "p": "___, the lights went out and everyone screamed.",
+     "o": [
+      "Suddenly",
+      "Although",
+      "While",
+      "Advantage"
+     ]
+    },
+    {
+     "p": "They ___ a flat near the station.",
+     "o": [
+      "rent",
+      "achieve",
+      "suggest",
+      "improve"
+     ]
+    },
+    {
+     "p": "One ___ of living in the centre is that everything is close.",
+     "o": [
+      "advantage",
+      "experience",
+      "journey",
+      "health"
+     ]
+    }
+   ],
+   "title": {
+    "en": "Everyday words",
+    "ar": "كلمات يومية"
+   }
+  },
+  {
+   "key": "en-b1-order",
+   "type": "ordering",
+   "skill": "grammar",
+   "level": "B1",
+   "title": {
+    "en": "Build longer sentences",
+    "ar": "كوّن جملًا أطول"
+   },
+   "questions": [
+    {
+     "o": [
+      "I",
+      "have",
+      "never",
+      "been",
+      "to",
+      "Japan"
+     ]
+    },
+    {
+     "o": [
+      "If",
+      "I",
+      "were",
+      "you",
+      "I'd",
+      "call",
+      "her"
+     ]
+    },
+    {
+     "o": [
+      "This",
+      "is",
+      "the",
+      "man",
+      "who",
+      "helped",
+      "me"
+     ]
+    }
+   ]
+  },
+  {
+   "key": "en-b1-read-1",
+   "type": "reading",
+   "skill": "reading",
+   "level": "B1",
+   "title": {
+    "en": "Working from home",
+    "ar": "العمل من المنزل"
+   },
+   "text": "For the past two years, Sam has worked from home three days a week. At first he loved it: he didn't waste time in traffic and could organise his own day. However, after a few months he started to feel lonely and missed chatting with his colleagues. Now he goes to the office on Tuesdays and Thursdays, and he says he has found the perfect balance.",
+   "questions": [
+    {
+     "p": "What did Sam like at first?",
+     "o": [
+      "Not wasting time in traffic",
+      "Chatting with colleagues",
+      "Going to the office",
+      "Working at weekends"
+     ]
+    },
+    {
+     "p": "What problem did he have later?",
+     "o": [
+      "He felt lonely",
+      "He earned less money",
+      "He worked too much",
+      "He lost his job"
+     ]
+    },
+    {
+     "p": "What does he do now?",
+     "o": [
+      "He goes to the office two days a week",
+      "He always works at home",
+      "He always works in the office",
+      "He has changed jobs"
+     ]
+    }
+   ]
+  },
+  {
+   "key": "en-b2-read-2",
+   "type": "reading",
+   "skill": "reading",
+   "level": "B2",
+   "title": {
+    "en": "Cities without cars",
+    "ar": "مدن بلا سيارات"
+   },
+   "text": "More and more European cities are closing their historic centres to traffic. Supporters say the air is cleaner and streets regain a sense of community. Shopkeepers, on the other hand, feared losing customers; yet several studies suggest that sales have actually risen, because pedestrians stroll more and stop in shops. Even so, the debate continues in cities where public transport is not good enough.",
+   "questions": [
+    {
+     "p": "What were shopkeepers afraid of?",
+     "o": [
+      "Losing customers",
+      "Paying more tax",
+      "More traffic",
+      "Closing at night"
+     ]
+    },
+    {
+     "p": "According to studies, what has happened to sales?",
+     "o": [
+      "They have risen",
+      "They have fallen",
+      "They have not changed",
+      "They only rose at night"
+     ]
+    },
+    {
+     "p": "Where does the debate continue?",
+     "o": [
+      "Where public transport is not good enough",
+      "In every city",
+      "Only in villages",
+      "Nowhere"
+     ]
+    }
+   ]
+  },
+  {
+   "key": "en-b1-listen-1",
+   "type": "listening",
+   "skill": "listening",
+   "level": "B1",
+   "title": {
+    "en": "A message from the dentist",
+    "ar": "رسالة من عيادة الأسنان"
+   },
+   "text": "Hello, this is Riverside Dental. Your appointment on Wednesday at ten has to be moved because the dentist is ill. We can offer you Thursday at the same time or Friday at four. Please call us back before Tuesday to confirm. Thank you.",
+   "questions": [
+    {
+     "p": "Why is the appointment moving?",
+     "o": [
+      "The dentist is ill",
+      "The patient is away",
+      "The clinic is closed",
+      "There is a strike"
+     ]
+    },
+    {
+     "p": "Which options are offered?",
+     "o": [
+      "Thursday at ten or Friday at four",
+      "Wednesday at four",
+      "Monday at ten",
+      "Friday at ten"
+     ]
+    },
+    {
+     "p": "What should the patient do?",
+     "o": [
+      "Call back before Tuesday",
+      "Go on Wednesday",
+      "Send an email",
+      "Nothing"
+     ]
+    }
+   ]
+  },
+  {
+   "key": "en-b1-dictation",
+   "type": "dictation",
+   "skill": "listening",
+   "level": "B1",
+   "title": {
+    "en": "Everyday sentences",
+    "ar": "جمل من الحياة اليومية"
+   },
+   "questions": [
+    {
+     "a": [
+      "When I was a child, I lived near the sea."
+     ]
+    },
+    {
+     "a": [
+      "I have never been to Japan."
+     ]
+    },
+    {
+     "a": [
+      "If I were you, I would talk to your boss."
+     ]
+    }
+   ]
+  },
+  {
+   "key": "en-b1-repeat",
+   "type": "repeat",
+   "skill": "speaking",
+   "level": "B1",
+   "title": {
+    "en": "Say it aloud",
+    "ar": "قلها بصوت عالٍ"
+   },
+   "objectives": [
+    {
+     "code": "en.b1.pronounce",
+     "skill": "speaking",
+     "text": {
+      "en": "Pronounce everyday sentences clearly enough to be understood",
+      "ar": "نطق جمل يومية بوضوح يكفي لفهمها"
+     }
+    }
+   ],
+   "questions": [
+    {
+     "r": "When I was a child, I lived near the sea."
+    },
+    {
+     "r": "I have never been to Japan."
+    },
+    {
+     "r": "If I were you, I would talk to your boss."
+    },
+    {
+     "r": "I have never been to Japan."
+    },
+    {
+     "r": "If you study, you will pass."
+    }
+   ]
+  }
+ ],
+ "course": {
+  "slug": "en-intermediate",
+  "level_from": "B1",
+  "level_to": "B2",
+  "title": {
+   "en": "English B1: everyday independence",
+   "ar": "الإنجليزية B1: الاستقلالية في الحياة اليومية"
+  },
+  "description": {
+   "en": "Tell stories about the past, give opinions and advice, and understand longer texts in English.",
+   "ar": "احكِ عن الماضي، وعبّر عن آرائك وقدّم النصائح، وافهم نصوصًا أطول في الإنجليزية."
+  },
+  "units": [
+   {
+    "title": {
+     "en": "Stories and opinions",
+     "ar": "القصص والآراء"
+    },
+    "lessons": [
+     {
+      "key": "en-b1-u1-l1",
+      "skill": "grammar",
+      "level": "B1",
+      "topic": "present_perfect_past",
+      "minutes": 20,
+      "title": {
+       "en": "What happened?",
+       "ar": "ماذا حدث؟"
+      },
+      "intro": {
+       "en": "Tell a story about the past and describe how things were.",
+       "ar": "احكِ قصة عن الماضي وصِف كيف كانت الأمور."
+      },
+      "objectives": [
+       {
+        "code": "en.b1.narrate",
+        "skill": "speaking",
+        "text": {
+         "en": "Tell a short story about something that happened",
+         "ar": "رواية قصة قصيرة عن شيء حدث"
+        }
+       },
+       {
+        "code": "en.b1.present_perfect_past",
+        "skill": "grammar",
+        "text": {
+         "en": "Use past forms to narrate events and describe situations",
+         "ar": "استخدام صيغ الماضي لسرد الأحداث ووصف المواقف"
+        }
+       }
+      ],
+      "words": [
+       "journey",
+       "memory",
+       "suddenly",
+       "while",
+       "experience"
+      ],
+      "exercises": [
+       "en-b1-perfect-mcq",
+       "en-b1-order"
+      ]
+     },
+     {
+      "key": "en-b1-u1-l2",
+      "skill": "grammar",
+      "level": "B1",
+      "topic": "wishes_suggestions",
+      "minutes": 20,
+      "title": {
+       "en": "Wishes and opinions",
+       "ar": "الأمنيات والآراء"
+      },
+      "intro": {
+       "en": "Say what you want others to do and what you think.",
+       "ar": "عبّر عمّا تريده من الآخرين وعمّا تفكر فيه."
+      },
+      "objectives": [
+       {
+        "code": "en.b1.wishes_suggestions",
+        "skill": "grammar",
+        "text": {
+         "en": "Express wishes, opinions and recommendations",
+         "ar": "التعبير عن الأمنيات والآراء والتوصيات"
+        }
+       },
+       {
+        "code": "en.b1.read_opinion",
+        "skill": "reading",
+        "text": {
+         "en": "Understand the main points of an opinion text",
+         "ar": "فهم الأفكار الرئيسية في نص رأي"
+        }
+       }
+      ],
+      "words": [
+       "suggest",
+       "opinion",
+       "environment",
+       "advice",
+       "decide"
+      ],
+      "exercises": [
+       "en-b1-suggest-cloze",
+       "en-b1-read-1",
+       "en-b1-vocab-mcq"
+      ]
+     }
+    ]
+   },
+   {
+    "title": {
+     "en": "Out in the world",
+     "ar": "في العالم من حولك"
+    },
+    "lessons": [
+     {
+      "key": "en-b1-u2-l1",
+      "skill": "grammar",
+      "level": "B1",
+      "topic": "conditionals_1_2",
+      "minutes": 20,
+      "title": {
+       "en": "Advice and what-ifs",
+       "ar": "النصائح والاحتمالات"
+      },
+      "intro": {
+       "en": "Give advice and imagine different situations.",
+       "ar": "قدّم النصائح وتخيّل مواقف مختلفة."
+      },
+      "objectives": [
+       {
+        "code": "en.b1.conditionals_1_2",
+        "skill": "grammar",
+        "text": {
+         "en": "Give advice and talk about hypothetical situations",
+         "ar": "تقديم النصائح والحديث عن مواقف افتراضية"
+        }
+       },
+       {
+        "code": "en.b1.listen_announcement",
+        "skill": "listening",
+        "text": {
+         "en": "Understand practical information in announcements and conversations",
+         "ar": "فهم المعلومات العملية في الإعلانات والمحادثات"
+        }
+       }
+      ],
+      "words": [
+       "should",
+       "health",
+       "achieve",
+       "traffic",
+       "neighbourhood"
+      ],
+      "exercises": [
+       "en-b1-cond-cloze",
+       "en-b1-listen-1",
+       "en-b1-dictation"
+      ]
+     },
+     {
+      "key": "en-b1-u2-l2",
+      "skill": "grammar",
+      "level": "B1",
+      "topic": "relative_clauses",
+      "minutes": 20,
+      "title": {
+       "en": "Saying more precisely",
+       "ar": "التعبير بدقة أكبر"
+      },
+      "intro": {
+       "en": "Join ideas to describe people, places and things precisely.",
+       "ar": "اربط الأفكار لتصف الأشخاص والأماكن والأشياء بدقة."
+      },
+      "objectives": [
+       {
+        "code": "en.b1.relative_clauses",
+        "skill": "grammar",
+        "text": {
+         "en": "Connect ideas into longer, more precise sentences",
+         "ar": "ربط الأفكار في جمل أطول وأدق"
+        }
+       },
+       {
+        "code": "en.b1.read_article",
+        "skill": "reading",
+        "text": {
+         "en": "Follow a short article on a familiar topic",
+         "ar": "متابعة مقال قصير عن موضوع مألوف"
+        }
+       }
+      ],
+      "words": [
+       "neighbour",
+       "rent",
+       "although",
+       "advantage",
+       "improve"
+      ],
+      "exercises": [
+       "en-b1-relative-mcq",
+       "en-b2-read-2"
+      ]
+     }
+    ]
+   }
+  ]
+ }
+}

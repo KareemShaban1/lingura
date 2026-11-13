@@ -23,18 +23,20 @@ def mcq(key, qs, topic=None, skill="grammar", level="A1"):
     return e
 
 def order(key, sentences, level="A1"):
-    return {"key": key, "type": "ordering", "skill": "grammar", "level": level, "title": {"en": "Build simple sentences", "ar": "كوّن جملًا بسيطة"}, "questions": [{"o": s} for s in sentences]}
+    title = {"en": "Build simple sentences", "ar": "كوّن جملًا بسيطة"} if level.startswith("A") else {"en": "Build longer sentences", "ar": "كوّن جملًا أطول"}
+    return {"key": key, "type": "ordering", "skill": "grammar", "level": level, "title": title, "questions": [{"o": s} for s in sentences]}
 
 def reading(key, title, text, qs, level="A1", kind="reading"):
     return {"key": key, "type": kind, "skill": kind, "level": level, "title": title, "text": text, "questions": [{"p": p, "o": o} for p, o in qs]}
 
-def dictation(key, sentences):
-    return {"key": key, "type": "dictation", "skill": "listening", "level": "A1", "title": {"en": "Short everyday sentences", "ar": "جمل يومية قصيرة"}, "questions": [{"a": [s]} for s in sentences]}
+def dictation(key, sentences, level="A1"):
+    title = {"en": "Short everyday sentences", "ar": "جمل يومية قصيرة"} if level.startswith("A") else {"en": "Everyday sentences", "ar": "جمل من الحياة اليومية"}
+    return {"key": key, "type": "dictation", "skill": "listening", "level": level, "title": title, "questions": [{"a": [s]} for s in sentences]}
 
-def repeat(key, sentences):
+def repeat(key, sentences, level="A1"):
     code = key.split("-")[0]
-    return {"key": key, "type": "repeat", "skill": "speaking", "level": "A1", "title": {"en": "Say it aloud", "ar": "قلها بصوت عالٍ"},
-            "objectives": [{"code": f"{code}.a1.pronounce", "skill": "speaking", "text": {"en": "Pronounce everyday sentences clearly enough to be understood", "ar": "نطق جمل يومية بوضوح يكفي لفهمها"}}],
+    return {"key": key, "type": "repeat", "skill": "speaking", "level": level, "title": {"en": "Say it aloud", "ar": "قلها بصوت عالٍ"},
+            "objectives": [{"code": f"{code}.{level.lower()}.pronounce", "skill": "speaking", "text": {"en": "Pronounce everyday sentences clearly enough to be understood", "ar": "نطق جمل يومية بوضوح يكفي لفهمها"}}],
             "questions": [{"r": s} for s in sentences]}
 
 def course(code, name_en, name_ar, topics, words, ex, l4=None):
@@ -526,10 +528,15 @@ packs["zh"] = {"language":"zh","topics":zh_topics,"words":zh_words,"exercises":z
   "course":course("zh","Chinese","الصينية",[t["slug"] for t in zh_topics],[["你好","再见","谢谢","朋友","家","城市"],["书","桌子","茶","水","米饭","大","小"],["学生","老师","工作","学习","买","今天","晚上"],["喜欢","商店","好","卖"]],[e["key"] for e in zh_ex],
      l4=({"en":"Likes and questions","ar":"ما تحبه والأسئلة"},{"en":"Ask yes/no questions, say what you like and understand a simple order in a café.","ar":"اطرح أسئلة بنعم أو لا، وعبّر عمّا تحبه، وافهم طلبًا بسيطًا في مقهى."}))}
 
+sys.path.insert(0, __import__("os").path.dirname(__import__("os").path.abspath(__file__)))
+from content_b1 import add_b1_packs
+add_b1_packs(packs, W, T, cloze, mcq, order, reading, dictation)
+
 for code, pack in packs.items():
+    lang, level = pack["language"], pack["course"]["units"][0]["lessons"][0]["level"]
     dictation_ex = next(e for e in pack["exercises"] if e["type"] == "dictation")
     sentences = [q["a"][0] for q in dictation_ex["questions"]] + [pack["topics"][0]["examples"][0][0], pack["topics"][2]["examples"][0][0]]
-    pack["exercises"].append(repeat(f"{code}-a1-repeat", sentences))
+    pack["exercises"].append(repeat(f"{lang}-{level.lower()}-repeat", sentences, level))
     with open(f"{OUT}/{code}.json", "w", encoding="utf-8") as f:
         json.dump(pack, f, ensure_ascii=False, indent=1)
     print(code, len(pack["topics"]), "topics", len(pack["words"]), "words", len(pack["exercises"]), "exercises")

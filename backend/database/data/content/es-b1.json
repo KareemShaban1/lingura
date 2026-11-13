@@ -1,0 +1,1091 @@
+{
+ "language": "es",
+ "topics": [
+  {
+   "slug": "preterito_imperfecto",
+   "level": "B1",
+   "title": {
+    "en": "Preterite vs imperfect",
+    "ar": "الماضي البسيط والماضي الناقص"
+   },
+   "explanation": {
+    "en": "Use the preterite (fui, comí, llegó) for completed events in the story and the imperfect (era, tenía, llovía) for background, descriptions and habits. Typical: Cuando llegué, llovía.",
+    "ar": "استخدم الماضي البسيط (fui، comí، llegó) للأحداث المكتملة في القصة، والماضي الناقص (era، tenía، llovía) للخلفية والوصف والعادات. مثال: Cuando llegué, llovía."
+   },
+   "examples": [
+    [
+     "Cuando era niño, vivía en Toledo.",
+     "When I was a child, I lived in Toledo."
+    ],
+    [
+     "Ayer llegué tarde porque había mucho tráfico.",
+     "Yesterday I arrived late because there was a lot of traffic."
+    ],
+    [
+     "Leía un libro cuando sonó el teléfono.",
+     "I was reading a book when the phone rang."
+    ]
+   ]
+  },
+  {
+   "slug": "presente_subjuntivo",
+   "level": "B1",
+   "title": {
+    "en": "Present subjunctive for wishes and advice",
+    "ar": "المضارع الشرطي للأمنيات والنصائح"
+   },
+   "explanation": {
+    "en": "After verbs of wishing, asking and recommending with a different subject (quiero que, espero que, te recomiendo que), the second verb is in the subjunctive: hable, comas, vengan.",
+    "ar": "بعد أفعال التمني والطلب والنصيحة عندما يختلف الفاعل (quiero que، espero que، te recomiendo que) يأتي الفعل الثاني في صيغة الـsubjuntivo: hable، comas، vengan."
+   },
+   "examples": [
+    [
+     "Quiero que vengas a mi fiesta.",
+     "I want you to come to my party."
+    ],
+    [
+     "Espero que tengas un buen viaje.",
+     "I hope you have a good trip."
+    ],
+    [
+     "Te recomiendo que leas este libro.",
+     "I recommend that you read this book."
+    ]
+   ]
+  },
+  {
+   "slug": "condicional",
+   "level": "B1",
+   "title": {
+    "en": "The conditional for advice and hypotheses",
+    "ar": "صيغة الشرط للنصيحة والافتراض"
+   },
+   "explanation": {
+    "en": "Form the conditional by adding -ía, -ías, -ía, -íamos, -íais, -ían to the infinitive: hablaría, comerías. Use it for polite requests, advice (yo que tú, iría al médico) and hypotheses (si tuviera tiempo, viajaría más).",
+    "ar": "تُصاغ صيغة الشرط بإضافة -ía، -ías، -ía، -íamos، -íais، -ían إلى المصدر: hablaría، comerías. وتُستخدم للطلب المهذب والنصيحة (yo que tú, iría al médico) والافتراض (si tuviera tiempo, viajaría más)."
+   },
+   "examples": [
+    [
+     "¿Podrías ayudarme?",
+     "Could you help me?"
+    ],
+    [
+     "Yo que tú, descansaría un poco.",
+     "If I were you, I'd rest a little."
+    ],
+    [
+     "Si tuviera dinero, viajaría a Perú.",
+     "If I had money, I would travel to Peru."
+    ]
+   ]
+  },
+  {
+   "slug": "por_para",
+   "level": "B1",
+   "title": {
+    "en": "Por and para",
+    "ar": "حرفا por وpara"
+   },
+   "explanation": {
+    "en": "Para shows purpose, destination and deadlines (estudio para aprobar, el tren para Madrid). Por shows cause, means, exchange and movement through (gracias por todo, por teléfono, paseamos por el parque).",
+    "ar": "يدل para على الغاية والوجهة والموعد النهائي (estudio para aprobar، el tren para Madrid)، ويدل por على السبب والوسيلة والمقابل والمرور عبر مكان (gracias por todo، por teléfono، paseamos por el parque)."
+   },
+   "examples": [
+    [
+     "Este regalo es para ti.",
+     "This present is for you."
+    ],
+    [
+     "Gracias por tu ayuda.",
+     "Thank you for your help."
+    ],
+    [
+     "Hablamos por teléfono cada semana.",
+     "We talk on the phone every week."
+    ]
+   ]
+  }
+ ],
+ "words": [
+  {
+   "lemma": "viaje",
+   "pos": "noun",
+   "level": "B1",
+   "meaning": {
+    "en": "trip, journey",
+    "ar": "رحلة"
+   },
+   "example": [
+    "El viaje a Granada fue increíble.",
+    "The trip to Granada was amazing."
+   ],
+   "forms": [
+    "viajes"
+   ],
+   "gender": "m"
+  },
+  {
+   "lemma": "recuerdo",
+   "pos": "noun",
+   "level": "B1",
+   "meaning": {
+    "en": "memory; souvenir",
+    "ar": "ذكرى"
+   },
+   "example": [
+    "Tengo muy buenos recuerdos de mi infancia.",
+    "I have very good memories of my childhood."
+   ],
+   "forms": [
+    "recuerdos"
+   ],
+   "gender": "m"
+  },
+  {
+   "lemma": "de repente",
+   "pos": "adv",
+   "level": "B1",
+   "meaning": {
+    "en": "suddenly",
+    "ar": "فجأة"
+   },
+   "example": [
+    "De repente, empezó a llover.",
+    "Suddenly, it started to rain."
+   ]
+  },
+  {
+   "lemma": "mientras",
+   "pos": "conj",
+   "level": "B1",
+   "meaning": {
+    "en": "while",
+    "ar": "بينما"
+   },
+   "example": [
+    "Mientras cocinaba, escuchaba la radio.",
+    "While I was cooking, I was listening to the radio."
+   ]
+  },
+  {
+   "lemma": "acontecimiento",
+   "pos": "noun",
+   "level": "B1",
+   "meaning": {
+    "en": "event",
+    "ar": "حدث"
+   },
+   "example": [
+    "La boda fue un gran acontecimiento.",
+    "The wedding was a big event."
+   ],
+   "forms": [
+    "acontecimientos"
+   ],
+   "gender": "m"
+  },
+  {
+   "lemma": "esperar",
+   "pos": "verb",
+   "level": "B1",
+   "meaning": {
+    "en": "to hope; to wait",
+    "ar": "يأمل؛ ينتظر"
+   },
+   "example": [
+    "Espero que estés bien.",
+    "I hope you are well."
+   ],
+   "forms": [
+    "espero",
+    "esperas",
+    "espera",
+    "esperamos",
+    "esperan"
+   ]
+  },
+  {
+   "lemma": "recomendar",
+   "pos": "verb",
+   "level": "B1",
+   "meaning": {
+    "en": "to recommend",
+    "ar": "يوصي"
+   },
+   "example": [
+    "Te recomiendo este restaurante.",
+    "I recommend this restaurant to you."
+   ],
+   "forms": [
+    "recomiendo",
+    "recomiendas",
+    "recomienda",
+    "recomendamos"
+   ]
+  },
+  {
+   "lemma": "opinión",
+   "pos": "noun",
+   "level": "B1",
+   "meaning": {
+    "en": "opinion",
+    "ar": "رأي"
+   },
+   "example": [
+    "En mi opinión, es una buena idea.",
+    "In my opinion, it's a good idea."
+   ],
+   "forms": [
+    "opiniones"
+   ],
+   "gender": "f"
+  },
+  {
+   "lemma": "medio ambiente",
+   "pos": "noun",
+   "level": "B1",
+   "meaning": {
+    "en": "environment",
+    "ar": "البيئة"
+   },
+   "example": [
+    "Debemos proteger el medio ambiente.",
+    "We must protect the environment."
+   ]
+  },
+  {
+   "lemma": "consejo",
+   "pos": "noun",
+   "level": "B1",
+   "meaning": {
+    "en": "piece of advice",
+    "ar": "نصيحة"
+   },
+   "example": [
+    "Gracias por el consejo.",
+    "Thanks for the advice."
+   ],
+   "forms": [
+    "consejos"
+   ],
+   "gender": "m"
+  },
+  {
+   "lemma": "deber",
+   "pos": "verb",
+   "level": "B1",
+   "meaning": {
+    "en": "should, must",
+    "ar": "يجب"
+   },
+   "example": [
+    "Deberías dormir más.",
+    "You should sleep more."
+   ],
+   "forms": [
+    "debo",
+    "debes",
+    "debe",
+    "debería",
+    "deberías"
+   ]
+  },
+  {
+   "lemma": "salud",
+   "pos": "noun",
+   "level": "B1",
+   "meaning": {
+    "en": "health",
+    "ar": "صحة"
+   },
+   "example": [
+    "El deporte es bueno para la salud.",
+    "Sport is good for your health."
+   ]
+  },
+  {
+   "lemma": "conseguir",
+   "pos": "verb",
+   "level": "B1",
+   "meaning": {
+    "en": "to get, to achieve",
+    "ar": "يحصل؛ يحقق"
+   },
+   "example": [
+    "Consiguió el trabajo que quería.",
+    "She got the job she wanted."
+   ],
+   "forms": [
+    "consigo",
+    "consigue",
+    "consiguió"
+   ]
+  },
+  {
+   "lemma": "tráfico",
+   "pos": "noun",
+   "level": "B1",
+   "meaning": {
+    "en": "traffic",
+    "ar": "حركة المرور"
+   },
+   "example": [
+    "Hay mucho tráfico en el centro.",
+    "There's a lot of traffic in the centre."
+   ],
+   "gender": "m"
+  },
+  {
+   "lemma": "barrio",
+   "pos": "noun",
+   "level": "B1",
+   "meaning": {
+    "en": "neighbourhood",
+    "ar": "حي"
+   },
+   "example": [
+    "Vivo en un barrio tranquilo.",
+    "I live in a quiet neighbourhood."
+   ],
+   "forms": [
+    "barrios"
+   ],
+   "gender": "m"
+  },
+  {
+   "lemma": "vecino",
+   "pos": "noun",
+   "level": "B1",
+   "meaning": {
+    "en": "neighbour",
+    "ar": "جار"
+   },
+   "example": [
+    "Mi vecino es muy amable.",
+    "My neighbour is very kind."
+   ],
+   "forms": [
+    "vecinos",
+    "vecina",
+    "vecinas"
+   ],
+   "gender": "m"
+  },
+  {
+   "lemma": "alquilar",
+   "pos": "verb",
+   "level": "B1",
+   "meaning": {
+    "en": "to rent",
+    "ar": "يستأجر"
+   },
+   "example": [
+    "Queremos alquilar un piso más grande.",
+    "We want to rent a bigger flat."
+   ],
+   "forms": [
+    "alquilo",
+    "alquilamos",
+    "alquiló"
+   ]
+  },
+  {
+   "lemma": "cambiar",
+   "pos": "verb",
+   "level": "B1",
+   "meaning": {
+    "en": "to change",
+    "ar": "يغيّر"
+   },
+   "example": [
+    "La ciudad ha cambiado mucho.",
+    "The city has changed a lot."
+   ],
+   "forms": [
+    "cambio",
+    "cambia",
+    "cambió",
+    "cambiado"
+   ]
+  },
+  {
+   "lemma": "aunque",
+   "pos": "conj",
+   "level": "B1",
+   "meaning": {
+    "en": "although",
+    "ar": "رغم أنّ"
+   },
+   "example": [
+    "Salimos aunque llovía.",
+    "We went out although it was raining."
+   ]
+  },
+  {
+   "lemma": "ventaja",
+   "pos": "noun",
+   "level": "B1",
+   "meaning": {
+    "en": "advantage",
+    "ar": "ميزة"
+   },
+   "example": [
+    "Vivir cerca del trabajo tiene muchas ventajas.",
+    "Living near work has many advantages."
+   ],
+   "forms": [
+    "ventajas"
+   ],
+   "gender": "f",
+   "ant": [
+    "desventaja"
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "key": "es-b1-pret-imp-mcq",
+   "type": "mcq",
+   "skill": "grammar",
+   "level": "B1",
+   "questions": [
+    {
+     "p": "Cuando ___ niño, vivía en el campo.",
+     "o": [
+      "era",
+      "fui",
+      "soy",
+      "sería"
+     ]
+    },
+    {
+     "p": "Ayer ___ a las ocho y me fui a trabajar.",
+     "o": [
+      "me levanté",
+      "me levantaba",
+      "me levanto",
+      "me levantaré"
+     ]
+    },
+    {
+     "p": "Leía el periódico cuando ___ el teléfono.",
+     "o": [
+      "sonó",
+      "sonaba",
+      "suena",
+      "sonará"
+     ]
+    },
+    {
+     "p": "De pequeña, siempre ___ con mis abuelos en verano.",
+     "o": [
+      "iba",
+      "fui",
+      "voy",
+      "iré"
+     ]
+    }
+   ],
+   "topic": "preterito_imperfecto"
+  },
+  {
+   "key": "es-b1-subj-cloze",
+   "type": "cloze",
+   "skill": "grammar",
+   "level": "B1",
+   "topic": "presente_subjuntivo",
+   "questions": [
+    {
+     "p": "Quiero que tú ___ (venir) a la cena.",
+     "a": [
+      "vengas"
+     ]
+    },
+    {
+     "p": "Espero que el examen ___ (ser) fácil.",
+     "a": [
+      "sea"
+     ]
+    },
+    {
+     "p": "Te recomiendo que ___ (beber) más agua.",
+     "a": [
+      "bebas"
+     ]
+    },
+    {
+     "p": "Mis padres quieren que yo ___ (estudiar) medicina.",
+     "a": [
+      "estudie"
+     ]
+    }
+   ]
+  },
+  {
+   "key": "es-b1-cond-cloze",
+   "type": "cloze",
+   "skill": "grammar",
+   "level": "B1",
+   "topic": "condicional",
+   "questions": [
+    {
+     "p": "Yo que tú, ___ (hablar) con ella.",
+     "a": [
+      "hablaría"
+     ]
+    },
+    {
+     "p": "¿___ (poder) cerrar la ventana, por favor?",
+     "a": [
+      "Podrías",
+      "Podría"
+     ]
+    },
+    {
+     "p": "Si tuviera tiempo, ___ (viajar) más.",
+     "a": [
+      "viajaría"
+     ]
+    },
+    {
+     "p": "Con más dinero, nosotros ___ (comprar) una casa.",
+     "a": [
+      "compraríamos"
+     ]
+    }
+   ]
+  },
+  {
+   "key": "es-b1-por-para-mcq",
+   "type": "mcq",
+   "skill": "grammar",
+   "level": "B1",
+   "questions": [
+    {
+     "p": "Este regalo es ___ ti.",
+     "o": [
+      "para",
+      "por",
+      "de",
+      "a"
+     ]
+    },
+    {
+     "p": "Gracias ___ tu ayuda.",
+     "o": [
+      "por",
+      "para",
+      "con",
+      "de"
+     ]
+    },
+    {
+     "p": "Estudio mucho ___ aprobar el examen.",
+     "o": [
+      "para",
+      "por",
+      "con",
+      "sin"
+     ]
+    },
+    {
+     "p": "Paseamos ___ el parque todas las tardes.",
+     "o": [
+      "por",
+      "para",
+      "a",
+      "sin"
+     ]
+    }
+   ],
+   "topic": "por_para"
+  },
+  {
+   "key": "es-b1-vocab-mcq",
+   "type": "mcq",
+   "skill": "vocabulary",
+   "level": "B1",
+   "questions": [
+    {
+     "p": "Debemos cuidar el ___ y reciclar más.",
+     "o": [
+      "medio ambiente",
+      "barrio",
+      "tráfico",
+      "recuerdo"
+     ]
+    },
+    {
+     "p": "Mi ___ vive en el piso de al lado.",
+     "o": [
+      "vecino",
+      "consejo",
+      "viaje",
+      "opinión"
+     ]
+    },
+    {
+     "p": "___, empezó a llover y nos mojamos.",
+     "o": [
+      "De repente",
+      "Aunque",
+      "Mientras",
+      "Ventaja"
+     ]
+    },
+    {
+     "p": "Hacer deporte es bueno para la ___.",
+     "o": [
+      "salud",
+      "ventaja",
+      "opinión",
+      "vecina"
+     ]
+    },
+    {
+     "p": "Una ___ de vivir en el centro es que todo está cerca.",
+     "o": [
+      "ventaja",
+      "salud",
+      "costumbre",
+      "noticia"
+     ]
+    }
+   ],
+   "title": {
+    "en": "Everyday words",
+    "ar": "كلمات يومية"
+   }
+  },
+  {
+   "key": "es-b1-order",
+   "type": "ordering",
+   "skill": "grammar",
+   "level": "B1",
+   "title": {
+    "en": "Build longer sentences",
+    "ar": "كوّن جملًا أطول"
+   },
+   "questions": [
+    {
+     "o": [
+      "Cuando",
+      "llegué",
+      "estaba",
+      "lloviendo"
+     ]
+    },
+    {
+     "o": [
+      "Quiero",
+      "que",
+      "vengas",
+      "mañana"
+     ]
+    },
+    {
+     "o": [
+      "Yo",
+      "que",
+      "tú",
+      "descansaría",
+      "más"
+     ]
+    }
+   ]
+  },
+  {
+   "key": "es-b1-read-1",
+   "type": "reading",
+   "skill": "reading",
+   "level": "B1",
+   "title": {
+    "en": "Working from home",
+    "ar": "العمل من المنزل"
+   },
+   "text": "Desde hace dos años, Marta trabaja desde casa tres días a la semana. Al principio le encantaba: no perdía tiempo en el tráfico y podía organizar su horario. Sin embargo, con el tiempo empezó a sentirse sola y echaba de menos a sus compañeros. Ahora va a la oficina los martes y los jueves, y dice que ha encontrado el equilibrio perfecto.",
+   "questions": [
+    {
+     "p": "¿Qué le gustaba al principio a Marta?",
+     "o": [
+      "No perder tiempo en el tráfico",
+      "Hablar con sus compañeros",
+      "Ir a la oficina",
+      "Trabajar los fines de semana"
+     ]
+    },
+    {
+     "p": "¿Qué problema tuvo después?",
+     "o": [
+      "Se sentía sola",
+      "Ganaba menos dinero",
+      "Trabajaba demasiado",
+      "Perdió su trabajo"
+     ]
+    },
+    {
+     "p": "¿Qué hace ahora?",
+     "o": [
+      "Va a la oficina dos días a la semana",
+      "Trabaja siempre en casa",
+      "Trabaja siempre en la oficina",
+      "Ha cambiado de trabajo"
+     ]
+    }
+   ]
+  },
+  {
+   "key": "es-b2-read-2",
+   "type": "reading",
+   "skill": "reading",
+   "level": "B2",
+   "title": {
+    "en": "Cities without cars",
+    "ar": "مدن بلا سيارات"
+   },
+   "text": "Cada vez más ciudades europeas cierran sus centros históricos al tráfico. Los defensores de la medida aseguran que el aire es más limpio y que las calles recuperan la vida de barrio. Los comerciantes, en cambio, temían perder clientes; sin embargo, varios estudios indican que las ventas han aumentado, porque los peatones pasean más y se detienen en las tiendas. Aun así, el debate continúa en las ciudades donde el transporte público no es suficiente.",
+   "questions": [
+    {
+     "p": "¿Qué temían los comerciantes?",
+     "o": [
+      "Perder clientes",
+      "Pagar más impuestos",
+      "Tener más tráfico",
+      "Cerrar por la noche"
+     ]
+    },
+    {
+     "p": "Según los estudios, ¿qué ha pasado con las ventas?",
+     "o": [
+      "Han aumentado",
+      "Han bajado",
+      "No han cambiado",
+      "Solo han subido de noche"
+     ]
+    },
+    {
+     "p": "¿Dónde sigue el debate?",
+     "o": [
+      "Donde el transporte público no es suficiente",
+      "En todas las ciudades",
+      "Solo en los pueblos",
+      "En ninguna parte"
+     ]
+    }
+   ]
+  },
+  {
+   "key": "es-b1-listen-1",
+   "type": "listening",
+   "skill": "listening",
+   "level": "B1",
+   "title": {
+    "en": "A message from the doctor's",
+    "ar": "رسالة من العيادة"
+   },
+   "text": "Hola, le llamo del centro de salud. Su cita con la doctora Ruiz era el miércoles a las diez, pero la doctora no puede venir ese día. Le proponemos el jueves a la misma hora o el viernes a las cuatro. Por favor, llámenos para confirmar antes del martes.",
+   "questions": [
+    {
+     "p": "¿Por qué cambia la cita?",
+     "o": [
+      "La doctora no puede ir el miércoles",
+      "El paciente está de viaje",
+      "El centro está cerrado",
+      "Hay una huelga"
+     ]
+    },
+    {
+     "p": "¿Qué opciones proponen?",
+     "o": [
+      "El jueves a las diez o el viernes a las cuatro",
+      "El miércoles a las cuatro",
+      "El lunes a las diez",
+      "El viernes a las diez"
+     ]
+    },
+    {
+     "p": "¿Qué tiene que hacer el paciente?",
+     "o": [
+      "Llamar antes del martes",
+      "Ir el miércoles",
+      "Escribir un correo",
+      "Nada"
+     ]
+    }
+   ]
+  },
+  {
+   "key": "es-b1-dictation",
+   "type": "dictation",
+   "skill": "listening",
+   "level": "B1",
+   "title": {
+    "en": "Everyday sentences",
+    "ar": "جمل من الحياة اليومية"
+   },
+   "questions": [
+    {
+     "a": [
+      "Cuando era pequeño, vivía cerca del mar."
+     ]
+    },
+    {
+     "a": [
+      "Espero que tengas un buen viaje."
+     ]
+    },
+    {
+     "a": [
+      "Yo que tú, hablaría con tu jefe."
+     ]
+    }
+   ]
+  },
+  {
+   "key": "es-b1-repeat",
+   "type": "repeat",
+   "skill": "speaking",
+   "level": "B1",
+   "title": {
+    "en": "Say it aloud",
+    "ar": "قلها بصوت عالٍ"
+   },
+   "objectives": [
+    {
+     "code": "es.b1.pronounce",
+     "skill": "speaking",
+     "text": {
+      "en": "Pronounce everyday sentences clearly enough to be understood",
+      "ar": "نطق جمل يومية بوضوح يكفي لفهمها"
+     }
+    }
+   ],
+   "questions": [
+    {
+     "r": "Cuando era pequeño, vivía cerca del mar."
+    },
+    {
+     "r": "Espero que tengas un buen viaje."
+    },
+    {
+     "r": "Yo que tú, hablaría con tu jefe."
+    },
+    {
+     "r": "Cuando era niño, vivía en Toledo."
+    },
+    {
+     "r": "¿Podrías ayudarme?"
+    }
+   ]
+  }
+ ],
+ "course": {
+  "slug": "es-intermediate",
+  "level_from": "B1",
+  "level_to": "B2",
+  "title": {
+   "en": "Spanish B1: everyday independence",
+   "ar": "الإسبانية B1: الاستقلالية في الحياة اليومية"
+  },
+  "description": {
+   "en": "Tell stories about the past, give opinions and advice, and understand longer texts in Spanish.",
+   "ar": "احكِ عن الماضي، وعبّر عن آرائك وقدّم النصائح، وافهم نصوصًا أطول في الإسبانية."
+  },
+  "units": [
+   {
+    "title": {
+     "en": "Stories and opinions",
+     "ar": "القصص والآراء"
+    },
+    "lessons": [
+     {
+      "key": "es-b1-u1-l1",
+      "skill": "grammar",
+      "level": "B1",
+      "topic": "preterito_imperfecto",
+      "minutes": 20,
+      "title": {
+       "en": "What happened?",
+       "ar": "ماذا حدث؟"
+      },
+      "intro": {
+       "en": "Tell a story about the past and describe how things were.",
+       "ar": "احكِ قصة عن الماضي وصِف كيف كانت الأمور."
+      },
+      "objectives": [
+       {
+        "code": "es.b1.narrate",
+        "skill": "speaking",
+        "text": {
+         "en": "Tell a short story about something that happened",
+         "ar": "رواية قصة قصيرة عن شيء حدث"
+        }
+       },
+       {
+        "code": "es.b1.preterito_imperfecto",
+        "skill": "grammar",
+        "text": {
+         "en": "Use past forms to narrate events and describe situations",
+         "ar": "استخدام صيغ الماضي لسرد الأحداث ووصف المواقف"
+        }
+       }
+      ],
+      "words": [
+       "viaje",
+       "recuerdo",
+       "de repente",
+       "mientras",
+       "acontecimiento"
+      ],
+      "exercises": [
+       "es-b1-pret-imp-mcq",
+       "es-b1-order"
+      ]
+     },
+     {
+      "key": "es-b1-u1-l2",
+      "skill": "grammar",
+      "level": "B1",
+      "topic": "presente_subjuntivo",
+      "minutes": 20,
+      "title": {
+       "en": "Wishes and opinions",
+       "ar": "الأمنيات والآراء"
+      },
+      "intro": {
+       "en": "Say what you want others to do and what you think.",
+       "ar": "عبّر عمّا تريده من الآخرين وعمّا تفكر فيه."
+      },
+      "objectives": [
+       {
+        "code": "es.b1.presente_subjuntivo",
+        "skill": "grammar",
+        "text": {
+         "en": "Express wishes, opinions and recommendations",
+         "ar": "التعبير عن الأمنيات والآراء والتوصيات"
+        }
+       },
+       {
+        "code": "es.b1.read_opinion",
+        "skill": "reading",
+        "text": {
+         "en": "Understand the main points of an opinion text",
+         "ar": "فهم الأفكار الرئيسية في نص رأي"
+        }
+       }
+      ],
+      "words": [
+       "esperar",
+       "recomendar",
+       "opinión",
+       "medio ambiente",
+       "consejo"
+      ],
+      "exercises": [
+       "es-b1-subj-cloze",
+       "es-b1-read-1",
+       "es-b1-vocab-mcq"
+      ]
+     }
+    ]
+   },
+   {
+    "title": {
+     "en": "Out in the world",
+     "ar": "في العالم من حولك"
+    },
+    "lessons": [
+     {
+      "key": "es-b1-u2-l1",
+      "skill": "grammar",
+      "level": "B1",
+      "topic": "condicional",
+      "minutes": 20,
+      "title": {
+       "en": "Advice and what-ifs",
+       "ar": "النصائح والاحتمالات"
+      },
+      "intro": {
+       "en": "Give advice and imagine different situations.",
+       "ar": "قدّم النصائح وتخيّل مواقف مختلفة."
+      },
+      "objectives": [
+       {
+        "code": "es.b1.condicional",
+        "skill": "grammar",
+        "text": {
+         "en": "Give advice and talk about hypothetical situations",
+         "ar": "تقديم النصائح والحديث عن مواقف افتراضية"
+        }
+       },
+       {
+        "code": "es.b1.listen_announcement",
+        "skill": "listening",
+        "text": {
+         "en": "Understand practical information in announcements and conversations",
+         "ar": "فهم المعلومات العملية في الإعلانات والمحادثات"
+        }
+       }
+      ],
+      "words": [
+       "deber",
+       "salud",
+       "conseguir",
+       "tráfico",
+       "barrio"
+      ],
+      "exercises": [
+       "es-b1-cond-cloze",
+       "es-b1-listen-1",
+       "es-b1-dictation"
+      ]
+     },
+     {
+      "key": "es-b1-u2-l2",
+      "skill": "grammar",
+      "level": "B1",
+      "topic": "por_para",
+      "minutes": 20,
+      "title": {
+       "en": "Saying more precisely",
+       "ar": "التعبير بدقة أكبر"
+      },
+      "intro": {
+       "en": "Join ideas to describe people, places and things precisely.",
+       "ar": "اربط الأفكار لتصف الأشخاص والأماكن والأشياء بدقة."
+      },
+      "objectives": [
+       {
+        "code": "es.b1.por_para",
+        "skill": "grammar",
+        "text": {
+         "en": "Connect ideas into longer, more precise sentences",
+         "ar": "ربط الأفكار في جمل أطول وأدق"
+        }
+       },
+       {
+        "code": "es.b1.read_article",
+        "skill": "reading",
+        "text": {
+         "en": "Follow a short article on a familiar topic",
+         "ar": "متابعة مقال قصير عن موضوع مألوف"
+        }
+       }
+      ],
+      "words": [
+       "vecino",
+       "alquilar",
+       "cambiar",
+       "aunque",
+       "ventaja"
+      ],
+      "exercises": [
+       "es-b1-por-para-mcq",
+       "es-b2-read-2"
+      ]
+     }
+    ]
+   }
+  ]
+ }
+}

@@ -4,7 +4,7 @@ import { Suspense, useEffect } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
-import { ArrowLeft, BarChart3, Bot, ClipboardCheck, CreditCard, FileStack, Globe2, ScrollText, Users, type LucideIcon } from "lucide-react";
+import { ArrowLeft, BarChart3, Bot, ClipboardCheck, CreditCard, FileStack, Globe2, PencilLine, ScrollText, Users, type LucideIcon } from "lucide-react";
 import { Logo } from "@/components/layout/app-shell";
 import { Button } from "@/components/ui/button";
 import { EmptyState, ErrorState } from "@/components/ui/states";
@@ -21,6 +21,7 @@ export const ADMIN_SECTIONS: { href: string; key: string; permission: string; ic
   { href: "/admin/users", key: "users", permission: "users.manage", icon: Users },
   { href: "/admin/review", key: "review", permission: "content.review", icon: ClipboardCheck },
   { href: "/admin/content", key: "content", permission: "content.manage", icon: FileStack },
+  { href: "/admin/editor", key: "editor", permission: "content.manage", icon: PencilLine },
   { href: "/admin/ai", key: "ai", permission: "ai.manage", icon: Bot },
   { href: "/admin/billing", key: "billing", permission: "billing.manage", icon: CreditCard },
   { href: "/admin/languages", key: "languages", permission: "languages.manage", icon: Globe2 },

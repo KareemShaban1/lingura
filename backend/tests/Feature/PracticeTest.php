@@ -35,13 +35,13 @@ class PracticeTest extends TestCase
     {
         $list = collect($this->getJson("/api/v1/learner-profiles/{$this->profile->public_id}/exercises")->assertOk()->json('data'));
 
-        $this->assertCount(9, $list, 'listening and dictation are hidden until their audio exists');
+        $this->assertCount(18, $list, 'listening and dictation are hidden until their audio exists');
         $this->assertTrue($list->contains('type', 'repeat'), 'Spanish supports pronunciation practice');
         $this->assertEmpty($list->whereIn('type', ['listening', 'dictation']));
         $this->assertTrue($list->every(fn ($e) => str_starts_with(Exercise::where('public_id', $e['id'])->value('key'), 'es-')));
 
         $grammar = $this->getJson("/api/v1/learner-profiles/{$this->profile->public_id}/exercises?skill=reading")->json('data');
-        $this->assertCount(2, $grammar);
+        $this->assertCount(4, $grammar);
     }
 
     public function test_cloze_attempt_with_feedback_partial_credit_and_mastery(): void

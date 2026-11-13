@@ -1,0 +1,1048 @@
+{
+ "language": "zh",
+ "topics": [
+  {
+   "slug": "le_completed",
+   "level": "B1",
+   "title": {
+    "en": "了 for completed actions and change",
+    "ar": "了 للأفعال المكتملة والتغيّر"
+   },
+   "explanation": {
+    "en": "Put 了 after a verb for a completed action (我买了一本书), and at the end of a sentence for a new situation (下雨了 — it's started raining). Negate completed actions with 没 and no 了: 我没去.",
+    "ar": "تُوضع 了 بعد الفعل للدلالة على فعل مكتمل (我买了一本书)، وفي آخر الجملة للدلالة على وضع جديد (下雨了 — بدأ المطر). ويُنفى الفعل المكتمل بـ 没 دون 了: 我没去."
+   },
+   "examples": [
+    [
+     "我昨天买了一本书。",
+     "I bought a book yesterday."
+    ],
+    [
+     "下雨了。",
+     "It's started raining."
+    ],
+    [
+     "他没去上班。",
+     "He didn't go to work."
+    ]
+   ]
+  },
+  {
+   "slug": "guo_experience",
+   "level": "B1",
+   "title": {
+    "en": "过 for experiences",
+    "ar": "过 للتعبير عن التجارب"
+   },
+   "explanation": {
+    "en": "Verb + 过 says you have done something at some time (an experience): 我去过北京 — I have been to Beijing. Negate with 没 + verb + 过: 我没吃过烤鸭.",
+    "ar": "الفعل + 过 يعني أنك قمت بالشيء في وقت ما (تجربة): 我去过北京 — زرت بكين من قبل. والنفي بـ 没 + الفعل + 过: 我没吃过烤鸭."
+   },
+   "examples": [
+    [
+     "我去过上海两次。",
+     "I have been to Shanghai twice."
+    ],
+    [
+     "你吃过饺子吗？",
+     "Have you ever eaten dumplings?"
+    ],
+    [
+     "我没看过这个电影。",
+     "I have never seen this film."
+    ]
+   ]
+  },
+  {
+   "slug": "comparison_bi",
+   "level": "B1",
+   "title": {
+    "en": "Comparing with 比",
+    "ar": "المقارنة بـ 比"
+   },
+   "explanation": {
+    "en": "A 比 B + adjective: 今天比昨天冷 (today is colder than yesterday). Add the difference after the adjective: 他比我高一点儿. Negate with 没有: 我没有他高.",
+    "ar": "A 比 B + صفة: 今天比昨天冷 (اليوم أبرد من أمس). ويُضاف مقدار الفرق بعد الصفة: 他比我高一点儿. والنفي بـ 没有: 我没有他高."
+   },
+   "examples": [
+    [
+     "今天比昨天冷。",
+     "Today is colder than yesterday."
+    ],
+    [
+     "他比我高一点儿。",
+     "He's a bit taller than me."
+    ],
+    [
+     "我的房间没有你的大。",
+     "My room isn't as big as yours."
+    ]
+   ]
+  },
+  {
+   "slug": "ba_construction",
+   "level": "B1",
+   "title": {
+    "en": "The 把 construction",
+    "ar": "تركيب 把"
+   },
+   "explanation": {
+    "en": "把 puts the object before the verb to say what happens to it; the verb needs a result or complement: 请把门关上 (please close the door), 我把作业做完了 (I finished the homework).",
+    "ar": "يُقدِّم 把 المفعول به قبل الفعل للتعبير عمّا يحدث له، ويحتاج الفعل إلى نتيجة أو مُكمِّل: 请把门关上 (أغلق الباب من فضلك)، 我把作业做完了 (أنهيت الواجب)."
+   },
+   "examples": [
+    [
+     "请把门关上。",
+     "Please close the door."
+    ],
+    [
+     "我把作业做完了。",
+     "I've finished the homework."
+    ],
+    [
+     "他把书放在桌子上了。",
+     "He put the book on the table."
+    ]
+   ]
+  }
+ ],
+ "words": [
+  {
+   "lemma": "旅行",
+   "pos": "noun",
+   "level": "B1",
+   "meaning": {
+    "en": "travel, trip",
+    "ar": "رحلة"
+   },
+   "example": [
+    "这次旅行很有意思。",
+    "This trip was very interesting."
+   ],
+   "pron": "lǚ xíng"
+  },
+  {
+   "lemma": "记得",
+   "pos": "verb",
+   "level": "B1",
+   "meaning": {
+    "en": "to remember",
+    "ar": "يتذكر"
+   },
+   "example": [
+    "我还记得那个夏天。",
+    "I still remember that summer."
+   ],
+   "pron": "jì de"
+  },
+  {
+   "lemma": "突然",
+   "pos": "adv",
+   "level": "B1",
+   "meaning": {
+    "en": "suddenly",
+    "ar": "فجأة"
+   },
+   "example": [
+    "突然下雨了。",
+    "Suddenly it started raining."
+   ],
+   "pron": "tū rán"
+  },
+  {
+   "lemma": "已经",
+   "pos": "adv",
+   "level": "B1",
+   "meaning": {
+    "en": "already",
+    "ar": "بالفعل"
+   },
+   "example": [
+    "我已经吃饭了。",
+    "I have already eaten."
+   ],
+   "pron": "yǐ jīng"
+  },
+  {
+   "lemma": "经历",
+   "pos": "noun",
+   "level": "B1",
+   "meaning": {
+    "en": "experience",
+    "ar": "تجربة"
+   },
+   "example": [
+    "这是一次难忘的经历。",
+    "It was an unforgettable experience."
+   ],
+   "pron": "jīng lì"
+  },
+  {
+   "lemma": "希望",
+   "pos": "verb",
+   "level": "B1",
+   "meaning": {
+    "en": "to hope",
+    "ar": "يأمل"
+   },
+   "example": [
+    "希望你一切都好。",
+    "I hope everything is well with you."
+   ],
+   "pron": "xī wàng"
+  },
+  {
+   "lemma": "建议",
+   "pos": "verb",
+   "level": "B1",
+   "meaning": {
+    "en": "to suggest; suggestion",
+    "ar": "يقترح؛ اقتراح"
+   },
+   "example": [
+    "我建议你早点儿休息。",
+    "I suggest you rest earlier."
+   ],
+   "pron": "jiàn yì"
+  },
+  {
+   "lemma": "觉得",
+   "pos": "verb",
+   "level": "B1",
+   "meaning": {
+    "en": "to think, to feel",
+    "ar": "يرى؛ يشعر"
+   },
+   "example": [
+    "我觉得这个主意不错。",
+    "I think this idea is good."
+   ],
+   "pron": "jué de"
+  },
+  {
+   "lemma": "环境",
+   "pos": "noun",
+   "level": "B1",
+   "meaning": {
+    "en": "environment",
+    "ar": "البيئة"
+   },
+   "example": [
+    "我们应该保护环境。",
+    "We should protect the environment."
+   ],
+   "pron": "huán jìng"
+  },
+  {
+   "lemma": "应该",
+   "pos": "verb",
+   "level": "B1",
+   "meaning": {
+    "en": "should",
+    "ar": "ينبغي"
+   },
+   "example": [
+    "你应该多喝水。",
+    "You should drink more water."
+   ],
+   "pron": "yīng gāi"
+  },
+  {
+   "lemma": "身体",
+   "pos": "noun",
+   "level": "B1",
+   "meaning": {
+    "en": "body; health",
+    "ar": "جسم؛ صحة"
+   },
+   "example": [
+    "运动对身体好。",
+    "Exercise is good for your health."
+   ],
+   "pron": "shēn tǐ"
+  },
+  {
+   "lemma": "成功",
+   "pos": "verb",
+   "level": "B1",
+   "meaning": {
+    "en": "to succeed",
+    "ar": "ينجح"
+   },
+   "example": [
+    "他终于成功了。",
+    "He finally succeeded."
+   ],
+   "pron": "chéng gōng"
+  },
+  {
+   "lemma": "堵车",
+   "pos": "verb",
+   "level": "B1",
+   "meaning": {
+    "en": "to be in a traffic jam",
+    "ar": "زحمة مرور"
+   },
+   "example": [
+    "早上堵车很厉害。",
+    "The traffic jam was bad this morning."
+   ],
+   "pron": "dǔ chē"
+  },
+  {
+   "lemma": "附近",
+   "pos": "noun",
+   "level": "B1",
+   "meaning": {
+    "en": "nearby area",
+    "ar": "بالقرب"
+   },
+   "example": [
+    "我家附近有一个公园。",
+    "There's a park near my home."
+   ],
+   "pron": "fù jìn"
+  },
+  {
+   "lemma": "邻居",
+   "pos": "noun",
+   "level": "B1",
+   "meaning": {
+    "en": "neighbour",
+    "ar": "جار"
+   },
+   "example": [
+    "我的邻居很热情。",
+    "My neighbour is very friendly."
+   ],
+   "pron": "lín jū"
+  },
+  {
+   "lemma": "租",
+   "pos": "verb",
+   "level": "B1",
+   "meaning": {
+    "en": "to rent",
+    "ar": "يستأجر"
+   },
+   "example": [
+    "我们想租一个大一点儿的房子。",
+    "We want to rent a slightly bigger flat."
+   ],
+   "pron": "zū"
+  },
+  {
+   "lemma": "变化",
+   "pos": "noun",
+   "level": "B1",
+   "meaning": {
+    "en": "change",
+    "ar": "تغيّر"
+   },
+   "example": [
+    "这个城市的变化很大。",
+    "This city has changed a lot."
+   ],
+   "pron": "biàn huà"
+  },
+  {
+   "lemma": "虽然",
+   "pos": "conj",
+   "level": "B1",
+   "meaning": {
+    "en": "although",
+    "ar": "رغم أنّ"
+   },
+   "example": [
+    "虽然下雨，我们还是出去了。",
+    "Although it was raining, we still went out."
+   ],
+   "pron": "suī rán"
+  },
+  {
+   "lemma": "方便",
+   "pos": "adj",
+   "level": "B1",
+   "meaning": {
+    "en": "convenient",
+    "ar": "مريح؛ ملائم"
+   },
+   "example": [
+    "住在市中心很方便。",
+    "Living in the city centre is convenient."
+   ],
+   "pron": "fāng biàn"
+  },
+  {
+   "lemma": "比较",
+   "pos": "adv",
+   "level": "B1",
+   "meaning": {
+    "en": "relatively, quite",
+    "ar": "نسبيًا"
+   },
+   "example": [
+    "这里的东西比较便宜。",
+    "Things here are relatively cheap."
+   ],
+   "pron": "bǐ jiào"
+  }
+ ],
+ "exercises": [
+  {
+   "key": "zh-b1-le-mcq",
+   "type": "mcq",
+   "skill": "grammar",
+   "level": "B1",
+   "questions": [
+    {
+     "p": "我昨天买___一本书。",
+     "o": [
+      "了",
+      "过",
+      "着",
+      "的"
+     ]
+    },
+    {
+     "p": "外面下雨___，带伞吧。",
+     "o": [
+      "了",
+      "过",
+      "着",
+      "吗"
+     ]
+    },
+    {
+     "p": "他昨天___去上班。",
+     "o": [
+      "没",
+      "不",
+      "别",
+      "没有了"
+     ]
+    },
+    {
+     "p": "我已经吃___饭了。",
+     "o": [
+      "了",
+      "过了的",
+      "着",
+      "地"
+     ]
+    }
+   ],
+   "topic": "le_completed"
+  },
+  {
+   "key": "zh-b1-guo-mcq",
+   "type": "mcq",
+   "skill": "grammar",
+   "level": "B1",
+   "questions": [
+    {
+     "p": "我去___北京两次。",
+     "o": [
+      "过",
+      "了",
+      "着",
+      "的"
+     ]
+    },
+    {
+     "p": "你吃___饺子吗？",
+     "o": [
+      "过",
+      "着",
+      "地",
+      "得"
+     ]
+    },
+    {
+     "p": "我___看过这个电影。",
+     "o": [
+      "没",
+      "不",
+      "别",
+      "没有了"
+     ]
+    },
+    {
+     "p": "你去过中国___？",
+     "o": [
+      "吗",
+      "了",
+      "过",
+      "的"
+     ]
+    }
+   ],
+   "topic": "guo_experience"
+  },
+  {
+   "key": "zh-b1-bi-cloze",
+   "type": "cloze",
+   "skill": "grammar",
+   "level": "B1",
+   "topic": "comparison_bi",
+   "questions": [
+    {
+     "p": "今天___昨天冷。(bǐ)",
+     "a": [
+      "比"
+     ]
+    },
+    {
+     "p": "他比我高一___。(diǎnr)",
+     "a": [
+      "点儿",
+      "点"
+     ]
+    },
+    {
+     "p": "我的房间___你的大。(méiyǒu)",
+     "a": [
+      "没有"
+     ]
+    },
+    {
+     "p": "坐地铁比坐公交车___。(kuài)",
+     "a": [
+      "快"
+     ]
+    }
+   ]
+  },
+  {
+   "key": "zh-b1-ba-mcq",
+   "type": "mcq",
+   "skill": "grammar",
+   "level": "B1",
+   "questions": [
+    {
+     "p": "请___门关上。",
+     "o": [
+      "把",
+      "被",
+      "比",
+      "给"
+     ]
+    },
+    {
+     "p": "我把作业做___了。",
+     "o": [
+      "完",
+      "过",
+      "着",
+      "了的"
+     ]
+    },
+    {
+     "p": "他把书放___桌子上了。",
+     "o": [
+      "在",
+      "从",
+      "对",
+      "跟"
+     ]
+    },
+    {
+     "p": "你把手机___了吗？",
+     "o": [
+      "带来",
+      "带",
+      "来带",
+      "带过的"
+     ]
+    }
+   ],
+   "topic": "ba_construction"
+  },
+  {
+   "key": "zh-b1-vocab-mcq",
+   "type": "mcq",
+   "skill": "vocabulary",
+   "level": "B1",
+   "questions": [
+    {
+     "p": "我们应该保护___。",
+     "o": [
+      "环境",
+      "邻居",
+      "堵车",
+      "经历"
+     ]
+    },
+    {
+     "p": "我的___住在隔壁。",
+     "o": [
+      "邻居",
+      "环境",
+      "建议",
+      "变化"
+     ]
+    },
+    {
+     "p": "___下雨了，我们都没带伞。",
+     "o": [
+      "突然",
+      "虽然",
+      "比较",
+      "已经了"
+     ]
+    },
+    {
+     "p": "运动对___好。",
+     "o": [
+      "身体",
+      "环境",
+      "堵车",
+      "建议"
+     ]
+    },
+    {
+     "p": "住在市中心很___，去哪儿都近。",
+     "o": [
+      "方便",
+      "成功",
+      "附近",
+      "突然"
+     ]
+    }
+   ],
+   "title": {
+    "en": "Everyday words",
+    "ar": "كلمات يومية"
+   }
+  },
+  {
+   "key": "zh-b1-order",
+   "type": "ordering",
+   "skill": "grammar",
+   "level": "B1",
+   "title": {
+    "en": "Build longer sentences",
+    "ar": "كوّن جملًا أطول"
+   },
+   "questions": [
+    {
+     "o": [
+      "我",
+      "去过",
+      "北京",
+      "两次"
+     ]
+    },
+    {
+     "o": [
+      "今天",
+      "比",
+      "昨天",
+      "冷"
+     ]
+    },
+    {
+     "o": [
+      "请",
+      "把",
+      "门",
+      "关上"
+     ]
+    }
+   ]
+  },
+  {
+   "key": "zh-b1-read-1",
+   "type": "reading",
+   "skill": "reading",
+   "level": "B1",
+   "title": {
+    "en": "Working from home",
+    "ar": "العمل من المنزل"
+   },
+   "text": "这两年，小王每个星期有三天在家工作。开始的时候他很喜欢：不用堵车，还可以自己安排时间。可是几个月以后，他觉得有点儿孤单，也很想念同事。现在他星期二和星期四去公司上班，他说自己找到了最好的平衡。",
+   "questions": [
+    {
+     "p": "开始的时候小王喜欢什么？",
+     "o": [
+      "不用堵车",
+      "和同事聊天",
+      "去公司上班",
+      "周末工作"
+     ]
+    },
+    {
+     "p": "几个月以后他有什么问题？",
+     "o": [
+      "觉得孤单",
+      "工资少了",
+      "工作太多",
+      "没有工作了"
+     ]
+    },
+    {
+     "p": "现在他怎么上班？",
+     "o": [
+      "一个星期去公司两天",
+      "一直在家工作",
+      "一直在公司工作",
+      "换了工作"
+     ]
+    }
+   ]
+  },
+  {
+   "key": "zh-b2-read-2",
+   "type": "reading",
+   "skill": "reading",
+   "level": "B2",
+   "title": {
+    "en": "Cities without cars",
+    "ar": "مدن بلا سيارات"
+   },
+   "text": "越来越多的欧洲城市不让汽车进入老城区。支持者认为，空气变干净了，街道也重新热闹起来。商店老板们原来担心会失去顾客，但是几项研究发现，销售额反而增加了，因为步行的人逛得更多，也更愿意走进商店。不过，在公共交通不够发达的城市，人们仍然在讨论这个问题。",
+   "questions": [
+    {
+     "p": "商店老板们原来担心什么？",
+     "o": [
+      "失去顾客",
+      "多交税",
+      "车更多",
+      "晚上关门"
+     ]
+    },
+    {
+     "p": "根据研究，销售额怎么样了？",
+     "o": [
+      "增加了",
+      "减少了",
+      "没有变化",
+      "只在晚上增加"
+     ]
+    },
+    {
+     "p": "哪些城市还在讨论这个问题？",
+     "o": [
+      "公共交通不够发达的城市",
+      "所有城市",
+      "只有农村",
+      "没有城市"
+     ]
+    }
+   ]
+  },
+  {
+   "key": "zh-b1-listen-1",
+   "type": "listening",
+   "skill": "listening",
+   "level": "B1",
+   "title": {
+    "en": "A message from the clinic",
+    "ar": "رسالة من العيادة"
+   },
+   "text": "您好，这里是张医生的诊所。您星期三上午十点的预约要改时间，因为医生那天不在。我们可以给您安排星期四同一时间，或者星期五下午四点。请您在星期二以前给我们回电话确认。",
+   "questions": [
+    {
+     "p": "为什么要改预约？",
+     "o": [
+      "医生星期三不在",
+      "病人去旅行",
+      "诊所关门",
+      "有罢工"
+     ]
+    },
+    {
+     "p": "可以改到什么时候？",
+     "o": [
+      "星期四十点或者星期五下午四点",
+      "星期三下午四点",
+      "星期一十点",
+      "星期五上午十点"
+     ]
+    },
+    {
+     "p": "病人要做什么？",
+     "o": [
+      "星期二以前回电话",
+      "星期三去诊所",
+      "发电子邮件",
+      "什么也不用做"
+     ]
+    }
+   ]
+  },
+  {
+   "key": "zh-b1-dictation",
+   "type": "dictation",
+   "skill": "listening",
+   "level": "B1",
+   "title": {
+    "en": "Everyday sentences",
+    "ar": "جمل من الحياة اليومية"
+   },
+   "questions": [
+    {
+     "a": [
+      "我小时候住在海边。"
+     ]
+    },
+    {
+     "a": [
+      "我去过北京两次。"
+     ]
+    },
+    {
+     "a": [
+      "你应该多喝水。"
+     ]
+    }
+   ]
+  },
+  {
+   "key": "zh-b1-repeat",
+   "type": "repeat",
+   "skill": "speaking",
+   "level": "B1",
+   "title": {
+    "en": "Say it aloud",
+    "ar": "قلها بصوت عالٍ"
+   },
+   "objectives": [
+    {
+     "code": "zh.b1.pronounce",
+     "skill": "speaking",
+     "text": {
+      "en": "Pronounce everyday sentences clearly enough to be understood",
+      "ar": "نطق جمل يومية بوضوح يكفي لفهمها"
+     }
+    }
+   ],
+   "questions": [
+    {
+     "r": "我小时候住在海边。"
+    },
+    {
+     "r": "我去过北京两次。"
+    },
+    {
+     "r": "你应该多喝水。"
+    },
+    {
+     "r": "我昨天买了一本书。"
+    },
+    {
+     "r": "今天比昨天冷。"
+    }
+   ]
+  }
+ ],
+ "course": {
+  "slug": "zh-intermediate",
+  "level_from": "B1",
+  "level_to": "B2",
+  "title": {
+   "en": "Chinese B1: everyday independence",
+   "ar": "الصينية B1: الاستقلالية في الحياة اليومية"
+  },
+  "description": {
+   "en": "Tell stories about the past, give opinions and advice, and understand longer texts in Chinese.",
+   "ar": "احكِ عن الماضي، وعبّر عن آرائك وقدّم النصائح، وافهم نصوصًا أطول في الصينية."
+  },
+  "units": [
+   {
+    "title": {
+     "en": "Stories and opinions",
+     "ar": "القصص والآراء"
+    },
+    "lessons": [
+     {
+      "key": "zh-b1-u1-l1",
+      "skill": "grammar",
+      "level": "B1",
+      "topic": "le_completed",
+      "minutes": 20,
+      "title": {
+       "en": "What happened?",
+       "ar": "ماذا حدث؟"
+      },
+      "intro": {
+       "en": "Tell a story about the past and describe how things were.",
+       "ar": "احكِ قصة عن الماضي وصِف كيف كانت الأمور."
+      },
+      "objectives": [
+       {
+        "code": "zh.b1.narrate",
+        "skill": "speaking",
+        "text": {
+         "en": "Tell a short story about something that happened",
+         "ar": "رواية قصة قصيرة عن شيء حدث"
+        }
+       },
+       {
+        "code": "zh.b1.le_completed",
+        "skill": "grammar",
+        "text": {
+         "en": "Use past forms to narrate events and describe situations",
+         "ar": "استخدام صيغ الماضي لسرد الأحداث ووصف المواقف"
+        }
+       }
+      ],
+      "words": [
+       "旅行",
+       "记得",
+       "突然",
+       "已经",
+       "经历"
+      ],
+      "exercises": [
+       "zh-b1-le-mcq",
+       "zh-b1-order"
+      ]
+     },
+     {
+      "key": "zh-b1-u1-l2",
+      "skill": "grammar",
+      "level": "B1",
+      "topic": "guo_experience",
+      "minutes": 20,
+      "title": {
+       "en": "Wishes and opinions",
+       "ar": "الأمنيات والآراء"
+      },
+      "intro": {
+       "en": "Say what you want others to do and what you think.",
+       "ar": "عبّر عمّا تريده من الآخرين وعمّا تفكر فيه."
+      },
+      "objectives": [
+       {
+        "code": "zh.b1.guo_experience",
+        "skill": "grammar",
+        "text": {
+         "en": "Express wishes, opinions and recommendations",
+         "ar": "التعبير عن الأمنيات والآراء والتوصيات"
+        }
+       },
+       {
+        "code": "zh.b1.read_opinion",
+        "skill": "reading",
+        "text": {
+         "en": "Understand the main points of an opinion text",
+         "ar": "فهم الأفكار الرئيسية في نص رأي"
+        }
+       }
+      ],
+      "words": [
+       "希望",
+       "建议",
+       "觉得",
+       "环境",
+       "应该"
+      ],
+      "exercises": [
+       "zh-b1-guo-mcq",
+       "zh-b1-read-1",
+       "zh-b1-vocab-mcq"
+      ]
+     }
+    ]
+   },
+   {
+    "title": {
+     "en": "Out in the world",
+     "ar": "في العالم من حولك"
+    },
+    "lessons": [
+     {
+      "key": "zh-b1-u2-l1",
+      "skill": "grammar",
+      "level": "B1",
+      "topic": "comparison_bi",
+      "minutes": 20,
+      "title": {
+       "en": "Advice and what-ifs",
+       "ar": "النصائح والاحتمالات"
+      },
+      "intro": {
+       "en": "Give advice and imagine different situations.",
+       "ar": "قدّم النصائح وتخيّل مواقف مختلفة."
+      },
+      "objectives": [
+       {
+        "code": "zh.b1.comparison_bi",
+        "skill": "grammar",
+        "text": {
+         "en": "Give advice and talk about hypothetical situations",
+         "ar": "تقديم النصائح والحديث عن مواقف افتراضية"
+        }
+       },
+       {
+        "code": "zh.b1.listen_announcement",
+        "skill": "listening",
+        "text": {
+         "en": "Understand practical information in announcements and conversations",
+         "ar": "فهم المعلومات العملية في الإعلانات والمحادثات"
+        }
+       }
+      ],
+      "words": [
+       "身体",
+       "成功",
+       "堵车",
+       "附近",
+       "邻居"
+      ],
+      "exercises": [
+       "zh-b1-bi-cloze",
+       "zh-b1-listen-1",
+       "zh-b1-dictation"
+      ]
+     },
+     {
+      "key": "zh-b1-u2-l2",
+      "skill": "grammar",
+      "level": "B1",
+      "topic": "ba_construction",
+      "minutes": 20,
+      "title": {
+       "en": "Saying more precisely",
+       "ar": "التعبير بدقة أكبر"
+      },
+      "intro": {
+       "en": "Join ideas to describe people, places and things precisely.",
+       "ar": "اربط الأفكار لتصف الأشخاص والأماكن والأشياء بدقة."
+      },
+      "objectives": [
+       {
+        "code": "zh.b1.ba_construction",
+        "skill": "grammar",
+        "text": {
+         "en": "Connect ideas into longer, more precise sentences",
+         "ar": "ربط الأفكار في جمل أطول وأدق"
+        }
+       },
+       {
+        "code": "zh.b1.read_article",
+        "skill": "reading",
+        "text": {
+         "en": "Follow a short article on a familiar topic",
+         "ar": "متابعة مقال قصير عن موضوع مألوف"
+        }
+       }
+      ],
+      "words": [
+       "租",
+       "变化",
+       "虽然",
+       "方便",
+       "比较"
+      ],
+      "exercises": [
+       "zh-b1-ba-mcq",
+       "zh-b2-read-2"
+      ]
+     }
+    ]
+   }
+  ]
+ }
+}

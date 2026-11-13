@@ -46,11 +46,12 @@ class ExamService
         if (! $framework->is_active || $framework->language_id !== $profile->target_language_id) {
             throw new DomainError('This exam is not available for your language.', 'exam_unavailable', 422);
         }
-        $form = $framework->activeForm() ?? throw new DomainError('No practice test is available yet.', 'exam_unavailable', 422);
-        $existing = ExamAttempt::where('learner_profile_id', $profile->id)->where('exam_form_id', $form->id)->where('status', 'in_progress')->first();
+        $existing = ExamAttempt::where('learner_profile_id', $profile->id)->where('status', 'in_progress')
+            ->whereIn('exam_form_id', $framework->forms()->select('id'))->first();
         if ($existing) {
             return $existing; // resume; not charged twice
         }
+        $form = $framework->formFor($profile) ?? throw new DomainError('No practice test is available yet.', 'exam_unavailable', 422);
 
         return $this->quota->using($profile->user, 'exam_mocks', fn () => DB::transaction(function () use ($profile, $framework, $form) {
             $attempt = ExamAttempt::create(['learner_profile_id' => $profile->id, 'exam_form_id' => $form->id, 'status' => 'in_progress', 'started_at' => now()]);

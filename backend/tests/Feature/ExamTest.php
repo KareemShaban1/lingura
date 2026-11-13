@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Domain\AI\Drivers\FakeDriver;
 use App\Models\ExamAttemptSection;
+use App\Models\ExamAttempt;
 use App\Models\ExamFramework;
 use App\Models\ExamItem;
 use App\Models\ExamItemOption;
@@ -137,6 +138,28 @@ class ExamTest extends TestCase
 
         $this->actingAsUser($this->makeUser());
         $this->getJson("/api/v1/exam-attempts/{$id}")->assertForbidden();
+    }
+
+    public function test_retakes_rotate_to_the_form_taken_least_and_open_attempts_resume(): void
+    {
+        $profile = $this->makeLearner('es');
+        $user = $this->actingAsUser($profile->user);
+        $this->subscribe($user, 'premium_monthly');
+        $start = "/api/v1/learner-profiles/{$profile->public_id}/exams/dele_a2/attempts";
+
+        $first = $this->postJson($start)->assertCreated()->assertJsonPath('data.form_number', 1)->json('data.id');
+        $this->postJson($start)->assertOk()->assertJsonPath('data.id', $first); // still open: resumed, not a new form
+
+        ExamAttempt::where('public_id', $first)->update(['status' => 'completed', 'completed_at' => now()]);
+        $second = $this->postJson($start)->assertCreated()->assertJsonPath('data.form_number', 2)->json('data.id');
+        $this->assertNotSame(
+            ExamAttempt::where('public_id', $first)->value('exam_form_id'),
+            ExamAttempt::where('public_id', $second)->value('exam_form_id'),
+        );
+
+        $list = $this->getJson("/api/v1/learner-profiles/{$profile->public_id}/exams")->assertOk()->json('data.0');
+        $this->assertSame(2, $list['forms_count']);
+        $this->assertSame([2, 1], array_column($list['attempts'], 'form_number'));
     }
 
     public function test_listening_audio_is_synthesised_once_per_group(): void

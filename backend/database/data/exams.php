@@ -13,6 +13,9 @@ return [
         'ar' => 'تدريب بصيغة هذا الاختبار بمواد أصلية من LinguaForge. لسنا تابعين للجهة المنظِّمة للاختبار ولا معتمَدين منها. النتائج تقديرات من نموذج التعلّم لدينا وليست درجات رسمية.',
     ],
 
+    // More original forms per framework, keyed by framework slug.
+    'additional_forms' => require __DIR__.'/exams_forms_2.php',
+
     'frameworks' => [
         'ielts_academic' => [
             'language' => 'en', 'exam_name' => 'IELTS Academic', 'scale' => 'band', 'target' => null, 'prior' => 'B2', 'overall_rule' => 'mean_half_band',

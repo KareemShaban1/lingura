@@ -52,14 +52,15 @@ class ExamSeeder extends Seeder
                     $framework->conversions()->create(['theta' => $theta, 'value' => $value]);
                 }
 
-                $this->seedForm($framework, $f, $sections, $levels, $anchors);
+                foreach ([$f['form'], ...($data['additional_forms'][$slug] ?? [])] as $spec) {
+                    $this->seedForm($framework, $spec, $sections, $levels, $anchors);
+                }
             }
         });
     }
 
-    private function seedForm(ExamFramework $framework, array $f, array $sections, $levels, $anchors): void
+    private function seedForm(ExamFramework $framework, array $spec, array $sections, $levels, $anchors): void
     {
-        $spec = $f['form'];
         $hash = hash('sha256', json_encode($spec, JSON_UNESCAPED_UNICODE));
         $form = ExamForm::where('key', $spec['key'])->first();
         if ($form && $form->content_hash === $hash) {

@@ -5,6 +5,7 @@ namespace App\Domain\Courses;
 use App\Domain\Shared\DomainError;
 use App\Domain\Shared\LearningEventRecorder;
 use App\Domain\Vocabulary\VocabularyService;
+use App\Models\AssessmentAttempt;
 use App\Models\Course;
 use App\Models\ExerciseAttempt;
 use App\Models\LearnerProfile;
@@ -31,21 +32,38 @@ class CourseService
         return LessonProgress::where('learner_profile_id', $profile->id)->get()->keyBy('lesson_id');
     }
 
-    /** The first lesson in course order that is not completed. */
+    /**
+     * The first lesson in course order that is not completed. Courses whose target level the learner has already
+     * reached (placement result, else self-reported level) are skipped while a course at their level still has
+     * lessons left; once those are done, earlier courses are offered again.
+     */
     public function nextLesson(LearnerProfile $profile, ?int $skillId = null): ?Lesson
     {
         $done = LessonProgress::where('learner_profile_id', $profile->id)->where('status', 'completed')->pluck('lesson_id');
-        foreach ($this->courses($profile) as $course) {
-            foreach ($course->units as $unit) {
-                foreach ($unit->lessons as $lesson) {
-                    if (! $done->contains($lesson->id) && ($skillId === null || $lesson->skill_id === $skillId)) {
-                        return $lesson;
+        $courses = $this->courses($profile);
+        $level = $this->learnerOrdinal($profile);
+        $atLevel = $level === null ? $courses : $courses->filter(fn (Course $c) => $c->levelTo->ordinal > $level);
+        foreach ([$atLevel, $courses] as $candidates) {
+            foreach ($candidates as $course) {
+                foreach ($course->units as $unit) {
+                    foreach ($unit->lessons as $lesson) {
+                        if (! $done->contains($lesson->id) && ($skillId === null || $lesson->skill_id === $skillId)) {
+                            return $lesson;
+                        }
                     }
                 }
             }
         }
 
         return null;
+    }
+
+    private function learnerOrdinal(LearnerProfile $profile): ?int
+    {
+        $placed = $profile->assessmentAttempts()->where('status', AssessmentAttempt::STATUS_COMPLETED)
+            ->latest('completed_at')->with('overallLevel')->first()?->overallLevel?->ordinal;
+
+        return $placed ?? $profile->selfReportedLevel?->ordinal;
     }
 
     /** Next uncompleted lesson after $current that is not in $excludedKeys ("lesson:{id}"). */

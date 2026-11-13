@@ -1,0 +1,1101 @@
+{
+ "language": "de",
+ "topics": [
+  {
+   "slug": "perfekt_praeteritum",
+   "level": "B1",
+   "title": {
+    "en": "Perfekt and Präteritum",
+    "ar": "الماضي التام والماضي البسيط"
+   },
+   "explanation": {
+    "en": "In conversation, use the Perfekt (ich bin gefahren, ich habe gegessen). For sein, haben and modal verbs, the Präteritum is more common even when speaking: ich war, ich hatte, ich musste.",
+    "ar": "في المحادثة يُستخدم Perfekt (ich bin gefahren، ich habe gegessen)، أما مع sein وhaben والأفعال المساعدة فيشيع Präteritum حتى في الكلام: ich war، ich hatte، ich musste."
+   },
+   "examples": [
+    [
+     "Gestern bin ich ins Kino gegangen.",
+     "Yesterday I went to the cinema."
+    ],
+    [
+     "Als Kind war ich oft bei meiner Oma.",
+     "As a child I was often at my grandma's."
+    ],
+    [
+     "Ich musste lange warten.",
+     "I had to wait a long time."
+    ]
+   ]
+  },
+  {
+   "slug": "nebensaetze_weil_dass",
+   "level": "B1",
+   "title": {
+    "en": "Subordinate clauses with weil and dass",
+    "ar": "الجمل التابعة مع weil وdass"
+   },
+   "explanation": {
+    "en": "After weil (because), dass (that), wenn (if/when) and ob (whether), the conjugated verb goes to the end: Ich bleibe zu Hause, weil ich krank bin. Ich glaube, dass er kommt.",
+    "ar": "بعد weil (لأن) وdass (أنّ) وwenn (إذا/عندما) وob (ما إذا) ينتقل الفعل المصرَّف إلى آخر الجملة: Ich bleibe zu Hause, weil ich krank bin. Ich glaube, dass er kommt."
+   },
+   "examples": [
+    [
+     "Ich lerne Deutsch, weil ich in Berlin arbeiten möchte.",
+     "I'm learning German because I want to work in Berlin."
+    ],
+    [
+     "Ich hoffe, dass du bald kommst.",
+     "I hope that you come soon."
+    ],
+    [
+     "Weißt du, ob der Laden heute offen ist?",
+     "Do you know whether the shop is open today?"
+    ]
+   ]
+  },
+  {
+   "slug": "konjunktiv_ii",
+   "level": "B1",
+   "title": {
+    "en": "Konjunktiv II for advice and wishes",
+    "ar": "صيغة Konjunktiv II للنصيحة والأمنيات"
+   },
+   "explanation": {
+    "en": "Use würde + infinitive and the forms wäre, hätte, könnte, sollte for polite requests, advice and unreal situations: Könnten Sie mir helfen? An deiner Stelle würde ich… Wenn ich Zeit hätte, würde ich reisen.",
+    "ar": "استخدم würde + المصدر والصيغ wäre وhätte وkönnte وsollte للطلب المهذب والنصيحة والمواقف غير الواقعية: Könnten Sie mir helfen? An deiner Stelle würde ich… Wenn ich Zeit hätte, würde ich reisen."
+   },
+   "examples": [
+    [
+     "Könnten Sie das wiederholen?",
+     "Could you repeat that?"
+    ],
+    [
+     "Du solltest mehr schlafen.",
+     "You should sleep more."
+    ],
+    [
+     "Wenn ich Zeit hätte, würde ich mehr lesen.",
+     "If I had time, I would read more."
+    ]
+   ]
+  },
+  {
+   "slug": "relativsaetze",
+   "level": "B1",
+   "title": {
+    "en": "Relative clauses",
+    "ar": "جمل الصلة"
+   },
+   "explanation": {
+    "en": "The relative pronoun (der, die, das, den, dem…) takes the gender of the noun and the case of its role in the clause; the verb goes to the end: Der Mann, der dort wohnt, ist Arzt. Das Buch, das ich lese, ist spannend.",
+    "ar": "يأخذ اسم الموصول (der، die، das، den، dem…) جنس الاسم وحالته الإعرابية في جملة الصلة، وينتقل الفعل إلى آخرها: Der Mann, der dort wohnt, ist Arzt. Das Buch, das ich lese, ist spannend."
+   },
+   "examples": [
+    [
+     "Die Frau, die nebenan wohnt, ist Ärztin.",
+     "The woman who lives next door is a doctor."
+    ],
+    [
+     "Das ist der Film, den ich gesehen habe.",
+     "That's the film I saw."
+    ],
+    [
+     "Die Stadt, in der ich wohne, ist klein.",
+     "The town where I live is small."
+    ]
+   ]
+  }
+ ],
+ "words": [
+  {
+   "lemma": "Reise",
+   "pos": "noun",
+   "level": "B1",
+   "meaning": {
+    "en": "trip, journey",
+    "ar": "رحلة"
+   },
+   "example": [
+    "Die Reise hat sechs Stunden gedauert.",
+    "The journey took six hours."
+   ],
+   "forms": [
+    "Reisen"
+   ],
+   "gender": "f"
+  },
+  {
+   "lemma": "Erinnerung",
+   "pos": "noun",
+   "level": "B1",
+   "meaning": {
+    "en": "memory",
+    "ar": "ذكرى"
+   },
+   "example": [
+    "Ich habe schöne Erinnerungen an diesen Sommer.",
+    "I have lovely memories of that summer."
+   ],
+   "forms": [
+    "Erinnerungen"
+   ],
+   "gender": "f"
+  },
+  {
+   "lemma": "plötzlich",
+   "pos": "adv",
+   "level": "B1",
+   "meaning": {
+    "en": "suddenly",
+    "ar": "فجأة"
+   },
+   "example": [
+    "Plötzlich ging das Licht aus.",
+    "Suddenly the light went out."
+   ]
+  },
+  {
+   "lemma": "während",
+   "pos": "conj",
+   "level": "B1",
+   "meaning": {
+    "en": "while",
+    "ar": "بينما"
+   },
+   "example": [
+    "Er kochte, während ich las.",
+    "He cooked while I read."
+   ]
+  },
+  {
+   "lemma": "Ereignis",
+   "pos": "noun",
+   "level": "B1",
+   "meaning": {
+    "en": "event",
+    "ar": "حدث"
+   },
+   "example": [
+    "Die Hochzeit war ein großes Ereignis.",
+    "The wedding was a big event."
+   ],
+   "forms": [
+    "Ereignisse"
+   ],
+   "gender": "n"
+  },
+  {
+   "lemma": "hoffen",
+   "pos": "verb",
+   "level": "B1",
+   "meaning": {
+    "en": "to hope",
+    "ar": "يأمل"
+   },
+   "example": [
+    "Ich hoffe, dass es dir gut geht.",
+    "I hope you are well."
+   ],
+   "forms": [
+    "hoffe",
+    "hoffst",
+    "hofft",
+    "gehofft"
+   ]
+  },
+  {
+   "lemma": "empfehlen",
+   "pos": "verb",
+   "level": "B1",
+   "meaning": {
+    "en": "to recommend",
+    "ar": "يوصي"
+   },
+   "example": [
+    "Ich empfehle dir dieses Restaurant.",
+    "I recommend this restaurant to you."
+   ],
+   "forms": [
+    "empfehle",
+    "empfiehlst",
+    "empfiehlt",
+    "empfohlen"
+   ]
+  },
+  {
+   "lemma": "Meinung",
+   "pos": "noun",
+   "level": "B1",
+   "meaning": {
+    "en": "opinion",
+    "ar": "رأي"
+   },
+   "example": [
+    "Meiner Meinung nach ist das eine gute Idee.",
+    "In my opinion that's a good idea."
+   ],
+   "forms": [
+    "Meinungen"
+   ],
+   "gender": "f"
+  },
+  {
+   "lemma": "Umwelt",
+   "pos": "noun",
+   "level": "B1",
+   "meaning": {
+    "en": "environment",
+    "ar": "البيئة"
+   },
+   "example": [
+    "Wir müssen die Umwelt schützen.",
+    "We must protect the environment."
+   ],
+   "gender": "f"
+  },
+  {
+   "lemma": "Rat",
+   "pos": "noun",
+   "level": "B1",
+   "meaning": {
+    "en": "advice",
+    "ar": "نصيحة"
+   },
+   "example": [
+    "Danke für deinen Rat.",
+    "Thanks for your advice."
+   ],
+   "forms": [
+    "Ratschläge"
+   ],
+   "gender": "m"
+  },
+  {
+   "lemma": "sollen",
+   "pos": "verb",
+   "level": "B1",
+   "meaning": {
+    "en": "should",
+    "ar": "ينبغي"
+   },
+   "example": [
+    "Du solltest zum Arzt gehen.",
+    "You should go to the doctor."
+   ],
+   "forms": [
+    "soll",
+    "sollst",
+    "sollte",
+    "solltest"
+   ]
+  },
+  {
+   "lemma": "Gesundheit",
+   "pos": "noun",
+   "level": "B1",
+   "meaning": {
+    "en": "health",
+    "ar": "صحة"
+   },
+   "example": [
+    "Sport ist gut für die Gesundheit.",
+    "Sport is good for your health."
+   ],
+   "gender": "f"
+  },
+  {
+   "lemma": "erreichen",
+   "pos": "verb",
+   "level": "B1",
+   "meaning": {
+    "en": "to reach, to achieve",
+    "ar": "يحقق؛ يصل"
+   },
+   "example": [
+    "Sie hat ihr Ziel erreicht.",
+    "She reached her goal."
+   ],
+   "forms": [
+    "erreiche",
+    "erreicht"
+   ]
+  },
+  {
+   "lemma": "Stau",
+   "pos": "noun",
+   "level": "B1",
+   "meaning": {
+    "en": "traffic jam",
+    "ar": "زحمة مرور"
+   },
+   "example": [
+    "Heute Morgen gab es einen langen Stau.",
+    "There was a long traffic jam this morning."
+   ],
+   "forms": [
+    "Staus"
+   ],
+   "gender": "m"
+  },
+  {
+   "lemma": "Viertel",
+   "pos": "noun",
+   "level": "B1",
+   "meaning": {
+    "en": "neighbourhood",
+    "ar": "حي"
+   },
+   "example": [
+    "Ich wohne in einem ruhigen Viertel.",
+    "I live in a quiet neighbourhood."
+   ],
+   "gender": "n"
+  },
+  {
+   "lemma": "Nachbar",
+   "pos": "noun",
+   "level": "B1",
+   "meaning": {
+    "en": "neighbour",
+    "ar": "جار"
+   },
+   "example": [
+    "Mein Nachbar ist sehr nett.",
+    "My neighbour is very nice."
+   ],
+   "forms": [
+    "Nachbarn",
+    "Nachbarin"
+   ],
+   "gender": "m"
+  },
+  {
+   "lemma": "mieten",
+   "pos": "verb",
+   "level": "B1",
+   "meaning": {
+    "en": "to rent",
+    "ar": "يستأجر"
+   },
+   "example": [
+    "Wir möchten eine größere Wohnung mieten.",
+    "We'd like to rent a bigger flat."
+   ],
+   "forms": [
+    "miete",
+    "mietet",
+    "gemietet"
+   ]
+  },
+  {
+   "lemma": "verändern",
+   "pos": "verb",
+   "level": "B1",
+   "meaning": {
+    "en": "to change",
+    "ar": "يغيّر"
+   },
+   "example": [
+    "Die Stadt hat sich sehr verändert.",
+    "The town has changed a lot."
+   ],
+   "forms": [
+    "verändert",
+    "veränderte"
+   ]
+  },
+  {
+   "lemma": "obwohl",
+   "pos": "conj",
+   "level": "B1",
+   "meaning": {
+    "en": "although",
+    "ar": "رغم أنّ"
+   },
+   "example": [
+    "Wir sind rausgegangen, obwohl es geregnet hat.",
+    "We went out although it was raining."
+   ]
+  },
+  {
+   "lemma": "Vorteil",
+   "pos": "noun",
+   "level": "B1",
+   "meaning": {
+    "en": "advantage",
+    "ar": "ميزة"
+   },
+   "example": [
+    "Das Leben in der Stadt hat viele Vorteile.",
+    "Life in the city has many advantages."
+   ],
+   "forms": [
+    "Vorteile"
+   ],
+   "gender": "m",
+   "ant": [
+    "Nachteil"
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "key": "de-b1-perfekt-mcq",
+   "type": "mcq",
+   "skill": "grammar",
+   "level": "B1",
+   "questions": [
+    {
+     "p": "Gestern ___ ich ins Kino gegangen.",
+     "o": [
+      "bin",
+      "habe",
+      "war",
+      "werde"
+     ]
+    },
+    {
+     "p": "Als Kind ___ ich oft bei meiner Oma.",
+     "o": [
+      "war",
+      "bin",
+      "habe",
+      "hatte gewesen"
+     ]
+    },
+    {
+     "p": "Ich ___ lange auf den Bus warten.",
+     "o": [
+      "musste",
+      "habe gemusst",
+      "muss gewartet",
+      "müssen"
+     ]
+    },
+    {
+     "p": "Wir ___ am Wochenende Freunde besucht.",
+     "o": [
+      "haben",
+      "sind",
+      "waren",
+      "hatten gehabt"
+     ]
+    }
+   ],
+   "topic": "perfekt_praeteritum"
+  },
+  {
+   "key": "de-b1-weil-dass-mcq",
+   "type": "mcq",
+   "skill": "grammar",
+   "level": "B1",
+   "questions": [
+    {
+     "p": "Ich bleibe zu Hause, weil ich krank ___.",
+     "o": [
+      "bin",
+      "ist",
+      "sein",
+      "war gewesen"
+     ]
+    },
+    {
+     "p": "Ich glaube, dass er morgen ___.",
+     "o": [
+      "kommt",
+      "kommen",
+      "kam gekommen",
+      "ist kommen"
+     ]
+    },
+    {
+     "p": "Weißt du, ___ der Laden heute offen ist?",
+     "o": [
+      "ob",
+      "dass",
+      "weil",
+      "wenn"
+     ]
+    },
+    {
+     "p": "Ich lerne Deutsch, ___ ich in Wien arbeiten möchte.",
+     "o": [
+      "weil",
+      "dass",
+      "ob",
+      "aber"
+     ]
+    }
+   ],
+   "topic": "nebensaetze_weil_dass"
+  },
+  {
+   "key": "de-b1-konj-cloze",
+   "type": "cloze",
+   "skill": "grammar",
+   "level": "B1",
+   "topic": "konjunktiv_ii",
+   "questions": [
+    {
+     "p": "___ Sie mir bitte helfen? (können)",
+     "a": [
+      "Könnten"
+     ]
+    },
+    {
+     "p": "Wenn ich Zeit ___ (haben), würde ich mehr lesen.",
+     "a": [
+      "hätte"
+     ]
+    },
+    {
+     "p": "An deiner Stelle ___ ich mit ihr sprechen. (werden)",
+     "a": [
+      "würde"
+     ]
+    },
+    {
+     "p": "Du ___ mehr schlafen. (sollen)",
+     "a": [
+      "solltest"
+     ]
+    }
+   ]
+  },
+  {
+   "key": "de-b1-relativ-mcq",
+   "type": "mcq",
+   "skill": "grammar",
+   "level": "B1",
+   "questions": [
+    {
+     "p": "Die Frau, ___ nebenan wohnt, ist Ärztin.",
+     "o": [
+      "die",
+      "der",
+      "das",
+      "den"
+     ]
+    },
+    {
+     "p": "Das ist der Film, ___ ich gesehen habe.",
+     "o": [
+      "den",
+      "der",
+      "dem",
+      "das"
+     ]
+    },
+    {
+     "p": "Das Buch, ___ ich lese, ist spannend.",
+     "o": [
+      "das",
+      "der",
+      "die",
+      "dem"
+     ]
+    },
+    {
+     "p": "Der Mann, ___ ich geholfen habe, war sehr dankbar.",
+     "o": [
+      "dem",
+      "den",
+      "der",
+      "die"
+     ]
+    }
+   ],
+   "topic": "relativsaetze"
+  },
+  {
+   "key": "de-b1-vocab-mcq",
+   "type": "mcq",
+   "skill": "vocabulary",
+   "level": "B1",
+   "questions": [
+    {
+     "p": "Wir müssen die ___ schützen und mehr recyceln.",
+     "o": [
+      "Umwelt",
+      "Meinung",
+      "Reise",
+      "Erinnerung"
+     ]
+    },
+    {
+     "p": "Mein ___ wohnt in der Wohnung nebenan.",
+     "o": [
+      "Nachbar",
+      "Rat",
+      "Stau",
+      "Vorteil"
+     ]
+    },
+    {
+     "p": "___ ging das Licht aus.",
+     "o": [
+      "Plötzlich",
+      "Obwohl",
+      "Während",
+      "Vorteil"
+     ]
+    },
+    {
+     "p": "Sport ist gut für die ___.",
+     "o": [
+      "Gesundheit",
+      "Meinung",
+      "Umwelt",
+      "Reise"
+     ]
+    },
+    {
+     "p": "Ein ___ der Stadt ist, dass alles in der Nähe ist.",
+     "o": [
+      "Vorteil",
+      "Ereignis",
+      "Stau",
+      "Rat"
+     ]
+    }
+   ],
+   "title": {
+    "en": "Everyday words",
+    "ar": "كلمات يومية"
+   }
+  },
+  {
+   "key": "de-b1-order",
+   "type": "ordering",
+   "skill": "grammar",
+   "level": "B1",
+   "title": {
+    "en": "Build longer sentences",
+    "ar": "كوّن جملًا أطول"
+   },
+   "questions": [
+    {
+     "o": [
+      "Wir",
+      "bleiben",
+      "zu",
+      "Hause",
+      "weil",
+      "es",
+      "regnet"
+     ]
+    },
+    {
+     "o": [
+      "Gestern",
+      "bin",
+      "ich",
+      "spät",
+      "gekommen"
+     ]
+    },
+    {
+     "o": [
+      "Du",
+      "solltest",
+      "mehr",
+      "schlafen"
+     ]
+    }
+   ]
+  },
+  {
+   "key": "de-b1-read-1",
+   "type": "reading",
+   "skill": "reading",
+   "level": "B1",
+   "title": {
+    "en": "Working from home",
+    "ar": "العمل من المنزل"
+   },
+   "text": "Seit zwei Jahren arbeitet Jana drei Tage pro Woche im Homeoffice. Am Anfang fand sie das toll: Sie stand nicht mehr im Stau und konnte ihren Tag selbst planen. Nach ein paar Monaten fühlte sie sich aber einsam und vermisste ihre Kollegen. Jetzt geht sie dienstags und donnerstags ins Büro und sagt, dass sie die richtige Balance gefunden hat.",
+   "questions": [
+    {
+     "p": "Was gefiel Jana am Anfang?",
+     "o": [
+      "Sie stand nicht mehr im Stau.",
+      "Sie sprach mit den Kollegen.",
+      "Sie ging ins Büro.",
+      "Sie arbeitete am Wochenende."
+     ]
+    },
+    {
+     "p": "Welches Problem hatte sie später?",
+     "o": [
+      "Sie fühlte sich einsam.",
+      "Sie verdiente weniger.",
+      "Sie arbeitete zu viel.",
+      "Sie verlor ihre Stelle."
+     ]
+    },
+    {
+     "p": "Was macht sie jetzt?",
+     "o": [
+      "Sie geht zwei Tage pro Woche ins Büro.",
+      "Sie arbeitet immer zu Hause.",
+      "Sie arbeitet immer im Büro.",
+      "Sie hat die Stelle gewechselt."
+     ]
+    }
+   ]
+  },
+  {
+   "key": "de-b2-read-2",
+   "type": "reading",
+   "skill": "reading",
+   "level": "B2",
+   "title": {
+    "en": "Cities without cars",
+    "ar": "مدن بلا سيارات"
+   },
+   "text": "Immer mehr europäische Städte sperren ihre Altstadt für Autos. Befürworter sagen, dass die Luft sauberer wird und die Straßen wieder belebter sind. Die Geschäftsleute befürchteten dagegen, Kunden zu verlieren; mehrere Studien zeigen jedoch, dass der Umsatz gestiegen ist, weil Fußgänger mehr bummeln und öfter in die Läden gehen. Trotzdem geht die Diskussion in Städten weiter, in denen der öffentliche Nahverkehr nicht gut genug ist.",
+   "questions": [
+    {
+     "p": "Was befürchteten die Geschäftsleute?",
+     "o": [
+      "Kunden zu verlieren",
+      "Mehr Steuern zu zahlen",
+      "Mehr Verkehr",
+      "Abends schließen zu müssen"
+     ]
+    },
+    {
+     "p": "Was ist laut den Studien mit dem Umsatz passiert?",
+     "o": [
+      "Er ist gestiegen.",
+      "Er ist gesunken.",
+      "Er hat sich nicht verändert.",
+      "Er ist nur abends gestiegen."
+     ]
+    },
+    {
+     "p": "Wo geht die Diskussion weiter?",
+     "o": [
+      "Wo der Nahverkehr nicht gut genug ist",
+      "In allen Städten",
+      "Nur in Dörfern",
+      "Nirgends"
+     ]
+    }
+   ]
+  },
+  {
+   "key": "de-b1-listen-1",
+   "type": "listening",
+   "skill": "listening",
+   "level": "B1",
+   "title": {
+    "en": "A message from the doctor's",
+    "ar": "رسالة من العيادة"
+   },
+   "text": "Guten Tag, hier ist die Praxis Dr. Weber. Ihr Termin am Mittwoch um zehn Uhr muss leider verschoben werden, weil die Ärztin an diesem Tag nicht da ist. Wir können Ihnen Donnerstag zur gleichen Zeit oder Freitag um sechzehn Uhr anbieten. Bitte rufen Sie uns bis Dienstag zurück.",
+   "questions": [
+    {
+     "p": "Warum wird der Termin verschoben?",
+     "o": [
+      "Die Ärztin ist am Mittwoch nicht da.",
+      "Der Patient ist verreist.",
+      "Die Praxis ist geschlossen.",
+      "Es gibt einen Streik."
+     ]
+    },
+    {
+     "p": "Welche Termine werden angeboten?",
+     "o": [
+      "Donnerstag um zehn oder Freitag um sechzehn Uhr",
+      "Mittwoch um sechzehn Uhr",
+      "Montag um zehn Uhr",
+      "Freitag um zehn Uhr"
+     ]
+    },
+    {
+     "p": "Was soll der Patient tun?",
+     "o": [
+      "Bis Dienstag zurückrufen",
+      "Am Mittwoch kommen",
+      "Eine E-Mail schreiben",
+      "Nichts"
+     ]
+    }
+   ]
+  },
+  {
+   "key": "de-b1-dictation",
+   "type": "dictation",
+   "skill": "listening",
+   "level": "B1",
+   "title": {
+    "en": "Everyday sentences",
+    "ar": "جمل من الحياة اليومية"
+   },
+   "questions": [
+    {
+     "a": [
+      "Als Kind habe ich am Meer gewohnt."
+     ]
+    },
+    {
+     "a": [
+      "Ich bleibe zu Hause, weil ich krank bin."
+     ]
+    },
+    {
+     "a": [
+      "An deiner Stelle würde ich mit dem Chef sprechen."
+     ]
+    }
+   ]
+  },
+  {
+   "key": "de-b1-repeat",
+   "type": "repeat",
+   "skill": "speaking",
+   "level": "B1",
+   "title": {
+    "en": "Say it aloud",
+    "ar": "قلها بصوت عالٍ"
+   },
+   "objectives": [
+    {
+     "code": "de.b1.pronounce",
+     "skill": "speaking",
+     "text": {
+      "en": "Pronounce everyday sentences clearly enough to be understood",
+      "ar": "نطق جمل يومية بوضوح يكفي لفهمها"
+     }
+    }
+   ],
+   "questions": [
+    {
+     "r": "Als Kind habe ich am Meer gewohnt."
+    },
+    {
+     "r": "Ich bleibe zu Hause, weil ich krank bin."
+    },
+    {
+     "r": "An deiner Stelle würde ich mit dem Chef sprechen."
+    },
+    {
+     "r": "Gestern bin ich ins Kino gegangen."
+    },
+    {
+     "r": "Könnten Sie das wiederholen?"
+    }
+   ]
+  }
+ ],
+ "course": {
+  "slug": "de-intermediate",
+  "level_from": "B1",
+  "level_to": "B2",
+  "title": {
+   "en": "German B1: everyday independence",
+   "ar": "الألمانية B1: الاستقلالية في الحياة اليومية"
+  },
+  "description": {
+   "en": "Tell stories about the past, give opinions and advice, and understand longer texts in German.",
+   "ar": "احكِ عن الماضي، وعبّر عن آرائك وقدّم النصائح، وافهم نصوصًا أطول في الألمانية."
+  },
+  "units": [
+   {
+    "title": {
+     "en": "Stories and opinions",
+     "ar": "القصص والآراء"
+    },
+    "lessons": [
+     {
+      "key": "de-b1-u1-l1",
+      "skill": "grammar",
+      "level": "B1",
+      "topic": "perfekt_praeteritum",
+      "minutes": 20,
+      "title": {
+       "en": "What happened?",
+       "ar": "ماذا حدث؟"
+      },
+      "intro": {
+       "en": "Tell a story about the past and describe how things were.",
+       "ar": "احكِ قصة عن الماضي وصِف كيف كانت الأمور."
+      },
+      "objectives": [
+       {
+        "code": "de.b1.narrate",
+        "skill": "speaking",
+        "text": {
+         "en": "Tell a short story about something that happened",
+         "ar": "رواية قصة قصيرة عن شيء حدث"
+        }
+       },
+       {
+        "code": "de.b1.perfekt_praeteritum",
+        "skill": "grammar",
+        "text": {
+         "en": "Use past forms to narrate events and describe situations",
+         "ar": "استخدام صيغ الماضي لسرد الأحداث ووصف المواقف"
+        }
+       }
+      ],
+      "words": [
+       "Reise",
+       "Erinnerung",
+       "plötzlich",
+       "während",
+       "Ereignis"
+      ],
+      "exercises": [
+       "de-b1-perfekt-mcq",
+       "de-b1-order"
+      ]
+     },
+     {
+      "key": "de-b1-u1-l2",
+      "skill": "grammar",
+      "level": "B1",
+      "topic": "nebensaetze_weil_dass",
+      "minutes": 20,
+      "title": {
+       "en": "Wishes and opinions",
+       "ar": "الأمنيات والآراء"
+      },
+      "intro": {
+       "en": "Say what you want others to do and what you think.",
+       "ar": "عبّر عمّا تريده من الآخرين وعمّا تفكر فيه."
+      },
+      "objectives": [
+       {
+        "code": "de.b1.nebensaetze_weil_dass",
+        "skill": "grammar",
+        "text": {
+         "en": "Express wishes, opinions and recommendations",
+         "ar": "التعبير عن الأمنيات والآراء والتوصيات"
+        }
+       },
+       {
+        "code": "de.b1.read_opinion",
+        "skill": "reading",
+        "text": {
+         "en": "Understand the main points of an opinion text",
+         "ar": "فهم الأفكار الرئيسية في نص رأي"
+        }
+       }
+      ],
+      "words": [
+       "hoffen",
+       "empfehlen",
+       "Meinung",
+       "Umwelt",
+       "Rat"
+      ],
+      "exercises": [
+       "de-b1-weil-dass-mcq",
+       "de-b1-read-1",
+       "de-b1-vocab-mcq"
+      ]
+     }
+    ]
+   },
+   {
+    "title": {
+     "en": "Out in the world",
+     "ar": "في العالم من حولك"
+    },
+    "lessons": [
+     {
+      "key": "de-b1-u2-l1",
+      "skill": "grammar",
+      "level": "B1",
+      "topic": "konjunktiv_ii",
+      "minutes": 20,
+      "title": {
+       "en": "Advice and what-ifs",
+       "ar": "النصائح والاحتمالات"
+      },
+      "intro": {
+       "en": "Give advice and imagine different situations.",
+       "ar": "قدّم النصائح وتخيّل مواقف مختلفة."
+      },
+      "objectives": [
+       {
+        "code": "de.b1.konjunktiv_ii",
+        "skill": "grammar",
+        "text": {
+         "en": "Give advice and talk about hypothetical situations",
+         "ar": "تقديم النصائح والحديث عن مواقف افتراضية"
+        }
+       },
+       {
+        "code": "de.b1.listen_announcement",
+        "skill": "listening",
+        "text": {
+         "en": "Understand practical information in announcements and conversations",
+         "ar": "فهم المعلومات العملية في الإعلانات والمحادثات"
+        }
+       }
+      ],
+      "words": [
+       "sollen",
+       "Gesundheit",
+       "erreichen",
+       "Stau",
+       "Viertel"
+      ],
+      "exercises": [
+       "de-b1-konj-cloze",
+       "de-b1-listen-1",
+       "de-b1-dictation"
+      ]
+     },
+     {
+      "key": "de-b1-u2-l2",
+      "skill": "grammar",
+      "level": "B1",
+      "topic": "relativsaetze",
+      "minutes": 20,
+      "title": {
+       "en": "Saying more precisely",
+       "ar": "التعبير بدقة أكبر"
+      },
+      "intro": {
+       "en": "Join ideas to describe people, places and things precisely.",
+       "ar": "اربط الأفكار لتصف الأشخاص والأماكن والأشياء بدقة."
+      },
+      "objectives": [
+       {
+        "code": "de.b1.relativsaetze",
+        "skill": "grammar",
+        "text": {
+         "en": "Connect ideas into longer, more precise sentences",
+         "ar": "ربط الأفكار في جمل أطول وأدق"
+        }
+       },
+       {
+        "code": "de.b1.read_article",
+        "skill": "reading",
+        "text": {
+         "en": "Follow a short article on a familiar topic",
+         "ar": "متابعة مقال قصير عن موضوع مألوف"
+        }
+       }
+      ],
+      "words": [
+       "Nachbar",
+       "mieten",
+       "verändern",
+       "obwohl",
+       "Vorteil"
+      ],
+      "exercises": [
+       "de-b1-relativ-mcq",
+       "de-b2-read-2"
+      ]
+     }
+    ]
+   }
+  ]
+ }
+}

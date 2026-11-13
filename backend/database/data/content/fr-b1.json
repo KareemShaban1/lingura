@@ -1,0 +1,1092 @@
+{
+ "language": "fr",
+ "topics": [
+  {
+   "slug": "passe_compose_imparfait",
+   "level": "B1",
+   "title": {
+    "en": "Passé composé vs imparfait",
+    "ar": "الماضي التام والماضي الناقص"
+   },
+   "explanation": {
+    "en": "Use the passé composé for completed events (je suis arrivé, il a mangé) and the imparfait for background, descriptions and habits (il pleuvait, j'étais fatigué). Quand je suis arrivé, il pleuvait.",
+    "ar": "استخدم passé composé للأحداث المكتملة (je suis arrivé، il a mangé) وimparfait للخلفية والوصف والعادات (il pleuvait، j'étais fatigué). مثال: Quand je suis arrivé, il pleuvait."
+   },
+   "examples": [
+    [
+     "Quand j'étais petit, j'habitais à Lyon.",
+     "When I was little, I lived in Lyon."
+    ],
+    [
+     "Hier, je suis rentré tard.",
+     "Yesterday I came home late."
+    ],
+    [
+     "Je lisais quand le téléphone a sonné.",
+     "I was reading when the phone rang."
+    ]
+   ]
+  },
+  {
+   "slug": "subjonctif_present",
+   "level": "B1",
+   "title": {
+    "en": "Present subjunctive",
+    "ar": "صيغة الـ subjonctif في المضارع"
+   },
+   "explanation": {
+    "en": "After il faut que, je veux que, j'aimerais que and similar expressions with a different subject, use the subjunctive: il faut que tu viennes, je veux qu'il soit là.",
+    "ar": "بعد il faut que وje veux que وj'aimerais que وعبارات مشابهة مع فاعل مختلف تُستخدم صيغة subjonctif: il faut que tu viennes، je veux qu'il soit là."
+   },
+   "examples": [
+    [
+     "Il faut que tu partes tôt.",
+     "You need to leave early."
+    ],
+    [
+     "Je veux que vous soyez à l'heure.",
+     "I want you to be on time."
+    ],
+    [
+     "J'aimerais que tu viennes avec nous.",
+     "I'd like you to come with us."
+    ]
+   ]
+  },
+  {
+   "slug": "conditionnel_present",
+   "level": "B1",
+   "title": {
+    "en": "Present conditional",
+    "ar": "صيغة الشرط في المضارع"
+   },
+   "explanation": {
+    "en": "Form it with the future stem + imperfect endings: je voudrais, tu pourrais, nous irions. Use it for polite requests, advice (à ta place, je dormirais plus) and hypotheses (si j'avais du temps, je voyagerais).",
+    "ar": "تُصاغ من جذع المستقبل مع نهايات الماضي الناقص: je voudrais، tu pourrais، nous irions. وتُستخدم للطلب المهذب والنصيحة (à ta place, je dormirais plus) والافتراض (si j'avais du temps, je voyagerais)."
+   },
+   "examples": [
+    [
+     "Pourriez-vous m'aider ?",
+     "Could you help me?"
+    ],
+    [
+     "À ta place, je parlerais avec elle.",
+     "If I were you, I'd talk to her."
+    ],
+    [
+     "Si j'avais de l'argent, je voyagerais.",
+     "If I had money, I would travel."
+    ]
+   ]
+  },
+  {
+   "slug": "pronoms_relatifs",
+   "level": "B1",
+   "title": {
+    "en": "Relative pronouns qui, que, où, dont",
+    "ar": "أسماء الموصول qui وque وoù وdont"
+   },
+   "explanation": {
+    "en": "Qui is the subject (l'homme qui parle), que the object (le livre que je lis), où a place or time (la ville où j'habite), dont replaces de + noun (le film dont je parle).",
+    "ar": "qui فاعل (l'homme qui parle)، وque مفعول به (le livre que je lis)، وoù للمكان أو الزمان (la ville où j'habite)، وdont تحل محل de + اسم (le film dont je parle)."
+   },
+   "examples": [
+    [
+     "C'est la femme qui habite à côté.",
+     "That's the woman who lives next door."
+    ],
+    [
+     "Le livre que je lis est passionnant.",
+     "The book I'm reading is fascinating."
+    ],
+    [
+     "La ville où je suis né est petite.",
+     "The town where I was born is small."
+    ]
+   ]
+  }
+ ],
+ "words": [
+  {
+   "lemma": "voyage",
+   "pos": "noun",
+   "level": "B1",
+   "meaning": {
+    "en": "trip, journey",
+    "ar": "رحلة"
+   },
+   "example": [
+    "Le voyage a duré six heures.",
+    "The journey took six hours."
+   ],
+   "forms": [
+    "voyages"
+   ],
+   "gender": "m"
+  },
+  {
+   "lemma": "souvenir",
+   "pos": "noun",
+   "level": "B1",
+   "meaning": {
+    "en": "memory; souvenir",
+    "ar": "ذكرى"
+   },
+   "example": [
+    "J'ai de bons souvenirs de cet été.",
+    "I have good memories of that summer."
+   ],
+   "forms": [
+    "souvenirs"
+   ],
+   "gender": "m"
+  },
+  {
+   "lemma": "soudain",
+   "pos": "adv",
+   "level": "B1",
+   "meaning": {
+    "en": "suddenly",
+    "ar": "فجأة"
+   },
+   "example": [
+    "Soudain, la lumière s'est éteinte.",
+    "Suddenly, the light went out."
+   ]
+  },
+  {
+   "lemma": "pendant que",
+   "pos": "conj",
+   "level": "B1",
+   "meaning": {
+    "en": "while",
+    "ar": "بينما"
+   },
+   "example": [
+    "Il cuisinait pendant que je lisais.",
+    "He was cooking while I was reading."
+   ]
+  },
+  {
+   "lemma": "événement",
+   "pos": "noun",
+   "level": "B1",
+   "meaning": {
+    "en": "event",
+    "ar": "حدث"
+   },
+   "example": [
+    "Le mariage était un grand événement.",
+    "The wedding was a big event."
+   ],
+   "forms": [
+    "événements"
+   ],
+   "gender": "m"
+  },
+  {
+   "lemma": "souhaiter",
+   "pos": "verb",
+   "level": "B1",
+   "meaning": {
+    "en": "to wish",
+    "ar": "يتمنى"
+   },
+   "example": [
+    "Je te souhaite un bon voyage.",
+    "I wish you a good trip."
+   ],
+   "forms": [
+    "souhaite",
+    "souhaites",
+    "souhaitons",
+    "souhaité"
+   ]
+  },
+  {
+   "lemma": "conseiller",
+   "pos": "verb",
+   "level": "B1",
+   "meaning": {
+    "en": "to advise",
+    "ar": "ينصح"
+   },
+   "example": [
+    "Je te conseille ce restaurant.",
+    "I recommend this restaurant to you."
+   ],
+   "forms": [
+    "conseille",
+    "conseilles",
+    "conseillé"
+   ]
+  },
+  {
+   "lemma": "avis",
+   "pos": "noun",
+   "level": "B1",
+   "meaning": {
+    "en": "opinion",
+    "ar": "رأي"
+   },
+   "example": [
+    "À mon avis, c'est une bonne idée.",
+    "In my opinion, it's a good idea."
+   ],
+   "gender": "m"
+  },
+  {
+   "lemma": "environnement",
+   "pos": "noun",
+   "level": "B1",
+   "meaning": {
+    "en": "environment",
+    "ar": "البيئة"
+   },
+   "example": [
+    "Il faut protéger l'environnement.",
+    "We must protect the environment."
+   ],
+   "gender": "m"
+  },
+  {
+   "lemma": "conseil",
+   "pos": "noun",
+   "level": "B1",
+   "meaning": {
+    "en": "piece of advice",
+    "ar": "نصيحة"
+   },
+   "example": [
+    "Merci pour le conseil.",
+    "Thanks for the advice."
+   ],
+   "forms": [
+    "conseils"
+   ],
+   "gender": "m"
+  },
+  {
+   "lemma": "devoir",
+   "pos": "verb",
+   "level": "B1",
+   "meaning": {
+    "en": "must, should",
+    "ar": "يجب"
+   },
+   "example": [
+    "Tu devrais dormir plus.",
+    "You should sleep more."
+   ],
+   "forms": [
+    "dois",
+    "doit",
+    "devrais",
+    "devrait"
+   ]
+  },
+  {
+   "lemma": "santé",
+   "pos": "noun",
+   "level": "B1",
+   "meaning": {
+    "en": "health",
+    "ar": "صحة"
+   },
+   "example": [
+    "Le sport est bon pour la santé.",
+    "Sport is good for your health."
+   ],
+   "gender": "f"
+  },
+  {
+   "lemma": "réussir",
+   "pos": "verb",
+   "level": "B1",
+   "meaning": {
+    "en": "to succeed",
+    "ar": "ينجح"
+   },
+   "example": [
+    "Elle a réussi son examen.",
+    "She passed her exam."
+   ],
+   "forms": [
+    "réussis",
+    "réussit",
+    "réussi"
+   ]
+  },
+  {
+   "lemma": "embouteillage",
+   "pos": "noun",
+   "level": "B1",
+   "meaning": {
+    "en": "traffic jam",
+    "ar": "زحمة مرور"
+   },
+   "example": [
+    "Il y avait un embouteillage ce matin.",
+    "There was a traffic jam this morning."
+   ],
+   "forms": [
+    "embouteillages"
+   ],
+   "gender": "m"
+  },
+  {
+   "lemma": "quartier",
+   "pos": "noun",
+   "level": "B1",
+   "meaning": {
+    "en": "neighbourhood",
+    "ar": "حي"
+   },
+   "example": [
+    "J'habite dans un quartier calme.",
+    "I live in a quiet neighbourhood."
+   ],
+   "forms": [
+    "quartiers"
+   ],
+   "gender": "m"
+  },
+  {
+   "lemma": "voisin",
+   "pos": "noun",
+   "level": "B1",
+   "meaning": {
+    "en": "neighbour",
+    "ar": "جار"
+   },
+   "example": [
+    "Mon voisin est très gentil.",
+    "My neighbour is very kind."
+   ],
+   "forms": [
+    "voisins",
+    "voisine",
+    "voisines"
+   ],
+   "gender": "m"
+  },
+  {
+   "lemma": "louer",
+   "pos": "verb",
+   "level": "B1",
+   "meaning": {
+    "en": "to rent",
+    "ar": "يستأجر"
+   },
+   "example": [
+    "Nous voulons louer un appartement plus grand.",
+    "We want to rent a bigger flat."
+   ],
+   "forms": [
+    "loue",
+    "louons",
+    "loué"
+   ]
+  },
+  {
+   "lemma": "changer",
+   "pos": "verb",
+   "level": "B1",
+   "meaning": {
+    "en": "to change",
+    "ar": "يغيّر"
+   },
+   "example": [
+    "La ville a beaucoup changé.",
+    "The town has changed a lot."
+   ],
+   "forms": [
+    "change",
+    "changé",
+    "changeons"
+   ]
+  },
+  {
+   "lemma": "bien que",
+   "pos": "conj",
+   "level": "B1",
+   "meaning": {
+    "en": "although",
+    "ar": "رغم أنّ"
+   },
+   "example": [
+    "Nous sommes sortis bien qu'il pleuve.",
+    "We went out although it was raining."
+   ]
+  },
+  {
+   "lemma": "avantage",
+   "pos": "noun",
+   "level": "B1",
+   "meaning": {
+    "en": "advantage",
+    "ar": "ميزة"
+   },
+   "example": [
+    "Habiter en ville a beaucoup d'avantages.",
+    "Living in town has many advantages."
+   ],
+   "forms": [
+    "avantages"
+   ],
+   "gender": "m",
+   "ant": [
+    "inconvénient"
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "key": "fr-b1-pc-imp-mcq",
+   "type": "mcq",
+   "skill": "grammar",
+   "level": "B1",
+   "questions": [
+    {
+     "p": "Quand j'___ petit, j'habitais à la campagne.",
+     "o": [
+      "étais",
+      "ai été",
+      "suis",
+      "serais"
+     ]
+    },
+    {
+     "p": "Hier, je ___ à huit heures.",
+     "o": [
+      "me suis levé",
+      "me levais",
+      "me lève",
+      "me lèverai"
+     ]
+    },
+    {
+     "p": "Je lisais quand le téléphone ___.",
+     "o": [
+      "a sonné",
+      "sonnait",
+      "sonne",
+      "sonnera"
+     ]
+    },
+    {
+     "p": "Chaque été, nous ___ chez nos grands-parents.",
+     "o": [
+      "allions",
+      "sommes allés",
+      "allons",
+      "irons"
+     ]
+    }
+   ],
+   "topic": "passe_compose_imparfait"
+  },
+  {
+   "key": "fr-b1-subj-cloze",
+   "type": "cloze",
+   "skill": "grammar",
+   "level": "B1",
+   "topic": "subjonctif_present",
+   "questions": [
+    {
+     "p": "Il faut que tu ___ (venir) demain.",
+     "a": [
+      "viennes"
+     ]
+    },
+    {
+     "p": "Je veux que vous ___ (être) à l'heure.",
+     "a": [
+      "soyez"
+     ]
+    },
+    {
+     "p": "J'aimerais qu'il ___ (faire) beau samedi.",
+     "a": [
+      "fasse"
+     ]
+    },
+    {
+     "p": "Il faut que nous ___ (partir) tôt.",
+     "a": [
+      "partions"
+     ]
+    }
+   ]
+  },
+  {
+   "key": "fr-b1-cond-cloze",
+   "type": "cloze",
+   "skill": "grammar",
+   "level": "B1",
+   "topic": "conditionnel_present",
+   "questions": [
+    {
+     "p": "À ta place, je ___ (parler) avec elle.",
+     "a": [
+      "parlerais"
+     ]
+    },
+    {
+     "p": "___-vous m'aider, s'il vous plaît ? (pouvoir)",
+     "a": [
+      "Pourriez"
+     ]
+    },
+    {
+     "p": "Si j'avais le temps, je ___ (voyager) plus.",
+     "a": [
+      "voyagerais"
+     ]
+    },
+    {
+     "p": "Avec plus d'argent, nous ___ (acheter) une maison.",
+     "a": [
+      "achèterions"
+     ]
+    }
+   ]
+  },
+  {
+   "key": "fr-b1-relatifs-mcq",
+   "type": "mcq",
+   "skill": "grammar",
+   "level": "B1",
+   "questions": [
+    {
+     "p": "C'est la femme ___ habite à côté.",
+     "o": [
+      "qui",
+      "que",
+      "où",
+      "dont"
+     ]
+    },
+    {
+     "p": "Le livre ___ je lis est passionnant.",
+     "o": [
+      "que",
+      "qui",
+      "où",
+      "dont"
+     ]
+    },
+    {
+     "p": "La ville ___ je suis né est petite.",
+     "o": [
+      "où",
+      "que",
+      "qui",
+      "dont"
+     ]
+    },
+    {
+     "p": "C'est le film ___ je t'ai parlé.",
+     "o": [
+      "dont",
+      "que",
+      "qui",
+      "où"
+     ]
+    }
+   ],
+   "topic": "pronoms_relatifs"
+  },
+  {
+   "key": "fr-b1-vocab-mcq",
+   "type": "mcq",
+   "skill": "vocabulary",
+   "level": "B1",
+   "questions": [
+    {
+     "p": "Il faut recycler pour protéger l'___.",
+     "o": [
+      "environnement",
+      "embouteillage",
+      "avis",
+      "événement"
+     ]
+    },
+    {
+     "p": "Mon ___ habite dans l'appartement d'à côté.",
+     "o": [
+      "voisin",
+      "conseil",
+      "voyage",
+      "souvenir"
+     ]
+    },
+    {
+     "p": "___, il a commencé à pleuvoir.",
+     "o": [
+      "Soudain",
+      "Bien que",
+      "Pendant que",
+      "Avantage"
+     ]
+    },
+    {
+     "p": "Le sport est bon pour la ___.",
+     "o": [
+      "santé",
+      "avis",
+      "voisine",
+      "réussite"
+     ]
+    },
+    {
+     "p": "Un ___ de la ville, c'est qu'on a tout à côté.",
+     "o": [
+      "avantage",
+      "souvenir",
+      "voyage",
+      "conseil"
+     ]
+    }
+   ],
+   "title": {
+    "en": "Everyday words",
+    "ar": "كلمات يومية"
+   }
+  },
+  {
+   "key": "fr-b1-order",
+   "type": "ordering",
+   "skill": "grammar",
+   "level": "B1",
+   "title": {
+    "en": "Build longer sentences",
+    "ar": "كوّن جملًا أطول"
+   },
+   "questions": [
+    {
+     "o": [
+      "Quand",
+      "je",
+      "suis",
+      "arrivé",
+      "il",
+      "pleuvait"
+     ]
+    },
+    {
+     "o": [
+      "Il",
+      "faut",
+      "que",
+      "tu",
+      "viennes"
+     ]
+    },
+    {
+     "o": [
+      "À",
+      "ta",
+      "place",
+      "je",
+      "dormirais",
+      "plus"
+     ]
+    }
+   ]
+  },
+  {
+   "key": "fr-b1-read-1",
+   "type": "reading",
+   "skill": "reading",
+   "level": "B1",
+   "title": {
+    "en": "Working from home",
+    "ar": "العمل من المنزل"
+   },
+   "text": "Depuis deux ans, Claire travaille de chez elle trois jours par semaine. Au début, elle adorait ça : elle ne perdait plus de temps dans les embouteillages et organisait sa journée comme elle voulait. Mais après quelques mois, elle a commencé à se sentir seule et ses collègues lui manquaient. Maintenant, elle va au bureau le mardi et le jeudi, et elle dit qu'elle a trouvé le bon équilibre.",
+   "questions": [
+    {
+     "p": "Qu'est-ce que Claire aimait au début ?",
+     "o": [
+      "Ne plus perdre de temps dans les embouteillages",
+      "Parler avec ses collègues",
+      "Aller au bureau",
+      "Travailler le week-end"
+     ]
+    },
+    {
+     "p": "Quel problème a-t-elle eu ensuite ?",
+     "o": [
+      "Elle se sentait seule",
+      "Elle gagnait moins",
+      "Elle travaillait trop",
+      "Elle a perdu son travail"
+     ]
+    },
+    {
+     "p": "Que fait-elle maintenant ?",
+     "o": [
+      "Elle va au bureau deux jours par semaine",
+      "Elle travaille toujours chez elle",
+      "Elle travaille toujours au bureau",
+      "Elle a changé de travail"
+     ]
+    }
+   ]
+  },
+  {
+   "key": "fr-b2-read-2",
+   "type": "reading",
+   "skill": "reading",
+   "level": "B2",
+   "title": {
+    "en": "Cities without cars",
+    "ar": "مدن بلا سيارات"
+   },
+   "text": "De plus en plus de villes européennes ferment leur centre historique aux voitures. Les partisans de la mesure affirment que l'air est plus pur et que les rues retrouvent une vie de quartier. Les commerçants, eux, craignaient de perdre des clients ; pourtant, plusieurs études montrent que les ventes ont augmenté, car les piétons flânent davantage et s'arrêtent dans les boutiques. Le débat continue toutefois dans les villes où les transports en commun sont insuffisants.",
+   "questions": [
+    {
+     "p": "Que craignaient les commerçants ?",
+     "o": [
+      "Perdre des clients",
+      "Payer plus d'impôts",
+      "Avoir plus de voitures",
+      "Fermer le soir"
+     ]
+    },
+    {
+     "p": "Selon les études, qu'est-il arrivé aux ventes ?",
+     "o": [
+      "Elles ont augmenté",
+      "Elles ont baissé",
+      "Elles n'ont pas changé",
+      "Elles ont augmenté seulement le soir"
+     ]
+    },
+    {
+     "p": "Où le débat continue-t-il ?",
+     "o": [
+      "Là où les transports en commun sont insuffisants",
+      "Dans toutes les villes",
+      "Seulement dans les villages",
+      "Nulle part"
+     ]
+    }
+   ]
+  },
+  {
+   "key": "fr-b1-listen-1",
+   "type": "listening",
+   "skill": "listening",
+   "level": "B1",
+   "title": {
+    "en": "A message from the doctor's",
+    "ar": "رسالة من العيادة"
+   },
+   "text": "Bonjour, ici le cabinet du docteur Petit. Votre rendez-vous de mercredi à dix heures doit être déplacé, car le docteur est absent ce jour-là. Nous vous proposons jeudi à la même heure ou vendredi à seize heures. Merci de nous rappeler avant mardi pour confirmer.",
+   "questions": [
+    {
+     "p": "Pourquoi le rendez-vous est-il déplacé ?",
+     "o": [
+      "Le docteur est absent mercredi",
+      "Le patient est en voyage",
+      "Le cabinet est fermé",
+      "Il y a une grève"
+     ]
+    },
+    {
+     "p": "Quelles possibilités propose-t-on ?",
+     "o": [
+      "Jeudi à dix heures ou vendredi à seize heures",
+      "Mercredi à seize heures",
+      "Lundi à dix heures",
+      "Vendredi à dix heures"
+     ]
+    },
+    {
+     "p": "Que doit faire le patient ?",
+     "o": [
+      "Rappeler avant mardi",
+      "Venir mercredi",
+      "Envoyer un e-mail",
+      "Rien"
+     ]
+    }
+   ]
+  },
+  {
+   "key": "fr-b1-dictation",
+   "type": "dictation",
+   "skill": "listening",
+   "level": "B1",
+   "title": {
+    "en": "Everyday sentences",
+    "ar": "جمل من الحياة اليومية"
+   },
+   "questions": [
+    {
+     "a": [
+      "Quand j'étais petit, j'habitais près de la mer."
+     ]
+    },
+    {
+     "a": [
+      "Il faut que tu viennes demain."
+     ]
+    },
+    {
+     "a": [
+      "À ta place, je parlerais à ton chef."
+     ]
+    }
+   ]
+  },
+  {
+   "key": "fr-b1-repeat",
+   "type": "repeat",
+   "skill": "speaking",
+   "level": "B1",
+   "title": {
+    "en": "Say it aloud",
+    "ar": "قلها بصوت عالٍ"
+   },
+   "objectives": [
+    {
+     "code": "fr.b1.pronounce",
+     "skill": "speaking",
+     "text": {
+      "en": "Pronounce everyday sentences clearly enough to be understood",
+      "ar": "نطق جمل يومية بوضوح يكفي لفهمها"
+     }
+    }
+   ],
+   "questions": [
+    {
+     "r": "Quand j'étais petit, j'habitais près de la mer."
+    },
+    {
+     "r": "Il faut que tu viennes demain."
+    },
+    {
+     "r": "À ta place, je parlerais à ton chef."
+    },
+    {
+     "r": "Quand j'étais petit, j'habitais à Lyon."
+    },
+    {
+     "r": "Pourriez-vous m'aider ?"
+    }
+   ]
+  }
+ ],
+ "course": {
+  "slug": "fr-intermediate",
+  "level_from": "B1",
+  "level_to": "B2",
+  "title": {
+   "en": "French B1: everyday independence",
+   "ar": "الفرنسية B1: الاستقلالية في الحياة اليومية"
+  },
+  "description": {
+   "en": "Tell stories about the past, give opinions and advice, and understand longer texts in French.",
+   "ar": "احكِ عن الماضي، وعبّر عن آرائك وقدّم النصائح، وافهم نصوصًا أطول في الفرنسية."
+  },
+  "units": [
+   {
+    "title": {
+     "en": "Stories and opinions",
+     "ar": "القصص والآراء"
+    },
+    "lessons": [
+     {
+      "key": "fr-b1-u1-l1",
+      "skill": "grammar",
+      "level": "B1",
+      "topic": "passe_compose_imparfait",
+      "minutes": 20,
+      "title": {
+       "en": "What happened?",
+       "ar": "ماذا حدث؟"
+      },
+      "intro": {
+       "en": "Tell a story about the past and describe how things were.",
+       "ar": "احكِ قصة عن الماضي وصِف كيف كانت الأمور."
+      },
+      "objectives": [
+       {
+        "code": "fr.b1.narrate",
+        "skill": "speaking",
+        "text": {
+         "en": "Tell a short story about something that happened",
+         "ar": "رواية قصة قصيرة عن شيء حدث"
+        }
+       },
+       {
+        "code": "fr.b1.passe_compose_imparfait",
+        "skill": "grammar",
+        "text": {
+         "en": "Use past forms to narrate events and describe situations",
+         "ar": "استخدام صيغ الماضي لسرد الأحداث ووصف المواقف"
+        }
+       }
+      ],
+      "words": [
+       "voyage",
+       "souvenir",
+       "soudain",
+       "pendant que",
+       "événement"
+      ],
+      "exercises": [
+       "fr-b1-pc-imp-mcq",
+       "fr-b1-order"
+      ]
+     },
+     {
+      "key": "fr-b1-u1-l2",
+      "skill": "grammar",
+      "level": "B1",
+      "topic": "subjonctif_present",
+      "minutes": 20,
+      "title": {
+       "en": "Wishes and opinions",
+       "ar": "الأمنيات والآراء"
+      },
+      "intro": {
+       "en": "Say what you want others to do and what you think.",
+       "ar": "عبّر عمّا تريده من الآخرين وعمّا تفكر فيه."
+      },
+      "objectives": [
+       {
+        "code": "fr.b1.subjonctif_present",
+        "skill": "grammar",
+        "text": {
+         "en": "Express wishes, opinions and recommendations",
+         "ar": "التعبير عن الأمنيات والآراء والتوصيات"
+        }
+       },
+       {
+        "code": "fr.b1.read_opinion",
+        "skill": "reading",
+        "text": {
+         "en": "Understand the main points of an opinion text",
+         "ar": "فهم الأفكار الرئيسية في نص رأي"
+        }
+       }
+      ],
+      "words": [
+       "souhaiter",
+       "conseiller",
+       "avis",
+       "environnement",
+       "conseil"
+      ],
+      "exercises": [
+       "fr-b1-subj-cloze",
+       "fr-b1-read-1",
+       "fr-b1-vocab-mcq"
+      ]
+     }
+    ]
+   },
+   {
+    "title": {
+     "en": "Out in the world",
+     "ar": "في العالم من حولك"
+    },
+    "lessons": [
+     {
+      "key": "fr-b1-u2-l1",
+      "skill": "grammar",
+      "level": "B1",
+      "topic": "conditionnel_present",
+      "minutes": 20,
+      "title": {
+       "en": "Advice and what-ifs",
+       "ar": "النصائح والاحتمالات"
+      },
+      "intro": {
+       "en": "Give advice and imagine different situations.",
+       "ar": "قدّم النصائح وتخيّل مواقف مختلفة."
+      },
+      "objectives": [
+       {
+        "code": "fr.b1.conditionnel_present",
+        "skill": "grammar",
+        "text": {
+         "en": "Give advice and talk about hypothetical situations",
+         "ar": "تقديم النصائح والحديث عن مواقف افتراضية"
+        }
+       },
+       {
+        "code": "fr.b1.listen_announcement",
+        "skill": "listening",
+        "text": {
+         "en": "Understand practical information in announcements and conversations",
+         "ar": "فهم المعلومات العملية في الإعلانات والمحادثات"
+        }
+       }
+      ],
+      "words": [
+       "devoir",
+       "santé",
+       "réussir",
+       "embouteillage",
+       "quartier"
+      ],
+      "exercises": [
+       "fr-b1-cond-cloze",
+       "fr-b1-listen-1",
+       "fr-b1-dictation"
+      ]
+     },
+     {
+      "key": "fr-b1-u2-l2",
+      "skill": "grammar",
+      "level": "B1",
+      "topic": "pronoms_relatifs",
+      "minutes": 20,
+      "title": {
+       "en": "Saying more precisely",
+       "ar": "التعبير بدقة أكبر"
+      },
+      "intro": {
+       "en": "Join ideas to describe people, places and things precisely.",
+       "ar": "اربط الأفكار لتصف الأشخاص والأماكن والأشياء بدقة."
+      },
+      "objectives": [
+       {
+        "code": "fr.b1.pronoms_relatifs",
+        "skill": "grammar",
+        "text": {
+         "en": "Connect ideas into longer, more precise sentences",
+         "ar": "ربط الأفكار في جمل أطول وأدق"
+        }
+       },
+       {
+        "code": "fr.b1.read_article",
+        "skill": "reading",
+        "text": {
+         "en": "Follow a short article on a familiar topic",
+         "ar": "متابعة مقال قصير عن موضوع مألوف"
+        }
+       }
+      ],
+      "words": [
+       "voisin",
+       "louer",
+       "changer",
+       "bien que",
+       "avantage"
+      ],
+      "exercises": [
+       "fr-b1-relatifs-mcq",
+       "fr-b2-read-2"
+      ]
+     }
+    ]
+   }
+  ]
+ }
+}

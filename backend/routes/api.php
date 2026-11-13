@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\Admin\AiAdminController;
 use App\Http\Controllers\Api\Admin\AnalyticsController;
 use App\Http\Controllers\Api\Admin\BillingAdminController;
 use App\Http\Controllers\Api\Admin\ContentAdminController;
+use App\Http\Controllers\Api\Admin\ContentDraftController;
 use App\Http\Controllers\Api\Admin\ReviewController;
 use App\Http\Controllers\Api\Admin\SystemAdminController;
 use App\Http\Controllers\Api\Admin\UserAdminController;
@@ -221,6 +222,17 @@ Route::prefix('v1')->group(function () {
                 Route::get('content/exercises', [ContentAdminController::class, 'exercises']);
                 Route::patch('content/exercises/{exercise}', [ContentAdminController::class, 'setExerciseStatus']);
                 Route::post('content/import', [ContentAdminController::class, 'import'])->middleware('throttle:10,1');
+                Route::get('content/drafts', [ContentDraftController::class, 'index']);
+                Route::post('content/drafts', [ContentDraftController::class, 'store']);
+                Route::get('content/drafts/{draft}', [ContentDraftController::class, 'show']);
+                Route::put('content/drafts/{draft}', [ContentDraftController::class, 'update']);
+                Route::post('content/drafts/{draft}/check', [ContentDraftController::class, 'check']);
+                Route::post('content/drafts/{draft}/submit', [ContentDraftController::class, 'submit']);
+                Route::post('content/exercises/{exercise}/drafts', [ContentDraftController::class, 'fromExercise']);
+            });
+            Route::middleware('permission:content.review')->group(function () {
+                Route::post('content/drafts/{draft}/approve', [ContentDraftController::class, 'approve']);
+                Route::post('content/drafts/{draft}/reject', [ContentDraftController::class, 'reject']);
             });
             Route::middleware('permission:ai.manage')->group(function () {
                 Route::get('ai/providers', [AiAdminController::class, 'providers']);
