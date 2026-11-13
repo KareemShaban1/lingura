@@ -18,6 +18,7 @@ linguaforge/
 ## Documentation
 | # | Document |
 |---|---|
+| — | [**User guide** (how to use the app, A to Z)](docs/USER_GUIDE.md) |
 | 01 | [Requirements analysis & system architecture](docs/01-architecture.md) |
 | 02 | [Database architecture & ERD](docs/02-database-erd.md) |
 | 03 | [Backend modules & REST API](docs/03-api.md) — machine-readable: [`backend/openapi.yaml`](backend/openapi.yaml) |
