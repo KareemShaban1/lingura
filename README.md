@@ -33,6 +33,20 @@ linguaforge/
 | 13 | [Billing, family groups, gamification & administration](docs/13-business-and-admin.md) |
 | 14 | [Chinese, exam practice, personalisation, offline & mobile](docs/14-expansion.md) |
 
+## Try it locally with temporary data (Docker)
+Requirements: Docker with Compose. Nothing else to install, no API keys.
+
+```bash
+docker compose -f docker-compose.demo.yml up --build
+```
+
+Open http://localhost:3000 once the `web` container is up (the first build takes a few minutes) and sign in:
+- **Learner:** `demo@linguaforge.test` / `password`: Spanish, placement taken, plan, practice history, flashcards, XP.
+- **Admin:** `admin@linguaforge.test` / `password`: the admin area is at `/admin`.
+- Or register a new account and go through onboarding.
+
+The database and Redis live in memory: stopping the stack (`Ctrl+C`, then `docker compose -f docker-compose.demo.yml down -v`) deletes all data, and the next start creates fresh data. AI features use the built-in fake provider (placeholder replies) and checkout runs in test mode (no payment).
+
 ## Local development (without Docker)
 Requirements: PHP 8.3 (pdo_pgsql, redis, intl), Composer, Node 22, PostgreSQL 16, Redis 7.
 
@@ -43,7 +57,8 @@ createuser -s linguaforge && createdb -O linguaforge linguaforge && createdb -O 
 # backend (http://localhost:8000)
 cd backend
 cp .env.example .env && php artisan key:generate      # set DB_PASSWORD
-php artisan migrate --seed                            # reference data, 204-item placement bank, 6 content packs
+php artisan migrate --seed                            # reference data, placement banks and content packs for 7 languages
+php artisan db:seed --class=DemoSeeder                # optional: demo learner with history (local only)
 php artisan serve
 php artisan queue:work redis --queue=default,ai,audio  # in a second terminal
 

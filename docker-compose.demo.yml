@@ -1,0 +1,74 @@
+# Try LinguaForge locally with a TEMPORARY database.
+#
+#   docker compose -f docker-compose.demo.yml up --build
+#
+# Then open http://localhost:3000 and sign in as demo@linguaforge.test / password
+# (admin: admin@linguaforge.test / password, area at /admin).
+#
+# PostgreSQL and Redis keep their data in memory (tmpfs): stopping the stack deletes everything, and the
+# next start re-creates the schema, reference content and demo learner. AI and payments run in their
+# local fake modes (no keys needed, no money moves). Demo/local use only — never deploy this file.
+x-env: &env
+  APP_ENV: local
+  APP_DEBUG: "true"
+  APP_KEY: "base64:5h+aOG/dfZYXxDSRpS4b8CfZECRNUXku2B+wD9EltKw=" # demo-only key for throwaway data
+  APP_URL: http://localhost:8000
+  FRONTEND_URL: http://localhost:3000
+  SANCTUM_STATEFUL_DOMAINS: localhost:3000
+  SESSION_DOMAIN: localhost
+  DB_CONNECTION: pgsql
+  DB_HOST: postgres
+  DB_DATABASE: linguaforge
+  DB_USERNAME: linguaforge
+  DB_PASSWORD: demo
+  REDIS_HOST: redis
+  CACHE_STORE: redis
+  QUEUE_CONNECTION: redis
+  SESSION_DRIVER: redis
+  MAIL_MAILER: log
+  MEDIA_DISK: local
+  FILESYSTEM_DISK: local
+  AI_DEFAULT_PROVIDER: fake
+  BILLING_DRIVER: fake
+  LOG_CHANNEL: stderr
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment: { POSTGRES_DB: linguaforge, POSTGRES_USER: linguaforge, POSTGRES_PASSWORD: demo }
+    tmpfs: [/var/lib/postgresql/data]
+    healthcheck: { test: ["CMD-SHELL", "pg_isready -U linguaforge"], interval: 3s, retries: 20 }
+
+  redis:
+    image: redis:7-alpine
+    command: ["redis-server", "--save", "", "--appendonly", "no"]
+
+  api:
+    build: { context: ./backend, target: app }
+    environment: *env
+    volumes: [media:/var/www/html/storage/app]
+    command: >-
+      sh -c "php artisan migrate:fresh --seed --force
+      && php artisan db:seed --class=DemoSeeder --force
+      && php artisan lf:exams:synthesize-audio
+      && php artisan lf:content:synthesize-audio
+      && php artisan serve --host=0.0.0.0 --port=8000"
+    ports: ["8000:8000"]
+    depends_on: { postgres: { condition: service_healthy }, redis: { condition: service_started } }
+    healthcheck: { test: ["CMD-SHELL", "wget -qO- http://localhost:8000/api/v1/billing/plans >/dev/null"], interval: 5s, retries: 60, start_period: 30s }
+
+  worker:
+    build: { context: ./backend, target: app }
+    environment: *env
+    volumes: [media:/var/www/html/storage/app]
+    command: ["php", "artisan", "queue:work", "redis", "--queue=default,ai,audio", "--sleep=1"]
+    depends_on: { api: { condition: service_healthy } }
+    restart: on-failure
+
+  web:
+    build: { context: ./frontend, args: { NEXT_PUBLIC_API_URL: "http://localhost:8000" } }
+    ports: ["3000:3000"]
+    depends_on: { api: { condition: service_healthy } }
+
+volumes:
+  media: # recordings/uploads for the demo; remove with: docker compose -f docker-compose.demo.yml down -v
