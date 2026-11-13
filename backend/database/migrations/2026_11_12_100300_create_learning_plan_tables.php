@@ -18,7 +18,14 @@ return new class extends Migration
             $table->timestamp('paused_at')->nullable();
             $table->timestamps();
         });
-        DB::statement("CREATE UNIQUE INDEX learning_plans_one_live_per_profile ON learning_plans (learner_profile_id) WHERE status <> 'archived'");
+        // Partial unique indexes are Postgres-only; MySQL/MariaDB use a generated column
+        // (NULL when archived) so archived plans do not block a new live plan per profile.
+        if (Schema::getConnection()->getDriverName() === 'pgsql') {
+            DB::statement("CREATE UNIQUE INDEX learning_plans_one_live_per_profile ON learning_plans (learner_profile_id) WHERE status <> 'archived'");
+        } else {
+            DB::statement("ALTER TABLE learning_plans ADD COLUMN live_learner_profile_id BIGINT UNSIGNED AS (IF(status <> 'archived', learner_profile_id, NULL)) STORED");
+            DB::statement('CREATE UNIQUE INDEX learning_plans_one_live_per_profile ON learning_plans (live_learner_profile_id)');
+        }
 
         Schema::create('learning_plan_versions', function (Blueprint $table) {
             $table->id();
@@ -41,7 +48,9 @@ return new class extends Migration
 
         Schema::create('learning_plan_version_allocations', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('learning_plan_version_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('learning_plan_version_id')
+                ->constrained(indexName: 'lpva_version_id_foreign')
+                ->cascadeOnDelete();
             $table->foreignId('skill_id')->constrained()->restrictOnDelete();
             $table->decimal('priority_score', 6, 3);
             $table->unsignedSmallInteger('minutes_per_week');
@@ -67,7 +76,7 @@ return new class extends Migration
             $table->string('skip_reason', 120)->nullable();
             $table->timestamp('completed_at')->nullable();
             $table->timestamps();
-            $table->index(['learning_plan_version_id', 'scheduled_date']);
+            $table->index(['learning_plan_version_id', 'scheduled_date'], 'lpi_version_date_index');
         });
 
         Schema::create('learning_sessions', function (Blueprint $table) {

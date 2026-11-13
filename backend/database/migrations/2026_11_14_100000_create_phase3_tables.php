@@ -223,7 +223,7 @@ return new class extends Migration
             $table->string('criterion', 30); // task_achievement | grammar | vocabulary | coherence | organization
             $table->unsignedTinyInteger('score'); // 1–5
             $table->text('comment');
-            $table->unique(['writing_evaluation_id', 'criterion']);
+            $table->unique(['writing_evaluation_id', 'criterion'], 'wec_evaluation_criterion_unique');
         });
         Schema::create('writing_corrections', function (Blueprint $table) {
             $table->id();
@@ -245,10 +245,11 @@ return new class extends Migration
             $table->unsignedInteger('occurrences');
             $table->unsignedSmallInteger('sources'); // distinct sources (tutor, writing, exercises)
             $table->text('example')->nullable();
-            $table->timestamp('first_seen_at');
-            $table->timestamp('last_seen_at');
+            // dateTime: MySQL rejects a second NOT NULL TIMESTAMP without an explicit default
+            $table->dateTime('first_seen_at');
+            $table->dateTime('last_seen_at');
             $table->timestamps();
-            $table->unique(['learner_profile_id', 'category', 'topic_slug']);
+            $table->unique(['learner_profile_id', 'category', 'topic_slug'], 'lmp_profile_category_topic_unique');
         });
 
         Schema::table('assessment_attempt_sections', function (Blueprint $table) {

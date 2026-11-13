@@ -55,7 +55,7 @@ return new class extends Migration
             $table->string('content_hash', 64)->unique(); // de-duplicates seeded / generated items
             $table->timestamps();
             $table->softDeletes();
-            $table->index(['language_id', 'skill_id', 'review_status', 'difficulty']);
+            $table->index(['language_id', 'skill_id', 'review_status', 'difficulty'], 'assessment_items_lookup_index');
         });
 
         Schema::create('assessment_item_options', function (Blueprint $table) {
@@ -101,7 +101,7 @@ return new class extends Migration
             $table->timestamp('current_item_served_at')->nullable();
             $table->timestamp('completed_at')->nullable();
             $table->timestamps();
-            $table->unique(['assessment_attempt_id', 'skill_id']);
+            $table->unique(['assessment_attempt_id', 'skill_id'], 'aas_attempt_skill_unique');
         });
 
         Schema::create('assessment_answers', function (Blueprint $table) {
@@ -116,7 +116,7 @@ return new class extends Migration
             $table->decimal('se_after', 6, 3);
             $table->timestamp('answered_at');
             $table->timestamps();
-            $table->unique(['assessment_attempt_id', 'assessment_item_id']);
+            $table->unique(['assessment_attempt_id', 'assessment_item_id'], 'aa_attempt_item_unique');
         });
 
         Schema::create('skill_scores', function (Blueprint $table) {

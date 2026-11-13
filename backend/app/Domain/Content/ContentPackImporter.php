@@ -100,7 +100,10 @@ class ContentPackImporter
             );
             $word->setTranslations('meaning', $w['meaning']);
             $word->forms()->delete();
-            $forms = array_unique(array_map(fn ($f) => TextNormalizer::normalize($f), [$w['lemma'], ...($w['forms'] ?? [])]));
+            $forms = array_values(array_unique(array_map(
+                fn ($f) => TextNormalizer::normalize($f),
+                [$w['lemma'], ...($w['forms'] ?? [])],
+            )));
             foreach ($forms as $form) {
                 $word->forms()->create(['language_id' => $this->language->id, 'form' => $form]);
             }

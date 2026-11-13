@@ -20,9 +20,10 @@ return new class extends Migration
             $table->foreignId('exercise_id')->nullable()->constrained()->nullOnDelete();
             $table->decimal('reward', 4, 3)->nullable();
             $table->timestamp('rewarded_at')->nullable();
-            $table->timestamp('created_at');
-            $table->index(['learner_profile_id', 'context', 'chosen_arm']);
-            $table->index(['learner_profile_id', 'exercise_id', 'reward']);
+            // useCurrent: MySQL rejects a second TIMESTAMP NOT NULL after rewarded_at without an explicit default
+            $table->timestamp('created_at')->useCurrent();
+            $table->index(['learner_profile_id', 'context', 'chosen_arm'], 'pd_profile_context_arm_index');
+            $table->index(['learner_profile_id', 'exercise_id', 'reward'], 'pd_profile_exercise_reward_index');
         });
     }
 

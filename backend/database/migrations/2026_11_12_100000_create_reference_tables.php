@@ -92,7 +92,7 @@ return new class extends Migration
             $table->foreignId('learning_purpose_id')->constrained()->cascadeOnDelete();
             $table->foreignId('skill_id')->constrained()->cascadeOnDelete();
             $table->decimal('weight', 4, 2);
-            $table->unique(['learning_purpose_id', 'skill_id']);
+            $table->unique(['learning_purpose_id', 'skill_id'], 'lp_skill_weights_unique');
         });
 
         Schema::create('roles', function (Blueprint $table) {

@@ -48,7 +48,14 @@ return new class extends Migration
             $table->softDeletes();
             $table->index(['user_id', 'status']);
         });
-        DB::statement('CREATE UNIQUE INDEX learner_profiles_user_language_unique ON learner_profiles (user_id, target_language_id) WHERE deleted_at IS NULL');
+        // Partial unique indexes are Postgres-only; MySQL/MariaDB use a generated column
+        // (NULL when soft-deleted) so deleted rows do not block recreating the same pair.
+        if (Schema::getConnection()->getDriverName() === 'pgsql') {
+            DB::statement('CREATE UNIQUE INDEX learner_profiles_user_language_unique ON learner_profiles (user_id, target_language_id) WHERE deleted_at IS NULL');
+        } else {
+            DB::statement('ALTER TABLE learner_profiles ADD COLUMN active_target_language_id BIGINT UNSIGNED AS (IF(deleted_at IS NULL, target_language_id, NULL)) STORED');
+            DB::statement('CREATE UNIQUE INDEX learner_profiles_user_language_unique ON learner_profiles (user_id, active_target_language_id)');
+        }
 
         Schema::create('learner_focus_skills', function (Blueprint $table) {
             $table->foreignId('learner_profile_id')->constrained()->cascadeOnDelete();

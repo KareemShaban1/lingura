@@ -64,11 +64,16 @@ return new class extends Migration
         });
 
         // Inflected forms so words can be recognised in running text (e.g. "casas" → casa).
+        // utf8mb4_bin: unicode_ci equates ä/a so "Laden"/"Läden" collide after lowercasing.
         Schema::create('vocabulary_forms', function (Blueprint $table) {
             $table->id();
             $table->foreignId('vocabulary_word_id')->constrained()->cascadeOnDelete();
             $table->foreignId('language_id')->constrained()->cascadeOnDelete();
-            $table->string('form', 120);
+            if (Schema::getConnection()->getDriverName() === 'mysql') {
+                $table->string('form', 120)->collation('utf8mb4_bin');
+            } else {
+                $table->string('form', 120);
+            }
             $table->unique(['vocabulary_word_id', 'form']);
             $table->index(['language_id', 'form']);
         });
@@ -119,7 +124,7 @@ return new class extends Migration
             $table->timestamp('reviewed_at')->nullable();
             $table->timestamps();
             $table->softDeletes();
-            $table->index(['language_id', 'skill_id', 'review_status', 'cefr_level_id']);
+            $table->index(['language_id', 'skill_id', 'review_status', 'cefr_level_id'], 'exercises_lookup_index');
         });
 
         Schema::create('exercise_objectives', function (Blueprint $table) {
