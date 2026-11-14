@@ -7,7 +7,8 @@ set -uo pipefail
 DOMAIN="${1:-}"
 APP_DIR="${APP_DIR:-$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)}"
 PHP="${PHP:-/www/server/php/83/bin/php}"
-NGINX="${NGINX:-$(command -v nginx || echo /www/server/nginx/sbin/nginx)}"
+# aaPanel's own Nginx first: a system nginx (/usr/sbin/nginx) may also be installed but is not the one serving the site.
+NGINX="${NGINX:-$( [ -x /www/server/nginx/sbin/nginx ] && echo /www/server/nginx/sbin/nginx || command -v nginx )}"
 ok()   { printf '  \033[32mOK\033[0m    %s\n' "$*"; }
 bad()  { printf '  \033[31mFAIL\033[0m  %s\n' "$*"; }
 info() { printf '        %s\n' "$*"; }
@@ -42,6 +43,8 @@ if [ -f "$APP_DIR/frontend/.env.production" ]; then info "frontend/.env.producti
 echo "3. Laravel"
 [ -f "$APP_DIR/backend/.env" ] && ok ".env exists" || bad "backend/.env missing"
 [ -d "$APP_DIR/backend/vendor" ] && ok "vendor installed" || bad "vendor missing: run update.sh"
+grep -qE '^BILLING_DRIVER=fake' "$APP_DIR/backend/.env" 2>/dev/null && grep -qE '^APP_ENV=production' "$APP_DIR/backend/.env" && bad "BILLING_DRIVER=fake is refused in production: set BILLING_DRIVER=stripe"
+grep -qE '^AI_DEFAULT_PROVIDER=fake' "$APP_DIR/backend/.env" 2>/dev/null && grep -qE '^APP_ENV=production' "$APP_DIR/backend/.env" && bad "AI_DEFAULT_PROVIDER=fake is refused in production: set openai and OPENAI_API_KEY"
 for k in APP_ENV APP_URL FRONTEND_URL SANCTUM_STATEFUL_DOMAINS SESSION_DOMAIN DB_CONNECTION BILLING_DRIVER AI_DEFAULT_PROVIDER; do info "$(grep -E "^$k=" "$APP_DIR/backend/.env" 2>/dev/null || echo "$k=(not set)")"; done
 grep -q '^APP_KEY=base64:' "$APP_DIR/backend/.env" 2>/dev/null && ok "APP_KEY set" || bad "APP_KEY empty: run update.sh (it generates one)"
 if out=$(cd "$APP_DIR/backend" && "$PHP" artisan migrate:status --no-ansi 2>&1 | tail -1); then info "migrations: $out"; fi
@@ -61,7 +64,7 @@ rm -f /tmp/lf-doctor.$$
 
 echo "5. Background services"
 pgrep -f "artisan horizon" >/dev/null && ok "Horizon (queue worker) running" || bad "Horizon not running: add/start 'linguaforge-horizon' in Supervisor Manager"
-pgrep -f "redis-server" >/dev/null && ok "Redis running" || bad "Redis not running"
+if pgrep -f "redis-server" >/dev/null; then ok "Redis running"; else bad "Redis not running: install/start it in App Store (sessions, cache and queues need it)"; fi
 crontab -l 2>/dev/null | grep -q "schedule:run" || grep -rqs "schedule:run" /www/server/cron 2>/dev/null && ok "scheduler cron found" || bad "no cron running 'artisan schedule:run'"
 
 echo "6. Recent errors"
