@@ -4,10 +4,10 @@ import { Suspense, useCallback, useEffect } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useQueryClient } from "@tanstack/react-query";
-import { useTheme } from "next-themes";
-import { BarChart3, Bot, CloudOff, CreditCard, Dumbbell, Home, Layers, LogOut, Map, Moon, Plus, ShieldCheck, Sun, Trophy, UserRound, type LucideIcon } from "lucide-react";
+import { BarChart3, Bot, CloudOff, CreditCard, Dumbbell, Home, Layers, LogOut, Map, Plus, ShieldCheck, Trophy, UserRound, type LucideIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Select } from "@/components/ui/input";
+import { ThemeToggle } from "@/components/theme-toggle";
 import { NotificationBell } from "@/features/notifications/notifications";
 import { OfflineSyncer } from "@/features/offline/offline-views";
 import { useActiveProfile, useMe } from "@/features/queries";
@@ -82,7 +82,7 @@ function ProfileSwitcher() {
       <span className="sr-only">{t.nav.learningLanguage}</span>
       <Select
         value={active.id}
-        className="h-9 w-auto min-w-36"
+        className="h-9 w-auto min-w-0 max-w-32 sm:min-w-36 sm:max-w-none"
         onChange={(e) => (e.target.value === "__add" ? router.push("/onboarding") : setActive(e.target.value))}
       >
         {data.learner_profiles.map((p) => (
@@ -110,17 +110,6 @@ function SecondaryLinks() {
   );
 }
 
-function ThemeToggle() {
-  const { resolvedTheme, setTheme } = useTheme();
-  return (
-    // Phones: the header has no room for it (theme is in Profile → Appearance).
-    <Button variant="ghost" size="icon" className="hidden md:inline-flex" aria-label="Toggle theme" onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}>
-      <Sun className="hidden dark:block" />
-      <Moon className="dark:hidden" />
-    </Button>
-  );
-}
-
 export function useSignOut() {
   const qc = useQueryClient();
   const router = useRouter();
@@ -132,11 +121,12 @@ export function useSignOut() {
   };
 }
 
-export function Logo({ className }: { className?: string }) {
+/** `compact`: the name is hidden on narrow phones (the mark stays), leaving room for header controls. */
+export function Logo({ className, compact = false }: { className?: string; compact?: boolean }) {
   return (
     <span className={cn("flex items-center gap-2 font-display text-xl tracking-tight", className)}>
       <span className="grid size-8 place-items-center rounded-lg bg-primary text-primary-foreground font-sans text-sm font-bold">L</span>
-      LinguaForge
+      <span className={cn(compact && "sr-only sm:not-sr-only")}>LinguaForge</span>
     </span>
   );
 }
@@ -174,8 +164,8 @@ export function AppShell({ children }: { children: React.ReactNode }) {
 
       <div className="flex min-w-0 flex-col">
         <header className="sticky top-0 z-30 flex h-14 items-center justify-between gap-3 border-b bg-background/85 px-4 backdrop-blur md:px-8">
-          <Link href="/home" className="md:hidden">
-            <Logo className="text-lg" />
+          <Link href="/home" className="shrink-0 md:hidden">
+            <Logo className="text-lg" compact />
           </Link>
           <div className="hidden md:block" />
           <div className="flex items-center gap-1">

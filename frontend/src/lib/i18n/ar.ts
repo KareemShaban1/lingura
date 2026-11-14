@@ -15,6 +15,7 @@ export const ar: Dictionary = {
     minutes: "د",
     minutesLong: "دقيقة",
     errorTitle: "حدث خطأ ما",
+    toggleTheme: "التبديل بين الوضع الفاتح والداكن",
     beta: "تجريبي",
     notAssessed: "لم يُقيَّم بعد",
     signOut: "تسجيل الخروج",

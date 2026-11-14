@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { ArrowRight, Check } from "lucide-react";
+import { ThemeToggle } from "@/components/theme-toggle";
 import { Logo } from "@/components/layout/app-shell";
 import { LevelLadder, SkillIcon } from "@/components/skill";
 import { Button } from "@/components/ui/button";
@@ -26,6 +27,7 @@ export function LandingView() {
       <header className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 md:px-8">
         <Logo />
         <div className="flex items-center gap-2">
+          <ThemeToggle />
           <Button variant="ghost" size="sm" onClick={() => setLocale(locale === "en" ? "ar" : "en")}>
             {locale === "en" ? "العربية" : "English"}
           </Button>

@@ -6,6 +6,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
 import { ArrowLeft, BarChart3, Bot, ClipboardCheck, CreditCard, FileStack, Globe2, PencilLine, ScrollText, Users, type LucideIcon } from "lucide-react";
 import { Logo } from "@/components/layout/app-shell";
+import { ThemeToggle } from "@/components/theme-toggle";
 import { Button } from "@/components/ui/button";
 import { EmptyState, ErrorState } from "@/components/ui/states";
 import { FullPageLoader } from "@/features/auth-gate";
@@ -74,7 +75,10 @@ export function AdminGate({ children }: { children: React.ReactNode }) {
     <div className="min-h-dvh md:grid md:grid-cols-[14rem_1fr]">
       <aside className="flex flex-col gap-4 border-b bg-card/60 p-4 md:sticky md:top-0 md:h-dvh md:border-e md:border-b-0">
         <div className="flex items-center justify-between md:flex-col md:items-start md:gap-1">
-          <Link href="/admin"><Logo className="text-lg" /></Link>
+          <div className="flex items-center gap-1 md:w-full md:justify-between">
+            <Link href="/admin"><Logo className="text-lg" /></Link>
+            <ThemeToggle />
+          </div>
           <span className="text-xs font-medium uppercase tracking-wide text-muted-foreground">{t.admin.title}</span>
         </div>
         <AdminNav permissions={data.permissions} />

@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { X } from "lucide-react";
+import { ThemeToggle } from "@/components/theme-toggle";
 import { AppShell, Logo } from "@/components/layout/app-shell";
 import { ErrorState } from "@/components/ui/states";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -48,11 +49,14 @@ export function FocusGate({ children }: { children: React.ReactNode }) {
     <div className="min-h-dvh">
       <header className="flex h-14 items-center justify-between border-b px-4 md:px-8">
         <Logo className="text-lg" />
-        {data.learner_profiles.length > 0 && (
-          <Link href="/home" aria-label="Exit" className="rounded-md p-2 text-muted-foreground hover:bg-muted">
-            <X className="size-5" />
-          </Link>
-        )}
+        <div className="flex items-center gap-1">
+          <ThemeToggle />
+          {data.learner_profiles.length > 0 && (
+            <Link href="/home" aria-label="Exit" className="rounded-md p-2 text-muted-foreground hover:bg-muted">
+              <X className="size-5" />
+            </Link>
+          )}
+        </div>
       </header>
       <main className="mx-auto w-full max-w-2xl px-4 py-8 md:py-12">{children}</main>
     </div>

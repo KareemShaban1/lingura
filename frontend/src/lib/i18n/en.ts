@@ -14,6 +14,7 @@ export const en = {
     minutes: "min",
     minutesLong: "minutes",
     errorTitle: "Something went wrong",
+    toggleTheme: "Switch between light and dark theme",
     beta: "Beta",
     notAssessed: "Not assessed yet",
     signOut: "Sign out",
