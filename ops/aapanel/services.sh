@@ -10,7 +10,8 @@
 set -euo pipefail
 
 DOMAIN="${1:-}"
-WEB_PORT="${WEB_PORT:-3000}"
+# Port: WEB_PORT if given, else the one saved by the last run, else 3000.
+WEB_PORT="${WEB_PORT:-$(sed -n 's/^WEB_PORT=//p' /etc/linguaforge.env 2>/dev/null)}"; WEB_PORT="${WEB_PORT:-3000}"
 APP_DIR="${APP_DIR:-$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)}"
 PHP="${PHP:-/www/server/php/83/bin/php}"
 WEB_USER="${WEB_USER:-www}"
@@ -23,6 +24,13 @@ NODE="${NODE:-$(command -v node || ls -d /www/server/nodejs/v*/bin/node 2>/dev/n
 [ -n "$NODE" ] && [ -x "$NODE" ] || { echo "Node.js not found (install Node 22 in aaPanel, or set NODE=/path/to/node)."; exit 1; }
 node_major=$("$NODE" -p 'process.versions.node.split(".")[0]')
 [ "$node_major" -ge 20 ] || { echo "Node $("$NODE" -v) is too old; Next.js 16 needs Node 20.9+ (22 recommended)."; exit 1; }
+# The service runs as $WEB_USER, which cannot read /root (e.g. Node installed with nvm as root).
+# Node is a single self-contained binary, so copy it somewhere every user can run it.
+if ! runuser -u "$WEB_USER" -- test -x "$NODE" 2>/dev/null; then
+  install -m 755 "$NODE" /usr/local/bin/linguaforge-node
+  echo "==> $NODE is not usable by '$WEB_USER'; copied it to /usr/local/bin/linguaforge-node"
+  NODE=/usr/local/bin/linguaforge-node
+fi
 STANDALONE="$APP_DIR/frontend/.next/standalone"
 [ -f "$STANDALONE/server.js" ] || { echo "No web app build at $STANDALONE: run ops/aapanel/update.sh first."; exit 1; }
 if ss -ltn 2>/dev/null | grep -q ":$WEB_PORT " && ! systemctl is-active --quiet linguaforge-web; then
@@ -83,7 +91,8 @@ RestartSec=5
 WantedBy=multi-user.target
 EOF
 
-chown -R "$WEB_USER:$WEB_USER" "$APP_DIR"
+# aaPanel makes .user.ini immutable, so chown reports an error for it; everything else is still changed.
+chown -R "$WEB_USER:$WEB_USER" "$APP_DIR" 2>/dev/null || true
 systemctl daemon-reload
 for s in linguaforge-web linguaforge-horizon linguaforge-scheduler; do
   systemctl enable --quiet "$s"

@@ -26,6 +26,7 @@ grep -q '^APP_KEY=base64:' .env || "$PHP" artisan key:generate --force   # first
 "$PHP" artisan event:cache
 
 echo "==> Web app (NEXT_PUBLIC_API_URL comes from frontend/.env.production)"
+command -v npm >/dev/null || { echo "npm not found in PATH (with nvm, run: source ~/.nvm/nvm.sh)"; exit 1; }
 cd "$APP_DIR/frontend"
 test -f .env.production || { echo "Missing frontend/.env.production (NEXT_PUBLIC_API_URL=https://your-domain)"; exit 1; }
 npm ci --no-audit --no-fund
@@ -34,7 +35,7 @@ cp -r .next/static .next/standalone/.next/static
 cp -r public .next/standalone/public
 
 echo "==> Permissions"
-chown -R "$WEB_USER:$WEB_USER" "$APP_DIR"
+chown -R "$WEB_USER:$WEB_USER" "$APP_DIR" 2>/dev/null || true   # aaPanel's locked .user.ini can't change owner; the rest does
 chmod -R ug+rwX "$APP_DIR/backend/storage" "$APP_DIR/backend/bootstrap/cache"
 
 echo "==> Restarting background workers and the web app"
