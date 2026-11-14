@@ -1,80 +1,78 @@
-# Deploying LinguaForge on a Contabo VPS with aaPanel
+# Deploying LinguaForge on a Contabo VPS with aaPanel (one website)
 
-> **Last updated:** 2026-11-14 · Use this for a single-server install. For containers or managed cloud, see `docs/10-deployment.md`.
+> **Last updated:** 2026-11-14 · For containers or managed cloud, see `docs/10-deployment.md`.
 
-This guide uses example domains. Replace them with your own throughout:
+The whole app (front end and back end) runs from **one folder** and **one aaPanel website on one domain**:
 
-| Part | Example domain | Served by |
-|---|---|---|
-| Web app (Next.js) | `app.example.com` | Node process on port 3000, behind Nginx |
-| API (Laravel) | `api.example.com` | PHP-FPM + Nginx, root `backend/public` |
+```
+https://example.com
+ ├── /api/…  /sanctum/…  /horizon  /up   →  Laravel (PHP-FPM, site root = backend/public)
+ └── everything else (/, /login, /home…) →  Next.js server on 127.0.0.1:3000 (reverse proxy)
+```
 
-**Both must be subdomains of the same parent domain.** Login uses cookies shared between the app and the API, so `app.yourdomain.com` + `api.yourdomain.com` works, but two unrelated domains do not.
+The browser talks to a single origin, so there are no CORS or cross-domain cookie problems. Replace `example.com` with your domain throughout. A subdomain such as `learn.example.com` works the same way.
+
+Two files in the repository do most of the work:
+- `ops/aapanel/nginx-rewrite.conf`: the Nginx rules for the website (tested with aaPanel's default site rules).
+- `ops/aapanel/update.sh`: installs and updates everything in one command.
 
 ---
 
 ## 0. What you need
-- **VPS:** Ubuntu 22.04/24.04 or Debian 12. **8 GB RAM recommended** (4 GB is the minimum, and building the frontend needs about 2 GB free). 2+ vCPU, 40 GB+ disk.
-- **DNS:** two `A` records, `app` and `api`, pointing at the VPS IP.
-- **An OpenAI API key** (or another configured provider). The app refuses the `fake` AI driver outside local/testing, so the tutor, writing feedback, speech and audio generation need a real key.
+- **VPS:** Ubuntu 22.04/24.04 or Debian 12. **8 GB RAM recommended** (4 GB minimum; the front-end build needs about 2 GB free). 2+ vCPU, 40 GB+ disk.
+- **DNS:** an `A` record for your domain pointing at the VPS IP.
+- **An OpenAI API key** (or another configured AI provider). Production refuses the test AI driver, so the tutor, writing feedback, speech and audio need a real key.
 - **SMTP credentials** for password resets, invitations and notifications.
-- **Stripe** account keys if you will take payments (see [§9](#9-payments-stripe)).
+- **Stripe keys** if you will take payments (§9). Optional at first.
 
 ## 1. Install aaPanel
-SSH into the server as root and run the installer from <https://www.aapanel.com/new/download.html> (copy the current command from that page). When it finishes, open the panel URL it prints and log in. **Change the panel port, username and password**, and enable the panel's SSL.
+SSH into the server as root and run the installer from <https://www.aapanel.com/new/download.html> (copy the current command from that page). Open the panel URL it prints. **Change the panel port, username and password**, and enable the panel's SSL.
 
-## 2. Install the software stack (aaPanel → App Store)
-Install:
-
+## 2. Install the software (aaPanel → App Store)
 | Software | Version | Notes |
 |---|---|---|
 | **Nginx** | latest stable | |
-| **MySQL** | **8.0** | Use MySQL 8.0, not MariaDB: the schema uses MySQL 8 generated columns and is tested on MySQL 8.0 (PostgreSQL 16 is also supported) |
+| **MySQL** | **8.0** | Use MySQL 8.0, not MariaDB: the schema uses MySQL 8 generated columns (PostgreSQL 16 also works) |
 | **PHP** | **8.3** (or 8.4) | |
-| **Redis** | 7.x | Queues, cache and locks |
+| **Redis** | 7.x | Queues, cache, sessions |
 | **Supervisor Manager** | latest | Keeps the queue worker and the web app running |
-| **Node.js version manager** (or "Node.js" in Website → Node project) | Node **22 LTS** | Next.js 16 needs Node ≥ 20.9 |
+| **Node.js version manager** | Node **22 LTS** | Next.js 16 needs Node ≥ 20.9 |
 
-### PHP settings (App Store → PHP 8.3 → Setting)
-1. **Install extensions:** `redis`, `intl`, `fileinfo`, `opcache`, `bcmath`, `zip`, and `pdo_mysql` (bundled) or `pdo_pgsql` if you use PostgreSQL. `pcntl` is needed by the queue worker. It is usually compiled into the CLI; check with `php -m | grep pcntl`.
-2. **Disabled functions:** remove these from the list, or Composer, Artisan and Horizon will fail: `proc_open`, `proc_get_status`, `putenv`, `pcntl_signal`, `pcntl_alarm`, `pcntl_async_signals`, `symlink`, `exec`, `shell_exec`.
-3. **Configuration:** `upload_max_filesize = 10M`, `post_max_size = 12M`, `memory_limit = 256M`, `max_execution_time = 60`.
+**PHP 8.3 → Setting:**
+1. **Install extensions:** `redis`, `intl`, `fileinfo`, `opcache`, `bcmath`, `zip`. `pdo_mysql` is built in (add `pdo_pgsql` if you use PostgreSQL). Check `pcntl` with `php -m | grep pcntl`; the queue worker needs it.
+2. **Disabled functions:** remove `proc_open`, `proc_get_status`, `putenv`, `pcntl_signal`, `pcntl_alarm`, `pcntl_async_signals`, `symlink`, `exec`, `shell_exec`. If you skip this, Composer, Artisan and the queue worker fail.
+3. **Configuration:** `upload_max_filesize = 10M`, `post_max_size = 12M`, `memory_limit = 256M`.
 4. Restart PHP.
 
-### Composer
-In SSH: `composer --version`. If it's missing, install it from <https://getcomposer.org/download/>.
+**Composer:** run `composer --version` in SSH. If it's missing, install it from <https://getcomposer.org/download/>.
 
-## 3. Create the database and Redis password
-**Databases → Add database:** name `linguaforge`, user `linguaforge`, a strong password, access *local server*. Keep the password for `.env`.
+**Node:** run `node -v` in SSH. It should print v22.x. If the command isn't found, link it: `ln -s /www/server/nodejs/v22.*/bin/node /usr/local/bin/node`, and do the same for `npm`.
 
-**App Store → Redis → Setting:** set a `requirepass` password (recommended) and keep it bound to `127.0.0.1`.
+## 3. Database and Redis
+- **Databases → Add database:** name `linguaforge`, user `linguaforge`, a strong password, access *local server*.
+- **App Store → Redis → Setting:** set a password (`requirepass`) and keep Redis bound to `127.0.0.1`.
 
-## 4. Get the code
+## 4. Put the code in one folder
 ```bash
-mkdir -p /www/wwwroot && cd /www/wwwroot
+cd /www/wwwroot
 git clone https://github.com/KareemShaban1/lingura.git linguaforge
-cd linguaforge
 ```
-For a private repository, add a deploy key or use a personal access token. The rest of this guide assumes `/www/wwwroot/linguaforge`.
+The result is `/www/wwwroot/linguaforge` containing `backend/`, `frontend/`, `ops/`, and so on. For a private repository, use a deploy key or a personal access token.
 
-## 5. Back end (Laravel API)
-
-### 5.1 Install and configure
+## 5. Configure
+### 5.1 Back end: `backend/.env`
 ```bash
 cd /www/wwwroot/linguaforge/backend
-composer install --no-dev --optimize-autoloader
 cp .env.example .env
-php artisan key:generate
 ```
-
-Edit `backend/.env`. These are the values that matter in production:
+Edit `backend/.env`. With one domain, **all the URLs are the same**:
 ```dotenv
 APP_ENV=production
 APP_DEBUG=false
-APP_URL=https://api.example.com
-FRONTEND_URL=https://app.example.com
-SANCTUM_STATEFUL_DOMAINS=app.example.com
-SESSION_DOMAIN=.example.com
+APP_URL=https://example.com
+FRONTEND_URL=https://example.com
+SANCTUM_STATEFUL_DOMAINS=example.com
+SESSION_DOMAIN=null
 SESSION_SECURE_COOKIE=true
 LOG_LEVEL=warning
 
@@ -103,63 +101,44 @@ AI_DEFAULT_PROVIDER=openai
 OPENAI_API_KEY=sk-...
 MEDIA_DISK=local          # recordings and generated audio stay on this server, outside the web root
 
-BILLING_DRIVER=stripe     # "fake" is refused in production; see §9
+BILLING_DRIVER=stripe     # the test driver is refused in production; see §9
 STRIPE_SECRET=
 STRIPE_WEBHOOK_SECRET=
 ```
+`SANCTUM_STATEFUL_DOMAINS` is the domain **without** `https://`. If you use `www.example.com` as well, list both, separated by a comma. Better still, redirect `www` to the main domain in aaPanel.
 
-**Keep `.env` private.** It must never be inside a public web root. Only `backend/public` is served (step 5.3).
-
-### 5.2 Database, content and caches
+### 5.2 Front end: `frontend/.env.production`
 ```bash
-php artisan migrate --force
-php artisan db:seed --force          # reference data, placement bank, courses, exams, plans. Safe to re-run.
-php artisan storage:link
-php artisan config:cache && php artisan route:cache && php artisan event:cache
+echo "NEXT_PUBLIC_API_URL=https://example.com" > /www/wwwroot/linguaforge/frontend/.env.production
 ```
+This is the **same domain** as the site, with no `/api` suffix. The value is built into the front end, so if you change it, rebuild (run `update.sh` again).
 
-File permissions (aaPanel runs PHP as `www`):
+## 6. Install and build (one command)
 ```bash
-chown -R www:www /www/wwwroot/linguaforge
-chmod -R ug+rwX backend/storage backend/bootstrap/cache
+cd /www/wwwroot/linguaforge
+bash ops/aapanel/update.sh
 ```
+`update.sh` installs PHP and Node dependencies, generates the app key on the first run, runs migrations, seeds the reference data, courses, placement bank and exams (safe to re-run), caches the configuration, builds the web app and sets permissions. If your PHP binary isn't `/www/server/php/83/bin/php`, prefix the command, e.g. `PHP=/www/server/php/84/bin/php bash ops/aapanel/update.sh`.
 
-### 5.3 API website
-**Website → Add site**
-- Domain: `api.example.com`
-- Root directory: `/www/wwwroot/linguaforge/backend/public`
+On a 4 GB server, if the build is killed for lack of memory, add swap (**aaPanel → Linux Tools → Swap**, 2–4 GB) and run it again.
+
+## 7. The website (one site for everything)
+### 7.1 Create it
+**Website → Add site:**
+- Domain: `example.com` (add `www.example.com` too if you want it)
+- **Root directory: `/www/wwwroot/linguaforge/backend/public`**
 - PHP version: 8.3
-- No database or FTP (already created)
+- No FTP or database (already created)
 
-Then open the site's settings:
-- **Site directory:** untick *anti-cross-site (open_basedir)*, or Laravel can't read `../.env` and `../vendor`. Keep *Running directory* as `/`.
-- **URL rewrite:** choose the **laravel5** template, or paste:
-  ```nginx
-  location / {
-      try_files $uri $uri/ /index.php?$query_string;
-  }
-  ```
-- **Config file:** inside the `server { … }` block, add `client_max_body_size 10m;` for audio and pack uploads.
-- **SSL:** Let's Encrypt → issue for `api.example.com` → enable **Force HTTPS**.
+### 7.2 Site settings
+1. **Site directory:** untick **anti-cross-site (open_basedir)**, so Laravel can read `../.env` and `../vendor`.
+2. **URL rewrite:** clear the box, paste the whole content of `ops/aapanel/nginx-rewrite.conf` and save.
+   - The file assumes PHP-FPM listens on `unix:/tmp/php-cgi-83.sock` (aaPanel's default for PHP 8.3). Check `/www/server/nginx/conf/enable-php-83.conf`. If yours differs (e.g. `php-cgi-84.sock`), change the `fastcgi_pass` line.
+   - **Don't** also add a reverse proxy in the site's *Reverse proxy* tab; the rewrite rules already do it. Two `location /` blocks make Nginx refuse the config.
+3. **Config file:** inside `server { … }`, add `client_max_body_size 10m;` (audio uploads and content packs) and save.
+4. **SSL:** Let's Encrypt → issue for your domain → turn on **Force HTTPS**. The rules keep `/.well-known/acme-challenge/` open, so renewals keep working.
 
-Check: `https://api.example.com/up` should return 200, and `https://api.example.com/api/v1/languages` should list the languages.
-
-## 6. Front end (Next.js web app)
-
-### 6.1 Build
-`NEXT_PUBLIC_API_URL` is baked in at build time, so set it before building:
-```bash
-cd /www/wwwroot/linguaforge/frontend
-npm ci
-echo "NEXT_PUBLIC_API_URL=https://api.example.com" > .env.production
-npm run build
-# The standalone server needs its static files next to it:
-cp -r .next/static .next/standalone/.next/static
-cp -r public .next/standalone/public
-```
-On a 4 GB server, if the build is killed for lack of memory, add swap (**aaPanel → Linux Tools → Swap**, 2–4 GB) and build again.
-
-### 6.2 Keep it running (Supervisor Manager → Add daemon)
+### 7.3 Run the web app (Supervisor Manager → Add daemon)
 | Field | Value |
 |---|---|
 | Name | `linguaforge-web` |
@@ -167,21 +146,22 @@ On a 4 GB server, if the build is killed for lack of memory, add swap (**aaPanel
 | Run directory | `/www/wwwroot/linguaforge/frontend/.next/standalone` |
 | Start command | `/usr/bin/env PORT=3000 HOSTNAME=127.0.0.1 NODE_ENV=production node server.js` |
 
-If `node` isn't on Supervisor's path, use the full path from `which node` (e.g. `/www/server/nodejs/v22.x.x/bin/node`).
+If Supervisor can't find `node`, use the full path from `which node`.
 
-### 6.3 Web app website (reverse proxy)
-**Website → Add site** with domain `app.example.com` (static, no PHP). Then:
-- **Reverse proxy → Add:** target URL `http://127.0.0.1:3000`, send domain `$host`.
-- **SSL:** Let's Encrypt for `app.example.com` → **Force HTTPS**.
+**Firewall (aaPanel → Security):** do **not** open port 3000. The web app only listens on `127.0.0.1`, and Nginx reaches it locally. Only 80, 443, SSH and the panel port should be public.
 
-**Firewall (aaPanel → Security):** do **not** open port 3000. Only 80, 443, SSH and your panel port should be public.
+### 7.4 Check
+| Open | Expect |
+|---|---|
+| `https://example.com/up` | 200 (Laravel is reachable) |
+| `https://example.com/api/v1/languages` | JSON list of languages |
+| `https://example.com/` | The LinguaForge home page |
+| `https://example.com/register` | You can create an account and land on onboarding |
 
-Open `https://app.example.com` and register an account.
+## 8. Background jobs and scheduler (required)
+AI feedback, writing evaluation, audio and emails run on queues. Plan roll-over, account purging, recording clean-up and billing reconciliation run on the scheduler. **Without these, many features wait forever.**
 
-## 7. Background jobs and scheduler (required)
-AI feedback, writing evaluation, audio generation and emails run on queues. Plan roll-over, account purging, recording clean-up and billing reconciliation run on the scheduler. **Without these, many features silently wait forever.**
-
-### 7.1 Queue worker: Supervisor Manager → Add daemon
+**Queue worker: Supervisor Manager → Add daemon**
 | Field | Value |
 |---|---|
 | Name | `linguaforge-horizon` |
@@ -189,80 +169,62 @@ AI feedback, writing evaluation, audio generation and emails run on queues. Plan
 | Run directory | `/www/wwwroot/linguaforge/backend` |
 | Start command | `/www/server/php/83/bin/php artisan horizon` |
 
-Horizon runs the `default`, `ai` and `audio` queues. Staff can view it at `https://api.example.com/horizon`.
+**Scheduler: Cron → Add task** (type *Shell script*, every **1 minute**):
+```bash
+cd /www/wwwroot/linguaforge/backend && sudo -u www /www/server/php/83/bin/php artisan schedule:run >> /dev/null 2>&1
+```
 
-### 7.2 Scheduler: Cron → Add task
-- Type: **Shell script**, period **every 1 minute**
-- Script:
-  ```bash
-  cd /www/wwwroot/linguaforge/backend && sudo -u www /www/server/php/83/bin/php artisan schedule:run >> /dev/null 2>&1
-  ```
-
-## 8. First administrator and audio
-Production does **not** create an admin account automatically. Register normally in the web app, then give that account the super-admin role:
+## 9. First administrator, audio and payments
+**Make yourself admin.** Production doesn't create an admin account automatically. Register on the site, then run:
 ```bash
 cd /www/wwwroot/linguaforge/backend
 php artisan tinker --execute='App\Models\User::where("email","you@example.com")->firstOrFail()->roles()->syncWithoutDetaching([App\Models\Role::where("slug","super_admin")->value("id")]);'
 ```
-Sign out and back in. **Administration** now appears in the menu (`/admin`).
+Sign out and back in to see **Administration** (`/admin`). The queue dashboard is at `/horizon` (staff only).
 
-Generate the listening and dictation audio (uses your TTS provider; runs on the `audio` queue, so Horizon must be running):
+**Generate listening audio** (queued, so Horizon must be running):
 ```bash
 php artisan lf:items:synthesize-audio
 php artisan lf:content:synthesize-audio
 php artisan lf:exams:synthesize-audio
 ```
-Until this is done, listening exercises and exam listening sections are hidden from learners rather than shown without sound.
+Until the audio exists, listening exercises and exam listening sections are hidden rather than shown without sound. Also set your AI models' unit prices in **Admin → AI**, so that AI cost reports are meaningful.
 
-Also in **Admin → AI**, set the unit prices of your models so that AI cost reports are meaningful.
+**Stripe (when you're ready to charge):**
+1. Create six prices (Premium, Pro and Family, each monthly and yearly) and put their IDs in `STRIPE_PRICE_*`. Set `STRIPE_SECRET`.
+2. Add a webhook to `https://example.com/api/v1/webhooks/billing` for `checkout.session.completed`, `customer.subscription.created/updated/deleted`, `invoice.paid`, `invoice.payment_succeeded` and `invoice.payment_failed`. Put its signing secret in `STRIPE_WEBHOOK_SECRET`.
+3. Make the prices in **Admin → Billing** match the Stripe prices, then run `php artisan config:cache`.
 
-## 9. Payments (Stripe)
-1. In Stripe, create six prices (Premium, Pro and Family, each monthly and yearly). Put their IDs in `STRIPE_PRICE_*` in `.env`, and set `STRIPE_SECRET`.
-2. Add a webhook endpoint `https://api.example.com/api/v1/webhooks/billing` with the events `checkout.session.completed`, `customer.subscription.created/updated/deleted`, `invoice.paid`, `invoice.payment_succeeded`, `invoice.payment_failed`. Put its signing secret in `STRIPE_WEBHOOK_SECRET`.
-3. Make the prices shown in **Admin → Billing** match the Stripe prices.
-4. Run `php artisan config:cache`.
+Until Stripe is set up, the free plan works but upgrading fails. Test with Stripe test-mode keys first.
 
-Until Stripe is configured, the free plan works but upgrading fails. Test with Stripe **test mode** keys first.
-
-## 10. Updating to a new version
+## 10. Updating
 ```bash
-cd /www/wwwroot/linguaforge
-git pull
-
-cd backend
-composer install --no-dev --optimize-autoloader
-php artisan migrate --force
-php artisan db:seed --force                  # picks up new content (see the note below)
-php artisan config:cache && php artisan route:cache && php artisan event:cache
-php artisan horizon:terminate                # Supervisor restarts it on the new code
-php artisan lf:content:synthesize-audio      # audio for any new content
-
-cd ../frontend
-npm ci && npm run build
-cp -r .next/static .next/standalone/.next/static && cp -r public .next/standalone/public
-chown -R www:www /www/wwwroot/linguaforge
+bash /www/wwwroot/linguaforge/ops/aapanel/update.sh
 ```
-Then restart `linguaforge-web` in **Supervisor Manager**.
+It pulls the code, migrates, seeds new content, rebuilds the web app, restarts the queue worker and asks Supervisor to restart `linguaforge-web`. If it can't do the restart itself, it tells you to do it in Supervisor Manager.
 
-**Note on content:** exercises and exam forms that learners have already answered are locked. If an update changes one of them, `db:seed` stops with an error naming it, and nothing is half-imported. In that case the update should publish it under a new key instead. Save this block as a script so each update is one command.
+Content that learners have already answered is locked. If an update changes such an exercise or exam form, `db:seed` stops with an error naming it, and nothing is half-imported. Publish the change under a new key instead.
 
 ## 11. Backups
-- **aaPanel → Cron → Backup database:** daily, keep 7–14 copies, and ideally upload to remote storage (S3, Google Drive, FTP).
+- **aaPanel → Cron → Backup database:** daily, keep 7–14 copies, and preferably upload to remote storage.
 - Also back up `backend/.env` and `backend/storage/app` (recordings and generated audio).
-- Test a restore occasionally on a separate database.
+- Test a restore on a separate database now and then.
 
 ## 12. Troubleshooting
-| Symptom | Likely cause / fix |
+| Symptom | Fix |
 |---|---|
-| **500 error on the API** | Check `backend/storage/logs/laravel.log`. Common causes: wrong `.env`, permissions on `storage/`, `open_basedir` still enabled, or a function still disabled in PHP. |
-| **"The fake billing driver cannot be used in production"** | Set `BILLING_DRIVER=stripe`, then `php artisan config:cache`. |
-| **Login works but you're immediately logged out, or you get 419 / CSRF errors** | `SESSION_DOMAIN` must be `.example.com`, `SANCTUM_STATEFUL_DOMAINS` must be `app.example.com`, both sites must use HTTPS, and `NEXT_PUBLIC_API_URL` must be the API's `https://` URL (rebuild the front end after changing it). |
-| **Writing feedback, tutor reports or audio never arrive** | Horizon isn't running. Check Supervisor Manager → `linguaforge-horizon` logs, and that Redis is running with the right password. |
-| **The plan doesn't roll over to a new day** | The scheduler cron isn't running (§7.2). |
-| **Listening exercises are missing** | Run the `synthesize-audio` commands (§8) with Horizon running. |
-| **Web app shows a blank page or 502** | `linguaforge-web` isn't running, or the static files weren't copied into `.next/standalone` after the build. |
-| **`Specified key was too long` or generated-column errors on migrate** | You're on MariaDB or MySQL 5.x. Use MySQL 8.0 (or PostgreSQL). |
-| **Uploads fail (413)** | Raise `client_max_body_size` in the API site's Nginx config and `upload_max_filesize` in PHP. |
+| **Nginx won't save the rewrite ("duplicate location")** | Remove the site's *Reverse proxy* entry and any old rewrite (e.g. *laravel5*); the rewrite file must be the only `location /`. |
+| **Site loads but has no styling, or `/_next/...` returns 404** | The rewrite rules aren't active, or `update.sh` didn't copy `.next/static` into `.next/standalone`. Run it again. |
+| **502 Bad Gateway on pages** | `linguaforge-web` isn't running. Check Supervisor Manager → its log. |
+| **502 on `/api/...`** | The PHP socket path in the rewrite doesn't match `enable-php-83.conf`, or PHP 8.3 is stopped. |
+| **500 on `/api/...`** | Check `backend/storage/logs/laravel.log`. Usual causes: `.env` values, permissions on `storage/`, `open_basedir` still on, a PHP function still disabled. |
+| **Login fails, 419 / CSRF mismatch, or you're logged out at once** | `APP_URL`, `FRONTEND_URL` and `NEXT_PUBLIC_API_URL` must all be the same `https://` domain. `SANCTUM_STATEFUL_DOMAINS` must be the bare domain, and `SESSION_DOMAIN=null`. Rebuild after changing `NEXT_PUBLIC_API_URL`, and run `php artisan config:cache` after changing `.env`. |
+| **"The fake billing driver cannot be used in production"** | Set `BILLING_DRIVER=stripe` and run `php artisan config:cache`. |
+| **Writing feedback, tutor reports or audio never arrive** | Horizon isn't running, or Redis is down or the password is wrong. |
+| **The daily plan doesn't roll over** | The scheduler cron (§8) isn't running. |
+| **Listening exercises missing** | Run the `synthesize-audio` commands (§9) with Horizon running. |
+| **Migration errors about keys or generated columns** | You're on MariaDB or MySQL 5.x. Use MySQL 8.0 (or PostgreSQL). |
+| **Uploads fail with 413** | Add `client_max_body_size 10m;` (§7.2) and raise PHP's `upload_max_filesize`. |
 
 ## 13. Mobile app (optional)
-The Expo app in `mobile/` needs the API URL at build time (see `mobile/README.md`). Point it at `https://api.example.com`. It signs in with tokens, so no cookie settings are needed for it.
+The Expo app in `mobile/` reads `EXPO_PUBLIC_API_URL` and `EXPO_PUBLIC_WEB_URL` at build time (see `mobile/README.md`). Set both to `https://example.com`. The app signs in with tokens, so it needs no cookie settings.
