@@ -55,14 +55,14 @@ SSH into the server as root and run the installer from <https://www.aapanel.com/
 ## 4. Put the code in one folder
 ```bash
 cd /www/wwwroot
-git clone https://github.com/KareemShaban1/lingura.git linguaforge
+git clone https://github.com/KareemShaban1/lingura.git lingura
 ```
-The result is `/www/wwwroot/linguaforge` containing `backend/`, `frontend/`, `ops/`, and so on. For a private repository, use a deploy key or a personal access token.
+The result is `/www/wwwroot/lingura` containing `backend/`, `frontend/`, `ops/`, and so on. For a private repository, use a deploy key or a personal access token.
 
 ## 5. Configure
 ### 5.1 Back end: `backend/.env`
 ```bash
-cd /www/wwwroot/linguaforge/backend
+cd /www/wwwroot/lingura/backend
 cp .env.example .env
 ```
 Edit `backend/.env`. With one domain, **all the URLs are the same**:
@@ -109,13 +109,13 @@ STRIPE_WEBHOOK_SECRET=
 
 ### 5.2 Front end: `frontend/.env.production`
 ```bash
-echo "NEXT_PUBLIC_API_URL=https://example.com" > /www/wwwroot/linguaforge/frontend/.env.production
+echo "NEXT_PUBLIC_API_URL=https://example.com" > /www/wwwroot/lingura/frontend/.env.production
 ```
 This is the **same domain** as the site, with no `/api` suffix. The value is built into the front end, so if you change it, rebuild (run `update.sh` again).
 
 ## 6. Install and build (one command)
 ```bash
-cd /www/wwwroot/linguaforge
+cd /www/wwwroot/lingura
 bash ops/aapanel/update.sh
 ```
 `update.sh` installs PHP and Node dependencies, generates the app key on the first run, runs migrations, seeds the reference data, courses, placement bank and exams (safe to re-run), caches the configuration, builds the web app and sets permissions. If your PHP binary isn't `/www/server/php/83/bin/php`, prefix the command, e.g. `PHP=/www/server/php/84/bin/php bash ops/aapanel/update.sh`.
@@ -123,27 +123,30 @@ bash ops/aapanel/update.sh
 On a 4 GB server, if the build is killed for lack of memory, add swap (**aaPanel → Linux Tools → Swap**, 2–4 GB) and run it again.
 
 ## 7. The website (one site for everything)
-### 7.1 Create it
+### 7.1 Create it (or reuse an existing site)
+If the site already exists, for example with root `/www/wwwroot/lingura/dist`, don't create a new one. Change its root in **Site directory** (§7.2) to `/www/wwwroot/lingura/backend/public`; nothing else in the site needs to be recreated.
+
 **Website → Add site:**
 - Domain: `example.com` (add `www.example.com` too if you want it)
-- **Root directory: `/www/wwwroot/linguaforge/backend/public`**
+- **Root directory: `/www/wwwroot/lingura/backend/public`**
 - PHP version: 8.3
 - No FTP or database (already created)
 
 ### 7.2 Site settings
-1. **Site directory:** untick **anti-cross-site (open_basedir)**, so Laravel can read `../.env` and `../vendor`.
+1. **Site directory:** set **Site directory** to `/www/wwwroot/lingura/backend/public`, keep **Running directory** at `/`, and untick **anti-cross-site (open_basedir)**, so Laravel can read `../.env` and `../vendor`. Change the root here rather than by editing the config file: aaPanel rewrites the config from these settings.
 2. **URL rewrite:** clear the box, paste the whole content of `ops/aapanel/nginx-rewrite.conf` and save.
    - The file assumes PHP-FPM listens on `unix:/tmp/php-cgi-83.sock` (aaPanel's default for PHP 8.3). Check `/www/server/nginx/conf/enable-php-83.conf`. If yours differs (e.g. `php-cgi-84.sock`), change the `fastcgi_pass` line.
+   - SSL certificate checks (`/.well-known/`) keep working with both old and new aaPanel layouts. Tested with aaPanel's `well-known/<domain>.conf` include in each form it takes.
    - **Don't** also add a reverse proxy in the site's *Reverse proxy* tab; the rewrite rules already do it. Two `location /` blocks make Nginx refuse the config.
 3. **Config file:** inside `server { … }`, add `client_max_body_size 10m;` (audio uploads and content packs) and save.
-4. **SSL:** Let's Encrypt → issue for your domain → turn on **Force HTTPS**. The rules keep `/.well-known/acme-challenge/` open, so renewals keep working.
+4. **SSL:** Let's Encrypt → issue for your domain → turn on **Force HTTPS**.
 
 ### 7.3 Run the web app (Supervisor Manager → Add daemon)
 | Field | Value |
 |---|---|
 | Name | `linguaforge-web` |
 | Run user | `www` |
-| Run directory | `/www/wwwroot/linguaforge/frontend/.next/standalone` |
+| Run directory | `/www/wwwroot/lingura/frontend/.next/standalone` |
 | Start command | `/usr/bin/env PORT=3000 HOSTNAME=127.0.0.1 NODE_ENV=production node server.js` |
 
 If Supervisor can't find `node`, use the full path from `which node`.
@@ -166,18 +169,18 @@ AI feedback, writing evaluation, audio and emails run on queues. Plan roll-over,
 |---|---|
 | Name | `linguaforge-horizon` |
 | Run user | `www` |
-| Run directory | `/www/wwwroot/linguaforge/backend` |
+| Run directory | `/www/wwwroot/lingura/backend` |
 | Start command | `/www/server/php/83/bin/php artisan horizon` |
 
 **Scheduler: Cron → Add task** (type *Shell script*, every **1 minute**):
 ```bash
-cd /www/wwwroot/linguaforge/backend && sudo -u www /www/server/php/83/bin/php artisan schedule:run >> /dev/null 2>&1
+cd /www/wwwroot/lingura/backend && sudo -u www /www/server/php/83/bin/php artisan schedule:run >> /dev/null 2>&1
 ```
 
 ## 9. First administrator, audio and payments
 **Make yourself admin.** Production doesn't create an admin account automatically. Register on the site, then run:
 ```bash
-cd /www/wwwroot/linguaforge/backend
+cd /www/wwwroot/lingura/backend
 php artisan tinker --execute='App\Models\User::where("email","you@example.com")->firstOrFail()->roles()->syncWithoutDetaching([App\Models\Role::where("slug","super_admin")->value("id")]);'
 ```
 Sign out and back in to see **Administration** (`/admin`). The queue dashboard is at `/horizon` (staff only).
@@ -199,7 +202,7 @@ Until Stripe is set up, the free plan works but upgrading fails. Test with Strip
 
 ## 10. Updating
 ```bash
-bash /www/wwwroot/linguaforge/ops/aapanel/update.sh
+bash /www/wwwroot/lingura/ops/aapanel/update.sh
 ```
 It pulls the code, migrates, seeds new content, rebuilds the web app, restarts the queue worker and asks Supervisor to restart `linguaforge-web`. If it can't do the restart itself, it tells you to do it in Supervisor Manager.
 

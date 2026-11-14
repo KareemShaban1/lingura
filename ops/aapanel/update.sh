@@ -1,10 +1,11 @@
 #!/usr/bin/env bash
-# Install or update LinguaForge on an aaPanel server (one website). Run as root from anywhere:
-#   bash /www/wwwroot/linguaforge/ops/aapanel/update.sh
+# Install or update LinguaForge on an aaPanel server (one website). Run as root from anywhere, e.g.:
+#   bash /www/wwwroot/lingura/ops/aapanel/update.sh
+# The app folder is found from this script's location (two levels up).
 # Override paths with environment variables if yours differ, e.g. PHP=/www/server/php/84/bin/php.
 set -euo pipefail
 
-APP_DIR="${APP_DIR:-/www/wwwroot/linguaforge}"
+APP_DIR="${APP_DIR:-$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)}"
 PHP="${PHP:-/www/server/php/83/bin/php}"
 COMPOSER="${COMPOSER:-$(command -v composer || echo /usr/bin/composer)}"
 WEB_USER="${WEB_USER:-www}"
