@@ -14,6 +14,7 @@ bad()  { printf '  \033[31mFAIL\033[0m  %s\n' "$*"; }
 info() { printf '        %s\n' "$*"; }
 
 [ -n "$DOMAIN" ] || { echo "Usage: bash $0 your-domain"; exit 1; }
+WEB_PORT="${WEB_PORT:-$(sed -n 's/^WEB_PORT=//p' /etc/linguaforge.env 2>/dev/null)}"; WEB_PORT="${WEB_PORT:-3000}"
 echo "LinguaForge check for $DOMAIN (app folder: $APP_DIR)"
 
 echo "1. Nginx"
@@ -33,11 +34,13 @@ rules_sock=$(grep -ho 'fastcgi_pass unix:[^;]*' "$VHOST" "$REWRITE" 2>/dev/null 
 [ -n "$sock" ] && [ "$sock" = "$rules_sock" ] && ok "PHP socket matches ($sock)" || bad "PHP socket in rules '$rules_sock' differs from enable-php-83.conf '$sock'"
 [ -S "${sock#unix:}" ] && ok "PHP-FPM socket exists" || bad "PHP-FPM socket ${sock#unix:} missing: is PHP 8.3 running?"
 
-echo "2. Web app (Next.js on 127.0.0.1:3000)"
+echo "2. Web app (Next.js on 127.0.0.1:$WEB_PORT)"
 [ -f "$APP_DIR/frontend/.next/standalone/server.js" ] && ok "build exists" || bad "no build: run ops/aapanel/update.sh"
 [ -d "$APP_DIR/frontend/.next/standalone/.next/static" ] && ok "static files copied" || bad "static files not copied into .next/standalone (run update.sh)"
-code=$(curl -s -o /dev/null -w '%{http_code}' --max-time 10 http://127.0.0.1:3000/ || true)
-case "$code" in 200|307|308) ok "web app answers on port 3000 (HTTP $code)";; 000) bad "nothing listening on port 3000: start 'linguaforge-web' in Supervisor Manager";; *) bad "web app answered HTTP $code";; esac
+code=$(curl -s -o /dev/null -w '%{http_code}' --max-time 10 http://127.0.0.1:$WEB_PORT/ || true)
+case "$code" in 200|307|308) ok "web app answers on port $WEB_PORT (HTTP $code)";; 000) bad "nothing listening on port $WEB_PORT: run ops/aapanel/services.sh (logs: journalctl -u linguaforge-web -n 50)";; *) bad "web app answered HTTP $code";; esac
+proxy_port=$(grep -ho 'proxy_pass http://127.0.0.1:[0-9]*' "/www/server/panel/vhost/nginx/$DOMAIN.conf" "/www/server/panel/vhost/rewrite/$DOMAIN.conf" 2>/dev/null | head -1 | grep -o '[0-9]*$')
+[ "$proxy_port" = "$WEB_PORT" ] && ok "Nginx proxies to port $WEB_PORT" || bad "Nginx proxies to port '$proxy_port' but the web app uses $WEB_PORT (re-run services.sh with the domain)"
 if [ -f "$APP_DIR/frontend/.env.production" ]; then info "frontend/.env.production: $(grep NEXT_PUBLIC_API_URL "$APP_DIR/frontend/.env.production")"; else bad "frontend/.env.production missing"; fi
 
 echo "3. Laravel"
@@ -63,9 +66,13 @@ done
 rm -f /tmp/lf-doctor.$$
 
 echo "5. Background services"
-pgrep -f "artisan horizon" >/dev/null && ok "Horizon (queue worker) running" || bad "Horizon not running: add/start 'linguaforge-horizon' in Supervisor Manager"
+for svc in linguaforge-web linguaforge-horizon linguaforge-scheduler; do
+  st=$(systemctl is-active "$svc" 2>/dev/null || true)
+  [ "$st" = active ] && ok "service $svc is running" || bad "service $svc is '${st:-not installed}' (install: ops/aapanel/services.sh; logs: journalctl -u $svc -n 50)"
+done
+pgrep -f "artisan horizon" >/dev/null && ok "Horizon (queue worker) process found" || bad "Horizon process not found"
 if pgrep -f "redis-server" >/dev/null; then ok "Redis running"; else bad "Redis not running: install/start it in App Store (sessions, cache and queues need it)"; fi
-crontab -l 2>/dev/null | grep -q "schedule:run" || grep -rqs "schedule:run" /www/server/cron 2>/dev/null && ok "scheduler cron found" || bad "no cron running 'artisan schedule:run'"
+if pgrep -f "artisan schedule:work" >/dev/null || crontab -l 2>/dev/null | grep -q "schedule:run" || grep -rqs "schedule:run" /www/server/cron 2>/dev/null; then ok "scheduler found"; else bad "no scheduler: run ops/aapanel/services.sh"; fi
 
 echo "6. Recent errors"
 info "Nginx: $(tail -n 3 "/www/wwwlogs/$DOMAIN.error.log" 2>/dev/null | tr '\n' ' ' | cut -c1-400)"

@@ -39,11 +39,12 @@ chmod -R ug+rwX "$APP_DIR/backend/storage" "$APP_DIR/backend/bootstrap/cache"
 
 echo "==> Restarting background workers and the web app"
 cd "$APP_DIR/backend"
-"$PHP" artisan horizon:terminate || true   # Supervisor starts it again on the new code
-if command -v supervisorctl >/dev/null; then
-  supervisorctl restart linguaforge-web || echo "Restart 'linguaforge-web' in aaPanel → Supervisor Manager."
+if systemctl list-unit-files linguaforge-web.service >/dev/null 2>&1 && systemctl cat linguaforge-web >/dev/null 2>&1; then
+  systemctl restart linguaforge-web linguaforge-scheduler
+  "$PHP" artisan horizon:terminate || true   # finishes current jobs; systemd starts it again on the new code
 else
-  echo "Restart 'linguaforge-web' in aaPanel → Supervisor Manager."
+  "$PHP" artisan horizon:terminate || true
+  echo "Services not installed yet: run  WEB_PORT=3000 bash $APP_DIR/ops/aapanel/services.sh your-domain"
 fi
 
 echo "==> Audio for any new content (queued; needs Horizon and a TTS provider)"

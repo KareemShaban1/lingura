@@ -7,7 +7,7 @@ The whole app (front end and back end) runs from **one folder** and **one aaPane
 ```
 https://example.com
  ├── /api/…  /sanctum/…  /horizon  /up   →  Laravel (PHP-FPM, site root = backend/public)
- └── everything else (/, /login, /home…) →  Next.js server on 127.0.0.1:3000 (reverse proxy)
+ └── everything else (/, /login, /home…) →  Next.js server on 127.0.0.1:3000, or your WEB_PORT (reverse proxy)
 ```
 
 The browser talks to a single origin, so there are no CORS or cross-domain cookie problems. Replace `example.com` with your domain throughout. A subdomain such as `learn.example.com` works the same way.
@@ -35,7 +35,6 @@ SSH into the server as root and run the installer from <https://www.aapanel.com/
 | **MySQL** | **8.0** | Use MySQL 8.0, not MariaDB: the schema uses MySQL 8 generated columns (PostgreSQL 16 also works) |
 | **PHP** | **8.3** (or 8.4) | |
 | **Redis** | 7.x | Queues, cache, sessions |
-| **Supervisor Manager** | latest | Keeps the queue worker and the web app running |
 | **Node.js version manager** | Node **22 LTS** | Next.js 16 needs Node ≥ 20.9 |
 
 **PHP 8.3 → Setting:**
@@ -141,17 +140,23 @@ If the site already exists, for example with root `/www/wwwroot/lingura/dist`, d
 3. **Config file:** inside `server { … }`, add `client_max_body_size 10m;` (audio uploads and content packs) and save.
 4. **SSL:** Let's Encrypt → issue for your domain → turn on **Force HTTPS**.
 
-### 7.3 Run the web app (Supervisor Manager → Add daemon)
-| Field | Value |
+### 7.3 Start the web app, queue worker and scheduler (one command)
+```bash
+WEB_PORT=3000 bash /www/wwwroot/lingura/ops/aapanel/services.sh lingura.example.com
+```
+This sets up three systemd services. They start on boot, restart if they crash, and run as `www`:
+
+| Service | What it runs |
 |---|---|
-| Name | `linguaforge-web` |
-| Run user | `www` |
-| Run directory | `/www/wwwroot/lingura/frontend/.next/standalone` |
-| Start command | `/usr/bin/env PORT=3000 HOSTNAME=127.0.0.1 NODE_ENV=production node server.js` |
+| `linguaforge-web` | The web app on `127.0.0.1:$WEB_PORT` |
+| `linguaforge-horizon` | The queue worker (AI feedback, audio, emails) |
+| `linguaforge-scheduler` | The scheduler (plan roll-over, clean-ups, billing reconciliation) |
 
-If Supervisor can't find `node`, use the full path from `which node`.
+- **Another port:** use e.g. `WEB_PORT=3020` if 3000 is taken. With the domain given, the script also changes the site's `proxy_pass` to that port and reloads Nginx. It keeps a backup and only reloads if `nginx -t` passes. Re-run it any time to change the port.
+- **Logs:** `journalctl -u linguaforge-web -f` (or `-horizon` / `-scheduler`). Status: `systemctl status linguaforge-web`.
+- **Don't also create these** in aaPanel's Supervisor Manager or Cron, or they would run twice and fight over the port.
 
-**Firewall (aaPanel → Security):** do **not** open port 3000. The web app only listens on `127.0.0.1`, and Nginx reaches it locally. Only 80, 443, SSH and the panel port should be public.
+**Firewall (aaPanel → Security):** do **not** open the web app's port. It only listens on `127.0.0.1`, and Nginx reaches it locally. Only 80, 443, SSH and the panel port should be public.
 
 ### 7.4 Check
 | Open | Expect |
@@ -162,20 +167,7 @@ If Supervisor can't find `node`, use the full path from `which node`.
 | `https://example.com/register` | You can create an account and land on onboarding |
 
 ## 8. Background jobs and scheduler (required)
-AI feedback, writing evaluation, audio and emails run on queues. Plan roll-over, account purging, recording clean-up and billing reconciliation run on the scheduler. **Without these, many features wait forever.**
-
-**Queue worker: Supervisor Manager → Add daemon**
-| Field | Value |
-|---|---|
-| Name | `linguaforge-horizon` |
-| Run user | `www` |
-| Run directory | `/www/wwwroot/lingura/backend` |
-| Start command | `/www/server/php/83/bin/php artisan horizon` |
-
-**Scheduler: Cron → Add task** (type *Shell script*, every **1 minute**):
-```bash
-cd /www/wwwroot/lingura/backend && sudo -u www /www/server/php/83/bin/php artisan schedule:run >> /dev/null 2>&1
-```
+AI feedback, writing evaluation, audio and emails run on queues. Plan roll-over, account purging, recording clean-up and billing reconciliation run on the scheduler. **Without these, many features wait forever.** `services.sh` (§7.3) runs both as `linguaforge-horizon` and `linguaforge-scheduler`; there is nothing else to set up.
 
 ## 9. First administrator, audio and payments
 **Make yourself admin.** Production doesn't create an admin account automatically. Register on the site, then run:
@@ -204,7 +196,7 @@ Until Stripe is set up, the free plan works but upgrading fails. Test with Strip
 ```bash
 bash /www/wwwroot/lingura/ops/aapanel/update.sh
 ```
-It pulls the code, migrates, seeds new content, rebuilds the web app, restarts the queue worker and asks Supervisor to restart `linguaforge-web`. If it can't do the restart itself, it tells you to do it in Supervisor Manager.
+It pulls the code, migrates, seeds new content, rebuilds the web app, and restarts the three services.
 
 Content that learners have already answered is locked. If an update changes such an exercise or exam form, `db:seed` stops with an error naming it, and nothing is half-imported. Publish the change under a new key instead.
 
@@ -224,13 +216,13 @@ bash /www/wwwroot/lingura/ops/aapanel/doctor.sh your-domain
 | **Nginx won't save the rewrite ("duplicate location")** | Remove the site's *Reverse proxy* entry and any old rewrite (e.g. *laravel5*); the rewrite file must be the only `location /`. |
 | **404 on every page right after setting things up** | Usually the new Nginx config was never loaded: `nginx -t` fails (often the rules were pasted into both the URL rewrite and the config file), so the old config, with its old root, stays active. Fix what `nginx -t` reports, then reload Nginx. |
 | **Site loads but has no styling, or `/_next/...` returns 404** | The rewrite rules aren't active, or `update.sh` didn't copy `.next/static` into `.next/standalone`. Run it again. |
-| **502 Bad Gateway on pages** | `linguaforge-web` isn't running. Check Supervisor Manager → its log. |
+| **502 Bad Gateway on pages** | The web app isn't running or Nginx proxies to another port. Run `services.sh` with your domain, and check `journalctl -u linguaforge-web -n 50`. |
 | **502 on `/api/...`** | The PHP socket path in the rewrite doesn't match `enable-php-83.conf`, or PHP 8.3 is stopped. |
 | **500 on `/api/...`** | Check `backend/storage/logs/laravel.log`. Usual causes: `.env` values, permissions on `storage/`, `open_basedir` still on, a PHP function still disabled. |
 | **Login fails, 419 / CSRF mismatch, or you're logged out at once** | `APP_URL`, `FRONTEND_URL` and `NEXT_PUBLIC_API_URL` must all be the same `https://` domain. `SANCTUM_STATEFUL_DOMAINS` must be the bare domain, and `SESSION_DOMAIN=null`. Rebuild after changing `NEXT_PUBLIC_API_URL`, and run `php artisan config:cache` after changing `.env`. |
 | **"The fake billing driver cannot be used in production"** | Set `BILLING_DRIVER=stripe` and run `php artisan config:cache`. |
-| **Writing feedback, tutor reports or audio never arrive** | Horizon isn't running, or Redis is down or the password is wrong. |
-| **The daily plan doesn't roll over** | The scheduler cron (§8) isn't running. |
+| **Writing feedback, tutor reports or audio never arrive** | `linguaforge-horizon` isn't running (`systemctl status linguaforge-horizon`), or Redis is down or the password is wrong. |
+| **The daily plan doesn't roll over** | `linguaforge-scheduler` isn't running. |
 | **Listening exercises missing** | Run the `synthesize-audio` commands (§9) with Horizon running. |
 | **Migration errors about keys or generated columns** | You're on MariaDB or MySQL 5.x. Use MySQL 8.0 (or PostgreSQL). |
 | **Uploads fail with 413** | Add `client_max_body_size 10m;` (§7.2) and raise PHP's `upload_max_filesize`. |
