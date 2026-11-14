@@ -285,7 +285,7 @@ export function AdminEditor() {
     <div className="space-y-6">
       <AdminTitle>{e.title}</AdminTitle>
       <p className="max-w-3xl text-sm text-muted-foreground">{e.help}</p>
-      <div className="grid gap-6 xl:grid-cols-[22rem_1fr]">
+      <div className="grid grid-cols-1 gap-6 xl:grid-cols-[22rem_minmax(0,1fr)]">
         <section className="space-y-3">
           <div className="flex flex-wrap items-center gap-2">
             <Select className="w-auto" value={status} aria-label={e.drafts} onChange={(ev) => { setStatus(ev.target.value); setPage(1); }}>

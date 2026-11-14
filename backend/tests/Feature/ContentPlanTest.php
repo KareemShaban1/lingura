@@ -30,6 +30,13 @@ class ContentPlanTest extends TestCase
         // Speaking binds to pronunciation practice first, then tutor conversations; writing to an evaluated task.
         $speaking = $items->where('skill', 'speaking')->values();
         $this->assertSame('repeat', Exercise::where('public_id', $speaking[0]['exercise_id'])->value('type'));
+        $this->assertStringStartsWith('Pronunciation: ', $speaking[0]['title']);
+
+        // Every title and objective is real text, never an untranslated key such as "plan.exercise_types.repeat".
+        foreach ($items as $item) {
+            $this->assertStringStartsNotWith('plan.', $item['title']);
+            $this->assertStringStartsNotWith('plan.', (string) $item['objective']);
+        }
         $this->assertTrue($items->contains('activity_type', 'conversation'));
         $this->assertTrue($items->contains('activity_type', 'writing_task'));
     }

@@ -32,8 +32,9 @@ export function Choice({
       <div className="min-w-0 flex-1">
         <div className="font-medium" lang={lang} dir={dir}>{title}</div>
         {description && <div className="mt-0.5 text-sm text-muted-foreground">{description}</div>}
+        {aside && <div className="mt-2 sm:hidden">{aside}</div>}
       </div>
-      {aside}
+      {aside && <div className="hidden shrink-0 sm:block">{aside}</div>}
       <span
         className={cn(
           "grid size-5 shrink-0 place-items-center border transition-colors",

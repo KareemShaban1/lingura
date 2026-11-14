@@ -61,8 +61,9 @@ export function CoursesView() {
                         <div className="min-w-0 flex-1">
                           <p className="font-medium">{lesson.title}</p>
                           <p className="text-xs text-muted-foreground">{lesson.estimated_minutes} {t.common.minutes} · {lesson.level.label}</p>
+                          {lesson.id === next && <Badge variant="accent" className="mt-1.5 sm:hidden">{t.courses.continue}</Badge>}
                         </div>
-                        {lesson.id === next && <Badge variant="accent">{t.courses.continue}</Badge>}
+                        {lesson.id === next && <Badge variant="accent" className="hidden shrink-0 sm:inline-flex">{t.courses.continue}</Badge>}
                       </Link>
                     </li>
                   );

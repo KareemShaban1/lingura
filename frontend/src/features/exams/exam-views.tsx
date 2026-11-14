@@ -146,13 +146,14 @@ function SectionList({ attempt, onStart, onSkip, busy }: { attempt: ExamAttempt;
         <li key={s.skill}>
           <Card>
             <CardContent className="flex flex-wrap items-center gap-3 p-4">
-              <span className="grid size-8 place-items-center rounded-full bg-secondary text-sm font-semibold">{i + 1}</span>
-              <div className="min-w-0 flex-1">
-                <p className="font-medium">{t.skills[s.skill]} <span className="text-sm text-muted-foreground">· {f(t.exams.minutes, { n: s.minutes })}</span></p>
+              <span className="grid size-8 shrink-0 place-items-center rounded-full bg-secondary text-sm font-semibold">{i + 1}</span>
+              {/* basis-44: on narrow phones the buttons wrap onto their own line instead of squeezing the name */}
+              <div className="min-w-0 flex-1 basis-44">
+                <p className="font-medium">{t.skills[s.skill]} <span className="whitespace-nowrap text-sm text-muted-foreground">· {f(t.exams.minutes, { n: s.minutes })}</span></p>
                 <p className="text-xs text-muted-foreground">{t.exams.statuses[s.status]}{s.reason ? ` — ${t.exams.reasons[s.reason] ?? s.reason}` : ""}</p>
               </div>
               {s.status === "pending" && (
-                <div className="flex gap-2">
+                <div className="ms-auto flex gap-2">
                   <Button size="sm" variant="ghost" onClick={() => onSkip(s)} disabled={busy}>{t.exams.skipSection}</Button>
                   <Button size="sm" onClick={() => onStart(s)} disabled={busy}>{t.exams.startSection}</Button>
                 </div>

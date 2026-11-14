@@ -122,7 +122,7 @@ export function LearningView() {
 
       {paused && <div className="rounded-xl border border-warning/50 bg-warning/10 p-4 text-sm">{t.learning.pausedBanner}</div>}
 
-      <div className="grid gap-6 lg:grid-cols-[1fr_20rem]">
+      <div className="grid grid-cols-1 gap-6 lg:grid-cols-[minmax(0,1fr)_20rem]">
         <section aria-labelledby="roadmap" className="space-y-6">
           <h2 id="roadmap" className="text-lg font-semibold">{t.learning.roadmap}</h2>
           {Object.entries(byDate).map(([date, dayItems]) => (

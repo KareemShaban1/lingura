@@ -83,7 +83,7 @@ function QuestionInput({ attempt, question, onChange, disabled, profileId }: {
     const parts = question.prompt.split("___");
     const input = (
       <Input ref={ref} dir={language.direction} lang={language.code} value={text} disabled={disabled} placeholder={t.exercise.typeHere}
-        className={cn(type === "cloze" ? "mx-1 inline-flex h-11 w-40 text-lg" : "h-12 text-lg")} autoComplete="off" autoCapitalize="off" spellCheck={false}
+        className={cn(type === "cloze" ? "mx-1 inline-flex h-11 w-40 text-lg placeholder:text-sm" : "h-12 text-lg")} autoComplete="off" autoCapitalize="off" spellCheck={false}
         onChange={(e) => { setText(e.target.value); onChange(e.target.value.trim() ? { text: e.target.value } : null); }} />
     );
     if (type === "dictation") {

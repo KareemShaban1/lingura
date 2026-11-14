@@ -56,7 +56,7 @@ export function ConversationReportView() {
         <h1 className="font-display text-3xl md:text-4xl">{t.report.title}</h1>
       </div>
 
-      <div className="grid gap-4 md:grid-cols-[1fr_16rem]">
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-[minmax(0,1fr)_16rem]">
         <Card><CardContent className="space-y-4 p-5">
           {(Object.keys(r.scores) as (keyof typeof r.scores)[]).map((k) => <ScoreBar key={k} label={t.report.scores[k]} score={r.scores[k]} />)}
         </CardContent></Card>

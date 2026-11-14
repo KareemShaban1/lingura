@@ -37,7 +37,7 @@ export function LandingView() {
         </div>
       </header>
 
-      <section className="mx-auto grid max-w-6xl items-center gap-12 px-4 pb-16 pt-10 md:grid-cols-[1.15fr_1fr] md:px-8 md:pt-20">
+      <section className="mx-auto grid max-w-6xl grid-cols-1 items-center gap-12 px-4 pb-16 pt-10 md:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)] md:px-8 md:pt-20">
         <div>
           <p className="text-sm font-medium uppercase tracking-[0.14em] text-primary">{t.landing.eyebrow}</p>
           <h1 className="mt-4 font-display text-4xl leading-[1.08] tracking-tight text-balance md:text-6xl">{t.landing.title}</h1>

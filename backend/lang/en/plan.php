@@ -98,6 +98,7 @@ return [
         'reading' => 'Reading: :name',
         'listening' => 'Listening: :name',
         'dictation' => 'Dictation: :name',
+        'repeat' => 'Pronunciation: :name',
     ],
     'content' => [
         'mcq' => 'Choose the right answers, then read the explanation for anything you missed.',
@@ -106,5 +107,6 @@ return [
         'reading' => 'Read the text at your own pace, then answer the questions. We track your reading speed.',
         'listening' => 'Listen as often as you need (slow it down if it helps), answer, then check the transcript.',
         'dictation' => 'Listen and type exactly what you hear. You are scored on word accuracy.',
+        'repeat' => 'Listen, then say each sentence aloud. You get an estimate of how clearly you were understood.',
     ],
 ];

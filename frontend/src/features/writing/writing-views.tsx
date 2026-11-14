@@ -92,7 +92,7 @@ export function SubmissionResult({ submission }: { submission: WritingSubmission
   if (submission.status === "failed" || !e) return <ErrorState error={t.writing.failed} />;
   return (
     <div className="space-y-5">
-      <div className="grid gap-4 md:grid-cols-[14rem_1fr]">
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-[14rem_minmax(0,1fr)]">
         <Card><CardContent className="p-5">
           <p className="text-xs text-muted-foreground">{t.writing.score}</p>
           <p className="font-display text-5xl">{e.overall_score.toFixed(1)}<span className="text-xl text-muted-foreground">/5</span></p>
