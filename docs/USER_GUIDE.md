@@ -248,7 +248,7 @@ Privacy: members see each other's **names only**. No learning data is shared wit
 **Profile & settings:**
 - **Account:** name, email, native and interface language.
 - **My languages:** switch the language you're learning (each has its own plan and progress), **add a language**, or **remove** one (its plan is archived).
-- **Appearance:** light, dark or system theme.
+- **Appearance:** light, dark or system theme. You can also switch between light and dark at any time with the sun/moon button at the top of every page, including the login page. The choice is remembered on that device.
 - **Time zone and daily reminder.**
 - **Notifications:** billing, family and learning messages appear under **Notifications**.
 
