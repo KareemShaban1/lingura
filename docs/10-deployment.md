@@ -1,5 +1,7 @@
 # 10 — Production Deployment Guide
 
+> Single server with aaPanel (e.g. a Contabo VPS)? See [DEPLOY_AAPANEL.md](DEPLOY_AAPANEL.md).
+
 ## 1. Prerequisites
 - PostgreSQL 16 (managed, with PITR enabled), Redis 7, an S3-compatible **private** bucket, SMTP/SES.
 - Container registry + orchestrator (ECS, Kubernetes, Fly, Render…), TLS at the load balancer.
