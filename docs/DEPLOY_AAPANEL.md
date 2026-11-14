@@ -214,9 +214,15 @@ Content that learners have already answered is locked. If an update changes such
 - Test a restore on a separate database now and then.
 
 ## 12. Troubleshooting
+Run the read-only check first. It tests Nginx, the web app, Laravel and the background services, and says which part fails:
+```bash
+bash /www/wwwroot/lingura/ops/aapanel/doctor.sh your-domain
+```
+
 | Symptom | Fix |
 |---|---|
 | **Nginx won't save the rewrite ("duplicate location")** | Remove the site's *Reverse proxy* entry and any old rewrite (e.g. *laravel5*); the rewrite file must be the only `location /`. |
+| **404 on every page right after setting things up** | Usually the new Nginx config was never loaded: `nginx -t` fails (often the rules were pasted into both the URL rewrite and the config file), so the old config, with its old root, stays active. Fix what `nginx -t` reports, then reload Nginx. |
 | **Site loads but has no styling, or `/_next/...` returns 404** | The rewrite rules aren't active, or `update.sh` didn't copy `.next/static` into `.next/standalone`. Run it again. |
 | **502 Bad Gateway on pages** | `linguaforge-web` isn't running. Check Supervisor Manager → its log. |
 | **502 on `/api/...`** | The PHP socket path in the rewrite doesn't match `enable-php-83.conf`, or PHP 8.3 is stopped. |
