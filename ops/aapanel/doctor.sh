@@ -68,7 +68,11 @@ rm -f /tmp/lf-doctor.$$
 echo "5. Background services"
 for svc in linguaforge-web linguaforge-horizon linguaforge-scheduler; do
   st=$(systemctl is-active "$svc" 2>/dev/null || true)
-  [ "$st" = active ] && ok "service $svc is running" || bad "service $svc is '${st:-not installed}' (install: ops/aapanel/services.sh; logs: journalctl -u $svc -n 50)"
+  if [ "$st" = active ]; then ok "service $svc is running"
+  else
+    bad "service $svc is '${st:-not installed}' (install: ops/aapanel/services.sh; logs: journalctl -u $svc -n 50)"
+    journalctl -u "$svc" -n 8 --no-pager -o cat 2>/dev/null | grep -v '^$' | tail -n 8 | cut -c1-220 | sed 's/^/        | /'
+  fi
 done
 pgrep -f "artisan horizon" >/dev/null && ok "Horizon (queue worker) process found" || bad "Horizon process not found"
 if pgrep -f "redis-server" >/dev/null; then ok "Redis running"; else bad "Redis not running: install/start it in App Store (sessions, cache and queues need it)"; fi
